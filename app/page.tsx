@@ -1,10 +1,12 @@
 import Hero from "@/components/hero";
 import Newsletter from "@/components/newsletter";
+import Slider from "@/components/slider";
 
 export default function Home() {
   return (
     <>
       <Hero />
+      <Slider />
       <Newsletter />
     </>
   );

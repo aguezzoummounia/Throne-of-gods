@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
     () => {
       const tl = gsap.timeline({
         defaults: { ease: "power3.out" },
-        delay: 0.2, // Add 0.15s delay to the entire animation
+        delay: 0.2,
       });
 
       tl.from(".hero-title", { opacity: 0, y: 20, duration: 1.2 }).from(
@@ -47,13 +47,6 @@ const Hero: React.FC = () => {
           {/*   transition-opacity duration-300 ease-in-out*/}
         </button>
       </div>
-      {/* <div
-        className="absolute inset-0 z-20 pointer-events-none opacity-25"
-        style={{
-          backgroundImage: "url(/grain.png)",
-          backgroundRepeat: "repeat",
-        }}
-      ></div> */}
     </div>
   );
 };
