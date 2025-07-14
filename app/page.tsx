@@ -1,103 +1,148 @@
-import Image from "next/image";
+import Hero from "@/components/hero";
+import Newsletter from "@/components/newsletter";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <>
+      <Hero />
+      <Newsletter />
+    </>
   );
 }
+// header
+// hero with teaser and title and CTA to watch the full trailer
+// about the story gsap animated text with images
+// characters slider
+// contact
+// footer
+// 🏠 1. Homepage
+
+// Design Feel: Dark, epic, atmospheric – ancient ruins, celestial imagery, flickers of lightning
+
+// Content:
+
+// Hero Section:
+
+//     Title: THRONE OF GODS
+
+//     Tagline: When the gods fall, who will rise?
+
+//     CTA Buttons:
+//     🔥 Watch the Series
+//     📖 Read the Prologue
+
+// Background Visual: A looping animation or static image of a storm over a broken throne in a forgotten temple.
+
+// Intro Text:
+
+//     Erosea lies in ruin. The gods are silent. But prophecy whispers of a fallen heir returned from death… Kaen. Cursed bloodlines, ancient powers, and divine secrets collide in THRONE OF GODS, a dark fantasy epic where gods are not what they seem, and the dead don't stay buried.
+
+// Video Embed (Trailer or Teaser):
+// Embed your first teaser or trailer for the YouTube series.
+// 📜 2. The Story
+
+// Sections:
+
+//     The Age of Divine Unity
+
+//         A time when the Goddess Law upheld balance across the fractured empires…
+
+//     The War of the Deep
+
+//         The rise of the monstrous King and Queen of the Deep – and the death of a goddess.
+
+//     The Prophecy
+
+//         A forgotten verse buried beneath time, whispering of the lightning reborn.
+
+// Design: Ancient scroll or parchment style, with animations (e.g., glowing text as the user scrolls).
+// 👑 3. Characters
+
+// Kaen – The Lightning Heir
+
+//     Betrayed, murdered, reborn. The true son of the Galeerian Empire returns, cloaked in shadow and storm.
+
+// Leticia – The Empress of Knives
+
+//     Kaen's stepmother and political mastermind. Ruthless and regal.
+
+// Agon – The Prince of Thorns
+
+//     Arrogant, entitled, and dangerously ambitious.
+
+// Reynold – The Cursed Noble
+
+//     Son of the Duke of Castle Berry. His blood holds a terrible secret.
+
+// Lucindra Thalakar – The Star-Eyed Princess
+
+//     Graceful, mysterious, and far more dangerous than she seems.
+
+// Optional:
+
+//     Include side factions or races (e.g., Order of Black Flame, Deep Dwellers, Priests of Moon Ash)
+
+// 📺 4. Episodes
+
+// Title: Watch the Series
+
+// Each episode can be displayed like:
+
+//     Episode 1 – The Lightning Reborn
+
+//         Kaen awakens in a tomb of storm, hunted by shadows from his past.
+//         (Watch on YouTube)
+
+// You can embed a YouTube playlist and expand episodes as more are released.
+// 📚 5. Read the Book
+
+// If you're publishing it online or selling it:
+
+//     Excerpt: First few paragraphs of the prologue
+
+//     Download Link / Amazon Link
+
+//     Reviews Section: Add testimonials from readers (even early fans or beta readers)
+
+// 🗺️ 6. Lore & Worldbuilding (Optional but Valuable)
+
+// Title: The Lore Vault or The Codex of Erosea
+
+// Sections:
+
+//     The Three Empires
+
+//     The Gods and the Deep
+
+//     Timeline of the Divine Fall
+
+//     Artifacts and Magic
+
+//     The Blood Curse
+
+// Great for deep fans and SEO traffic.
+// 🧙‍♂️ 7. Behind the Scenes / Blog
+
+//     Making of the show
+
+//     Casting / Voice acting
+
+//     Concept art
+
+//     Progress updates
+
+// 💌 8. Newsletter Signup
+
+// Title: Join the Watchers of the Storm
+
+// Text:
+
+//     Be the first to hear about new episodes, exclusive art, and prophecy updates. No spam. Only shadows.
+
+// 📞 9. Contact Page
+
+//     Simple contact form
+
+//     Links to social platforms
+
+//     Possibly: “Want to collaborate?” or “Submit Fan Art”
