@@ -12,6 +12,9 @@ export default {
         secondary: "#171717",
         primary: "#f5f5f5",
       },
+      transitionTimingFunction: {
+        "custom-ease": "cubic-bezier(0.4, 0, 0.2, 1)",
+      },
       //   screens: {
       //     xs: "400px",
       //     xxs: "350px",

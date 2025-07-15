@@ -1,12 +1,46 @@
 import Hero from "@/components/hero";
-import Newsletter from "@/components/newsletter";
 import Slider from "@/components/slider";
+import Newsletter from "@/components/newsletter";
+interface Slide {
+  id: number;
+  image: string;
+  title: string;
+}
+
+const SLIDES_DATA: Slide[] = [
+  {
+    id: 1,
+    image: "https://picsum.photos/id/10/1600/900",
+    title: "Forest Path",
+  },
+  {
+    id: 2,
+    image: "https://picsum.photos/id/20/1600/900",
+    title: "Mountain View",
+  },
+  {
+    id: 3,
+    image: "https://picsum.photos/id/30/1600/900",
+    title: "City at Night",
+  },
+  {
+    id: 4,
+    image: "https://picsum.photos/id/40/1600/900",
+    title: "Desert Dunes",
+  },
+  {
+    id: 5,
+    image: "https://picsum.photos/id/50/1600/900",
+    title: "Ocean Waves",
+  },
+  { id: 6, image: "https://picsum.photos/id/60/1600/900", title: "Icy Peaks" },
+];
 
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Slider />
+      {/* <Hero /> */}
+      <Slider slides={SLIDES_DATA} />
       <Newsletter />
     </>
   );
