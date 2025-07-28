@@ -1,6 +1,9 @@
 import Hero from "@/components/hero";
+import Quiz from "@/components/quiz";
+import About from "@/components/about";
 import Slider from "@/components/slider";
-import Newsletter from "@/components/newsletter";
+import ContactForm from "@/components/contact-form";
+import { WebGLSlider } from "@/components/test-component";
 interface Slide {
   id: number;
   image: string;
@@ -35,13 +38,51 @@ const SLIDES_DATA: Slide[] = [
   },
   { id: 6, image: "https://picsum.photos/id/60/1600/900", title: "Icy Peaks" },
 ];
+const projects = [
+  {
+    id: 1,
+    name: "Shemaia Wispr",
+    description: "Voice-to-text AI Platform",
+    imageUrl: "https://picsum.photos/1200/800?grayscale&blur=2",
+  },
+  {
+    id: 2,
+    name: "Sacred Labs",
+    description: "AI Apps Development",
+    imageUrl: "https://picsum.photos/1200/800?grayscale&blur=2",
+  },
+  {
+    id: 3,
+    name: "J Flip Solutions",
+    description: "Construction & Remodeling",
+    imageUrl: "https://picsum.photos/1200/800?grayscale&blur=2",
+  },
+  {
+    id: 4,
+    name: "Ministerio Bethel",
+    description: "Church Website",
+    imageUrl: "https://picsum.photos/1200/800?grayscale&blur=2",
+  },
+  {
+    id: 5,
+    name: "Personal Portfolio",
+    description: "Creative Portfolio",
+    imageUrl: "https://picsum.photos/1200/800?grayscale&blur=2",
+  },
+];
 
 export default function Home() {
   return (
     <>
-      {/* <Hero /> */}
-      <Slider slides={SLIDES_DATA} />
-      <Newsletter />
+      <Hero />
+      <About />
+      <div className="min-h-screen flex items-center justify-center text-4xl">
+        <h2 className="font-cinzeldecorative">Characters slider coming...</h2>
+      </div>
+      <Quiz />
+      <ContactForm />
+      {/* <WebGLSlider projects={projects} /> */}
+      {/* <Slider slides={SLIDES_DATA} /> */}
     </>
   );
 }
@@ -54,19 +95,14 @@ export default function Home() {
 // 🏠 1. Homepage
 
 // Design Feel: Dark, epic, atmospheric – ancient ruins, celestial imagery, flickers of lightning
-
 // Content:
 
 // Hero Section:
-
 //     Title: THRONE OF GODS
-
 //     Tagline: When the gods fall, who will rise?
-
 //     CTA Buttons:
 //     🔥 Watch the Series
 //     📖 Read the Prologue
-
 // Background Visual: A looping animation or static image of a storm over a broken throne in a forgotten temple.
 
 // Intro Text:
@@ -75,6 +111,7 @@ export default function Home() {
 
 // Video Embed (Trailer or Teaser):
 // Embed your first teaser or trailer for the YouTube series.
+
 // 📜 2. The Story
 
 // Sections:
@@ -92,60 +129,46 @@ export default function Home() {
 //         A forgotten verse buried beneath time, whispering of the lightning reborn.
 
 // Design: Ancient scroll or parchment style, with animations (e.g., glowing text as the user scrolls).
+
 // 👑 3. Characters
 
 // Kaen – The Lightning Heir
-
 //     Betrayed, murdered, reborn. The true son of the Galeerian Empire returns, cloaked in shadow and storm.
 
 // Leticia – The Empress of Knives
-
 //     Kaen's stepmother and political mastermind. Ruthless and regal.
 
 // Agon – The Prince of Thorns
-
 //     Arrogant, entitled, and dangerously ambitious.
 
 // Reynold – The Cursed Noble
-
 //     Son of the Duke of Castle Berry. His blood holds a terrible secret.
 
 // Lucindra Thalakar – The Star-Eyed Princess
-
 //     Graceful, mysterious, and far more dangerous than she seems.
 
 // Optional:
-
 //     Include side factions or races (e.g., Order of Black Flame, Deep Dwellers, Priests of Moon Ash)
 
 // 📺 4. Episodes
 
 // Title: Watch the Series
-
 // Each episode can be displayed like:
-
 //     Episode 1 – The Lightning Reborn
-
 //         Kaen awakens in a tomb of storm, hunted by shadows from his past.
 //         (Watch on YouTube)
-
 // You can embed a YouTube playlist and expand episodes as more are released.
+
 // 📚 5. Read the Book
-
 // If you're publishing it online or selling it:
-
 //     Excerpt: First few paragraphs of the prologue
-
 //     Download Link / Amazon Link
-
 //     Reviews Section: Add testimonials from readers (even early fans or beta readers)
 
 // 🗺️ 6. Lore & Worldbuilding (Optional but Valuable)
 
 // Title: The Lore Vault or The Codex of Erosea
-
 // Sections:
-
 //     The Three Empires
 
 //     The Gods and the Deep
@@ -157,28 +180,19 @@ export default function Home() {
 //     The Blood Curse
 
 // Great for deep fans and SEO traffic.
+
 // 🧙‍♂️ 7. Behind the Scenes / Blog
-
 //     Making of the show
-
 //     Casting / Voice acting
-
 //     Concept art
-
 //     Progress updates
 
 // 💌 8. Newsletter Signup
-
 // Title: Join the Watchers of the Storm
-
-// Text:
-
+// Text
 //     Be the first to hear about new episodes, exclusive art, and prophecy updates. No spam. Only shadows.
 
 // 📞 9. Contact Page
-
 //     Simple contact form
-
 //     Links to social platforms
-
 //     Possibly: “Want to collaborate?” or “Submit Fan Art”

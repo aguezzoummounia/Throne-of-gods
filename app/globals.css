@@ -8,8 +8,15 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* fonts */
+  --font-cinzel: var(--font-cinzel);
+  --font-alegreya: var(--font-alegreya);
+  --font-montserrat: var(--font-montserrat);
+  --font-raleway: var(--font-raleway);
+  --font-cardo: var(--font-cardo);
+  --font-imfellenglish: var(--font-im-fell-english);
+  --font-cinzeldecorative: var(--font-cinzel-decorative);
+  --font-medievalsharp: var(--font-medieval-sharp);
 }
 
 @media (prefers-color-scheme: dark) {
