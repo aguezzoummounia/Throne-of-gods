@@ -1,3 +1,4 @@
+import Map from "@/components/map";
 import Hero from "@/components/hero";
 import Quiz from "@/components/quiz";
 import About from "@/components/about";
@@ -79,6 +80,7 @@ export default function Home() {
       <div className="min-h-screen flex items-center justify-center text-4xl">
         <h2 className="font-cinzeldecorative">Characters slider coming...</h2>
       </div>
+      <Map />
       <Quiz />
       <ContactForm />
       {/* <WebGLSlider projects={projects} /> */}
