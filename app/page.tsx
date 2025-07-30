@@ -14,30 +14,33 @@ interface Slide {
 const SLIDES_DATA: Slide[] = [
   {
     id: 1,
-    image: "https://picsum.photos/id/10/1600/900",
+    image: "/characters/character-1.jpeg",
     title: "Forest Path",
   },
   {
     id: 2,
-    image: "https://picsum.photos/id/20/1600/900",
+    image: "/characters/character-2.jpeg",
     title: "Mountain View",
   },
   {
     id: 3,
-    image: "https://picsum.photos/id/30/1600/900",
+    image: "/characters/character-3.jpeg",
     title: "City at Night",
   },
   {
     id: 4,
-    image: "https://picsum.photos/id/40/1600/900",
+    image: "/characters/character-4.jpeg",
     title: "Desert Dunes",
   },
   {
     id: 5,
-    image: "https://picsum.photos/id/50/1600/900",
+    image: "/characters/character-5.jpeg",
     title: "Ocean Waves",
   },
-  { id: 6, image: "https://picsum.photos/id/60/1600/900", title: "Icy Peaks" },
+  { id: 6, image: "/characters/character-6.jpeg", title: "Icy Peaks" },
+  { id: 7, image: "/characters/character-7.jpeg", title: "character 7" },
+  { id: 8, image: "/characters/character-8.jpeg", title: "character 8" },
+  { id: 9, image: "/characters/character-9.jpeg", title: "character 9" },
 ];
 const projects = [
   {
@@ -77,14 +80,14 @@ export default function Home() {
     <>
       <Hero />
       <About />
-      <div className="min-h-screen flex items-center justify-center text-4xl">
+      {/* <div className="min-h-screen flex items-center justify-center text-4xl">
         <h2 className="font-cinzeldecorative">Characters slider coming...</h2>
-      </div>
+      </div> */}
+      <Slider slides={SLIDES_DATA} />
       <Map />
       <Quiz />
       <ContactForm />
       {/* <WebGLSlider projects={projects} /> */}
-      {/* <Slider slides={SLIDES_DATA} /> */}
     </>
   );
 }

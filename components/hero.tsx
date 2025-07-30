@@ -65,14 +65,13 @@ const Hero: React.FC = () => {
       <div className="flex flex-col items-center justify-center gap-4 absolute inset-[auto_0%_3rem] max-w-[768px] w-[90%] mx-auto text-[#D5A962]">
         <AnimatedText>
           <h4 className="uppercase  md:text-base text-sm text-center">
-            Welcome
+            Welcome traveler
           </h4>
         </AnimatedText>
         <AnimatedText>
           <p className="uppercase  md:text-base text-sm text-center mb-4">
-            Courageous explorer, plunge into a realm of divine power and
-            shadowed secrets, where empires rise and fall in a clash of fate and
-            fury.
+            Plunge into a realm of divine power and shadowed secrets, where
+            empires rise and fall in a clash of fate and fury.
             <br />
             Ready to unravel the mystery?
           </p>
