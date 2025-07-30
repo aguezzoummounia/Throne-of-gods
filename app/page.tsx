@@ -97,10 +97,8 @@ export default function Home() {
 // characters slider
 // contact
 // footer
-// 🏠 1. Homepage
-
 // Design Feel: Dark, epic, atmospheric – ancient ruins, celestial imagery, flickers of lightning
-// Content:
+// 🏠 1. Homepage
 
 // Hero Section:
 //     Title: THRONE OF GODS

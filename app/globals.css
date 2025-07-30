@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #ededed;
 }
 /* ::selection {
   background: #171b1e;
@@ -26,17 +26,83 @@
   --font-imfellenglish: var(--font-im-fell-english);
   --font-cinzeldecorative: var(--font-cinzel-decorative);
   --font-medievalsharp: var(--font-medieval-sharp);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* animation */
+  /* --animate-light-sweep: light-sweep 2.5s ease-in-out infinite; */
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.animate-sweep {
+  --angle: 0deg;
+  background: linear-gradient(
+    var(--angle),
+    transparent,
+    rgba(255, 215, 0, 0.5),
+    transparent
+  );
+}
+
+.sweep-vertical {
+  animation: goldenLightSweep 70s ease-in-out infinite,
+    rotateAngle 5s linear infinite;
+}
+
+.sweep-vertical-reversed {
+  animation: goldenLightSweepReversed 70s ease-in-out infinite,
+    rotateAngle 5s linear infinite;
+}
+
+.sweep-right {
+  animation: goldenLightSweepHorizontal 70s ease-in-out infinite,
+    rotateAngle 5s linear infinite;
+}
+
+.sweep-left {
+  animation: goldenLightSweepHorizontalReversed 70s ease-in-out infinite,
+    rotateAngle 5s linear infinite;
+}
+
+@keyframes goldenLightSweep {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
+@keyframes goldenLightSweepReversed {
+  0% {
+    bottom: 0;
+  }
+  100% {
+    bottom: 100%;
+  }
+}
+@keyframes goldenLightSweepHorizontal {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: 100%;
+  }
+}
+@keyframes goldenLightSweepHorizontalReversed {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 100%;
+  }
+}
+@keyframes rotateAngle {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
 }
