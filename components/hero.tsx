@@ -3,79 +3,76 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import Button from "@/components/ui/button-or-link";
-import AnimatedText from "@/components/ui/animated-text";
-// import WavyImage from "./ui/wavy-image";
 
 const Hero: React.FC = () => {
   const containerRef = useRef<HTMLHeadingElement>(null);
-  // const container = useRef<HTMLDivElement>(null);
-  // useGSAP(
-  //   () => {
-  //     const lines = containerRef.current?.querySelectorAll("div");
-  //     if (!lines) return;
 
-  //     gsap.set(lines, { y: 60, opacity: 0 });
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        delay: 0.1,
+      });
 
-  //     gsap.to(lines, {
-  //       y: 0,
-  //       opacity: 1,
-  //       duration: 1,
-  //       ease: "power4.out",
-  //       stagger: 0.15,
-  //       // scrollTrigger: {
-  //       //   trigger: containerRef.current,
-  //       //   start: "top 80%",
-  //       //   toggleActions: "play none none none",
-  //       // },
-  //     });
-  //   },
-  //   { scope: containerRef }
-  // );
+      const words = gsap.utils.toArray(".animated-word");
+      const button = containerRef.current?.querySelector("a");
+      const paragraph = containerRef.current?.querySelector("p");
+      const subheading = containerRef.current?.querySelector("h4");
 
-  // useGSAP(
-  //   () => {
-  //     const tl = gsap.timeline({
-  //       defaults: { ease: "power3.out" },
-  //       delay: 0.2,
-  //     });
+      // Animate h2 divs (from bottom, staggered)
+      tl.from(words, {
+        y: 50,
+        opacity: 0,
+        stagger: 0.15,
+        duration: 1.2,
+      });
 
-  //     tl.from(".hero-title", { opacity: 0, y: 20, duration: 1.2 }).from(
-  //       ".hero-button",
-  //       { opacity: 0, y: 15, duration: 0.8 },
-  //       "-=0.7"
-  //     );
-  //   },
-  //   { scope: container }
-  // );
+      const betweenGroupsDelay = "+=0.15";
 
+      // Animate h4, p, button in a single staggered group
+      const secondGroup: Element[] = [];
+      if (subheading) secondGroup.push(subheading);
+      if (paragraph) secondGroup.push(paragraph);
+      if (button) secondGroup.push(button);
+
+      if (secondGroup.length) {
+        tl.from(
+          secondGroup,
+          {
+            y: 25,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1.2, // Match h2 animation duration
+          },
+          betweenGroupsDelay
+        );
+      }
+    },
+    { scope: containerRef }
+  );
   return (
-    <section className="min-h-screen flex justify-center items-center relative">
-      <AnimatedText>
-        <h2
-          // ref={containerRef}
-          className="md:text-9xl text-6xl font-cinzel font-bold  max-w-[768px]"
-        >
-          <div className="md:text-7xl text-4xl ml-10">Your</div>
-          <div>Epic Quest</div>
-          <div className="text-center">Begins</div>
-          <div className="md:text-7xl text-4xl text-end mr-10">Here</div>
-        </h2>
-      </AnimatedText>
+    <section
+      ref={containerRef}
+      className="min-h-screen md:gap-20 grid grid-rows-[1fr_auto] relative md:py-16 py-8"
+    >
+      <h2 className="hero-title lg:text-9xl md:text-8xl text-[15vw] leading-none font-cinzel font-bold lg:max-w-[768px] max-w-[90%] lg:self-end self-center justify-self-center md:mt-0 mt-20">
+        <div className="animated-word md:text-7xl text-4xl ml-10">Your</div>
+        <div className="animated-word">Epic Quest</div>
+        <div className="animated-word text-center">Begins</div>
+        <div className="animated-word md:text-7xl text-4xl text-end mr-10">
+          Here
+        </div>
+      </h2>
 
-      <div className="flex flex-col items-center justify-center gap-4 absolute inset-[auto_0%_3rem] max-w-[768px] w-[90%] mx-auto text-[#D5A962]">
-        <AnimatedText>
-          <h4 className="uppercase  md:text-base text-sm text-center">
-            Welcome traveler
-          </h4>
-        </AnimatedText>
-        <AnimatedText>
-          <p className="uppercase  md:text-base text-sm text-center mb-4">
-            Plunge into a realm of divine power and shadowed secrets, where
-            empires rise and fall in a clash of fate and fury.
-            <br />
-            Ready to unravel the mystery?
-          </p>
-        </AnimatedText>
+      <div className="flex flex-col items-center justify-center gap-4 max-w-[600px] w-[90%] mx-auto text-[#8f7e77]">
+        <h4 className="uppercase  md:text-base text-sm text-center">
+          Welcome traveler
+        </h4>
+        <p className="uppercase  md:text-base leading-[1.125] text-base text-center mb-4">
+          Plunge into a realm of divine power and shadowed secrets, where
+          empires rise and fall in a clash of fate and fury.
+          <br className="md:block hidden" /> Ready to unravel the mystery?
+        </p>
 
         <Button
           animated
@@ -90,5 +87,3 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-
-// <WavyImage imageUrl="https://picsum.photos/1200/800?grayscale&blur=2" />

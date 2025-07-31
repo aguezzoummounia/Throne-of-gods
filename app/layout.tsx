@@ -79,7 +79,7 @@ export default function RootLayout({
         <Footer />
         {/* main svg overlay */}
         <GlobalOutline />
-        {/* <GrainOverlay /> */}
+        <GrainOverlay />
       </body>
     </html>
   );
