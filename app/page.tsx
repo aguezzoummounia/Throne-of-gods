@@ -79,12 +79,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <About />
-      {/* <div className="min-h-screen flex items-center justify-center text-4xl">
-        <h2 className="font-cinzeldecorative">Characters slider coming...</h2>
-      </div> */}
-      <Slider slides={SLIDES_DATA} />
       <Map />
+      <About />
+      <Slider slides={SLIDES_DATA} />
       <Quiz />
       <ContactForm />
       {/* <WebGLSlider projects={projects} /> */}

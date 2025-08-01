@@ -6,7 +6,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 // border-l border-r border-[#D5A962]  rgba(255,255,255,.05)
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 backdrop-blur-xl transition-colors ",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 backdrop-blur-xl transition-colors group",
   {
     variants: {
       variant: {
@@ -72,7 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
     );
 
     const content = animated ? (
-      <div className="inline-block relative group h-full overflow-hidden z-10 gap-0">
+      <div className="inline-block relative  h-full overflow-hidden z-10 gap-0">
         <span className="flex items-center h-full transform transition duration-500 ease-out group-hover:-translate-y-full">
           {children}
         </span>
@@ -88,9 +88,9 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
       return (
         <Link
           href={href}
-          ref={ref as React.Ref<HTMLAnchorElement>}
-          className={classNames}
           data-slot="button"
+          className={classNames}
+          ref={ref as React.Ref<HTMLAnchorElement>}
           {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
         >
           {content}
@@ -101,9 +101,9 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
 
     return (
       <button
-        ref={ref as React.Ref<HTMLButtonElement>}
-        className={classNames}
         data-slot="button"
+        className={classNames}
+        ref={ref as React.Ref<HTMLButtonElement>}
         {...(props as React.ButtonHTMLAttributes<HTMLButtonElement>)}
       >
         {content}

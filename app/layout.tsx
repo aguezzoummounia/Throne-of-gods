@@ -13,6 +13,7 @@ import {
   IM_Fell_English,
   Cinzel_Decorative,
 } from "next/font/google";
+import { SoundProvider } from "@/context/sound-context";
 import GlobalOutline from "@/components/global/global-outline";
 
 const cinzel = Cinzel({
@@ -74,9 +75,11 @@ export default function RootLayout({
       <body
         className={`${cinzel.variable} ${alegreya.variable} ${montserrat.variable} ${raleway.variable} ${cinzelDecorative.variable} ${cardo.variable} ${medievalSharp.variable} ${imFellEnglish.variable} antialiased`}
       >
-        <Header />
-        <main className="min-h-screen">{children}</main>
-        <Footer />
+        <SoundProvider>
+          <Header />
+          <main className="min-h-screen">{children}</main>
+          <Footer />
+        </SoundProvider>
         {/* main svg overlay */}
         <GlobalOutline />
         <GrainOverlay />

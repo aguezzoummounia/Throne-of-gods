@@ -17,6 +17,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: #9e8f7a;
+  /* #8f7e77 */
   /* fonts */
   --font-cinzel: var(--font-cinzel);
   --font-alegreya: var(--font-alegreya);
