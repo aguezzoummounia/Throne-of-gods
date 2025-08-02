@@ -133,7 +133,6 @@ const vertexShader = `
     gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
   }
 `;
-
 const fragmentShader = `
   varying vec2 vUv;
   uniform float u_time;
@@ -167,7 +166,7 @@ const fragmentShader = `
     }
     return value;
   }
-  
+
   // --- Main Shader Logic ---
   void main() {
     vec2 p = (vUv * 2.0 - 1.0);
@@ -182,13 +181,13 @@ const fragmentShader = `
     // Slower, more viscous motion for a liquid feel
     float slow_flow = u_time * 0.1;
     float fast_flow = u_time * 0.2;
-    float y_offset = 
-      fbm(vec2(p.x * 0.4, slow_flow)) * 0.2 + 
+    float y_offset =
+      fbm(vec2(p.x * 0.4, slow_flow)) * 0.2 +
       fbm(vec2(p.x * 1.2, fast_flow)) * 0.08;
-    
+
     float liquid_y = globalSway + y_offset;
     float dist_to_liquid = abs(p.y - liquid_y);
-    
+
     // --- 3. Core Liquid Gold & Glow ---
     float liquid_body = 1.0 - smoothstep(0.0, 0.045, dist_to_liquid); // A bit thicker
     float glow = 1.0 - smoothstep(0.0, 0.3, dist_to_liquid);
@@ -196,7 +195,7 @@ const fragmentShader = `
     if (liquid_body > 0.0) {
       // --- 4. Liquid Texture & Color ---
       float turbulence = fbm(vec2(p.x * 2.0 + u_time * 0.2, p.y * 5.0 + u_time * 0.3));
-      
+
       // Color ramp from dark gold -> brilliant gold -> yellow-white highlight
       vec3 dark_gold = vec3(0.8, 0.5, 0.05);
       vec3 brilliant_gold = vec3(1.0, 0.8, 0.3);
@@ -204,17 +203,17 @@ const fragmentShader = `
 
       vec3 color = mix(dark_gold, brilliant_gold, smoothstep(-0.2, 0.2, turbulence));
       color = mix(color, highlight_gold, smoothstep(0.3, 0.5, turbulence));
-      
+
       // Apply intensity based on distance to core center
       float core_intensity = pow(1.0 - smoothstep(0.0, 0.045, dist_to_liquid), 2.0);
       finalColor += color * core_intensity;
-      
+
       // --- 5. Shimmering Glint Effect ---
       float glint_noise = noise(vec2(p.x * 40.0 + u_time * 4.0, p.y * 10.0));
       float glint = pow(smoothstep(0.85, 0.9, glint_noise), 5.0); // Sharp, fast glints
       finalColor += vec3(1.0, 1.0, 0.9) * glint * core_intensity * 1.5; // Bright white-gold glint
     }
-    
+
     // Add glow effect outside the main body
     finalColor += vec3(1.0, 0.7, 0.2) * pow(glow, 4.0) * 0.4; // Brighter golden glow
 
@@ -223,6 +222,8 @@ const fragmentShader = `
     gl_FragColor = vec4(finalColor, alpha);
   }
 `;
+
+// third try
 
 const ShaderPlane: React.FC = () => {
   const materialRef = useRef<ShaderMaterial>(null);

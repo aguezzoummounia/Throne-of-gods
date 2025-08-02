@@ -83,6 +83,7 @@ export default function RootLayout({
         {/* main svg overlay */}
         <GlobalOutline />
         <GrainOverlay />
+        <div id="popup-portal"></div>
       </body>
     </html>
   );
