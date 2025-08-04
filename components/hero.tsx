@@ -72,9 +72,6 @@ const Hero: React.FC = () => {
         </h2>
 
         <div className="flex flex-col items-center justify-center gap-4 max-w-[600px] w-[90%] mx-auto ">
-          {/* <h4 className="uppercase md:text-base text-sm text-center">
-            Welcome traveler
-          </h4> */}
           <p className="uppercase  md:text-base leading-[1.125] text-base text-center mb-4">
             Plunge into a realm of divine power and shadowed secrets, where
             empires rise and fall in a clash of fate and fury.

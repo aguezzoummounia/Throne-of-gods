@@ -1,6 +1,7 @@
 "use client";
 import { gsap } from "gsap";
 import Link from "next/link";
+import Text from "../ui/text";
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
@@ -64,15 +65,19 @@ const Footer: React.FC = () => {
 
       <div className="block z-10 relative">
         <div className="w-full flex flex-col gap-10 items-center xl:justify-center xl:max-w-[55%] lg:max-w-[70%] mx-auto">
-          <h2
+          <Text
+            as="h2"
+            variant="title"
+            className="text-center"
             ref={(el) => {
               topGroup.current[0] = el;
             }}
-            className="font-cinzeldecorative lg:text-6xl md:text-4xl text-2xl text-center"
           >
             Where Memory Burns Brighter Than Flame
-          </h2>
-          <p
+          </Text>
+
+          <Text
+            as="p"
             ref={(el) => {
               topGroup.current[1] = el;
             }}
@@ -82,7 +87,8 @@ const Footer: React.FC = () => {
             and the fire-forged rise of those who remember. In a land reborn by
             curse and prophecy, power is not inherited, it is claimed through
             betrayal, defiance, and impossible rebirth.
-          </p>
+          </Text>
+
           <div
             ref={(el) => {
               topGroup.current[2] = el;
@@ -111,20 +117,24 @@ const Footer: React.FC = () => {
             className="md:absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%]  max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%]"
           />
           <div className="flex items-center justify-between absolute inset-[auto_0%_0%]">
-            <span
+            <Text
+              variant="xs"
+              color="lightDark"
               ref={(el) => {
                 bottomGroup.current[0] = el;
               }}
-              className="text-xs md:text-sm text-[rgba(255,255,255,0.6)] col-span-1 row-start-2 col-start-1"
+              className="col-span-1 row-start-2 col-start-1"
             >
               &#169; {new Date().getFullYear()} {site_name} | All rights
               reserved
-            </span>
-            <div
+            </Text>
+            <Text
+              variant="xs"
+              color="lightDark"
               ref={(el) => {
                 bottomGroup.current[1] = el;
               }}
-              className="text-xs md:text-sm text-[rgba(255,255,255,0.6)] col-span-1 row-start-2 col-start-2 flex justify-end"
+              className="col-span-1 row-start-2 col-start-2 flex justify-end"
             >
               <span>Site by</span>
               <Link
@@ -134,7 +144,7 @@ const Footer: React.FC = () => {
               >
                 DEV
               </Link>
-            </div>
+            </Text>
           </div>
         </div>
       </div>
