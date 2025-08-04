@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
   );
 
   return (
-    <section ref={containerRef} className="min-h-screen relative ">
+    <section ref={containerRef} className="min-h-screen relative">
       <Image
         width={1980}
         height={1024}

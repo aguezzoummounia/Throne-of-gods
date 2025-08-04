@@ -4,14 +4,13 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
-// border-l border-r border-[#D5A962]  rgba(255,255,255,.05)
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 backdrop-blur-xl transition-colors group",
   {
     variants: {
       variant: {
         default:
-          "bg-[rgba(71,70,70,0.2)] text-primary-foreground shadow-sm hover:opacity-70",
+          "bg-[rgba(0,0,0,.05)] text-primary-foreground shadow-sm hover:opacity-70",
         destructive:
           "bg-destructive text-destructive-foreground shadow-xs hover:bg-destructive/90",
         outline:

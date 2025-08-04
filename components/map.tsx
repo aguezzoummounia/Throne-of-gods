@@ -34,7 +34,7 @@ const Map: React.FC = () => {
           height={1024}
           alt="ereosa map"
         />
-        <MapCard />
+        {/* <MapCard /> */}
       </div>
     </section>
   );

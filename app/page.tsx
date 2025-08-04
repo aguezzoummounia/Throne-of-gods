@@ -3,7 +3,6 @@ import Hero from "@/components/hero";
 import Quiz from "@/components/quiz";
 import About from "@/components/about";
 import Slider from "@/components/slider";
-import ContactForm from "@/components/contact-form";
 import { WebGLSlider } from "@/components/test-component";
 interface Slide {
   id: number;
@@ -78,12 +77,11 @@ const projects = [
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* <Hero />
       <Map />
       <About />
       <Slider slides={SLIDES_DATA} />
-      <Quiz />
-      <ContactForm />
+      <Quiz /> */}
       {/* <WebGLSlider projects={projects} /> */}
     </>
   );
@@ -180,19 +178,3 @@ export default function Home() {
 //     The Blood Curse
 
 // Great for deep fans and SEO traffic.
-
-// 🧙‍♂️ 7. Behind the Scenes / Blog
-//     Making of the show
-//     Casting / Voice acting
-//     Concept art
-//     Progress updates
-
-// 💌 8. Newsletter Signup
-// Title: Join the Watchers of the Storm
-// Text
-//     Be the first to hear about new episodes, exclusive art, and prophecy updates. No spam. Only shadows.
-
-// 📞 9. Contact Page
-//     Simple contact form
-//     Links to social platforms
-//     Possibly: “Want to collaborate?” or “Submit Fan Art”
