@@ -15,14 +15,14 @@ const MenuToggle: React.FC<{ open: boolean; handleClick: () => void }> = ({
         <span
           aria-hidden="true"
           className={cn(
-            "absolute block h-0.5 w-[20px] transform bg-current transition-all duration-500 ease-in-out",
+            "absolute block h-[1.5px] w-[20px] transform bg-current transition-all duration-500 ease-in-out rounded-[2px]",
             open ? "rotate-45" : "-translate-y-[3.5px]"
           )}
         ></span>
         <span
           aria-hidden="true"
           className={cn(
-            "absolute block h-0.5 w-[20px] transform bg-current transition-all duration-500 ease-in-out",
+            "absolute block h-[1.5px] w-[20px] transform bg-current transition-all duration-500 ease-in-out rounded-[2px]",
             open ? "-rotate-45" : "translate-y-[3.5px]"
           )}
         ></span>

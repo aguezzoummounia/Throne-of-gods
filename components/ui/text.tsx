@@ -38,7 +38,6 @@ type TextOwnProps = VariantProps<typeof titleVariants> & {
   className?: string;
 };
 
-// Props including the polymorphic 'as' prop and ref
 type TextProps<T extends ElementType> = TextOwnProps & {
   as?: T;
   ref?: React.ComponentPropsWithRef<T>["ref"];

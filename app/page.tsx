@@ -77,11 +77,13 @@ const projects = [
 export default function Home() {
   return (
     <>
-      {/* <Hero />
+      <Hero />
+      {/* 
       <Map />
       <About />
       <Slider slides={SLIDES_DATA} />
-      <Quiz /> */}
+       */}
+      <Quiz />
       {/* <WebGLSlider projects={projects} /> */}
     </>
   );

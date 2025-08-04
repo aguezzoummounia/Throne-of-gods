@@ -53,7 +53,7 @@ const Footer: React.FC = () => {
   return (
     <footer
       ref={container}
-      className="px-12 max-md:px-6 md:py-10 py-8 md:pt-30 pt-16 overflow-hidden bg-orange-950 relative"
+      className="px-12 max-md:px-5 md:py-10 py-8 md:pt-30 pt-16 overflow-hidden relative"
     >
       <Image
         width={1980}

@@ -68,6 +68,31 @@ body {
     rotateAngle 5s linear infinite;
 }
 
+/* toggle animation classes */
+.audio-line-1 {
+  animation: audio-line-1 0.9s linear infinite;
+}
+.audio-line-2 {
+  animation: audio-line-2-5 1.3s linear infinite;
+}
+.audio-line-3 {
+  animation: audio-line-0-3 0.9s linear infinite;
+}
+.audio-line-4 {
+  animation: audio-line-4 0.8s linear infinite;
+}
+
+.wave-animation {
+  animation: wave 4s linear infinite;
+}
+
+.wave-animation-reversed {
+  animation: wave 6s linear infinite reverse;
+}
+
+.rotate-animation {
+  animation: rotate 4s linear infinite;
+}
 @keyframes goldenLightSweep {
   0% {
     top: 0;
@@ -106,5 +131,74 @@ body {
   }
   100% {
     --angle: 360deg;
+  }
+}
+
+/* sound toggle animation keyframes */
+@keyframes audio-line-0-3 {
+  0% {
+    transform: scaleY(0.1);
+  }
+  50% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes audio-line-1 {
+  0% {
+    transform: scaleY(0.1);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes audio-line-2-5 {
+  0% {
+    transform: scaleY(0.3);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+  100% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes audio-line-4 {
+  0% {
+    transform: scaleY(0.1);
+  }
+  50% {
+    transform: scaleY(0.8);
+  }
+  100% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* wave animation keyframe */
+@keyframes wave {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(-100%);
+  }
+}
+
+/* rotate animation keyframe */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

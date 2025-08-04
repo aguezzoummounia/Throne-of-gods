@@ -1,10 +1,10 @@
 "use client";
-import Image from "next/image";
+import gsap from "gsap";
 import { cn } from "@/lib/utils";
+import { useGSAP } from "@gsap/react";
 import { useRef, useEffect } from "react";
 import { useSound } from "@/context/sound-context";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
+import AnimatedUnderline from "./animated-underline";
 
 interface SoundButtonProps {
   href: string;
@@ -73,16 +73,7 @@ const NavLink: React.FC<SoundButtonProps> = ({
       className={cn("relative cursor-pointer uppercase text-sm", className)}
     >
       {children}
-      {href === path && (
-        <Image
-          width={100}
-          height={50}
-          ref={imageRef}
-          src="/highlight-nobg-2.png"
-          alt="highlight image - fiery line"
-          className="absolute -bottom-2 w-fit"
-        />
-      )}
+      {href === path && <AnimatedUnderline />}
       {href === path && (
         <div
           ref={divRef}
