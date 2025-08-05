@@ -1,77 +1,87 @@
+import Text from "./ui/text";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import AnimatedText from "./ui/animated-text";
 
 const About: React.FC = () => {
   return (
-    <div className="min-h-screen flex flex-col gap-8 items-center justify-center text-4xl p-10">
-      <div className="">
-        <h2 className="font-cinzeldecorative md:text-2xl text-xl">
-          When the gods fall, who rises?
-        </h2>
-        <SVG className="w-[300px] " />
+    // md:pt-30 pt-16
+    <section className="min-h-screen px-12 max-md:px-5 md:py-10 py-8 overflow-hidden relative">
+      <Image
+        width={1980}
+        height={1024}
+        src="/bg/bg-8.webp"
+        alt="background dark blue image"
+        className="absolute inset-0 object-cover w-full h-full z-0 object-center rotate-180"
+      />
+      <div className="relative z-10 flex flex-col gap-4 items-start justify-center">
+        <div className="flex flex-col gap-4 items-start justify-center max-w-[768px]">
+          <Text
+            as="h2"
+            variant="title"
+            className="font-cinzeldecorative md:text-2xl text-xl"
+          >
+            When the gods fall, who rises?
+          </Text>
+          <Text as="h4" variant="lead">
+            A god is not born.
+            <br /> He is broken, burned, and reborn.
+          </Text>
+        </div>
+
+        <Text>
+          Throne of Gods is an epic fantasy saga set across centuries of
+          forgotten wars, divine betrayals, and rising empires. It tells the
+          intertwined fates of gods and mortals in the war-torn world of Erosea,
+          where ancient powers slumber beneath ash and prophecy, waiting to
+          awaken.
+        </Text>
+        <Text>
+          The story begins in a forgotten era known as the Age of Divine Unity,
+          where monstrous creatures from the deep rise against three corrupt
+          emperors—only to be stopped by the last act of a dying goddess.
+        </Text>
+        <Text>
+          Her sacrifice ends an age of magic and unity, leaving behind a fading
+          prophecy: a true heir will return to wake the dawn. Centuries later,
+          in a fractured world ruled by greed and deception, a murdered prince
+          named Kaen is reborn in a stranger’s body, bearing the divine powers
+          of lightning and fire. Once cast aside as illegitimate, Kaen now
+          returns as something more—a god in exile, hunted by emperors, feared
+          by queens, and drawn toward a destiny written in celestial blood.
+        </Text>
+        <Text>
+          From secret military camps and cursed royal banquets to the halls of
+          flame-worshipping orders and forgotten tombs, Throne of Gods weaves a
+          sweeping narrative of power, identity, and redemption.
+        </Text>
+
+        <Text>
+          At its core is Kaen—ruthless yet loyal, divine yet human—facing his
+          past sins, forging unlikely alliances, and challenging the very order
+          that sought to erase him. As ancient prophecies stir and reborn souls
+          converge, the question is no longer who will rule? but who is worthy
+          of godhood?
+        </Text>
       </div>
-      <AnimatedText>
-        <p className="uppercase  md:text-4xl text-2xl text-center font-montserrat">
-          Before time bore names and kings carved crowns from stardust, the
-          world trembled beneath the Weeping Sky.
-          <br />
-          Centuries ago, three emperors ruled Erosea, each corrupting divine
-          power in their own way
-          <br />
-          Their clashing ambitions fractured the world and unleashed grotesque,
-          shadow-born monsters from the deep.
-          <br />
-          In desperation, they united and called down Goddess Law, who sealed
-          the boundary between realms.
-          <br />
-          Her death marked the end of the Age of Divine Unity, and began the
-          long wait for the prophecy's heir.
-        </p>
-      </AnimatedText>
-      {/* <AnimatedText>
-        <p className="">
-          ⚔️ A Prince Reborn Eight centuries later, the empires have crumbled.
-          But blood remembers. Kaen, Crown Prince of Galeeria, is born with the
-          gods’ mark — and branded a curse. Framed for the murder of his father
-          and betrayed by his stepmother and half-brother, he is executed and
-          displayed for all to see. But death is not the end. Kaen awakens five
-          years later in a stranger’s body, stripped of his name but wielding
-          terrifying power: lightning, strength, and a healing flame that burns
-          like prophecy. Driven by vengeance, he discovers that Valeon’s ancient
-          curse still lives — and it’s waking.
-        </p>
-      </AnimatedText>
-      <AnimatedText>
-        <p className="">
-          🕊 Threads of Power As kingdoms rot and queens twist prophecy to their
-          will, Kaen finds himself in a deeper game orchestrated by Princess
-          Lucindra Thalakar, a reborn seer claiming the Weaver of Fates sent
-          her. In a land where power devours and the past refuses silence, Kaen
-          must face the storm of his destiny. Will he command it — or be
-          consumed by it?
-        </p>
-      </AnimatedText>
-*/}
-      <AnimatedText>
-        <p className="max-w-[768px] text-center font-alegreya">
-          But no story shall live without the ones who walk it.
-          <br />
-          These are the cursed, the chosen, and the condemned
-        </p>
-      </AnimatedText>
-      {/* <h2 className="font-alegreya">This is test only</h2>
-      <h2 className="font-cardo">This is test only</h2>
-      <h2 className="font-cinzel">This is test only</h2>
-      <h2 className="font-medievalsharp">This is test only</h2>
-      <h2 className="font-montserrat">This is test only</h2>
-      <h2 className="font-imfellenglish">This is test only</h2>
-      <h2 className="font-alegreya">This is test only</h2>
-      <h2 className="font-cinzeldecorative">This is test only</h2> */}
-    </div>
+    </section>
   );
 };
 
 export default About;
+
+//         <svg aria-hidden="true" class="chapter-title-card__instructions__svg chapter-title-card__instructions__svg--c3">
+//     <use xlink:href="#c3"></use>
+// </svg>
+{
+  /* <AnimatedText>
+  <p className="max-w-[768px] text-center font-alegreya">
+    But no story shall live without the ones who walk it.
+    <br />
+    These are the cursed, the chosen, and the condemned
+  </p>
+</AnimatedText> */
+}
 
 const SVG = ({ className }: { className?: string }) => {
   return (

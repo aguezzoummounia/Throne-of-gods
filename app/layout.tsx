@@ -14,7 +14,8 @@ import {
   Cinzel_Decorative,
 } from "next/font/google";
 import { SoundProvider } from "@/context/sound-context";
-import GlobalOutline from "@/components/global/global-outline";
+import SvgOutline from "@/components/global/svg-outline";
+import ImagesUnderline from "@/components/global/images-underline";
 
 const cinzel = Cinzel({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -77,11 +78,15 @@ export default function RootLayout({
       >
         <SoundProvider>
           <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
+          <div className="min-h-screen overflow-clip relative">
+            <ImagesUnderline />
+            <main className="min-h-screen">
+              {children}
+              <Footer />
+            </main>
+          </div>
         </SoundProvider>
-        {/* main svg overlay */}
-        <GlobalOutline />
+        <SvgOutline />
         <GrainOverlay />
         <div id="popup-portal"></div>
       </body>

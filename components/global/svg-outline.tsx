@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-const GlobalOutline: React.FC = () => {
+const SvgOutline: React.FC = () => {
   return (
     <div className="fixed z-[999] md:inset-[30px_20px_20px_20px] inset-[28px_12px_16px_12px] p-4 m-auto pointer-events-none">
       {/* corners */}
@@ -123,7 +123,7 @@ const GlobalOutline: React.FC = () => {
   );
 };
 
-export default GlobalOutline;
+export default SvgOutline;
 
 const Corner: React.FC<{ className: string; position: string }> = ({
   position,

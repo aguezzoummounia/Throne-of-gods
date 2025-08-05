@@ -78,12 +78,25 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <div className="w-full h-screen flex items-center justify-center">
+        screen 2
+      </div>
+      <div className="w-full h-screen flex items-center justify-center">
+        screen 3
+      </div>
+      <div className="w-full h-screen flex items-center justify-center">
+        screen 4
+      </div>
+      <div className="w-full h-screen flex items-center justify-center">
+        screen 5
+      </div>
+
+      {/* <About /> */}
       {/* 
       <Map />
-      <About />
       <Slider slides={SLIDES_DATA} />
        */}
-      <Quiz />
+      {/* <Quiz /> */}
       {/* <WebGLSlider projects={projects} /> */}
     </>
   );
