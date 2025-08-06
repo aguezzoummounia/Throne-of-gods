@@ -9,9 +9,9 @@ const titleVariants = cva("", {
       default: "lg:text-lg md:text-xl text-lg leading-[1.1]",
       medium: "text-xl leading-[1.1]",
       title:
-        "font-cinzeldecorative font-bold lg:text-7xl md:text-6xl text-[9vw] leading-[1.2]", //title
-      lead: "md:text-4xl text-[5.5vw] font-semibold leading-[1.1]", //medium title
-      small: "md:text-base text-[3.75vw] leading-[1.1]", //subtitle
+        "font-cinzeldecorative max-md:text-dynamic-xl md:text-dynamic-2xl leading-[1.2]", //title
+      lead: "lg:text-dynamic-lg md:text-dynamic-base max-md:text-[4vw] font-semibold leading-[1.1]", //medium title
+      small: "md:text-lg text-[3.75vw] leading-[1.1]", //subtitle
       xs: "md:text-xs text-[3vw] leading-[1.1]", //small regular text
     },
     width: {
@@ -54,6 +54,7 @@ const Text = <T extends ElementType = "span">({
   ...rest
 }: TextProps<T>) => {
   const Component = as || "span";
+
   return (
     <Component
       ref={ref as any} // Type assertion to handle cases where T may not accept ref

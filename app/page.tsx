@@ -77,10 +77,8 @@ const projects = [
 export default function Home() {
   return (
     <>
-      <Hero />
-      <div className="w-full h-screen flex items-center justify-center">
-        screen 2
-      </div>
+      {/* <Hero /> */}
+      <Quiz />
       <div className="w-full h-screen flex items-center justify-center">
         screen 3
       </div>
@@ -96,7 +94,7 @@ export default function Home() {
       <Map />
       <Slider slides={SLIDES_DATA} />
        */}
-      {/* <Quiz /> */}
+      {/* */}
       {/* <WebGLSlider projects={projects} /> */}
     </>
   );

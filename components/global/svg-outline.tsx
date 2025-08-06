@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 
 const SvgOutline: React.FC = () => {
   return (
-    <div className="fixed z-[999] md:inset-[30px_20px_20px_20px] inset-[28px_12px_16px_12px] p-4 m-auto pointer-events-none">
+    <div className="fixed z-[999] md:inset-[30px_20px_20px_20px] inset-[28px_12px_16px_12px] m-auto pointer-events-none">
       {/* corners */}
       <div className="z-1 absolute inset-0">
         <Corner className="inset-[0%_auto_auto_0%]" position="top-left" />

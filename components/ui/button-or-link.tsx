@@ -3,9 +3,9 @@ import Link from "next/link";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
-
+// whitespace-nowrap
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 backdrop-blur-xl transition-colors group",
+  "inline-flex items-center justify-center gap-2 whitespace-normal break-words text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 backdrop-blur-xl transition-colors group cursor-pointer",
   {
     variants: {
       variant: {
@@ -25,6 +25,7 @@ const buttonVariants = cva(
         sm: "h-8 px-3 has-[>svg]:px-2.5",
         lg: "h-11 px-8 has-[>svg]:px-4",
         icon: "h-10 w-10",
+        loose: "h-auto px-1.5",
       },
     },
     defaultVariants: {
@@ -71,7 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
     );
 
     const content = animated ? (
-      <div className="inline-block relative  h-full overflow-hidden z-10 gap-0">
+      <div className="inline-block relative h-full overflow-hidden z-10 gap-0">
         <span className="flex items-center h-full transform transition duration-500 ease-out group-hover:-translate-y-full">
           {children}
         </span>

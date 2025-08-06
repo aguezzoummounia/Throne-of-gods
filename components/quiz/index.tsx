@@ -1,17 +1,38 @@
-import Image from "next/image";
+"use client";
+import Text from "../ui/text";
+import { useState } from "react";
+import { quizData } from "@/lib/data";
+import Button from "../ui/button-or-link";
+import Container from "../global/container";
+import { QuizQuestions } from "./quiz-questions";
 
 const Quiz: React.FC = () => {
+  const [open, setOpen] = useState(false);
   return (
-    <div className="min-h-screen px-12 max-md:px-5 md:py-10 py-8 md:pt-30 pt-16 overflow-hidden relative">
-      {/* <Image
-        width={1980}
-        height={1024}
-        src="/bg/bg-2.webp"
-        alt="background dark blue image"
-        className="absolute inset-0 object-cover w-full h-full z-0 object-center"
-      /> */}
-      <h2 className="text-6xl">Quiz</h2>
-    </div>
+    <Container id="quiz" as="section" className="flex">
+      {open ? (
+        <QuizQuestions questions={quizData.questions} />
+      ) : (
+        <div className="flex-1 flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center gap-10 lg:w-[58.33%] xs:w-[83.33%] w-full">
+            <Text as="h2" variant="title" className="text-center">
+              What Darkness <br /> Dwells Within You?
+            </Text>
+
+            <Text
+              as="h4"
+              variant="lead"
+              className="text-center uppercase md:mt-2 mt-4"
+            >
+              Find the villain lurking in you.
+            </Text>
+            <Button animated onClick={() => setOpen(true)}>
+              Choose your path
+            </Button>
+          </div>
+        </div>
+      )}
+    </Container>
   );
 };
 

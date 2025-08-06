@@ -15,21 +15,28 @@
 } */
 
 @theme inline {
+  --breakpoint-xs: 479px;
+  --color-primary: #9e8f7a;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-primary: #9e8f7a;
-  /* #8f7e77 */
+  /* text size */
+  --text-dynamic-4xl: clamp(42px, 4.676056338px + 7.4647887324vw, 148px);
+  --text-dynamic-3xl: clamp(36px, 14.8732394366px + 4.2253521127vw, 96px);
+  --text-dynamic-2xl: clamp(32px, 16.5070422535px + 3.0985915493vw, 76px);
+  --text-dynamic-xl: clamp(26px, 15.4366197183px + 2.1126760563vw, 56px);
+  --text-dynamic-lg: clamp(22px, 12.8450704225px + 1.8309859155vw, 30px);
+  --text-dynamic-base: clamp(20px, 15.8873239437px + 0.4225352113vw, 26px);
+  --text-dynamic-sm: clamp(18px, 17.2957746479px + 0.1408450704vw, 20px);
+  --text-dynamic-sx: clamp(16px, 14.5915492958px + 0.2816901408vw, 20px);
   /* fonts */
+  --font-cardo: var(--font-cardo);
   --font-cinzel: var(--font-cinzel);
+  --font-raleway: var(--font-raleway);
   --font-alegreya: var(--font-alegreya);
   --font-montserrat: var(--font-montserrat);
-  --font-raleway: var(--font-raleway);
-  --font-cardo: var(--font-cardo);
+  --font-medievalsharp: var(--font-medieval-sharp);
   --font-imfellenglish: var(--font-im-fell-english);
   --font-cinzeldecorative: var(--font-cinzel-decorative);
-  --font-medievalsharp: var(--font-medieval-sharp);
-  /* animation */
-  /* --animate-light-sweep: light-sweep 2.5s ease-in-out infinite; */
 }
 
 body {
