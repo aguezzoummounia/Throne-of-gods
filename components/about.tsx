@@ -10,7 +10,7 @@ const About: React.FC = () => {
       <Image
         width={1980}
         height={1024}
-        src="/bg/bg-8.webp"
+        src="/images/bg/bg-8.webp"
         alt="background dark blue image"
         className="absolute inset-0 object-cover w-full h-full z-0 object-center rotate-180"
       />

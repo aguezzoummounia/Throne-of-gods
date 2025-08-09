@@ -9,7 +9,7 @@ const titleVariants = cva("", {
       default: "lg:text-lg md:text-xl text-lg leading-[1.1]",
       medium: "text-xl leading-[1.1]",
       title:
-        "font-cinzeldecorative max-md:text-dynamic-xl md:text-dynamic-2xl leading-[1.2]", //title
+        "font-cinzeldecorative max-md:text-dynamic-2xl md:text-dynamic-2xl leading-[1.2]", //title
       lead: "lg:text-dynamic-lg md:text-dynamic-base max-md:text-[4vw] font-semibold leading-[1.1]", //medium title
       small: "md:text-lg text-[3.75vw] leading-[1.1]", //subtitle
       xs: "md:text-xs text-[3vw] leading-[1.1]", //small regular text

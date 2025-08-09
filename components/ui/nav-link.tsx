@@ -75,14 +75,17 @@ const NavLink: React.FC<SoundButtonProps> = ({
       {children}
       {href === path && <AnimatedUnderline />}
       {href === path && (
-        <div
-          ref={divRef}
-          className="absolute left-[50%] -top-[90%] -translate-x-[50%]  mix-blend-screen rounded-[83%] w-[100px] h-[50px] blur-xl"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(244, 234, 143, 0.35) 0%,rgba(244, 234, 143, 0.1) 70%,transparent 100%)",
-          }}
-        />
+        <div className="absolute left-1/2 -top-[90%] -translate-x-1/2 pointer-events-none">
+          {/* rotating element */}
+          <div
+            ref={divRef}
+            className="w-[100px] h-[50px] rounded-[83%] blur-xl mix-blend-screen rotate-scale"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, rgba(244, 234, 143, 0.35) 0%, rgba(244, 234, 143, 0.1) 70%, transparent 100%)",
+            }}
+          />
+        </div>
       )}
     </a>
   );

@@ -19,16 +19,16 @@ const Header: React.FC = () => {
       </Link>
 
       <nav className="md:flex hidden gap-8">
-        <NavLink href="#about" path={hash}>
+        <NavLink href="/#about" path={`/${hash}`}>
           About
         </NavLink>
-        <NavLink href="#ereosa" path={hash}>
+        <NavLink href="/#ereosa" path={`/${hash}`}>
           Ereosa
         </NavLink>
-        <NavLink path={hash} href="#characters">
+        <NavLink path={`/${hash}`} href="/#characters">
           Roles
         </NavLink>
-        <NavLink href="#quiz" path={hash}>
+        <NavLink href="/#quiz" path={`/${hash}`}>
           Quiz
         </NavLink>
       </nav>

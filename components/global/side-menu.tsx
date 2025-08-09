@@ -1,13 +1,12 @@
 "use client";
 import { gsap } from "gsap";
 import Link from "next/link";
+import Text from "../ui/text";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import useEscape from "@/hooks/useEscape";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
-import Text from "../ui/text";
-
-const site_name = process.env.NEXT_PUBLIC_SITE_NAME;
+import { site_name, chanel_handler, email_address } from "@/lib/consts";
 
 const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
   open,
@@ -126,7 +125,7 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
           <li className="menu-item-secondary">
             <Link
               target="_blank"
-              href="https://www.youtube.com/@ThroneofGods"
+              href={chanel_handler}
               className="text-center text-[rgba(255,255,255,0.4)]"
             >
               Youtube
@@ -135,7 +134,7 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
           <li className="menu-item-secondary">
             <Link
               target="_blank"
-              href="mailto:throneofgods@gmail.com"
+              href={`mailto:${email_address}`}
               className="text-center text-[rgba(255,255,255,0.4)]"
             >
               Reach out

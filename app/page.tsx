@@ -13,33 +13,33 @@ interface Slide {
 const SLIDES_DATA: Slide[] = [
   {
     id: 1,
-    image: "/characters/character-1.jpeg",
+    image: "/images/characters/character-1.jpeg",
     title: "Forest Path",
   },
   {
     id: 2,
-    image: "/characters/character-2.jpeg",
+    image: "/images/characters/character-2.jpeg",
     title: "Mountain View",
   },
   {
     id: 3,
-    image: "/characters/character-3.jpeg",
+    image: "/images/characters/character-3.jpeg",
     title: "City at Night",
   },
   {
     id: 4,
-    image: "/characters/character-4.jpeg",
+    image: "/images/characters/character-4.jpeg",
     title: "Desert Dunes",
   },
   {
     id: 5,
-    image: "/characters/character-5.jpeg",
+    image: "/images/characters/character-5.jpeg",
     title: "Ocean Waves",
   },
-  { id: 6, image: "/characters/character-6.jpeg", title: "Icy Peaks" },
-  { id: 7, image: "/characters/character-7.jpeg", title: "character 7" },
-  { id: 8, image: "/characters/character-8.jpeg", title: "character 8" },
-  { id: 9, image: "/characters/character-9.jpeg", title: "character 9" },
+  { id: 6, image: "/images/characters/character-6.jpeg", title: "Icy Peaks" },
+  { id: 7, image: "/images/characters/character-7.jpeg", title: "character 7" },
+  { id: 8, image: "/images/characters/character-8.jpeg", title: "character 8" },
+  { id: 9, image: "/images/characters/character-9.jpeg", title: "character 9" },
 ];
 const projects = [
   {
@@ -77,16 +77,10 @@ const projects = [
 export default function Home() {
   return (
     <>
-      {/* <Hero /> */}
+      <Hero />
       <Quiz />
       <div className="w-full h-screen flex items-center justify-center">
         screen 3
-      </div>
-      <div className="w-full h-screen flex items-center justify-center">
-        screen 4
-      </div>
-      <div className="w-full h-screen flex items-center justify-center">
-        screen 5
       </div>
 
       {/* <About /> */}

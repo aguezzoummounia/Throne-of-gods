@@ -16,7 +16,7 @@ const Container = <T extends ElementType = "div">({
   return (
     <Component
       // md:pt-30 pt-16
-      className={cn("min-h-svh px-12 max-md:px-5 md:py-10 py-8 ", className)}
+      className={cn("min-h-svh px-12 max-md:px-5 md:py-10 py-8", className)}
       {...(props as any)}
     >
       {children}

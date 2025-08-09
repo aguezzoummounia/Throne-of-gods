@@ -11,8 +11,15 @@ export type VillainKey = keyof typeof quizData.villains;
  */
 export interface VillainProfile {
   name: string;
-  slug: VillainKey;
+  quote: string;
   image: string;
+  overview: string;
+  nickname: string;
+  slug: VillainKey;
+  stats: string[];
+  powers: string[];
+  trivia: string[];
+  relations: string[];
   description: string;
 }
 
@@ -22,7 +29,7 @@ export interface VillainProfile {
  */
 export interface Answer {
   text: string;
-  villain: VillainKey; // <-- The key improvement!
+  villains?: readonly VillainKey[];
 }
 
 /**
