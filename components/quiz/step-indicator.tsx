@@ -17,7 +17,7 @@ const Indicator: React.FC<{
         onClick={handleClick}
         title={`skip to question ${number}`}
         className={cn(
-          "cursor-pointer relative block md:w-14 md:h-14 w-8 h-8 transition-opacity opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",
+          "cursor-pointer relative block md:w-[46px] md:h-[46px] w-9 h-9 transition-opacity opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",
           isActive && "opacity-100"
         )}
       >

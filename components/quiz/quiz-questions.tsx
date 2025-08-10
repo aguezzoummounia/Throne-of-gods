@@ -1,9 +1,9 @@
 // // TODO: this needs a new button styles
-// // make questions and answers 5 words max for consistency
 
 "use client";
 import gsap from "gsap";
 import Text from "../ui/text";
+import Portal from "../global/portal";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import LabelText from "../ui/label-text";
@@ -12,54 +12,54 @@ import Indicator from "./step-indicator";
 import Button from "../ui/button-or-link";
 import { useRouter } from "next/navigation";
 import type { Question, VillainKey } from "@/lib/types";
+import QuizResultPreloader from "./quiz-result-preloader";
 
 gsap.registerPlugin(SplitText);
 
 type TieBreaker = "earliest" | "random";
 interface QuizClientProps {
-  questions: readonly Question[];
-  /**
-   * Tie-breaker strategy:
-   * - "earliest": prefer villain the user selected earliest
-   * - "random": choose randomly among top-tied villains
-   *
-   * defaults to "earliest"
-   */
   tieBreaker?: TieBreaker;
+  questions: readonly Question[];
 }
 
 interface AnswerMeta {
-  answerIndex: number;
   seq: number; // sequence number of when it was answered
+  answerIndex: number;
 }
 
 export function QuizQuestions({
   questions,
   tieBreaker = "earliest",
 }: QuizClientProps) {
+  const router = useRouter();
+
   const seqRef = useRef<number>(0);
   const h4Ref = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
   const indicatorsRef = useRef<HTMLDivElement>(null);
 
-  const router = useRouter();
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
-  // store selected answer index per question: questionIndex -> answerIndex
-  // const [selectedAnswers, setSelectedAnswers] = useState<
-  //   Partial<Record<number, number>>
-  // >({});
   const [selectedAnswers, setSelectedAnswers] = useState<
     Partial<Record<number, AnswerMeta>>
   >({});
+  const [result, setResult] = useState<{ open: boolean; href: string }>({
+    open: false,
+    href: "",
+  });
 
   useGSAP(
     () => {
       if (isAnimating) return;
-      const h4Split = new SplitText(h4Ref.current, { type: "chars" });
-      const h2Split = new SplitText(h2Ref.current, { type: "chars" });
+      const h4Split = new SplitText(h4Ref.current, {
+        type: "chars",
+        smartWrap: true,
+      });
+      const h2Split = new SplitText(h2Ref.current, {
+        type: "chars",
+        smartWrap: true,
+      });
       const buttons = gsap.utils.toArray<HTMLButtonElement>(
         buttonsRef.current?.children || []
       );
@@ -110,37 +110,7 @@ export function QuizQuestions({
    *    - scores: Record<VillainKey, number>
    *    - earliestSeqForVillain: Record<VillainKey, seqNumber> (lowest seq wins earliest)
    */
-  // const computeScores = (
-  //   answersMap: Partial<Record<number, number>>
-  // ): Partial<Record<VillainKey, number>> => {
-  //   const result: Partial<Record<VillainKey, number>> = {};
-  //   Object.entries(answersMap).forEach(([qIndexStr, ansIdx]) => {
-  //     if (ansIdx === undefined || ansIdx === null) return;
-  //     const qIndex = Number(qIndexStr);
-  //     const q = questions[qIndex];
-  //     if (!q) return;
-  //     const answer = q.answers[ansIdx];
-  //     if (!answer) return;
 
-  //     // Backwards-compatibility: accept either `villain: string` or `villains: string[]`
-  //     const villainsArray: VillainKey[] =
-  //       // @ts-ignore
-  //       Array.isArray(answer.villains)
-  //         ? // @ts-ignore
-  //           answer.villains
-  //         : // @ts-ignore
-  //         answer.villain
-  //         ? // @ts-ignore
-  //           [answer.villain]
-  //         : [];
-
-  //     villainsArray.forEach((v) => {
-  //       if (!v) return;
-  //       result[v] = (result[v] || 0) + 1;
-  //     });
-  //   });
-  //   return result;
-  // };
   const computeScores = (
     answersMap: Partial<Record<number, { answerIndex: number; seq: number }>>
   ): {
@@ -163,10 +133,6 @@ export function QuizQuestions({
       const villainsArray: VillainKey[] = Array.isArray(answer.villains)
         ? // @ts-ignore
           answer.villains
-        : // @ts-ignore
-        answer.villain
-        ? // @ts-ignore
-          [answer.villain]
         : [];
 
       villainsArray.forEach((v) => {
@@ -189,53 +155,50 @@ export function QuizQuestions({
    * - stores answerIndex and seq for current question
    * - advances or finishes quiz
    */
-  // const handleAnswer = (answerIndex: number) => {
-  //   if (isAnimating) return;
-  //   setIsAnimating(true);
 
-  //   const tl = gsap.timeline({
-  //     onComplete: () => {
-  //       const newSelected = {
-  //         ...selectedAnswers,
-  //         [currentQuestionIndex]: answerIndex,
-  //       };
-  //       setSelectedAnswers(newSelected);
-
-  //       if (currentQuestionIndex < questions.length - 1) {
-  //         setCurrentQuestionIndex((idx) => idx + 1);
-  //       } else {
-  //         const finalScores = computeScores(newSelected);
-  //         calculateResult(finalScores);
-  //       }
-  //       setIsAnimating(false);
-  //     },
-  //   });
-
-  //   tl.to(h4Ref.current, { opacity: 0, y: -20, duration: 0.3 });
-  //   tl.to(h2Ref.current, { opacity: 0, y: -20, duration: 0.3 }, 0);
-  //   tl.to(buttonsRef.current, { opacity: 0, y: -20, duration: 0.3 }, 0);
-  // };
   const handleAnswer = (answerIndex: number) => {
     if (isAnimating) return;
+    // set true immediately to avoid double clicks while we handle logic
     setIsAnimating(true);
+
+    const seq = seqRef.current++;
+    const lastQuestion = currentQuestionIndex === questions.length - 1;
+    if (lastQuestion) {
+      // Skip exit animations entirely for the final answer.
+      // Use functional update so we compute result from the fresh object.
+      setSelectedAnswers((prev) => {
+        const newSelected = {
+          ...prev,
+          [currentQuestionIndex]: { answerIndex, seq },
+        };
+        return newSelected;
+      });
+      const newSelectedAnswers = {
+        ...selectedAnswers,
+        [currentQuestionIndex]: { answerIndex, seq },
+      };
+      const { scores, earliestSeqForVillain } =
+        computeScores(newSelectedAnswers);
+      const path = calculateResult(scores, earliestSeqForVillain);
+      setResult({ open: true, href: path as string });
+      // give path to the popup
+      // still set false to keep state consistent in case push is replaced.
+      setIsAnimating(false);
+      return;
+    }
 
     const tl = gsap.timeline({
       onComplete: () => {
-        // assign a new sequence number (use post-increment so first seq is 0)
-        const seq = seqRef.current++;
-        const newSelected = {
-          ...selectedAnswers,
-          [currentQuestionIndex]: { answerIndex, seq },
-        };
-        setSelectedAnswers(newSelected);
+        setSelectedAnswers((prev) => {
+          const newSelected = {
+            ...prev,
+            [currentQuestionIndex]: { answerIndex, seq },
+          };
 
-        if (currentQuestionIndex < questions.length - 1) {
-          setCurrentQuestionIndex((idx) => idx + 1);
-        } else {
-          // last question answered -> compute and decide
-          const { scores, earliestSeqForVillain } = computeScores(newSelected);
-          calculateResult(scores, earliestSeqForVillain);
-        }
+          return newSelected;
+        });
+        // advance to next question
+        setCurrentQuestionIndex((idx) => idx + 1);
         setIsAnimating(false);
       },
     });
@@ -244,6 +207,7 @@ export function QuizQuestions({
     tl.to(h2Ref.current, { opacity: 0, y: -20, duration: 0.3 }, 0);
     tl.to(buttonsRef.current, { opacity: 0, y: -20, duration: 0.3 }, 0);
   };
+
   /**
    * calculateResult:
    * - Accepts computed scores and earliestSeq map
@@ -253,49 +217,6 @@ export function QuizQuestions({
    *    - if tieBreaker === "random"   -> pick random among tied
    */
 
-  // const calculateResult = (
-  //   finalScores: Partial<Record<VillainKey, number>>,
-  //   tieBreaker: "earliest" | "latest" | "random" = "earliest"
-  // ) => {
-  //   const entries = Object.entries(finalScores) as [VillainKey, number][];
-
-  //   if (entries.length === 0) return;
-
-  //   // find max score
-  //   const maxScore = Math.max(...entries.map(([,score]) => score));
-
-  //   // collect all villains with that max score
-  //   const topCandidates = entries
-  //     .filter(([,score]) => score === maxScore)
-  //     .map(([v]) => v);
-
-  //   let chosen: VillainKey;
-
-  //   if (topCandidates.length === 1) {
-  //     chosen = topCandidates[0];
-  //   } else {
-  //     if (tieBreaker === "random") {
-  //       const i = Math.floor(Math.random() * topCandidates.length);
-  //       chosen = topCandidates[i];
-  //     } else if (tieBreaker === "earliest") {
-  //       // choose the villain with the smallest firstSelectedAt timestamp
-  //       chosen = topCandidates.reduce((best, v) => {
-  //         const bestTime = villainFirstSelectedAt[best] ?? Infinity;
-  //         const vTime = villainFirstSelectedAt[v] ?? Infinity;
-  //         return vTime < bestTime ? v : best;
-  //       }, topCandidates[0]);
-  //     } else {
-  //       // 'latest' - choose the one with largest lastSelectedAt
-  //       chosen = topCandidates.reduce((best, v) => {
-  //         const bestTime = villainLastSelectedAt[best] ?? -Infinity;
-  //         const vTime = villainLastSelectedAt[v] ?? -Infinity;
-  //         return vTime > bestTime ? v : best;
-  //       }, topCandidates[0]);
-  //     }
-  //   }
-
-  //   router.push(`/quiz/results/${chosen}`);
-  // };
   const calculateResult = (
     finalScores: Partial<Record<VillainKey, number>>,
     earliestSeqForVillain: Partial<Record<VillainKey, number>>
@@ -337,7 +258,7 @@ export function QuizQuestions({
       }
     }
 
-    router.push(`/quiz/results/${picked}`);
+    return `/quiz/results/${picked}`;
   };
 
   const currentQuestion = questions[currentQuestionIndex];
@@ -378,21 +299,22 @@ export function QuizQuestions({
           {currentQuestion.answers.map((answer, index) => {
             const meta = selectedAnswers[currentQuestionIndex];
             const isSelected = !!meta && meta.answerIndex === index;
-            // const isSelected = selectedAnswers[currentQuestionIndex] === index;
+
             return (
-              <Button
-                animated
-                size="loose"
-                disabled={isAnimating}
-                key={`response-button-${index}`}
-                onClick={() => handleAnswer(index)}
-                className={`text-xs md:w-52 w-[80%] md:h-14 h-14 uppercase ${
-                  isSelected ? "ring-2 ring-offset-2" : ""
-                }`}
-                aria-pressed={isSelected}
-              >
-                {answer.text}
-              </Button>
+              // <Button
+              //   animated
+              //   size="loose"
+              //   disabled={isAnimating}
+              //   key={`response-button-${index}`}
+              //   onClick={() => handleAnswer(index)}
+              //   className={`text-xs md:w-52 w-[80%] md:h-14 h-14 uppercase ${
+              //     isSelected ? "ring-2 ring-offset-2" : ""
+              //   }`}
+              //   aria-pressed={isSelected}
+              // >
+              //   {answer.text}
+              // </Button>
+              <NewButton>{answer.text}</NewButton>
             );
           })}
         </div>
@@ -425,6 +347,49 @@ export function QuizQuestions({
           })}
         </div>
       </div>
+      {result.open && (
+        <Portal>
+          <QuizResultPreloader
+            open={result.open}
+            onFinish={() => router.push(result.href)}
+            goBack={() => setResult({ open: false, href: "" })}
+          />
+        </Portal>
+      )}
     </div>
   );
 }
+
+const NewButton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  return (
+    <button className="relative cursor-pointer bg-[rgba(0,0,0,.05)] backdrop-blur-xl group">
+      <div className="absolute inset-0 border border-bronze" />
+      <div className="absolute border border-bronze inset-[3px]"></div>
+      <div className="absolute inset-0 group-hover:-inset-[1px] transition-all">
+        {/* top left corner */}
+        <div className="flex absolute inset-[0%_auto_auto_0%] ">
+          <div className="h-[12px] w-[2px] bg-bronze"></div>
+          <div className="w-[12px] h-[2px] bg-bronze"></div>
+        </div>
+        {/* top right corner */}
+        <div className="flex items-start justify-end absolute inset-[0%_0%_auto_auto]">
+          <div className="w-[12px] h-[2px] bg-bronze"></div>
+          <div className="h-[12px] w-[2px] bg-bronze"></div>
+        </div>
+        {/* bottom left corner */}
+        <div className="flex items-end justify-start absolute inset-[auto_auto_0%_0%]">
+          <div className="h-[12px] w-[2px] bg-bronze"></div>
+          <div className="w-[12px] h-[2px] bg-bronze"></div>
+        </div>
+        {/* bottom right corner */}
+        <div className="flex items-end justify-end absolute inset-[auto_0%_0%_auto]">
+          <div className="w-[12px] h-[2px] bg-bronze"></div>
+          <div className="h-[12px] w-[2px] bg-bronze"></div>
+        </div>
+      </div>
+      <div className="h-11 px-8  has-[>svg]:px-4 flex items-center justify-center">
+        {children}
+      </div>
+    </button>
+  );
+};

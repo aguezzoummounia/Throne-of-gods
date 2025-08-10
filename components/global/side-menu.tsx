@@ -22,6 +22,7 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
   // animations
   useGSAP(
     () => {
+      // const tl = gsap.timeline();
       // Set initial state to invisible before animation
       gsap.set(container.current, { visibility: "hidden" });
 
@@ -76,6 +77,7 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
 
   useGSAP(
     () => {
+      // const tl = gsap.timeline();
       if (open) {
         tl.current?.timeScale(1).play();
       } else {

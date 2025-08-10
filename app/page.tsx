@@ -1,9 +1,12 @@
+"use client";
 import Map from "@/components/map";
 import Hero from "@/components/hero";
 import Quiz from "@/components/quiz";
 import About from "@/components/about";
 import Slider from "@/components/slider";
 import { WebGLSlider } from "@/components/test-component";
+import { cn } from "@/lib/utils";
+import { useRef, useState } from "react";
 interface Slide {
   id: number;
   image: string;
@@ -77,10 +80,10 @@ const projects = [
 export default function Home() {
   return (
     <>
-      <Hero />
+      {/* <Hero /> */}
       <Quiz />
-      <div className="w-full h-screen flex items-center justify-center">
-        screen 3
+      <div className="w-full h-screen flex items-center justify-center gap-20">
+        {/* style={{ filter: "drop-shadow(0 0 4px rgba(244,234,143,0.5))" }} */}
       </div>
 
       {/* <About /> */}
@@ -93,6 +96,7 @@ export default function Home() {
     </>
   );
 }
+
 // header
 // hero with teaser and title and CTA to watch the full trailer
 // about the story gsap animated text with images
