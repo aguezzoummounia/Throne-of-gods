@@ -18,7 +18,7 @@ const Indicator: React.FC<{
         title={`skip to question ${number}`}
         className={cn(
           "cursor-pointer relative block md:w-[46px] md:h-[46px] w-9 h-9 transition-opacity opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",
-          isActive && "opacity-100"
+          isActive && "opacity-100 drop-shadow-[0_0_4px_rgba(244,234,143,0.7)]"
         )}
       >
         <span className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] flex items-center justify-center p-1.5 text-bronze font-cinzeldecorative md:text-sm text-xs">
@@ -29,8 +29,7 @@ const Indicator: React.FC<{
           viewBox="0 0 88 89"
           xmlns="http://www.w3.org/2000/svg"
           className={cn(
-            "transition-transform ease-[cubic-bezier(.25,1,.5,1)] hover:scale-110 duration-[.6s] w-full h-full absolute inset-0 text-bronze",
-            `delay-[${number * 0.1}]`
+            "transition-transform ease-[cubic-bezier(.25,1,.5,1)] hover:scale-110 duration-[.6s] w-full h-full absolute inset-0 text-bronze"
           )}
         >
           <g filter="url(#filter0_f_6587_3779)">
@@ -84,7 +83,9 @@ const Indicator: React.FC<{
           <AnimatedUnderline
             className={cn(
               "bottom-0 transition-opacity opacity-40",
-              isActive && inLineActive && "opacity-100"
+              isActive &&
+                inLineActive &&
+                "opacity-100 drop-shadow-[0_0_4px_rgba(244,234,143,0.7)]"
             )}
           />
         </div>

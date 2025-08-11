@@ -85,17 +85,17 @@ const Quiz: React.FC = () => {
             as="h4"
             ref={h4Ref}
             variant="lead"
-            className="text-center uppercase md:mt-2 mt-4"
+            // font-medievalsharp
+            className="text-center uppercase md:mt-2 mt-4 font-alegreya"
           >
             Find the villain lurking in you.
           </Text>
+
           <Button href="/quiz" ref={buttonsRef} animated>
             Choose your path
           </Button>
         </div>
       </div>
-
-      {/* <QuizResultPreloader onFinish={() => alert("hellooo...........")} /> */}
     </Container>
   );
 };

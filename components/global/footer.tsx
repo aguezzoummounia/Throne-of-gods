@@ -105,7 +105,8 @@ const Footer: React.FC = () => {
     >
       <div className="w-full flex flex-col gap-10 items-center xl:justify-center xl:max-w-[55%] lg:max-w-[70%] mx-auto">
         <Text as="h2" ref={h2Ref} variant="title" className="text-center">
-          Where Memory Burns Brighter Than Flame
+          {/* Where Memory Burns Brighter Than Flame */}
+          Memories Burn Beyond the Flame
         </Text>
 
         <Text as="p" ref={pRef} className="text-center">

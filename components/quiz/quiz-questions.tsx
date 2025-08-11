@@ -1,15 +1,14 @@
-// // TODO: this needs a new button styles
-
 "use client";
 import gsap from "gsap";
 import Text from "../ui/text";
+import { cn } from "@/lib/utils";
 import Portal from "../global/portal";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import LabelText from "../ui/label-text";
 import { useRef, useState } from "react";
 import Indicator from "./step-indicator";
-import Button from "../ui/button-or-link";
+import AnswerButton from "./answer-button";
 import { useRouter } from "next/navigation";
 import type { Question, VillainKey } from "@/lib/types";
 import QuizResultPreloader from "./quiz-result-preloader";
@@ -294,27 +293,26 @@ export function QuizQuestions({
         <div
           ref={buttonsRef}
           key={`buttons-container-${currentQuestionIndex}`}
-          className="flex items-center justify-center flex-wrap md:gap-6 gap-10 md:max-w-[55rem]"
+          className="flex items-stretch justify-center flex-wrap md:gap-6 gap-2 md:max-w-[55rem]"
         >
           {currentQuestion.answers.map((answer, index) => {
             const meta = selectedAnswers[currentQuestionIndex];
             const isSelected = !!meta && meta.answerIndex === index;
 
             return (
-              // <Button
-              //   animated
-              //   size="loose"
-              //   disabled={isAnimating}
-              //   key={`response-button-${index}`}
-              //   onClick={() => handleAnswer(index)}
-              //   className={`text-xs md:w-52 w-[80%] md:h-14 h-14 uppercase ${
-              //     isSelected ? "ring-2 ring-offset-2" : ""
-              //   }`}
-              //   aria-pressed={isSelected}
-              // >
-              //   {answer.text}
-              // </Button>
-              <NewButton>{answer.text}</NewButton>
+              <AnswerButton
+                animated={true}
+                disabled={isAnimating}
+                aria-pressed={isSelected}
+                key={`response-button-${index}`}
+                onClick={() => handleAnswer(index)}
+                className={cn(
+                  " md:w-52 w-full uppercase",
+                  isSelected && "drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]"
+                )}
+              >
+                {answer.text}
+              </AnswerButton>
             );
           })}
         </div>
@@ -359,37 +357,3 @@ export function QuizQuestions({
     </div>
   );
 }
-
-const NewButton: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <button className="relative cursor-pointer bg-[rgba(0,0,0,.05)] backdrop-blur-xl group">
-      <div className="absolute inset-0 border border-bronze" />
-      <div className="absolute border border-bronze inset-[3px]"></div>
-      <div className="absolute inset-0 group-hover:-inset-[1px] transition-all">
-        {/* top left corner */}
-        <div className="flex absolute inset-[0%_auto_auto_0%] ">
-          <div className="h-[12px] w-[2px] bg-bronze"></div>
-          <div className="w-[12px] h-[2px] bg-bronze"></div>
-        </div>
-        {/* top right corner */}
-        <div className="flex items-start justify-end absolute inset-[0%_0%_auto_auto]">
-          <div className="w-[12px] h-[2px] bg-bronze"></div>
-          <div className="h-[12px] w-[2px] bg-bronze"></div>
-        </div>
-        {/* bottom left corner */}
-        <div className="flex items-end justify-start absolute inset-[auto_auto_0%_0%]">
-          <div className="h-[12px] w-[2px] bg-bronze"></div>
-          <div className="w-[12px] h-[2px] bg-bronze"></div>
-        </div>
-        {/* bottom right corner */}
-        <div className="flex items-end justify-end absolute inset-[auto_0%_0%_auto]">
-          <div className="w-[12px] h-[2px] bg-bronze"></div>
-          <div className="h-[12px] w-[2px] bg-bronze"></div>
-        </div>
-      </div>
-      <div className="h-11 px-8  has-[>svg]:px-4 flex items-center justify-center">
-        {children}
-      </div>
-    </button>
-  );
-};

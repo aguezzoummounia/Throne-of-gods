@@ -1,9 +1,9 @@
-import Image from "next/image";
 import { quizData } from "@/lib/data";
 import Text from "@/components/ui/text";
 import { notFound } from "next/navigation";
 import Stat from "@/components/quiz/villain-stats";
 import Container from "@/components/global/container";
+import QuizResultHero from "@/components/quiz/quiz-result-hero";
 
 export default async function QuizResultPage({
   params,
@@ -16,29 +16,14 @@ export default async function QuizResultPage({
   if (!villain) return notFound();
 
   return (
-    <div className="min-h-svh">
-      <div className="w-full h-svh relative">
-        <Image
-          width={1920}
-          height={1080}
-          src={villain.image}
-          alt={`villain ${slug} image`}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute bottom-0 left-0 w-full pt-20 md:pb-20 pb-10 px-12 max-md:px-5 bg-gradient-to-t from-black via-zinc-900/70 to-transparent">
-          <div className="flex gap-4 flex-col md:items-center justify-center lg:w-[58.33%] xs:w-[83.33%] w-full mx-auto md:text-center">
-            <Text as="h2" variant="title">
-              {villain.name}
-            </Text>
-            {/* <Text as="p">{villain.quote}</Text> */}
-          </div>
-        </div>
-      </div>
+    <section className="min-h-svh">
+      {/* TODO: fix this typescript error */}
+      <QuizResultHero villain={villain} slug={slug} />
       <Container className="md:pt-30 pt-16">
         <div className="flex flex-col md:gap-20 gap-10">
           <div className="grid md:grid-cols-2 grid-cols-1 md:gap-12 gap-6">
             <div className="flex flex-col gap-y-4">
-              <Text as="p">{villain.quote}</Text>
+              <Text as="p">{villain.nickname}</Text>
               <Text as="p">{villain.overview}</Text>
             </div>
             <div className="grid gap-2.5">
@@ -51,19 +36,70 @@ export default async function QuizResultPage({
               <Stat title="Alignment" value={villain.stats.alignment} />
             </div>
           </div>
-          <div className="grid grid-cols-2  md:gap-12 gap-6">
+          <section className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            {villain.relations.map((stat, i) => (
+              <div
+                key={i}
+                className="bg-black/40 border border-red-700 p-3 rounded-lg text-center"
+              >
+                <h3 className="text-yellow-300 font-bold">{stat}</h3>
+                {/* <p className="text-lg">{stat.value}</p> */}
+              </div>
+            ))}
+          </section>
+
+          {/* Relics of Power */}
+          <section className="mb-8">
+            <h2 className="text-3xl font-bold mb-4 text-yellow-400 border-b border-red-700">
+              Relics of Power
+            </h2>
+            <ul className="space-y-4">
+              {villain.powers.map((power, i) => (
+                <li
+                  key={i}
+                  className="bg-black/50 border border-yellow-700 p-4 rounded-lg shadow-lg hover:shadow-red-900/50 transition"
+                >
+                  <h3 className="text-xl text-red-400 font-semibold">
+                    {power}
+                  </h3>
+                  {/* <p className="text-gray-200">{power.description}</p> */}
+                </li>
+              ))}
+            </ul>
+          </section>
+          {/* <div className="grid grid-cols-2  md:gap-12 gap-6">
             <div className="">
               // === ABILITIES === // • Whispers of Madness // • Crown of Thorns
             </div>
             <div className="">
               // === RELATIONS === // Allies: Kael // Enemies: The Oracle
             </div>
+          </div> */}
+          <div className="lg:w-[58.33%] xs:w-[83.33%] w-full mx-auto text-center text-2xl">
+            <h2 className="text-3xl font-bold mb-4 text-yellow-400 border-b border-red-700">
+              Chronicle of Sin
+            </h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: villain.backstory }}
+              className="grid gap-8"
+            />
           </div>
-          <div className="lg:w-[58.33%] xs:w-[83.33%] w-full mx-auto text-center">
-            <Text as="p">{villain.backstory}</Text>
-          </div>
+          {villain.trivia && villain.trivia.length > 0 && (
+            <section className="mb-8">
+              <h2 className="text-3xl font-bold mb-4 text-yellow-400 border-b border-red-700">
+                Whispered Truths
+              </h2>
+              <ul className="list-disc list-inside space-y-2 text-gray-300 italic">
+                {villain.trivia.map((fact, i) => (
+                  <li key={i} className="hover:text-red-300 transition">
+                    {fact}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          )}
         </div>
       </Container>
-    </div>
+    </section>
   );
 }

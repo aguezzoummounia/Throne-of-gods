@@ -5,7 +5,6 @@ import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
 import { useRef, useState, useEffect } from "react";
-import useBodyLockScroll from "@/hooks/useBodyLockScroll";
 
 gsap.registerPlugin(SplitText);
 
@@ -27,8 +26,6 @@ const QuizResultPreloader: React.FC<QuizResultsProps> = ({
   goBack,
   onFinish,
 }) => {
-  useBodyLockScroll(open);
-
   const [index, setIndex] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -38,7 +35,7 @@ const QuizResultPreloader: React.FC<QuizResultsProps> = ({
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % messages.length);
       // (% messages.length) loops back to 0 after last index
-    }, 1500);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, []);
@@ -114,7 +111,7 @@ const QuizResultPreloader: React.FC<QuizResultsProps> = ({
             GO BACK
           </Button>
           <Button animated onClick={onFinish}>
-            Face it.
+            Face it
           </Button>
         </div>
       </div>
@@ -135,7 +132,7 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ message }) => {
     () => {
       const split = new SplitText(textRef.current, { type: "chars" });
       gsap.from(split.chars, {
-        duration: 0.8,
+        duration: 2,
         autoAlpha: 0,
         stagger: { amount: 0.5, from: "random" },
         ease: "power2.out",

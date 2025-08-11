@@ -82,9 +82,9 @@ export default function Home() {
     <>
       {/* <Hero /> */}
       <Quiz />
-      <div className="w-full h-screen flex items-center justify-center gap-20">
-        {/* style={{ filter: "drop-shadow(0 0 4px rgba(244,234,143,0.5))" }} */}
-      </div>
+      {/* <div className="w-full h-screen flex items-center justify-center gap-20">
+      
+      </div> */}
 
       {/* <About /> */}
       {/* 

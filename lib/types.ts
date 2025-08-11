@@ -20,7 +20,7 @@ export interface VillainProfile {
   powers: string[];
   trivia: string[];
   relations: string[];
-  description: string;
+  backstory: string;
 }
 
 /**
