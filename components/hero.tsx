@@ -12,8 +12,8 @@ gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const Hero: React.FC = () => {
   const pRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  const containerRef = useRef<HTMLHeadingElement>(null);
 
   useGSAP(
     () => {
@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
         autoSplit: true,
       });
 
-      // animate main header
+      // animate main headerautoSplit: true,
       tl.from(words, {
         y: 50,
         opacity: 0,

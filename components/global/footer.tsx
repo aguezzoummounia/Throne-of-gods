@@ -7,12 +7,14 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
+import { usePathname } from "next/navigation";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { dev_url, site_name, email_address, trailer_url } from "@/lib/consts";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const Footer: React.FC = () => {
+  const pathname = usePathname();
   const pRef = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -40,8 +42,8 @@ const Footer: React.FC = () => {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: container.current,
           start: "top 80%",
+          trigger: container.current,
         },
       });
 
@@ -64,6 +66,7 @@ const Footer: React.FC = () => {
           stagger: 0.1,
           autoAlpha: 0,
           yPercent: 100,
+          duration: 1.5,
           ease: "expo.out",
         },
         0.2
@@ -73,11 +76,11 @@ const Footer: React.FC = () => {
       tl.from(
         buttons,
         {
-          y: 30,
+          y: 15,
           opacity: 0,
-          stagger: 0.2,
-          ease: "power3.inOut",
-          duration: 0.7,
+          stagger: 0.3,
+          ease: "power2.inOut",
+          duration: 1,
         },
         0.4
       );
@@ -89,13 +92,13 @@ const Footer: React.FC = () => {
           y: 10,
           opacity: 0,
           stagger: 0.2,
-          ease: "power3.inOut",
-          duration: 0.7,
+          ease: "power2.inOut",
+          duration: 1,
         },
         0.6
       );
     },
-    { scope: container }
+    { scope: container, dependencies: [pathname] }
   );
 
   return (
@@ -105,8 +108,7 @@ const Footer: React.FC = () => {
     >
       <div className="w-full flex flex-col gap-10 items-center xl:justify-center xl:max-w-[55%] lg:max-w-[70%] mx-auto">
         <Text as="h2" ref={h2Ref} variant="title" className="text-center">
-          {/* Where Memory Burns Brighter Than Flame */}
-          Memories Burn Beyond the Flame
+          Memory Burns Brighter Than Flame
         </Text>
 
         <Text as="p" ref={pRef} className="text-center">

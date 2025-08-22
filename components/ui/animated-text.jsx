@@ -33,6 +33,7 @@ const AnimatedText = ({ children, delay = 0.5, animateOnScroll = true }) => {
         const split = SplitText.create(element, {
           type: "lines",
           mask: "lines",
+          autoSplit: true,
           linesClass: "line++",
         });
         splitRef.current.push(split);

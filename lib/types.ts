@@ -5,6 +5,16 @@ import { quizData } from "./data";
  */
 export type VillainKey = keyof typeof quizData.villains;
 
+export interface VillainStats {
+  age: string;
+  race: string;
+  role: string;
+  status: string;
+  faction: string;
+  location: string;
+  alignment: string;
+}
+
 /**
  * Describes the profile of a single villain.
  * We ensure the slug is one of the valid villain keys.
@@ -13,14 +23,17 @@ export interface VillainProfile {
   name: string;
   quote: string;
   image: string;
+  powers: readonly string[];
+  trivia: readonly string[];
   overview: string;
   nickname: string;
   slug: VillainKey;
-  stats: string[];
-  powers: string[];
-  trivia: string[];
-  relations: string[];
   backstory: string;
+  stats: VillainStats;
+  relations: {
+    allies: string;
+    enemies: string;
+  };
 }
 
 /**

@@ -3,7 +3,7 @@ import { ElementType } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 // Variant styles
-const titleVariants = cva("", {
+const titleVariants = cva("font-alegreya", {
   variants: {
     variant: {
       default: "lg:text-lg md:text-xl text-lg leading-[1.1]",
@@ -12,7 +12,7 @@ const titleVariants = cva("", {
         "font-cinzeldecorative max-md:text-dynamic-2xl md:text-dynamic-2xl leading-[1.2]", //title
       lead: "lg:text-dynamic-lg md:text-dynamic-base max-md:text-[4vw] font-semibold leading-[1.1]", //medium title
       small: "md:text-lg text-[3.75vw] leading-[1.1]", //subtitle
-      xs: "md:text-xs text-[3vw] leading-[1.1]", //small regular text
+      xs: "md:text-[10px] text-[3vw] leading-[1.1]", //small regular text
     },
     width: {
       default: "w-auto",
