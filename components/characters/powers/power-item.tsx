@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import PowerCard from "./power-card";
 import { useGSAP } from "@gsap/react";
 import SVGElement from "./svg-elements";
+import { Power } from "@/lib/types";
 
 const powerItemPositions = [
   {
@@ -33,8 +34,7 @@ const powerItemPositions = [
 
 interface PowerItemProps {
   index: number;
-  power: string;
-  image: string;
+  power: Power;
   className?: string;
   isSelected?: boolean;
   onHoverEnd: () => void;
@@ -47,7 +47,6 @@ interface PowerItemProps {
 const PowerItem: React.FC<PowerItemProps> = ({
   index,
   power,
-  image,
   className,
   activeIndex,
   onHoverEnd,
@@ -153,8 +152,8 @@ const PowerItem: React.FC<PowerItemProps> = ({
         <div className="md:size-[55%] size-[60%] flex items-center justify-center relative z-3">
           <Image
             fill
-            src={image}
-            alt="planet image"
+            src={power.image}
+            alt={`${power.name} image`}
             className="object-cover overflow-clip rounded-full power-item-image"
           />
         </div>
@@ -166,10 +165,10 @@ const PowerItem: React.FC<PowerItemProps> = ({
 
       <PowerCard
         isOpen={isOpen}
-        title="Power title"
+        title={power.name}
+        image={power.image}
+        details={power.overview}
         className={cn(position.card)}
-        image="/images/characters/character-3.jpeg"
-        details="Sacred Flame / Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse."
       />
     </>
   );

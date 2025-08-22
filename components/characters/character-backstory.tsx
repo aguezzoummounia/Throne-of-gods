@@ -51,10 +51,10 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
         tl.from(
           split.lines,
           {
-            y: 50, // Slide up from below
+            y: 10, // Slide up from below
             opacity: 0,
             stagger: 0.1,
-            duration: 1.2,
+            duration: 1.5,
             ease: "expo.out",
           },
           "-=0.6" // Overlap with header animation

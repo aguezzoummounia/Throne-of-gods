@@ -40,9 +40,9 @@ export default async function CharacterPage({
         overview={character.overview}
       />
       <CharacterRelation data={character.relations} />
-      {/* 
-       <CharacterPowers data={character.powers} />
-      */}
+
+      <CharacterPowers data={character.powers} />
+
       <CharacterBackstory data={character.backstory} />
       {character.trivia && character.trivia.length > 0 && (
         <CharacterTrivia data={character.trivia} />

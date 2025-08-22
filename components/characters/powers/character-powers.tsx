@@ -1,6 +1,7 @@
 "use client";
 import gsap from "gsap";
 import Text from "../../ui/text";
+import { Power } from "@/lib/types";
 import PowerItem from "./power-item";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
@@ -8,9 +9,12 @@ import Container from "../../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRef, useState, useEffect, useCallback } from "react";
 
+// TODO: fix animation that triggers before element is in screen,
+// account for layout for characters with 1 or 2 or 3 powers
+// add svg lines that link between powers and animate them
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
-const CharacterPowers: React.FC<{ data: readonly string[] }> = ({ data }) => {
+const CharacterPowers: React.FC<{ data: readonly Power[] }> = ({ data }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
@@ -85,7 +89,6 @@ const CharacterPowers: React.FC<{ data: readonly string[] }> = ({ data }) => {
     <Container
       as="div"
       ref={containerRef} // Attach the ref here
-      //
       className="flex flex-col gap-10 md:pt-16 max-md:py-12"
     >
       <Text ref={titleRef} as="h2" variant="title" className="mx-auto">
@@ -100,9 +103,8 @@ const CharacterPowers: React.FC<{ data: readonly string[] }> = ({ data }) => {
             containerRef={containerRef}
             key={`power-card-${index}`}
             onTogglePin={handleTogglePin}
-            onHoverStart={() => setHoverIndex(index)}
             onHoverEnd={() => setHoverIndex(null)}
-            image={`/images/powers/planet-${index + 1}.webp`}
+            onHoverStart={() => setHoverIndex(index)}
           />
         ))}
       </div>

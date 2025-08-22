@@ -80,15 +80,12 @@ const projects = [
 export default function Home() {
   return (
     <>
-      {/* <Hero /> */}
+      <Hero />
+      <Map />
       <Quiz />
-      {/* <div className="w-full h-screen flex items-center justify-center gap-20">
-      
-      </div> */}
 
       {/* <About /> */}
       {/* 
-      <Map />
       <Slider slides={SLIDES_DATA} />
        */}
       {/* */}

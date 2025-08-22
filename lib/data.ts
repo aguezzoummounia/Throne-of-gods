@@ -160,8 +160,17 @@ const quizData = {
           "The King and Queen of the Deep & Goddess Law (whom he defied)",
       },
       powers: [
-        "Corrupted Divine Power: He fundamentally twisted the nature of divine power.",
-        "Lightning: His specific manifestation of divine power, contributing to the 'Trinity' of imperial powers during the War of Depths. His descendant, Kaen, inherits a similar 'storm' ability",
+        {
+          name: "Corrupted Divine Power",
+          image: "/images/powers/planet-2.webp",
+          overview: "He fundamentally twisted the nature of divine power.",
+        },
+        {
+          name: "Lightning",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "His specific manifestation of divine power, contributing to the 'Trinity' of imperial powers during the War of Depths. His descendant, Kaen, inherits a similar 'storm' ability",
+        },
       ],
       stats: {
         race: "Human",
@@ -200,7 +209,12 @@ const quizData = {
         enemies: "The King and Queen of the Deep",
       },
       powers: [
-        "Sacred Flame / Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse.",
+        {
+          name: "Sacred Flame",
+          image: "/images/powers/planet-1.webp",
+          overview:
+            "Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse.",
+        },
       ],
       stats: {
         race: "Human",
@@ -244,9 +258,24 @@ const quizData = {
           "Kaen, Emperor Jarvan XI (whom she likely conspired against), Empress Emilia (Kaen's mother), Jarvan the Tenth, and Drogo (who opposed her actions).",
       },
       powers: [
-        "Master Manipulator: Her primary strength lies in her ability to orchestrate complex plots, frame innocents, and exploit political and religious influence.",
-        "Political Influence: As Imperial Consort and head of the Order of Eternal Flames, she wields significant power over the court, clergy, and public opinion.",
-        "Ruthless Ambition:** Her insatiable craving for power drives her destructive actions.",
+        {
+          name: "Master Manipulator",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Her primary strength lies in her ability to orchestrate complex plots, frame innocents, and exploit political and religious influence.",
+        },
+        {
+          name: "Political Influence",
+          image: "/images/powers/planet-3.webp",
+          overview:
+            "As Imperial Consort and head of the Order of Eternal Flames, she wields significant power over the court, clergy, and public opinion",
+        },
+        {
+          name: "Ruthless Ambition",
+          image: "/images/powers/planet-1.webp",
+          overview:
+            "Her insatiable craving for power drives her destructive actions.",
+        },
       ],
       stats: {
         race: "Human",
@@ -294,9 +323,22 @@ const quizData = {
         enemies: "Kaen, Drogo (his half-brother, who openly despised him).",
       },
       powers: [
-        "Monstrous Blade: Wielded a large, powerful sword.",
-        "Brute Force: Relied on heavy strikes and physical power in combat.",
-        "Heavy Armor: Wore armor that, while protective, limited his speed and awareness.",
+        {
+          name: "Monstrous Blade",
+          image: "/images/powers/planet-2.webp",
+          overview: "Wielded a large, powerful sword.",
+        },
+        {
+          name: "Brute Force",
+          image: "/images/powers/planet-2.webp",
+          overview: "Relied on heavy strikes and physical power in combat.",
+        },
+        {
+          name: "Heavy Armor",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Wore armor that, while protective, limited his speed and awareness.",
+        },
       ],
       stats: {
         race: "Human",
@@ -345,10 +387,30 @@ const quizData = {
           "Reynold (threat to her throne), Duke George (his father), Sir Anthony (whom she eliminated), Kaen (who exposed her), Lucindra (her daughter, who betrayed her). Kaen also implicates Galeeria in her husband's death, implying a shared enemy.",
       },
       powers: [
-        "Master Manipulator and Deceiver: Her primary strength lies in creating and maintaining elaborate illusions and controlling public perception through fear and spectacle.",
-        "Vast Wealth and Resources: Controls the Ember Mountains, home to the greatest forge, which generates immense riches and influence. This wealth allows her to control allegiances and maintain power.",
-        "Political Authority: As Queen, she commands the palace guards and bureaucracy to enforce her will.",
-        "Ruthlessness: Willing to inflict harm on her own son and eliminate perceived threats (like Sir Anthony) to secure her position.",
+        {
+          name: "Master Deceiver",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Her primary strength lies in creating and maintaining elaborate illusions and controlling public perception through fear and spectacle.",
+        },
+        {
+          name: "Vast Wealth",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Controls the Ember Mountains, home to the greatest forge, which generates immense riches and influence. This wealth allows her to control allegiances and maintain power.",
+        },
+        {
+          name: "Political Authority",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "As Queen, she commands the palace guards and bureaucracy to enforce her will.",
+        },
+        {
+          name: "Ruthlessness",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Willing to inflict harm on her own son and eliminate perceived threats (like Sir Anthony) to secure her position.",
+        },
       ],
       stats: {
         race: "Human",
@@ -388,10 +450,30 @@ const quizData = {
       overview:
         "The Order of Eternal Flames is a 'powerful religious organization' that emerged from the chaos of Eternea's civil war, with **House Valaar** (Empress Leticia's family) at its head. They preach a doctrine of 'purity and fire' which has allowed them to gain immense influence, even reaching the highest echelons of Galeeria's throne. They played a critical role in supporting Prince Agon as the 'true heir chosen by the gods', actively opposing Kaen's claim to the throne and conspiring in his downfall. The Order represents a powerful, corrupt religious force that Kaen, upon his return, vows to dismantle and destroy, stripping them of their wealth, influence, and temples.",
       powers: [
-        "Religious Authority:** Their doctrines and declarations are influential, particularly in swaying public opinion and court decisions.",
-        "Political Manipulation:** They operate within the imperial court, manipulating events and succession through alliances and accusations.",
-        "Wealth and Resources:** As a powerful order, they possess significant wealth which Kaen plans to seize.",
-        "Symbolic Fire:** Their rhetoric and philosophy are deeply tied to 'fire' and 'purity'.",
+        {
+          name: "Religious Authority",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Their doctrines and declarations are influential, particularly in swaying public opinion and court decisions.",
+        },
+        {
+          name: "Political Manipulation",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "They operate within the imperial court, manipulating events and succession through alliances and accusations.",
+        },
+        {
+          name: "Wealth and Resources",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "As a powerful order, they possess significant wealth which Kaen plans to seize.",
+        },
+        {
+          name: "Symbolic Fire",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Their rhetoric and philosophy are deeply tied to 'fire' and 'purity'.",
+        },
       ],
       relations: {
         allies:
@@ -440,7 +522,13 @@ const quizData = {
         enemies:
           "Kaen (his killer), and the enslaved individuals he oversaw, such as Jeremiah, who muttered, 'That brute has no soul'.",
       },
-      powers: ["Whip: His primary tool for control and punishment."],
+      powers: [
+        {
+          name: "Whip",
+          image: "/images/powers/planet-2.webp",
+          overview: "His primary tool for control and punishment.",
+        },
+      ],
       stats: {
         race: "Human",
         age: "Adult",
@@ -481,8 +569,16 @@ const quizData = {
           "Kaen (initially, due to his perceived threat and strangeness).",
       },
       powers: [
-        "Whip: Carried and used this tool as an overseer.",
-        "Soldier Training: Possessed the skills and discipline of a trained soldier.",
+        {
+          name: "Whip",
+          image: "/images/powers/planet-2.webp",
+          overview: "Carried and used this tool as an overseer.",
+        },
+        {
+          name: "Soldier Training",
+          image: "/images/powers/planet-2.webp",
+          overview: "Possessed the skills and discipline of a trained soldier.",
+        },
       ],
       stats: {
         race: "Human",
@@ -518,10 +614,29 @@ const quizData = {
       overview:
         "The King of the Deep is an ancient ruler who, alongside the Queen of the Deep, is reclaiming lands they held before gods walked Erosea. He commanded absolute authority and was a silent but powerful presence. He and the Queen led monstrous, light-devouring creatures in the 'War of Depths' against the human emperors of Erosea. Their bond is described as a supernaturally coordinated partnership forged before civilization, providing a stark contrast to the disunity of their human adversaries. He was temporarily frozen by Goddess Law's power before vanishing into ash with the Queen",
       powers: [
-        "Absolute Authority: His 'presence alone commanded absolute authority'",
-        "Command over Deep Creatures: He leads the creatures that caused devastation, which are described as 'half-human, half-sea' and capable of 'devour[ing] light itself'",
-        "Supernatural Coordination: Demonstrates 'supernatural' coordination with the Queen, anticipating her movements",
-        " Vanishing: Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
+        {
+          name: "Absolute Authority",
+          image: "/images/powers/planet-2.webp",
+          overview: "His 'presence alone commanded absolute authority'",
+        },
+        {
+          name: "Command over Deep Creatures",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "He leads the creatures that caused devastation, which are described as 'half-human, half-sea' and capable of 'devour[ing] light itself'",
+        },
+        {
+          name: "Supernatural Coordination",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Demonstrates 'supernatural' coordination with the Queen, anticipating her movements",
+        },
+        {
+          name: "Vanishing",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
+        },
       ],
       relations: {
         allies:
@@ -570,7 +685,7 @@ const quizData = {
       quote: "She was devastatingly beautiful yet alien",
       overview:
         "The Queen of the Deep, ancient sovereign beside her King, seeks to reclaim the realms they ruled before gods walked Erosea. Commanding indescribable sea-spawn that devoured light, she brought devastation—melting mountains, boiling seas, and turning lands to desert—until clashing with the three emperors in the War of Depths. Defiant even before Goddess Law, she chose her fate, her bond with the King as unyielding as the abyss itself.",
-      // The Queen of the Deep, ancient sovereign beside her King, seeks to reclaim the realms they ruled before gods walked Erosea, commanding indescribable sea-spawn that devoured light and brought devastation—melting mountains, boiling seas, and turning lands to desert. In the War of Depths, she defied Goddess Law, meeting her fate by choice, her bond with the King as unyielding as the abyss itself.
+
       relations: {
         allies:
           "The King of the Deep – Her ancient partner, their bond 'a partnership forged in the abyss of the deep before the dawn of civilization'",
@@ -579,12 +694,30 @@ const quizData = {
           "Nemesis: Goddess Law – The divine entity who intervened to stop her invasion and tried to force her submission &(Reluctant Allies): The Three Emperors of Erosea: Jarvan the First, Valeon, and Crascius Velathor – They warred against her forces, eventually uniting to drive her back",
       },
       powers: [
-        "Command over Deep Creatures: Commands 'monsters' that are 'half-human, half-sea' and 'devoured light itself'",
-        "Even these 'beasts' reportedly never bowed to her out of fear, suggesting a different kind of loyalty",
-        "Supernatural Coordination: Moves 'as one being' with the King of the Deep, their coordination being 'supernatural'",
-        "Corruption/Influence: Law implied she was corrupted, stating, 'the corruption suits you'",
-        "She could manifest black mist that 'deepened, eating the ground where it touched'",
-        "Self-Chosen Demise: Possessed the ability to turn herself (and her King and creatures) into ash and vanish",
+        {
+          name: "Command over Deep Creatures",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Commands 'monsters' that are 'half-human, half-sea' and 'devoured light itself'",
+        },
+        {
+          name: "Supernatural Coordination",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
+        },
+        {
+          name: "Corruption/Influence",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "Law implied she was corrupted, stating, 'the corruption suits you'",
+        },
+        {
+          name: "black mist",
+          image: "/images/powers/planet-2.webp",
+          overview:
+            "She could manifest black mist that 'deepened, eating the ground where it touched'",
+        },
       ],
       stats: {
         race: "Ancient Being (Fallen Goddess)",
@@ -633,8 +766,17 @@ const charactersData = {
       enemies: "The King and Queen of the Deep & Goddess Law (whom he defied)",
     },
     powers: [
-      "Corrupted Divine Power: He fundamentally twisted the nature of divine power.",
-      "Lightning: His specific manifestation of divine power, contributing to the 'Trinity' of imperial powers during the War of Depths. His descendant, Kaen, inherits a similar 'storm' ability",
+      {
+        name: "Corrupted Divine Power",
+        image: "/images/powers/planet-2.webp",
+        overview: "He fundamentally twisted the nature of divine power.",
+      },
+      {
+        name: "Lightning",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "His specific manifestation of divine power, contributing to the 'Trinity' of imperial powers during the War of Depths. His descendant, Kaen, inherits a similar 'storm' ability",
+      },
     ],
     stats: {
       race: "Human",
@@ -651,15 +793,15 @@ const charactersData = {
       "His 'voice permanently vanished' after the death of Goddess Law, who collapsed in his arms",
     ],
     backstory: `
-      <p>
-      The Age of Divine Unity and Corruption:<br/>
-      During the Age of Divine Unity, Jarvan the First stood as one of Erosea's three emperors, each uniquely twisting divine power to their will. While Crascius Velathor maintained faith, Jarvan outlawed prayer and destroyed religious sites, proclaiming a doctrine of strength over devotion. This clash of ideologies and powers between him and Crascius, exacerbated by Valeon's profiteering, caused the very fabric of the world to crack, leading to ecological devastation.
-      </p>
-      <p>
-      The War of Depths and Defiance:<br/>
-      When monstrous creatures emerged from the deep, threatening all of Erosea, Jarvan the First was compelled to unite with Valeon and Crascius. In this unprecedented alliance, their combined powers—Jarvan's lightning, Valeon's purifying fire, and Crascius's divine flame—drove back the horrors. However, when Goddess Law descended to intervene, commanding all to kneel, Jarvan defiantly remained standing. The Queen of the Deep referred to him as "Storm-Emperor," hinting at his innate connection to tempestuous power, and even implicated him in the unleashing of Law upon themselves. His steadfast defiance marked him, though his voice ultimately broke and never returned after Goddess Law's death in his arms.
-      </p>
-      `,
+    <p>
+    The Age of Divine Unity and Corruption:<br/>
+    During the Age of Divine Unity, Jarvan the First stood as one of Erosea's three emperors, each uniquely twisting divine power to their will. While Crascius Velathor maintained faith, Jarvan outlawed prayer and destroyed religious sites, proclaiming a doctrine of strength over devotion. This clash of ideologies and powers between him and Crascius, exacerbated by Valeon's profiteering, caused the very fabric of the world to crack, leading to ecological devastation.
+    </p>
+    <p>
+    The War of Depths and Defiance:<br/>
+    When monstrous creatures emerged from the deep, threatening all of Erosea, Jarvan the First was compelled to unite with Valeon and Crascius. In this unprecedented alliance, their combined powers—Jarvan's lightning, Valeon's purifying fire, and Crascius's divine flame—drove back the horrors. However, when Goddess Law descended to intervene, commanding all to kneel, Jarvan defiantly remained standing. The Queen of the Deep referred to him as "Storm-Emperor," hinting at his innate connection to tempestuous power, and even implicated him in the unleashing of Law upon themselves. His steadfast defiance marked him, though his voice ultimately broke and never returned after Goddess Law's death in his arms.
+    </p>
+    `,
   },
   valeon: {
     nickname: "The Coin King",
@@ -673,7 +815,12 @@ const charactersData = {
       enemies: "The King and Queen of the Deep",
     },
     powers: [
-      "Sacred Flame / Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse.",
+      {
+        name: "Sacred Flame",
+        image: "/images/powers/planet-1.webp",
+        overview:
+          "Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse.",
+      },
     ],
     stats: {
       race: "Human",
@@ -693,15 +840,15 @@ const charactersData = {
     slug: "valeon",
     image: "/images/villains/villain-2.jpeg",
     backstory: `
-      <p>
-      The Price of Greed:<br/>
-      Valeon was entrusted with the "flame of divine purification," a power meant to cleanse corrupted souls and mend the fractured world. However, he **chose wealth over duty**, transforming this sacred gift into a means of amassing immense riches through commercial enterprises. His forges produced steel for any willing buyer, fueling the wars of his neighbors and profiting from destruction. The gods, displeased with his avarice, exacted a heavy price: Valeon was 'consumed by the very fire he carried', dying from a blood curse that has since plagued his lineage.
-      </p>
-      <p>
-      Reluctant Unity and Tragic End:<br/>
-      Despite his self-serving nature, Valeon was forced into a temporary alliance with Jarvan and Crascius during the War of Depths. He expressed visceral disgust at the display of unity and love by the King and Queen of the Deep, which starkly contrasted his own isolation. He contributed his "purifying fire" to the collective effort that drove back the deep creatures. After the Queen of the Deep's demise, Valeon was visibly shaken, muttering about his lost coin and forges, seemingly realizing the true cost of his pursuit of wealth in the face of cosmic events. His legacy remains a cautionary tale of divine power misused for worldly gain.
-      </p>
-      `,
+    <p>
+    The Price of Greed:<br/>
+    Valeon was entrusted with the "flame of divine purification," a power meant to cleanse corrupted souls and mend the fractured world. However, he **chose wealth over duty**, transforming this sacred gift into a means of amassing immense riches through commercial enterprises. His forges produced steel for any willing buyer, fueling the wars of his neighbors and profiting from destruction. The gods, displeased with his avarice, exacted a heavy price: Valeon was 'consumed by the very fire he carried', dying from a blood curse that has since plagued his lineage.
+    </p>
+    <p>
+    Reluctant Unity and Tragic End:<br/>
+    Despite his self-serving nature, Valeon was forced into a temporary alliance with Jarvan and Crascius during the War of Depths. He expressed visceral disgust at the display of unity and love by the King and Queen of the Deep, which starkly contrasted his own isolation. He contributed his "purifying fire" to the collective effort that drove back the deep creatures. After the Queen of the Deep's demise, Valeon was visibly shaken, muttering about his lost coin and forges, seemingly realizing the true cost of his pursuit of wealth in the face of cosmic events. His legacy remains a cautionary tale of divine power misused for worldly gain.
+    </p>
+    `,
   },
   leticia: {
     nickname: "The Poison Serpent",
@@ -717,9 +864,24 @@ const charactersData = {
         "Kaen, Emperor Jarvan XI (whom she likely conspired against), Empress Emilia (Kaen's mother), Jarvan the Tenth, and Drogo (who opposed her actions).",
     },
     powers: [
-      "Master Manipulator: Her primary strength lies in her ability to orchestrate complex plots, frame innocents, and exploit political and religious influence.",
-      "Political Influence: As Imperial Consort and head of the Order of Eternal Flames, she wields significant power over the court, clergy, and public opinion.",
-      "Ruthless Ambition:** Her insatiable craving for power drives her destructive actions.",
+      {
+        name: "Master Manipulator",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Her primary strength lies in her ability to orchestrate complex plots, frame innocents, and exploit political and religious influence.",
+      },
+      {
+        name: "Political Influence",
+        image: "/images/powers/planet-3.webp",
+        overview:
+          "As Imperial Consort and head of the Order of Eternal Flames, she wields significant power over the court, clergy, and public opinion",
+      },
+      {
+        name: "Ruthless Ambition",
+        image: "/images/powers/planet-1.webp",
+        overview:
+          "Her insatiable craving for power drives her destructive actions.",
+      },
     ],
     stats: {
       race: "Human",
@@ -740,19 +902,19 @@ const charactersData = {
     slug: "leticia",
     image: "/images/villains/villain-3.jpeg",
     backstory: `
-      <p>
-      The Lure of the Throne and House Valaar's Rise:<br/>
-      Leticia's rise to power began when Jarvan XI, weary of conflict, married her. Her beauty captivated him, but her ambition soon eclipsed her charm. As a member of House Valaar, which ascended from the ashes of Eternea's civil war and headed the influential Order of Eternal Flames, Leticia brought significant political and religious weight to the imperial court. After giving birth to three sons, her craving for power intensified, leading her Order to declare her firstborn, Agon, as the divinely chosen heir, despite Jarvan XI's reservations about his younger sons.
-      </p>
-      <p>
-      Conspiracy and Assassination:<br/>
-      Leticia's cunning and ruthlessness were fully displayed following Emperor Jarvan XI's death. She publicly accused Kaen of patricide, claiming he poisoned his father through a sealed letter. Despite Kaen's pleas of innocence and alibis, she ordered his imprisonment. Immediately after, she orchestrated an assassination attempt on Kaen with a dozen archers during the funeral, revealing her murderous intent. Her coldness and calculated cruelty were evident as she exchanged a knowing glance with Agon, ignoring Drogo's desperate intervention.
-      </p>
-      <p>
-      Undermining Kaen and The Order's Agenda:<br/>
-      Leticia consistently worked to undermine Kaen. During the Crown Prince Tournament, she proudly supported Agon, believing him divinely chosen. When Kaen miraculously manifested divine lightning and defeated Agon, her mask of composure shattered. She dismissed his power as an "illusion" and a "spectacle," vowing that the Order of Eternal Flames "will not suffer a storm prince to rule" and would "awaken what has once slumbered" against him. She harbors deep hatred for Kaen, vowing to reduce his "very existence to ash and memory". She was also secretly listening in on the alliance formed between Jarvan XI, Jarvan X, and Kaen, plotting to splinter their pact.
-      </p>
-      `,
+    <p>
+    The Lure of the Throne and House Valaar's Rise:<br/>
+    Leticia's rise to power began when Jarvan XI, weary of conflict, married her. Her beauty captivated him, but her ambition soon eclipsed her charm. As a member of House Valaar, which ascended from the ashes of Eternea's civil war and headed the influential Order of Eternal Flames, Leticia brought significant political and religious weight to the imperial court. After giving birth to three sons, her craving for power intensified, leading her Order to declare her firstborn, Agon, as the divinely chosen heir, despite Jarvan XI's reservations about his younger sons.
+    </p>
+    <p>
+    Conspiracy and Assassination:<br/>
+    Leticia's cunning and ruthlessness were fully displayed following Emperor Jarvan XI's death. She publicly accused Kaen of patricide, claiming he poisoned his father through a sealed letter. Despite Kaen's pleas of innocence and alibis, she ordered his imprisonment. Immediately after, she orchestrated an assassination attempt on Kaen with a dozen archers during the funeral, revealing her murderous intent. Her coldness and calculated cruelty were evident as she exchanged a knowing glance with Agon, ignoring Drogo's desperate intervention.
+    </p>
+    <p>
+    Undermining Kaen and The Order's Agenda:<br/>
+    Leticia consistently worked to undermine Kaen. During the Crown Prince Tournament, she proudly supported Agon, believing him divinely chosen. When Kaen miraculously manifested divine lightning and defeated Agon, her mask of composure shattered. She dismissed his power as an "illusion" and a "spectacle," vowing that the Order of Eternal Flames "will not suffer a storm prince to rule" and would "awaken what has once slumbered" against him. She harbors deep hatred for Kaen, vowing to reduce his "very existence to ash and memory". She was also secretly listening in on the alliance formed between Jarvan XI, Jarvan X, and Kaen, plotting to splinter their pact.
+    </p>
+    `,
   },
   agon: {
     nickname: "The False Emperor",
@@ -767,9 +929,22 @@ const charactersData = {
       enemies: "Kaen, Drogo (his half-brother, who openly despised him).",
     },
     powers: [
-      "Monstrous Blade: Wielded a large, powerful sword.",
-      "Brute Force: Relied on heavy strikes and physical power in combat.",
-      "Heavy Armor: Wore armor that, while protective, limited his speed and awareness.",
+      {
+        name: "Monstrous Blade",
+        image: "/images/powers/planet-2.webp",
+        overview: "Wielded a large, powerful sword.",
+      },
+      {
+        name: "Brute Force",
+        image: "/images/powers/planet-2.webp",
+        overview: "Relied on heavy strikes and physical power in combat.",
+      },
+      {
+        name: "Heavy Armor",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Wore armor that, while protective, limited his speed and awareness.",
+      },
     ],
     stats: {
       race: "Human",
@@ -790,19 +965,19 @@ const charactersData = {
     slug: "agon",
     image: "/images/villains/villain-4.jpeg",
     backstory: `
-      <p>
-      The "Chosen" Heir and Patricide:<br/>
-      From his birth, Agon was championed by his mother, Empress Leticia, and the powerful Order of Eternal Flames as the "true heir chosen by the gods". This instilled in him an unshakeable belief in his divine right to the throne, leading him to declare that the gods had "already chosen" him even before the Crown Prince Tournament began. He vehemently accused Kaen of poisoning Emperor Jarvan XI, his father, despite Kaen's protests. Agon sealed Kaen's fate at the funeral, personally delivering the fatal dagger blow into Kaen's back while twisting the blade.
-      </p>
-      <p>
-      Defeat in the Crown Prince Tournament:<br/>
-      Agon entered the Crown Prince Tournament with overwhelming confidence, fully expecting an uncontested victory after his brothers withdrew. He wielded a "monstrous blade" and was heavily armored, relying on brute force fueled by his rage and conviction. Kaen, however, exploited Agon's blind fury and heavy equipment, enduring his blows until Agon's blade shattered Kaen's. Just as Agon prepared to deliver the killing strike, Kaen's eyes blazed with divine lightning. A blinding bolt from the heavens struck Agon's sword, shattering it and hurling him "smoking, shattered" across the arena, exposing him as a pretender.
-      </p>
-      <p>
-      Ascension Despite Humiliation:<br/>
-      Despite his humiliating defeat and exposed vulnerability, Agon became Emperor after Kaen's supposed death. His mother, Leticia, immediately dismissed Kaen's victory as a mere "spectacle" and a "stolen power," vowing that the Order of Eternal Flames would never accept a "storm prince". Agon's reign, therefore, is founded on his mother's manipulation and the murder of his own father and half-brother, a testament to the corruption pervasive in the imperial court.
-      </p>
-      `,
+    <p>
+    The "Chosen" Heir and Patricide:<br/>
+    From his birth, Agon was championed by his mother, Empress Leticia, and the powerful Order of Eternal Flames as the "true heir chosen by the gods". This instilled in him an unshakeable belief in his divine right to the throne, leading him to declare that the gods had "already chosen" him even before the Crown Prince Tournament began. He vehemently accused Kaen of poisoning Emperor Jarvan XI, his father, despite Kaen's protests. Agon sealed Kaen's fate at the funeral, personally delivering the fatal dagger blow into Kaen's back while twisting the blade.
+    </p>
+    <p>
+    Defeat in the Crown Prince Tournament:<br/>
+    Agon entered the Crown Prince Tournament with overwhelming confidence, fully expecting an uncontested victory after his brothers withdrew. He wielded a "monstrous blade" and was heavily armored, relying on brute force fueled by his rage and conviction. Kaen, however, exploited Agon's blind fury and heavy equipment, enduring his blows until Agon's blade shattered Kaen's. Just as Agon prepared to deliver the killing strike, Kaen's eyes blazed with divine lightning. A blinding bolt from the heavens struck Agon's sword, shattering it and hurling him "smoking, shattered" across the arena, exposing him as a pretender.
+    </p>
+    <p>
+    Ascension Despite Humiliation:<br/>
+    Despite his humiliating defeat and exposed vulnerability, Agon became Emperor after Kaen's supposed death. His mother, Leticia, immediately dismissed Kaen's victory as a mere "spectacle" and a "stolen power," vowing that the Order of Eternal Flames would never accept a "storm prince". Agon's reign, therefore, is founded on his mother's manipulation and the murder of his own father and half-brother, a testament to the corruption pervasive in the imperial court.
+    </p>
+    `,
   },
   isolde: {
     nickname: "The Iron Monarch",
@@ -818,10 +993,30 @@ const charactersData = {
         "Reynold (threat to her throne), Duke George (his father), Sir Anthony (whom she eliminated), Kaen (who exposed her), Lucindra (her daughter, who betrayed her). Kaen also implicates Galeeria in her husband's death, implying a shared enemy.",
     },
     powers: [
-      "Master Manipulator and Deceiver: Her primary strength lies in creating and maintaining elaborate illusions and controlling public perception through fear and spectacle.",
-      "Vast Wealth and Resources: Controls the Ember Mountains, home to the greatest forge, which generates immense riches and influence. This wealth allows her to control allegiances and maintain power.",
-      "Political Authority: As Queen, she commands the palace guards and bureaucracy to enforce her will.",
-      "Ruthlessness: Willing to inflict harm on her own son and eliminate perceived threats (like Sir Anthony) to secure her position.",
+      {
+        name: "Master Deceiver",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Her primary strength lies in creating and maintaining elaborate illusions and controlling public perception through fear and spectacle.",
+      },
+      {
+        name: "Vast Wealth",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Controls the Ember Mountains, home to the greatest forge, which generates immense riches and influence. This wealth allows her to control allegiances and maintain power.",
+      },
+      {
+        name: "Political Authority",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "As Queen, she commands the palace guards and bureaucracy to enforce her will.",
+      },
+      {
+        name: "Ruthlessness",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Willing to inflict harm on her own son and eliminate perceived threats (like Sir Anthony) to secure her position.",
+      },
     ],
     stats: {
       race: "Human",
@@ -841,18 +1036,18 @@ const charactersData = {
     slug: "isolde",
     image: "/images/villains/villain-5.jpeg",
     backstory: `
-      <p>
-      The Ascendancy of Power and Deception:<br/>
-      Isolde's path to power was through marriage, not birthright, and she has clung to her authority fiercely since her husband's death. To solidify her rule and quell doubts about the Thalakar family's divine mandate, she enacted a cruel deception: she repeatedly inflicted external burns on her own son, Crown Prince Teralion, to simulate the Valeon blood curse. This public display of suffering convinced the populace that divine blood (and curse) still flowed through her line, justifying her continued regency and securing their fear and obedience.
-      </p>
-      <p>
-      The Elimination of Threats (Sir Anthony and Kaen):<br/>
-      News of Reynold's miraculous recovery (attributed to Kaen) reached Isolde, threatening her carefully constructed narrative. She summoned Duke George and his party to Valemont, ostensibly for a celebration, but subtly to investigate and control the situation. Sir Anthony, who was investigating Kaen's claims, mysteriously disappeared before the banquet, and the Queen showed no concern, leading Kaen and Duke George to believe she arranged his abduction and subsequent torture-death in the palace dungeons. During a private confrontation, Kaen directly exposed her deception regarding Teralion and accused her of passively allowing her husband, King Thalakar, to be poisoned by Galeerian hands to consolidate her own power.
-      </p>
-      <p>
-      A Dangerous Game of Wits and Power:<br/>
-      Faced with Kaen's dangerous knowledge, Isolde offered him a deal: declare her son healed and parade his "miracle" for the public in exchange for access to the War Council and the forge master. Kaen scoffed at allying with her, calling it an "agreement" instead. He openly threatened to "reduce this throne to ash" if she betrayed him, recognizing her desperation to maintain her illusion. In response, Isolde had Kaen thrown into the dungeon, intending to execute him at dawn, showcasing her ruthlessness and determination to control the narrative.
-      </p>
+    <p>
+    The Ascendancy of Power and Deception:<br/>
+    Isolde's path to power was through marriage, not birthright, and she has clung to her authority fiercely since her husband's death. To solidify her rule and quell doubts about the Thalakar family's divine mandate, she enacted a cruel deception: she repeatedly inflicted external burns on her own son, Crown Prince Teralion, to simulate the Valeon blood curse. This public display of suffering convinced the populace that divine blood (and curse) still flowed through her line, justifying her continued regency and securing their fear and obedience.
+    </p>
+    <p>
+    The Elimination of Threats (Sir Anthony and Kaen):<br/>
+    News of Reynold's miraculous recovery (attributed to Kaen) reached Isolde, threatening her carefully constructed narrative. She summoned Duke George and his party to Valemont, ostensibly for a celebration, but subtly to investigate and control the situation. Sir Anthony, who was investigating Kaen's claims, mysteriously disappeared before the banquet, and the Queen showed no concern, leading Kaen and Duke George to believe she arranged his abduction and subsequent torture-death in the palace dungeons. During a private confrontation, Kaen directly exposed her deception regarding Teralion and accused her of passively allowing her husband, King Thalakar, to be poisoned by Galeerian hands to consolidate her own power.
+    </p>
+    <p>
+    A Dangerous Game of Wits and Power:<br/>
+    Faced with Kaen's dangerous knowledge, Isolde offered him a deal: declare her son healed and parade his "miracle" for the public in exchange for access to the War Council and the forge master. Kaen scoffed at allying with her, calling it an "agreement" instead. He openly threatened to "reduce this throne to ash" if she betrayed him, recognizing her desperation to maintain her illusion. In response, Isolde had Kaen thrown into the dungeon, intending to execute him at dawn, showcasing her ruthlessness and determination to control the narrative.
+    </p>
 `,
   },
   "eternal-flames": {
@@ -861,10 +1056,30 @@ const charactersData = {
     overview:
       "The Order of Eternal Flames is a 'powerful religious organization' that emerged from the chaos of Eternea's civil war, with **House Valaar** (Empress Leticia's family) at its head. They preach a doctrine of 'purity and fire' which has allowed them to gain immense influence, even reaching the highest echelons of Galeeria's throne. They played a critical role in supporting Prince Agon as the 'true heir chosen by the gods', actively opposing Kaen's claim to the throne and conspiring in his downfall. The Order represents a powerful, corrupt religious force that Kaen, upon his return, vows to dismantle and destroy, stripping them of their wealth, influence, and temples.",
     powers: [
-      "Religious Authority:** Their doctrines and declarations are influential, particularly in swaying public opinion and court decisions.",
-      "Political Manipulation:** They operate within the imperial court, manipulating events and succession through alliances and accusations.",
-      "Wealth and Resources:** As a powerful order, they possess significant wealth which Kaen plans to seize.",
-      "Symbolic Fire:** Their rhetoric and philosophy are deeply tied to 'fire' and 'purity'.",
+      {
+        name: "Religious Authority",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Their doctrines and declarations are influential, particularly in swaying public opinion and court decisions.",
+      },
+      {
+        name: "Political Manipulation",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "They operate within the imperial court, manipulating events and succession through alliances and accusations.",
+      },
+      {
+        name: "Wealth and Resources",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "As a powerful order, they possess significant wealth which Kaen plans to seize.",
+      },
+      {
+        name: "Symbolic Fire",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Their rhetoric and philosophy are deeply tied to 'fire' and 'purity'.",
+      },
     ],
     relations: {
       allies:
@@ -891,16 +1106,16 @@ const charactersData = {
     slug: "eternal-flames",
     image: "/images/villains/villain-6.jpeg",
     backstory: `
-        <p>
-          They say the Order of Eternal Flames was forged in the ashes of Eternea’s civil war, its roots twined around the ambitions of House Valaar. Preaching purity through fire, they became more than a creed—they became a blade hidden within the empire’s heart. When Leticia of Valaar took the throne beside Emperor Jarvan XI, the Order’s reach deepened. From temple steps to imperial chambers, their word became law. It was they who named Leticia’s firstborn, Agon, the true heir chosen by the gods, binding the bloodline to their will.
-        </p>
-        <p>
-          But in the shadows of their sanctity, they marked another as heretic—Kaen, the storm-born prince. His victory in the Crown Prince Tournament was a thunderclap the realm could not ignore: lightning summoned by his own hand, divine and undeniable. Yet the Order called it witchcraft. Their priests cried for his ruin, and Empress Leticia, their most fervent flame, vowed that “no storm prince shall rule.” She spoke of waking what should have stayed buried, a weapon to shatter him.
-        </p>
-        <p>
-          The tale darkens from there. The prince was cast down, his father slain, the Order’s blessing sealing the crime. But death was not Kaen’s end. Returned from shadow with father and grandsire beside him, his vengeance was scripture in its own right: strip the Order of lands, titles, and divine immunity; starve their coffers; silence their priests; and set their temples to the pyre—brick by sacred brick. In his decree, the Order was no longer the empire’s guiding flame, but kindling awaiting the match.
-        </p>
-        `,
+      <p>
+        They say the Order of Eternal Flames was forged in the ashes of Eternea’s civil war, its roots twined around the ambitions of House Valaar. Preaching purity through fire, they became more than a creed—they became a blade hidden within the empire’s heart. When Leticia of Valaar took the throne beside Emperor Jarvan XI, the Order’s reach deepened. From temple steps to imperial chambers, their word became law. It was they who named Leticia’s firstborn, Agon, the true heir chosen by the gods, binding the bloodline to their will.
+      </p>
+      <p>
+        But in the shadows of their sanctity, they marked another as heretic—Kaen, the storm-born prince. His victory in the Crown Prince Tournament was a thunderclap the realm could not ignore: lightning summoned by his own hand, divine and undeniable. Yet the Order called it witchcraft. Their priests cried for his ruin, and Empress Leticia, their most fervent flame, vowed that “no storm prince shall rule.” She spoke of waking what should have stayed buried, a weapon to shatter him.
+      </p>
+      <p>
+        The tale darkens from there. The prince was cast down, his father slain, the Order’s blessing sealing the crime. But death was not Kaen’s end. Returned from shadow with father and grandsire beside him, his vengeance was scripture in its own right: strip the Order of lands, titles, and divine immunity; starve their coffers; silence their priests; and set their temples to the pyre—brick by sacred brick. In his decree, the Order was no longer the empire’s guiding flame, but kindling awaiting the match.
+      </p>
+      `,
   },
   nicolas: {
     nickname: "The Iron Monarch",
@@ -913,7 +1128,13 @@ const charactersData = {
       enemies:
         "Kaen (his killer), and the enslaved individuals he oversaw, such as Jeremiah, who muttered, 'That brute has no soul'.",
     },
-    powers: ["Whip: His primary tool for control and punishment."],
+    powers: [
+      {
+        name: "Whip",
+        image: "/images/powers/planet-2.webp",
+        overview: "His primary tool for control and punishment.",
+      },
+    ],
     stats: {
       race: "Human",
       age: "Adult",
@@ -931,14 +1152,14 @@ const charactersData = {
     slug: "nicolas",
     image: "/images/villains/villain-1.jpeg",
     backstory: `
-      <p>
-      Nicolas was responsible for overseeing the "slaves" at Castleberry Farm, a role he performed with brutality. He owned two large, dark hounds that served him. He was clearly vested in his role and in the control he exerted over the workers, as evidenced by his fury over his dogs and his immediate attempt to punish Kaen.
-      </p>
-      <p>
-      Fateful Encounter with Kaen:<br/>
-      Upon Kaen's mysterious reawakening in a new body at Castleberry Farm, he inadvertently killed Nicolas's hounds with a burst of lightning. Enraged, Nicolas lunged at Kaen with a whip, intent on flogging him. However, Kaen, still grappling with his transformed strength, effortlessly caught the whip and with a single "push," sent Nicolas flying into a fence post, snapping his neck and killing him instantly. This shocking death was witnessed by the other workers and immediately stirred whispers of "devil's mark" and "sorcery" around Kaen.
-      </p>
-      `,
+    <p>
+    Nicolas was responsible for overseeing the "slaves" at Castleberry Farm, a role he performed with brutality. He owned two large, dark hounds that served him. He was clearly vested in his role and in the control he exerted over the workers, as evidenced by his fury over his dogs and his immediate attempt to punish Kaen.
+    </p>
+    <p>
+    Fateful Encounter with Kaen:<br/>
+    Upon Kaen's mysterious reawakening in a new body at Castleberry Farm, he inadvertently killed Nicolas's hounds with a burst of lightning. Enraged, Nicolas lunged at Kaen with a whip, intent on flogging him. However, Kaen, still grappling with his transformed strength, effortlessly caught the whip and with a single "push," sent Nicolas flying into a fence post, snapping his neck and killing him instantly. This shocking death was witnessed by the other workers and immediately stirred whispers of "devil's mark" and "sorcery" around Kaen.
+    </p>
+    `,
   },
   harald: {
     nickname: "The overseer",
@@ -953,8 +1174,16 @@ const charactersData = {
       enemies: "Kaen (initially, due to his perceived threat and strangeness).",
     },
     powers: [
-      "Whip: Carried and used this tool as an overseer.",
-      "Soldier Training: Possessed the skills and discipline of a trained soldier.",
+      {
+        name: "Whip",
+        image: "/images/powers/planet-2.webp",
+        overview: "Carried and used this tool as an overseer.",
+      },
+      {
+        name: "Soldier Training",
+        image: "/images/powers/planet-2.webp",
+        overview: "Possessed the skills and discipline of a trained soldier.",
+      },
     ],
     stats: {
       race: "Human",
@@ -973,15 +1202,15 @@ const charactersData = {
     slug: "harald",
     image: "/images/villains/villain-2.jpeg",
     backstory: `
-      <p>
-      The Overseer and the "Mad Boy":<br/>
-      Following Nicolas's death, Harald, as another overseer, took charge. He approached Kaen with questions, attempting to assert authority and dismiss Kaen's claims of being a prince. He believed Kaen was either "possessed by a devil" or "mad". He ordered men to seize Kaen, but they were incapacitated by Kaen's touch.
-      </p>
-      <p>
-      Revelation of the Covert Operation:<br/>
-      It was during this confrontation that Kaen, with his military acumen, realized Harald and the "slaves" were actually "trained soldiers". Harald confirmed Kaen's suspicions, admitting that Castleberry was a "hidden war camp" and a "rebellion disguised," stating his loyalty to the Duke. This revelation exposed Duke George's secret military preparations, confirming that Harald was not just a farm overseer but a disciplined soldier following orders in a larger, covert operation.
-      </p>
-      `,
+    <p>
+    The Overseer and the "Mad Boy":<br/>
+    Following Nicolas's death, Harald, as another overseer, took charge. He approached Kaen with questions, attempting to assert authority and dismiss Kaen's claims of being a prince. He believed Kaen was either "possessed by a devil" or "mad". He ordered men to seize Kaen, but they were incapacitated by Kaen's touch.
+    </p>
+    <p>
+    Revelation of the Covert Operation:<br/>
+    It was during this confrontation that Kaen, with his military acumen, realized Harald and the "slaves" were actually "trained soldiers". Harald confirmed Kaen's suspicions, admitting that Castleberry was a "hidden war camp" and a "rebellion disguised," stating his loyalty to the Duke. This revelation exposed Duke George's secret military preparations, confirming that Harald was not just a farm overseer but a disciplined soldier following orders in a larger, covert operation.
+    </p>
+    `,
   },
   "king-of-deep": {
     nickname: "The Abyssal King",
@@ -990,10 +1219,29 @@ const charactersData = {
     overview:
       "The King of the Deep is an ancient ruler who, alongside the Queen of the Deep, is reclaiming lands they held before gods walked Erosea. He commanded absolute authority and was a silent but powerful presence. He and the Queen led monstrous, light-devouring creatures in the 'War of Depths' against the human emperors of Erosea. Their bond is described as a supernaturally coordinated partnership forged before civilization, providing a stark contrast to the disunity of their human adversaries. He was temporarily frozen by Goddess Law's power before vanishing into ash with the Queen",
     powers: [
-      "Absolute Authority: His 'presence alone commanded absolute authority'",
-      "Command over Deep Creatures: He leads the creatures that caused devastation, which are described as 'half-human, half-sea' and capable of 'devour[ing] light itself'",
-      "Supernatural Coordination: Demonstrates 'supernatural' coordination with the Queen, anticipating her movements",
-      " Vanishing: Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
+      {
+        name: "Absolute Authority",
+        image: "/images/powers/planet-2.webp",
+        overview: "His 'presence alone commanded absolute authority'",
+      },
+      {
+        name: "Command over Deep Creatures",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "He leads the creatures that caused devastation, which are described as 'half-human, half-sea' and capable of 'devour[ing] light itself'",
+      },
+      {
+        name: "Supernatural Coordination",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Demonstrates 'supernatural' coordination with the Queen, anticipating her movements",
+      },
+      {
+        name: "Vanishing",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
+      },
     ],
     relations: {
       allies:
@@ -1019,30 +1267,30 @@ const charactersData = {
     slug: "king-of-deep",
     image: "/images/villains/king-of-deep.jpeg",
     backstory: `
-        <p>
-        Ancient Sovereignty:<br/>
-        The King of the Deep, along with the Queen, are ancient rulers of lands held "before gods walked Erosea"
-        They emerged from "the deep" to reclaim these territories, leading to widespread environmental devastation across Erosea
-        A Partnership Forged in the Abyss: He is consistently depicted as inseparable from the Queen, sitting "regally behind" her.<br/>
-        </p>
-        <p>
-        Under Law's Spell:<br/>
-        During Goddess Law's intervention, he, like his forces, was compelled to drop and remain "locked to the ground" by her power
-        Their bond is described as a "partnership forged in the abyss of the deep before the dawn of civilization," characterized by supernatural coordination where "when she guides their mount, he anticipates her every shift". This union highlights a profound unity, a quality "the three emperors lack"
-        He stayed "still frozen in the dust" even as the Queen broke free of the spell, indicating his stillness or perhaps a different vulnerability to Law's magic compared to the Queen.<br/>
-        </p>
-        <p>
-        Shared Fate: <br/>
-        He shared the Queen's ultimate fate, breaking "into ash along with any remaining creature and rode the wind away" in a silent flash
-        </p>
-        `,
+      <p>
+      Ancient Sovereignty:<br/>
+      The King of the Deep, along with the Queen, are ancient rulers of lands held "before gods walked Erosea"
+      They emerged from "the deep" to reclaim these territories, leading to widespread environmental devastation across Erosea
+      A Partnership Forged in the Abyss: He is consistently depicted as inseparable from the Queen, sitting "regally behind" her.<br/>
+      </p>
+      <p>
+      Under Law's Spell:<br/>
+      During Goddess Law's intervention, he, like his forces, was compelled to drop and remain "locked to the ground" by her power
+      Their bond is described as a "partnership forged in the abyss of the deep before the dawn of civilization," characterized by supernatural coordination where "when she guides their mount, he anticipates her every shift". This union highlights a profound unity, a quality "the three emperors lack"
+      He stayed "still frozen in the dust" even as the Queen broke free of the spell, indicating his stillness or perhaps a different vulnerability to Law's magic compared to the Queen.<br/>
+      </p>
+      <p>
+      Shared Fate: <br/>
+      He shared the Queen's ultimate fate, breaking "into ash along with any remaining creature and rode the wind away" in a silent flash
+      </p>
+      `,
   },
   "queen-of-deep": {
     nickname: "The Fallen Goddess",
     quote: "She was devastatingly beautiful yet alien",
     overview:
       "The Queen of the Deep, ancient sovereign beside her King, seeks to reclaim the realms they ruled before gods walked Erosea. Commanding indescribable sea-spawn that devoured light, she brought devastation—melting mountains, boiling seas, and turning lands to desert—until clashing with the three emperors in the War of Depths. Defiant even before Goddess Law, she chose her fate, her bond with the King as unyielding as the abyss itself.",
-    // The Queen of the Deep, ancient sovereign beside her King, seeks to reclaim the realms they ruled before gods walked Erosea, commanding indescribable sea-spawn that devoured light and brought devastation—melting mountains, boiling seas, and turning lands to desert. In the War of Depths, she defied Goddess Law, meeting her fate by choice, her bond with the King as unyielding as the abyss itself.
+
     relations: {
       allies:
         "The King of the Deep – Her ancient partner, their bond 'a partnership forged in the abyss of the deep before the dawn of civilization'",
@@ -1051,12 +1299,30 @@ const charactersData = {
         "Nemesis: Goddess Law – The divine entity who intervened to stop her invasion and tried to force her submission &(Reluctant Allies): The Three Emperors of Erosea: Jarvan the First, Valeon, and Crascius Velathor – They warred against her forces, eventually uniting to drive her back",
     },
     powers: [
-      "Command over Deep Creatures: Commands 'monsters' that are 'half-human, half-sea' and 'devoured light itself'",
-      "Even these 'beasts' reportedly never bowed to her out of fear, suggesting a different kind of loyalty",
-      "Supernatural Coordination: Moves 'as one being' with the King of the Deep, their coordination being 'supernatural'",
-      "Corruption/Influence: Law implied she was corrupted, stating, 'the corruption suits you'",
-      "She could manifest black mist that 'deepened, eating the ground where it touched'",
-      "Self-Chosen Demise: Possessed the ability to turn herself (and her King and creatures) into ash and vanish",
+      {
+        name: "Command over Deep Creatures",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Commands 'monsters' that are 'half-human, half-sea' and 'devoured light itself'",
+      },
+      {
+        name: "Supernatural Coordination",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
+      },
+      {
+        name: "Corruption/Influence",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "Law implied she was corrupted, stating, 'the corruption suits you'",
+      },
+      {
+        name: "black mist",
+        image: "/images/powers/planet-2.webp",
+        overview:
+          "She could manifest black mist that 'deepened, eating the ground where it touched'",
+      },
     ],
     stats: {
       race: "Ancient Being (Fallen Goddess)",
@@ -1077,16 +1343,16 @@ const charactersData = {
     slug: "king-of-Queen",
     image: "/images/villains/queen-of-deep.jpeg",
     backstory: `
-      <p>
-        The Queen and King of the Deep were sovereigns of an age before gods walked Erosea, their dominion spanning realms now long claimed by others. When they rose from the abyss, it was not as conquerors, but as heirs reclaiming what had always been theirs. The Queen’s words were calm, almost serene: “I came for what is mine.” Yet the war they waged—the War of Depths—was anything but tranquil. It shattered the world itself: mountains melted, seas boiled, and deserts spread like a slow, festering wound.
-      </p>
-      <p>
-        At the height of the conflict, Goddess Law descended in blinding radiance, her voice an unshakable command for all to kneel. The Queen did not. She shattered the divine spell and regarded the goddess with a voice edged in memory: “All together again. Just like old times.” Law’s reply was cold and telling—“Fallen Goddess Moon. The corruption suits you.” In those words lay the shadow of a great fall, a shared history buried by time. The Queen accused Law of ruling through fear, of orchestrating their doom, and of forcing Memory itself to strip truth from the world. But she, unlike the others, remembered everything.
-      </p>
-      <p>
-        Even as defeat closed in, the Queen’s defiance only deepened. When Jarvan stepped between her and Law, sworn to protect the goddess, she mocked him with the cruel certainty that if he remembered their past, he too would turn his blade against Law. With no path left but surrender, she chose otherwise. Her roar split the air: “I kneel to no one—and I shall choose how I die!” In a blinding flash, she and her King, along with the last of their abyssal kin, dissolved into ash and scattered upon the wind—leaving only the echo of their unyielding will.
-      </p>
-      `,
+    <p>
+      The Queen and King of the Deep were sovereigns of an age before gods walked Erosea, their dominion spanning realms now long claimed by others. When they rose from the abyss, it was not as conquerors, but as heirs reclaiming what had always been theirs. The Queen’s words were calm, almost serene: “I came for what is mine.” Yet the war they waged—the War of Depths—was anything but tranquil. It shattered the world itself: mountains melted, seas boiled, and deserts spread like a slow, festering wound.
+    </p>
+    <p>
+      At the height of the conflict, Goddess Law descended in blinding radiance, her voice an unshakable command for all to kneel. The Queen did not. She shattered the divine spell and regarded the goddess with a voice edged in memory: “All together again. Just like old times.” Law’s reply was cold and telling—“Fallen Goddess Moon. The corruption suits you.” In those words lay the shadow of a great fall, a shared history buried by time. The Queen accused Law of ruling through fear, of orchestrating their doom, and of forcing Memory itself to strip truth from the world. But she, unlike the others, remembered everything.
+    </p>
+    <p>
+      Even as defeat closed in, the Queen’s defiance only deepened. When Jarvan stepped between her and Law, sworn to protect the goddess, she mocked him with the cruel certainty that if he remembered their past, he too would turn his blade against Law. With no path left but surrender, she chose otherwise. Her roar split the air: “I kneel to no one—and I shall choose how I die!” In a blinding flash, she and her King, along with the last of their abyssal kin, dissolved into ash and scattered upon the wind—leaving only the echo of their unyielding will.
+    </p>
+    `,
   },
 };
 

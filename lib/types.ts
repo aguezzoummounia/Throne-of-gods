@@ -15,6 +15,13 @@ export interface VillainStats {
   alignment: string;
 }
 
+export interface Power {
+  name: string;
+  image: string;
+  overview: string;
+  background?: string;
+}
+
 /**
  * Describes the profile of a single villain.
  * We ensure the slug is one of the valid villain keys.
@@ -23,7 +30,7 @@ export interface VillainProfile {
   name: string;
   quote: string;
   image: string;
-  powers: readonly string[];
+  powers: readonly Power[];
   trivia: readonly string[];
   overview: string;
   nickname: string;
