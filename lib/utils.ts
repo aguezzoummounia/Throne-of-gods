@@ -36,4 +36,8 @@ function missingClass(string: string | undefined, prefix: string) {
   return string.match(regex) === null;
 }
 
-export { cx, cn, sleep, missingClass };
+function lerp(a: number, b: number, t: number) {
+  return a + (b - a) * t;
+}
+
+export { cx, cn, lerp, sleep, missingClass };

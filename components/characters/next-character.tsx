@@ -70,6 +70,7 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
         <Image
           fill
           src={image}
+          sizes="90vw"
           alt={`Portrait of ${name}`}
           className="w-full h-full object-cover"
         />

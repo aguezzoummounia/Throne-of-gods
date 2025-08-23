@@ -6,7 +6,7 @@ import SideMenu from "./side-menu";
 import NavLink from "../ui/nav-link";
 import { useHash } from "@/hooks/useHash";
 import MenuToggle from "../ui/menu-toggle";
-import SoundToggle from "../ui/sound-toggle";
+import SoundToggle from "../sound/sound-toggle";
 
 const Header: React.FC = () => {
   const hash = useHash();

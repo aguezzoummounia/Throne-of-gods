@@ -3,6 +3,8 @@ import Link from "next/link";
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
+import { useInteractiveSound } from "@/hooks/useInteractiveSound";
+
 // whitespace-nowrap
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-normal break-words text-sm font-alegreya font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 backdrop-blur-xl transition-colors group cursor-pointer",
@@ -55,6 +57,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
     { size, href, variant, children, className, animated = false, ...props },
     ref
   ) => {
+    const soundEvents = useInteractiveSound();
     const classNames = cn(buttonVariants({ variant, size }), className);
     const borders = (
       <>
@@ -88,6 +91,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
       return (
         <Link
           href={href}
+          {...soundEvents}
           data-slot="button"
           className={classNames}
           ref={ref as React.Ref<HTMLAnchorElement>}
@@ -101,6 +105,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
 
     return (
       <button
+        {...soundEvents}
         data-slot="button"
         className={classNames}
         ref={ref as React.Ref<HTMLButtonElement>}

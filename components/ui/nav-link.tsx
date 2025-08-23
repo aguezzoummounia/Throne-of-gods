@@ -1,10 +1,10 @@
 "use client";
 import gsap from "gsap";
+import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import { useRef, useEffect } from "react";
-import { useSound } from "@/context/sound-context";
 import AnimatedUnderline from "./animated-underline";
+import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 
 interface SoundButtonProps {
   href: string;
@@ -19,42 +19,12 @@ const NavLink: React.FC<SoundButtonProps> = ({
   children,
   className,
 }) => {
-  const { isSoundEnabled } = useSound();
+  const soundEvents = useInteractiveSound();
   const divRef = useRef<HTMLDivElement | null>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
-  const hoverSoundRef = useRef<HTMLAudioElement | null>(null);
-  const clickSoundRef = useRef<HTMLAudioElement | null>(null);
-
-  useEffect(() => {
-    // Create the audio objects and assign them to the refs
-    hoverSoundRef.current = new Audio("/sounds/hover-sf.wav");
-    clickSoundRef.current = new Audio("/sounds/click-sf.wav");
-  }, []);
-
-  const playHoverSound = () => {
-    if (isSoundEnabled && hoverSoundRef.current) {
-      // Check if sound is enabled
-      hoverSoundRef.current.currentTime = 0;
-      hoverSoundRef.current.play();
-    }
-  };
-
-  const playClickSound = () => {
-    if (isSoundEnabled && clickSoundRef.current) {
-      // Check if sound is enabled
-      clickSoundRef.current.currentTime = 0;
-      clickSoundRef.current.play();
-    }
-  };
 
   useGSAP(
     () => {
       if (href === path) {
-        gsap.fromTo(
-          imageRef.current,
-          { opacity: 0, y: 10 },
-          { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }
-        );
         gsap.fromTo(
           divRef.current,
           { opacity: 0, scale: 0.8 },
@@ -68,8 +38,7 @@ const NavLink: React.FC<SoundButtonProps> = ({
   return (
     <a
       href={href}
-      onMouseEnter={playHoverSound}
-      onClick={() => playClickSound()}
+      {...soundEvents}
       className={cn("relative cursor-pointer uppercase text-sm", className)}
     >
       {children}

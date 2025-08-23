@@ -16,6 +16,7 @@ import {
 import { SoundProvider } from "@/context/sound-context";
 import SvgOutline from "@/components/global/svg-outline";
 import ImagesUnderline from "@/components/global/images-underline";
+import { BackgroundMusic } from "@/components/sound/background-music";
 
 const cinzel = Cinzel({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -80,6 +81,7 @@ export default function RootLayout({
           <Header />
           <div className="min-h-screen overflow-clip relative">
             <ImagesUnderline />
+            <BackgroundMusic />
             <main className="min-h-screen">
               {children}
               <Footer />

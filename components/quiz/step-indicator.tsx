@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import AnimatedUnderline from "../ui/animated-underline";
+import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 
 const Indicator: React.FC<{
   number: number;
@@ -9,12 +10,18 @@ const Indicator: React.FC<{
   inLineActive: boolean;
   handleClick: () => void;
 }> = ({ number, isLast, isActive, disabled, inLineActive, handleClick }) => {
+  const soundEvents = useInteractiveSound();
+
   return (
     <div className="flex items-center">
       <button
         role="button"
+        {...soundEvents}
         disabled={disabled}
-        onClick={handleClick}
+        onClick={() => {
+          handleClick();
+          soundEvents.onClick();
+        }}
         title={`skip to question ${number}`}
         className={cn(
           "cursor-pointer relative block md:w-[46px] md:h-[46px] w-9 h-9 transition-opacity opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",

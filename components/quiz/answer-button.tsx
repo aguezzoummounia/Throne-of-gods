@@ -1,5 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 
 interface AnswerButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -16,8 +17,10 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
   className,
   ...props
 }) => {
+  const soundEvents = useInteractiveSound();
   return (
     <button
+      {...soundEvents}
       onClick={onClick}
       className={cn(
         "relative cursor-pointer bg-[rgba(0,0,0,.05)] backdrop-blur-xl group inline-flex gap-2 whitespace-normal break-words text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 group h-auto mix-blend-difference",

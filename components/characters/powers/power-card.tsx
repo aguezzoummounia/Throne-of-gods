@@ -120,6 +120,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
             fill
             src={image}
             alt={`${title} power image`}
+            sizes="14rem"
             className="object-cover power-card-image"
           />
         </div>

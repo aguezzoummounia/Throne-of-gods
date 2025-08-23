@@ -3,10 +3,11 @@ import gsap from "gsap";
 import Image from "next/image";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { Power } from "@/lib/types";
 import PowerCard from "./power-card";
 import { useGSAP } from "@gsap/react";
 import SVGElement from "./svg-elements";
-import { Power } from "@/lib/types";
+import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 
 const powerItemPositions = [
   {
@@ -55,6 +56,7 @@ const PowerItem: React.FC<PowerItemProps> = ({
   containerRef,
 }) => {
   const isOpen = activeIndex === index;
+  const soundEvents = useInteractiveSound();
   const itemRef = useRef<HTMLDivElement>(null);
 
   const handlePointerEnter = (e: React.PointerEvent) => {
@@ -72,6 +74,7 @@ const PowerItem: React.FC<PowerItemProps> = ({
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     onTogglePin(index);
+    soundEvents.onClick();
   };
 
   // Keyboard: Enter/Space toggle, Escape to close
@@ -127,6 +130,7 @@ const PowerItem: React.FC<PowerItemProps> = ({
     <>
       <div
         ref={itemRef}
+        {...soundEvents}
         onClick={handleClick}
         onKeyDown={handleKeyDown}
         onPointerEnter={handlePointerEnter}
@@ -154,6 +158,7 @@ const PowerItem: React.FC<PowerItemProps> = ({
             fill
             src={power.image}
             alt={`${power.name} image`}
+            sizes="(min-width: 768px) 110px, 78px"
             className="object-cover overflow-clip rounded-full power-item-image"
           />
         </div>
