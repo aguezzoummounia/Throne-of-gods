@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import SmoothScroll from "@/components/global/smooth-scroll";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import GrainOverlay from "@/components/global/grain-overlay";
@@ -77,20 +78,22 @@ export default function RootLayout({
       <body
         className={`${cinzel.variable} ${alegreya.variable} ${montserrat.variable} ${raleway.variable} ${cinzelDecorative.variable} ${cardo.variable} ${medievalSharp.variable} ${imFellEnglish.variable} antialiased`}
       >
-        <SoundProvider>
-          <Header />
-          <div className="min-h-screen overflow-clip relative">
-            <ImagesUnderline />
-            <BackgroundMusic />
-            <main className="min-h-screen">
-              {children}
-              <Footer />
-            </main>
-          </div>
-        </SoundProvider>
-        <SvgOutline />
-        <GrainOverlay />
-        <div id="popup-portal"></div>
+        <SmoothScroll>
+          <SoundProvider>
+            <Header />
+            <div className="min-h-screen overflow-clip relative">
+              <ImagesUnderline />
+              <BackgroundMusic />
+              <main className="min-h-screen">
+                {children}
+                <Footer />
+              </main>
+            </div>
+          </SoundProvider>
+          <SvgOutline />
+          <GrainOverlay />
+          <div id="popup-portal"></div>
+        </SmoothScroll>
       </body>
     </html>
   );
