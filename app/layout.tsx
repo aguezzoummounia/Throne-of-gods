@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import { LenisRef, ReactLenis } from "lenis/react";
 import SmoothScroll from "@/components/global/smooth-scroll";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
@@ -86,7 +87,7 @@ export default function RootLayout({
               <BackgroundMusic />
               <main className="min-h-screen">
                 {children}
-                <Footer />
+                {/* <Footer /> */}
               </main>
             </div>
           </SoundProvider>

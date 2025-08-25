@@ -27,7 +27,13 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "components/ui/animated-text.jsx"
+    "components/ui/animated-text.jsx",
+    "components/spheres/water-sphere.jsx",
+    "components/spheres/water-v2-sphere.jsx",
+    "components/spheres/smoke-sphere.jsx",
+    "components/spheres/lightning-sphere.jsx",
+    "components/spheres/sun-sphere.jsx",
+    "components/spheres/text.jsx"
   ],
   "exclude": ["node_modules"]
 }

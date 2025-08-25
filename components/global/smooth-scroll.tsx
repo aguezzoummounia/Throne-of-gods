@@ -23,7 +23,7 @@ const SmoothScroll = ({ children }: SmoothScrollProps) => {
     return () => gsap.ticker.remove(update);
   }, []);
   return (
-    <ReactLenis root ref={lenisRef}>
+    <ReactLenis root options={{ autoRaf: false }} ref={lenisRef}>
       {children}
     </ReactLenis>
   );

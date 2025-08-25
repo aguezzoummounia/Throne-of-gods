@@ -7,6 +7,7 @@ import Slider from "@/components/slider";
 import { WebGLSlider } from "@/components/test-component";
 import { cn } from "@/lib/utils";
 import { useRef, useState } from "react";
+import SpheresSection from "@/components/spheres/spheres-parent";
 interface Slide {
   id: number;
   image: string;
@@ -80,6 +81,7 @@ const projects = [
 export default function Home() {
   return (
     <>
+      {/* <SpheresSection /> */}
       <Hero />
       <Map />
       <Quiz />
