@@ -19,6 +19,7 @@ import { SoundProvider } from "@/context/sound-context";
 import SvgOutline from "@/components/global/svg-outline";
 import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
+import CustomCursor from "@/components/global/custom-cursor";
 
 const cinzel = Cinzel({
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -87,9 +88,10 @@ export default function RootLayout({
               <BackgroundMusic />
               <main className="min-h-screen">
                 {children}
-                {/* <Footer /> */}
+                <Footer />
               </main>
             </div>
+            <CustomCursor />
           </SoundProvider>
           <SvgOutline />
           <GrainOverlay />
