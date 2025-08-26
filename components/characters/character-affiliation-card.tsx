@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import TiltedCardWarper from "../titlted-card-wraper";
+import TiltedCardWrapper from "../tilted-card-wrapper";
 import ElementsSvgOutline from "../elements-svg-outline";
 
 const CharacterAffiliationCard: React.FC<{
@@ -9,7 +9,7 @@ const CharacterAffiliationCard: React.FC<{
   onClick: () => void;
 }> = ({ onClick, isActive, type = "allies" }) => {
   return (
-    <TiltedCardWarper>
+    <TiltedCardWrapper className="md:w-[250px] w-full aspect-[2/3] rounded-[10px] overflow-hidden transition-none transform-3d backface-hidden">
       <div
         onClick={onClick}
         className={cn(
@@ -44,7 +44,7 @@ const CharacterAffiliationCard: React.FC<{
           )}
         </div>
       </div>
-    </TiltedCardWarper>
+    </TiltedCardWrapper>
   );
 };
 

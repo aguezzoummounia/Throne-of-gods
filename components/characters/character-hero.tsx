@@ -85,7 +85,10 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
   );
 
   return (
-    <div ref={containerRef} className="w-full h-svh relative overflow-clip">
+    <div
+      ref={containerRef}
+      className="w-full h-svh relative overflow-clip backdrop-blur-3xl bg-blurred"
+    >
       <Image
         src={image}
         width={1920}
@@ -94,7 +97,7 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
         alt={`Portrait of ${name}`}
         className="w-full h-full object-cover transform-origin-center scale-150 invisible brightness-130"
       />
-      <div className="absolute bottom-0 left-0 w-full pt-20 md:pb-14 pb-10 px-12 max-md:px-5 bg-gradient-to-t from-black via-zinc-900/70 to-transparent flex items-center justify-center">
+      <div className="absolute bottom-0 left-0 w-full pt-20 md:pb-14 pb-10 px-12 max-md:px-5 bg-gradient-to-t from-black via-zinc-900/60 to-transparent flex items-center justify-center">
         <header className="gap-4 flex flex-col items-center justify-center lg:w-[58.33%] xs:w-[83.33%] w-full text-center">
           <Text ref={pRef} as="p" className="font-alegreya invisible">
             {nickname}

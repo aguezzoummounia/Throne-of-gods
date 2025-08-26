@@ -19,6 +19,7 @@ export default async function QuizResultPage({
 
   return (
     <div className="min-h-svh">
+      {/* // color-dodge hard-light luminosity */}
       {/* <div className="fixed inset-0 w-full h-full bg-[rgb(79,135,53)] mix-blend-hue" /> */}
       <CharacterHero
         name={villain.name}

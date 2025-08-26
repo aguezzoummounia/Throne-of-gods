@@ -1,4 +1,5 @@
 "use client";
+import { cn } from "@/lib/utils";
 import { lerp } from "@/lib/utils";
 import { useRef, useEffect } from "react";
 import { useInteractiveSound } from "@/hooks/useInteractiveSound";
@@ -9,10 +10,11 @@ const MAX_LIFT = 14; // px upward (towards cursor)
 const SMOOTHING = 0.12; // lower = smoother (slower)
 
 interface TiltedCardWarperProps {
+  className?: string;
   children: React.ReactNode;
 }
 
-const TiltedCardWarper = ({ children }: TiltedCardWarperProps) => {
+const TiltedCardWrapper = ({ children, className }: TiltedCardWarperProps) => {
   const soundEvents = useInteractiveSound();
   const cardRef = useRef<HTMLDivElement | null>(null);
   const wrapperRef = useRef<HTMLDivElement | null>(null);
@@ -148,17 +150,14 @@ const TiltedCardWarper = ({ children }: TiltedCardWarperProps) => {
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
-      className="will-change-transform transform-3d"
+      className={cn("will-change-transform transform-3d", className)}
       onMouseDown={startLoop} // optional: kick the loop on first interaction if needed
     >
-      <div
-        ref={cardRef}
-        className="md:w-[250px] w-full aspect-[2/3] rounded-[10px] overflow-hidden transition-none transform-3d backface-hidden"
-      >
+      <div ref={cardRef} className="w-full h-full">
         {children}
       </div>
     </div>
   );
 };
 
-export default TiltedCardWarper;
+export default TiltedCardWrapper;

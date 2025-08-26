@@ -7,31 +7,8 @@ import { Power } from "@/lib/types";
 import PowerCard from "./power-card";
 import { useGSAP } from "@gsap/react";
 import SVGElement from "./svg-elements";
+import { power_item_positions } from "@/lib/consts";
 import { useInteractiveSound } from "@/hooks/useInteractiveSound";
-
-const powerItemPositions = [
-  {
-    // index 0
-    item: "md:top-[3%] top-[3%] md:left-[30%] left-[3%]",
-    card: "md:top-[3%] -top-10 md:left-[calc(30%_+_185px)] left-[calc(3%_+_70px)]",
-  },
-  {
-    // index 1
-    item: "top-[30%] md:right-[5%] right-[3%]",
-    card: "md:top-[30%] top-[20%] md:right-[calc(180px_+_5%)] right-[calc(3%_+_70px)]",
-  },
-  {
-    // index 2
-    item: "md:top-[45%] top-[50%] md:left-[5%] left-0",
-    card: "md:top-[45%] top-[40%] md:left-[calc(5%_+_180px)] left-[70px]",
-  },
-  {
-    // index 3
-    item: "md:bottom-[5%] bottom-[5%] md:right-[20%] right-0",
-    card: "md:-bottom-0 -bottom-[5%] md:right-[calc(20%_+_180px)] right-[70px]",
-  },
-  // You can now easily add a 5th, 6th, etc. item here without crashing the app.
-];
 
 interface PowerItemProps {
   index: number;
@@ -85,7 +62,7 @@ const PowerItem: React.FC<PowerItemProps> = ({
     }
   };
 
-  const position = powerItemPositions[index] || { item: "", card: "" };
+  const position = power_item_positions[index] || { item: "", card: "" };
 
   useGSAP(
     () => {
@@ -170,9 +147,9 @@ const PowerItem: React.FC<PowerItemProps> = ({
 
       <PowerCard
         isOpen={isOpen}
-        title={power.name}
+        name={power.name}
         image={power.image}
-        details={power.overview}
+        overview={power.overview}
         className={cn(position.card)}
       />
     </>

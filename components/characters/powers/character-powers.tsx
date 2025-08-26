@@ -1,12 +1,14 @@
 "use client";
 import gsap from "gsap";
 import Text from "../../ui/text";
+import { cn } from "@/lib/utils";
 import { Power } from "@/lib/types";
-import PowerItem from "./power-item";
+import PowerCard from "./power-card";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 import Container from "../../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { power_item_positions } from "@/lib/consts";
 import { useRef, useState, useEffect, useCallback } from "react";
 
 // TODO: fix animation that triggers before element is in screen,
@@ -15,46 +17,46 @@ import { useRef, useState, useEffect, useCallback } from "react";
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
 const CharacterPowers: React.FC<{ data: readonly Power[] }> = ({ data }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
-  // State for which item is being hovered by a mouse
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
-  // State for which item has been explicitly clicked/tapped ("pinned")
-  const [pinnedIndex, setPinnedIndex] = useState<number | null>(null);
+  // // State for which item is being hovered by a mouse
+  // const [hoverIndex, setHoverIndex] = useState<number | null>(null);
+  // // State for which item has been explicitly clicked/tapped ("pinned")
+  // const [pinnedIndex, setPinnedIndex] = useState<number | null>(null);
 
-  // --- DERIVED STATE ---
-  // The truly active item is the one that's pinned, otherwise it's the one being hovered.
-  // This is the magic that solves the flicker. A click will set pinnedIndex, and this
-  // value will take precedence over any hover changes.
-  const activeIndex = pinnedIndex ?? hoverIndex;
+  // // --- DERIVED STATE ---
+  // // The truly active item is the one that's pinned, otherwise it's the one being hovered.
+  // // This is the magic that solves the flicker. A click will set pinnedIndex, and this
+  // // value will take precedence over any hover changes.
+  // const activeIndex = pinnedIndex ?? hoverIndex;
 
-  // --- EVENT HANDLERS ---
-  // Memoize this handler to pass a stable function to children
-  const handleTogglePin = useCallback((index: number) => {
-    // If the user clicks the already pinned item, unpin it.
-    // Otherwise, pin the new item.
-    setPinnedIndex((currentPinnedIndex) =>
-      currentPinnedIndex === index ? null : index
-    );
-  }, []);
+  // // --- EVENT HANDLERS ---
+  // // Memoize this handler to pass a stable function to children
+  // const handleTogglePin = useCallback((index: number) => {
+  //   // If the user clicks the already pinned item, unpin it.
+  //   // Otherwise, pin the new item.
+  //   setPinnedIndex((currentPinnedIndex) =>
+  //     currentPinnedIndex === index ? null : index
+  //   );
+  // }, []);
 
-  // Effect for handling "click outside" to close the pinned card.
-  useEffect(() => {
-    // This effect only cares about the pinned state.
-    if (pinnedIndex === null) {
-      return;
-    }
+  // // Effect for handling "click outside" to close the pinned card.
+  // useEffect(() => {
+  //   // This effect only cares about the pinned state.
+  //   if (pinnedIndex === null) {
+  //     return;
+  //   }
 
-    const handleClickOutside = () => {
-      setPinnedIndex(null);
-    };
+  //   const handleClickOutside = () => {
+  //     setPinnedIndex(null);
+  //   };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [pinnedIndex]);
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, [pinnedIndex]);
 
   useGSAP(
     () => {
@@ -87,26 +89,28 @@ const CharacterPowers: React.FC<{ data: readonly Power[] }> = ({ data }) => {
 
   return (
     <Container
-      as="div"
-      ref={containerRef} // Attach the ref here
-      className="flex flex-col gap-10 md:pt-16 max-md:py-12"
+      as="section"
+      ref={containerRef}
+      className="flex flex-col md:gap-20 gap-10"
     >
       <Text ref={titleRef} as="h2" variant="title" className="mx-auto">
         Relics of Power
       </Text>
-      <div className="min-h-[90vh] grid-container flex-1 w-full h-full relative">
-        {data.map((power, index) => (
-          <PowerItem
-            index={index}
-            power={power}
-            activeIndex={activeIndex}
-            containerRef={containerRef}
-            key={`power-card-${index}`}
-            onTogglePin={handleTogglePin}
-            onHoverEnd={() => setHoverIndex(null)}
-            onHoverStart={() => setHoverIndex(index)}
-          />
-        ))}
+      <div className="md:min-h-[120vh] min-h-[1500px] grid-container flex-1 w-full h-full relative">
+        {data.map((power, index) => {
+          const position = power_item_positions[index] || {
+            item: "",
+          };
+          return (
+            <PowerCard
+              name={power.name}
+              image={power.image}
+              overview={power.overview}
+              key={`power-card-${index}`}
+              className={cn(position.item)}
+            />
+          );
+        })}
       </div>
     </Container>
   );

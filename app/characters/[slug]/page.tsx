@@ -7,6 +7,12 @@ import CharacterPowers from "@/components/characters/powers/character-powers";
 import CharacterOverview from "@/components/characters/character-overview";
 import CharacterRelation from "@/components/characters/character-relations";
 import CharacterBackstory from "@/components/characters/character-backstory";
+//
+import Image from "next/image";
+import Text from "@/components/ui/text";
+import Container from "@/components/global/container";
+import ElementsSvgOutline from "@/components/elements-svg-outline";
+import PowerCard from "@/components/characters/powers/power-card";
 
 export default async function CharacterPage({
   params,
@@ -40,9 +46,7 @@ export default async function CharacterPage({
         overview={character.overview}
       />
       <CharacterRelation data={character.relations} />
-
       <CharacterPowers data={character.powers} />
-
       <CharacterBackstory data={character.backstory} />
       {character.trivia && character.trivia.length > 0 && (
         <CharacterTrivia data={character.trivia} />

@@ -162,12 +162,12 @@ const quizData = {
       powers: [
         {
           name: "Corrupted Divine Power",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "He fundamentally twisted the nature of divine power.",
         },
         {
           name: "Lightning",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "His specific manifestation of divine power, contributing to the 'Trinity' of imperial powers during the War of Depths. His descendant, Kaen, inherits a similar 'storm' ability",
         },
@@ -211,7 +211,7 @@ const quizData = {
       powers: [
         {
           name: "Sacred Flame",
-          image: "/images/powers/planet-1.webp",
+          image: "/images/powers/power-1.jpeg",
           overview:
             "Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse.",
         },
@@ -260,19 +260,19 @@ const quizData = {
       powers: [
         {
           name: "Master Manipulator",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Her primary strength lies in her ability to orchestrate complex plots, frame innocents, and exploit political and religious influence.",
         },
         {
           name: "Political Influence",
-          image: "/images/powers/planet-3.webp",
+          image: "/images/powers/power-3.jpeg",
           overview:
             "As Imperial Consort and head of the Order of Eternal Flames, she wields significant power over the court, clergy, and public opinion",
         },
         {
           name: "Ruthless Ambition",
-          image: "/images/powers/planet-1.webp",
+          image: "/images/powers/power-1.jpeg",
           overview:
             "Her insatiable craving for power drives her destructive actions.",
         },
@@ -325,17 +325,17 @@ const quizData = {
       powers: [
         {
           name: "Monstrous Blade",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "Wielded a large, powerful sword.",
         },
         {
           name: "Brute Force",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "Relied on heavy strikes and physical power in combat.",
         },
         {
           name: "Heavy Armor",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Wore armor that, while protective, limited his speed and awareness.",
         },
@@ -389,25 +389,25 @@ const quizData = {
       powers: [
         {
           name: "Master Deceiver",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Her primary strength lies in creating and maintaining elaborate illusions and controlling public perception through fear and spectacle.",
         },
         {
           name: "Vast Wealth",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Controls the Ember Mountains, home to the greatest forge, which generates immense riches and influence. This wealth allows her to control allegiances and maintain power.",
         },
         {
           name: "Political Authority",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "As Queen, she commands the palace guards and bureaucracy to enforce her will.",
         },
         {
           name: "Ruthlessness",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Willing to inflict harm on her own son and eliminate perceived threats (like Sir Anthony) to secure her position.",
         },
@@ -452,25 +452,25 @@ const quizData = {
       powers: [
         {
           name: "Religious Authority",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Their doctrines and declarations are influential, particularly in swaying public opinion and court decisions.",
         },
         {
           name: "Political Manipulation",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-1.jpeg",
           overview:
             "They operate within the imperial court, manipulating events and succession through alliances and accusations.",
         },
         {
           name: "Wealth and Resources",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-3.jpeg",
           overview:
             "As a powerful order, they possess significant wealth which Kaen plans to seize.",
         },
         {
           name: "Symbolic Fire",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-4.jpeg",
           overview:
             "Their rhetoric and philosophy are deeply tied to 'fire' and 'purity'.",
         },
@@ -525,7 +525,7 @@ const quizData = {
       powers: [
         {
           name: "Whip",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "His primary tool for control and punishment.",
         },
       ],
@@ -571,12 +571,12 @@ const quizData = {
       powers: [
         {
           name: "Whip",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "Carried and used this tool as an overseer.",
         },
         {
           name: "Soldier Training",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "Possessed the skills and discipline of a trained soldier.",
         },
       ],
@@ -616,24 +616,24 @@ const quizData = {
       powers: [
         {
           name: "Absolute Authority",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview: "His 'presence alone commanded absolute authority'",
         },
         {
           name: "Command over Deep Creatures",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "He leads the creatures that caused devastation, which are described as 'half-human, half-sea' and capable of 'devour[ing] light itself'",
         },
         {
           name: "Supernatural Coordination",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Demonstrates 'supernatural' coordination with the Queen, anticipating her movements",
         },
         {
           name: "Vanishing",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
         },
@@ -696,25 +696,25 @@ const quizData = {
       powers: [
         {
           name: "Command over Deep Creatures",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Commands 'monsters' that are 'half-human, half-sea' and 'devoured light itself'",
         },
         {
           name: "Supernatural Coordination",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
         },
         {
           name: "Corruption/Influence",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "Law implied she was corrupted, stating, 'the corruption suits you'",
         },
         {
           name: "black mist",
-          image: "/images/powers/planet-2.webp",
+          image: "/images/powers/power-2.jpeg",
           overview:
             "She could manifest black mist that 'deepened, eating the ground where it touched'",
         },
@@ -768,12 +768,12 @@ const charactersData = {
     powers: [
       {
         name: "Corrupted Divine Power",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "He fundamentally twisted the nature of divine power.",
       },
       {
         name: "Lightning",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "His specific manifestation of divine power, contributing to the 'Trinity' of imperial powers during the War of Depths. His descendant, Kaen, inherits a similar 'storm' ability",
       },
@@ -817,7 +817,7 @@ const charactersData = {
     powers: [
       {
         name: "Sacred Flame",
-        image: "/images/powers/planet-1.webp",
+        image: "/images/powers/power-1.jpeg",
         overview:
           "Purifying Fire: A divine power he possessed and corrupted for monetary gain. This power, when corrupted, led to the blood curse.",
       },
@@ -866,19 +866,19 @@ const charactersData = {
     powers: [
       {
         name: "Master Manipulator",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Her primary strength lies in her ability to orchestrate complex plots, frame innocents, and exploit political and religious influence.",
       },
       {
         name: "Political Influence",
-        image: "/images/powers/planet-3.webp",
+        image: "/images/powers/power-3.jpeg",
         overview:
           "As Imperial Consort and head of the Order of Eternal Flames, she wields significant power over the court, clergy, and public opinion",
       },
       {
         name: "Ruthless Ambition",
-        image: "/images/powers/planet-1.webp",
+        image: "/images/powers/power-1.jpeg",
         overview:
           "Her insatiable craving for power drives her destructive actions.",
       },
@@ -931,17 +931,17 @@ const charactersData = {
     powers: [
       {
         name: "Monstrous Blade",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "Wielded a large, powerful sword.",
       },
       {
         name: "Brute Force",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "Relied on heavy strikes and physical power in combat.",
       },
       {
         name: "Heavy Armor",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Wore armor that, while protective, limited his speed and awareness.",
       },
@@ -995,25 +995,25 @@ const charactersData = {
     powers: [
       {
         name: "Master Deceiver",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Her primary strength lies in creating and maintaining elaborate illusions and controlling public perception through fear and spectacle.",
       },
       {
         name: "Vast Wealth",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Controls the Ember Mountains, home to the greatest forge, which generates immense riches and influence. This wealth allows her to control allegiances and maintain power.",
       },
       {
         name: "Political Authority",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "As Queen, she commands the palace guards and bureaucracy to enforce her will.",
       },
       {
         name: "Ruthlessness",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Willing to inflict harm on her own son and eliminate perceived threats (like Sir Anthony) to secure her position.",
       },
@@ -1058,25 +1058,25 @@ const charactersData = {
     powers: [
       {
         name: "Religious Authority",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-1.jpeg",
         overview:
           "Their doctrines and declarations are influential, particularly in swaying public opinion and court decisions.",
       },
       {
         name: "Political Manipulation",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "They operate within the imperial court, manipulating events and succession through alliances and accusations.",
       },
       {
         name: "Wealth and Resources",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-3.jpeg",
         overview:
           "As a powerful order, they possess significant wealth which Kaen plans to seize.",
       },
       {
         name: "Symbolic Fire",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-4.jpeg",
         overview:
           "Their rhetoric and philosophy are deeply tied to 'fire' and 'purity'.",
       },
@@ -1131,7 +1131,7 @@ const charactersData = {
     powers: [
       {
         name: "Whip",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "His primary tool for control and punishment.",
       },
     ],
@@ -1176,12 +1176,12 @@ const charactersData = {
     powers: [
       {
         name: "Whip",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "Carried and used this tool as an overseer.",
       },
       {
         name: "Soldier Training",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "Possessed the skills and discipline of a trained soldier.",
       },
     ],
@@ -1221,24 +1221,24 @@ const charactersData = {
     powers: [
       {
         name: "Absolute Authority",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview: "His 'presence alone commanded absolute authority'",
       },
       {
         name: "Command over Deep Creatures",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "He leads the creatures that caused devastation, which are described as 'half-human, half-sea' and capable of 'devour[ing] light itself'",
       },
       {
         name: "Supernatural Coordination",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Demonstrates 'supernatural' coordination with the Queen, anticipating her movements",
       },
       {
         name: "Vanishing",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
       },
@@ -1301,25 +1301,25 @@ const charactersData = {
     powers: [
       {
         name: "Command over Deep Creatures",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Commands 'monsters' that are 'half-human, half-sea' and 'devoured light itself'",
       },
       {
         name: "Supernatural Coordination",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Possessed the ability to turn into ash and vanish, alongside the Queen and their creatures",
       },
       {
         name: "Corruption/Influence",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "Law implied she was corrupted, stating, 'the corruption suits you'",
       },
       {
         name: "black mist",
-        image: "/images/powers/planet-2.webp",
+        image: "/images/powers/power-2.jpeg",
         overview:
           "She could manifest black mist that 'deepened, eating the ground where it touched'",
       },
