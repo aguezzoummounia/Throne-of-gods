@@ -21,9 +21,24 @@ const power_item_positions = [
 
 const map_locations_positions = [
   {
-    // index 0
-    item: "md:top-[3%] top-[3%] md:left-[30%] left-[3%]",
-    card: "md:top-[3%] -top-10 md:left-[calc(30%_+_185px)] left-[calc(3%_+_70px)]",
+    item: "lg:top-[calc(38%_-_23px)] lg:left-[calc(50%_-_23px)] md:top-[calc(38%_-_18px)] md:left-[calc(50%_-_18px)] top-[calc(50%_-_12px)] left-[calc(60%_-_12px)]",
+    card: "md:top-[calc(38%_-_165px)] bottom-[calc(50%_+_24px)] md:left-[calc(50%_+_32px)] left-[calc(3%_+_70px)]",
+  },
+  {
+    item: "lg:top-[calc(15%_-_23px)] lg:left-[calc(80%_-_23px)] md:top-[calc(15%_-_18px)] md:left-[calc(80%_-_18px)] top-[calc(80%_-_12px)] left-[calc(85%_-_12px)]",
+    card: "md:top-[5%] md:right-[calc(20%_+_32px)] top-[calc(70%_-_165px)] right-[calc(15%_+_24px)]",
+  },
+  {
+    item: "lg:top-[calc(45%_-_23px)] lg:left-[calc(17%_-_23px)] md:top-[calc(48%_-_18px)] md:left-[calc(18%_-_18px)] top-[calc(18%_-_12px)] left-[calc(55%_-_12px)]",
+    card: "md:top-[calc(45%_-_165px)] md:left-[calc(17%_+_32px)] left-[calc(50%_-_110px)] top-[calc(18%_+_24px)]",
+  },
+  {
+    item: "lg:top-[calc(63%_-_23px)] lg:left-[calc(83%_-_23px)] md:top-[calc(63%_-_18px)] md:left-[calc(83%_-_18px)] top-[calc(83%_-_12px)] left-[calc(35%_-_12px)]",
+    card: "md:top-[calc(63%_-_165px)] bottom-[calc(17%_+_24px)] md:left-[calc(83%_-_253px)] left-[calc(50%_-_110px)]",
+  },
+  {
+    item: "lg:top-[calc(68%_-_23px)] lg:left-[calc(19%_-_23px)] md:top-[calc(68%_-_18px)] md:left-[calc(19%_-_18px)] top-[calc(19%_-_12px)] left-[calc(32%_-_12px)]",
+    card: "md:top-[calc(68%_-_165px)] top-[calc(19%_+_24px)] md:left-[calc(19%_+_32px)] left-[calc(5%)]",
   },
 ];
 

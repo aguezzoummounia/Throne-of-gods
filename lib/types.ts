@@ -69,3 +69,13 @@ export interface QuizData {
   questions: Question[];
   villains: Record<VillainKey, VillainProfile>;
 }
+
+/**
+ * Describes a location entry.
+ */
+export interface Location {
+  image: string;
+  title: string;
+  label: string;
+  details: string;
+}

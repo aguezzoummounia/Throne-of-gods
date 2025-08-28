@@ -82,7 +82,7 @@ export default function Home() {
   return (
     <>
       {/* <SpheresSection /> */}
-      <Hero />
+      {/* <Hero /> */}
       <Map />
       <Quiz />
 

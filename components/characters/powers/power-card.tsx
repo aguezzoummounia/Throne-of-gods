@@ -80,6 +80,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
 
       return () => {
         if (titleSplit) titleSplit.revert();
+        if (pSplit) pSplit.revert();
       };
     },
     {

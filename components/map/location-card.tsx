@@ -6,83 +6,105 @@ import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
 import Text from "@/components/ui/text";
 import { SplitText } from "gsap/SplitText";
+import AnimatedUnderline from "../ui/animated-underline";
 import ElementsSvgOutline from "@/components/elements-svg-outline";
+
+gsap.registerPlugin(SplitText);
+
+type CardType = "new" | "default";
 
 interface PowerCardProps {
   image: string;
   title: string;
-  isOpen: boolean;
+  label: string;
+  type?: CardType;
   details: string;
   className?: string;
 }
 
-const LocationMap = ({
+const LocationCard = ({
   image,
   title,
-  isOpen,
+  label,
+  type,
   details,
   className,
 }: PowerCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const tl = useRef<gsap.core.Timeline | null>(null);
+
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const labelRef = useRef<HTMLParagraphElement | null>(null);
+  const detailsRef = useRef<HTMLParagraphElement | null>(null);
+  const imageRef = useRef<HTMLImageElement | null>(null);
 
   useGSAP(
     () => {
-      tl.current = gsap.timeline({ paused: true });
-      const titleSplit = new SplitText(".power-card-title", {
+      const tl = gsap.timeline();
+      const titleSplit = new SplitText(titleRef.current, {
         type: "chars",
         smartWrap: true,
       });
+      const labelSplit = new SplitText(labelRef.current, {
+        type: "chars",
+        smartWrap: true,
+      });
+      const pSplit = new SplitText(detailsRef.current, {
+        type: "words",
+      });
 
-      tl.current
-        .to(cardRef.current, {
-          scale: 1,
-          autoAlpha: 1,
-          duration: 0.8,
-          ease: "power3.out",
-        })
+      tl.to(cardRef.current, {
+        scale: 1,
+        autoAlpha: 1,
+        duration: 1,
+        ease: "power2.out",
+      })
         .from(
-          ".power-card-image-wrapper",
-          {
-            clipPath: "inset(0% 0% 100% 0%)",
-            duration: 0.8,
-            ease: "power3.inOut",
-          },
-          "<0.2" // Start 0.2s after the card reveal begins
-        )
-        .from(
-          ".power-card-image",
+          imageRef.current,
           {
             scale: 1.3,
-            duration: 0.8,
-            ease: "power3.inOut",
+            duration: 1,
+            filter: "blur(5px)",
+            ease: "power2.out",
           },
-          "<" // Start at the same time as the wrapper animation
+          "<.3" // Start at the same time as the wrapper animation
+        )
+        .from(
+          labelSplit.chars,
+          {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: { from: "random", each: 0.05 },
+          },
+          "-=0.3" // Overlap with previous animation for a smoother feel
         )
         .from(
           titleSplit.chars,
           {
             opacity: 0,
-            y: 20,
-            duration: 0.3,
+            duration: 0.8,
             ease: "power2.out",
             stagger: { from: "random", each: 0.05 },
           },
-          "-=0.5" // Overlap with previous animation for a smoother feel
+          "<" // Overlap with previous animation for a smoother feel
         )
         .from(
-          ".power-card-details",
+          pSplit.words,
           {
-            filter: "blur(5px)",
+            y: 10,
             opacity: 0,
-            duration: 0.6,
+            stagger: 0.05,
+            duration: 1,
             ease: "power2.out",
           },
-          "<0.1" // Start 0.1s after the title animation begins
+
+          "<0.2" // Start 0.1s after the title animation begins
         );
 
       return () => {
         if (titleSplit) titleSplit.revert();
+        if (labelSplit) labelSplit.revert();
+        if (pSplit) pSplit.revert();
       };
     },
     {
@@ -90,54 +112,115 @@ const LocationMap = ({
     }
   );
 
-  useGSAP(
-    () => {
-      if (isOpen) {
-        // If the card should be open, play the timeline forward.
-        tl.current?.play(0);
-      } else {
-        tl.current?.progress(0).pause();
-      }
-    },
-    { dependencies: [isOpen] }
-  );
   return (
     <div
+      role="dialog"
+      aria-label={title}
       ref={cardRef}
       className={cn(
-        "max-h-[34rem] max-w-[14rem] h-auto w-full mix-blend-difference bg-blurred backdrop-blur-xl absolute px-4 py-4.5 z-20 rounded-lg overflow-clip",
+        "aspect-[2/3] w-[220px] h-auto bg-blurred backdrop-blur-xl absolute z-20 rounded-lg overflow-clip",
         "transform-origin-center scale-0 invisible",
         className
       )}
     >
-      <ElementsSvgOutline />
-      <div className="flex flex-col gap-3">
-        <div className="w-full aspect-[3/2] relative mb-2 overflow-hidden power-card-image-wrapper">
+      {type === "new" ? (
+        <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px]">
           <Image
             fill
             src={image}
+            ref={imageRef}
+            sizes="500px"
             alt={`${title} power image`}
-            sizes="14rem"
             className="object-cover power-card-image"
           />
+
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-zinc-900/60 to-transparent flex flex-col px-4 py-4.5 pt-30 gap-2">
+            <div className="flex flex-col gap-1">
+              <Text
+                as="p"
+                variant="xs"
+                ref={labelRef}
+                className="md:text-[10px] text-[10px] power-card-label uppercase"
+              >
+                {label}
+              </Text>
+              <Text
+                as="h4"
+                ref={titleRef}
+                variant="small"
+                className="uppercase md:text-base power-card-title"
+              >
+                {title}
+              </Text>
+            </div>
+            <Text
+              as="p"
+              ref={detailsRef}
+              variant="xs"
+              className="md:text-[13px] text-xs power-card-details"
+            >
+              {details}
+            </Text>
+          </div>
+          <ElementsSvgOutline />
         </div>
-        <Text
-          as="h4"
-          variant="small"
-          className="uppercase md:text-base power-card-title"
-        >
-          {title}
-        </Text>
-        <Text
-          as="p"
-          variant="xs"
-          className="mb-2 md:text-[13px] text-xs power-card-details"
-        >
-          {details}
-        </Text>
-      </div>
+      ) : (
+        <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px]">
+          <Image
+            fill
+            src={"/images/bg/new-bg-6.webp"}
+            alt={`${title} power image`}
+            sizes="220px"
+            className="object-cover power-card-image blur-xs"
+          />
+          <div className="relative flex w-full h-full flex-col gap-2 px-3.5 py-4">
+            {/* bg-gradient-to-t from-black via-zinc-900/60 */}
+
+            <Image
+              width={220}
+              src={image}
+              height={100}
+              ref={imageRef}
+              sizes="220px"
+              alt={`${title} power image`}
+              className="object-cover aspect-[5/4] rounded-[5px] power-card-image"
+            />
+
+            <div className="mt-auto to-transparent flex flex-col gap-2 text-center">
+              <Text
+                as="p"
+                variant="xs"
+                ref={labelRef}
+                className="md:text-[10px] text-[10px] power-card-label uppercase"
+              >
+                {label}
+              </Text>
+              <div className="relative pb-3">
+                <Text
+                  as="h4"
+                  ref={titleRef}
+                  variant="small"
+                  className="uppercase md:text-base power-card-title"
+                >
+                  {title}
+                </Text>
+                <AnimatedUnderline className="-bottom-0.5" />
+              </div>
+              <Text
+                as="p"
+                variant="xs"
+                ref={detailsRef}
+                className="md:text-[13px] text-xs power-card-details line-clamp-4"
+              >
+                {details}
+              </Text>
+            </div>
+          </div>
+          <ElementsSvgOutline />
+        </div>
+      )}
     </div>
   );
 };
 
-export default LocationMap;
+export default LocationCard;

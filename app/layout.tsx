@@ -91,7 +91,7 @@ export default function RootLayout({
                 <Footer />
               </main>
             </div>
-            <CustomCursor />
+            {/* <CustomCursor /> */}
           </SoundProvider>
           <SvgOutline />
           <GrainOverlay />

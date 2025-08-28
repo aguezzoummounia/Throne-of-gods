@@ -264,31 +264,27 @@ body {
   }
 }
 
+/* floating animation keyframe */
 @keyframes float {
   0% {
-    transform: translate(0, 0);
-    opacity: 0.8;
+    transform: translateY(0);
   }
   25% {
-    transform: translate(5px, -3px);
-    opacity: 1;
+    transform: translateY(-1px); /* move up */
   }
   50% {
-    transform: translate(-4px, 2px);
-    opacity: 0.9;
+    transform: translateY(0); /* move up */
   }
   75% {
-    transform: translate(3px, 4px);
-    opacity: 1;
+    transform: translateY(1px); /* move up */
   }
   100% {
-    transform: translate(0, 0);
-    opacity: 0.8;
+    transform: translateY(0);
   }
 }
 
-.float-animation-class {
-  animation: float linear infinite;
+.location-ping:hover .float-animation-class {
+  animation: float 2s linear infinite;
 }
 .grid-container:has(.group:hover) .group:not(:hover) .svg-element {
   transform: scale(95%);

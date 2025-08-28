@@ -1356,4 +1356,37 @@ const charactersData = {
   },
 };
 
-export { quizData, charactersData };
+const locationData = [
+  {
+    image: "/images/characters/character-2.jpeg",
+    title: "Eternea",
+    label: "Marraki’sh",
+    details: "golden desert city inspired by Moroccan architecture.",
+  },
+  {
+    image: "/images/characters/character-1.jpeg",
+    title: "Galeeria",
+    label: "Kalgrath",
+    details: "a gothic fortress capital in the icy north.",
+  },
+  {
+    image: "/images/characters/character-4.jpeg",
+    title: "Valemyra",
+    label: "Valemont",
+    details: "lush southern capital, center of noble bloodlines.",
+  },
+  {
+    image: "/images/characters/character-5.jpeg",
+    title: "Isles of Eryndyr",
+    label: "Venmyr",
+    details: "cliff-side bastion of the Watchers of the Deep.",
+  },
+  {
+    image: "/images/characters/character-3.jpeg",
+    title: "Christalia",
+    label: "Vasselguard",
+    details: "arid republic capital with the Tree of Life at its heart.",
+  },
+];
+
+export { quizData, locationData, charactersData };
