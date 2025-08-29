@@ -4,17 +4,12 @@ import Link from "next/link";
 import Text from "../ui/text";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import useEscape from "@/hooks/useEscape";
-import useBodyLockScroll from "@/hooks/useBodyLockScroll";
 import { site_name, chanel_handler, email_address } from "@/lib/consts";
 
 const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
   open,
   handleClick,
 }) => {
-  // hooks
-  useEscape(handleClick);
-  useBodyLockScroll(open);
   // refs
   const tl = useRef<gsap.core.Timeline>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -22,7 +17,6 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
   // animations
   useGSAP(
     () => {
-      // const tl = gsap.timeline();
       // Set initial state to invisible before animation
       gsap.set(container.current, { visibility: "hidden" });
 
@@ -38,19 +32,19 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
           },
           {
             clipPath: "circle(150% at 50% 0)", // Grow to a large circle to cover the screen
-            duration: 1,
-            ease: "power2.inOut",
+            duration: 1.2,
+            ease: "power2.out",
           }
         )
         // Animate the main menu links, staggering from the bottom up
         .from(
           ".menu-item-main",
           {
-            y: 50,
+            y: 30,
             opacity: 0,
-            stagger: 0.1,
-            duration: 0.8,
-            ease: "power3.out",
+            stagger: 0.25,
+            duration: 1,
+            ease: "power2.out",
           },
           "-=0.1" // Overlap with the container animation for a smoother effect
         )
@@ -58,34 +52,38 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
         .from(
           ".menu-item-secondary",
           {
-            y: 50,
+            y: 30,
             opacity: 0,
             stagger: 0.1,
-            duration: 0.5,
-            ease: "power3.out",
+            duration: 1,
+            ease: "power2.out",
           },
-          "<" // Overlap with the container animation for a smoother effect
+          "<.5" // Overlap with the container animation for a smoother effect
         )
         // Animate the footer
-        .from(".menu-item-footer", {
-          opacity: 0,
-          duration: 0.2,
-        });
+        .from(
+          ".menu-item-footer",
+          {
+            opacity: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          },
+          "<.5"
+        );
     },
     { scope: container }
   );
 
   useGSAP(
     () => {
-      // const tl = gsap.timeline();
       if (open) {
         tl.current?.timeScale(1).play();
       } else {
         // Reverse the animation with a slightly faster timescale for a snappy close
-        tl.current?.timeScale(1.5).reverse();
+        tl.current?.timeScale(0.5).reverse();
       }
     },
-    { dependencies: [open] }
+    { scope: container, dependencies: [open] }
   );
 
   return (

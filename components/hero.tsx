@@ -33,32 +33,28 @@ const Hero: React.FC = () => {
         opacity: 0,
         stagger: 0.15,
         duration: 1.2,
-      });
-
-      // P lines mask animation
-      tl.from(
-        pSplit.lines,
-        {
-          opacity: 0,
-          stagger: 0.1,
-          duration: 0.6,
-          yPercent: 100,
-          ease: "expo.out",
-        },
-        0.15
-      );
-
-      // button animation
-      tl.from(
-        buttonRef.current,
-        {
-          y: 30,
-          opacity: 0,
-          duration: 1,
-          ease: "power2.inOut",
-        },
-        0.3
-      );
+      })
+        .from(
+          pSplit.lines,
+          {
+            opacity: 0,
+            stagger: 0.2,
+            duration: 1.2,
+            yPercent: 100,
+            ease: "expo.out",
+          },
+          1
+        )
+        .from(
+          buttonRef.current,
+          {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power1.in",
+          },
+          0.5
+        );
     },
     { scope: containerRef }
   );
