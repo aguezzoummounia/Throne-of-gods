@@ -27,7 +27,6 @@ const Hero: React.FC = () => {
         autoSplit: true,
       });
 
-      // animate main headerautoSplit: true,
       tl.from(words, {
         y: 50,
         opacity: 0,

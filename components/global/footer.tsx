@@ -2,12 +2,12 @@
 import { gsap } from "gsap";
 import Link from "next/link";
 import Text from "../ui/text";
-import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
 import { usePathname } from "next/navigation";
+import { RippleImage } from "../ripple-image";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { dev_url, site_name, email_address, trailer_url } from "@/lib/consts";
 
@@ -20,7 +20,6 @@ const Footer: React.FC = () => {
   const container = useRef<HTMLDivElement>(null);
   const linksGroup = useRef<HTMLDivElement>(null);
   const buttonsGroup = useRef<HTMLDivElement>(null);
-
   // animations
   useGSAP(
     () => {
@@ -45,6 +44,12 @@ const Footer: React.FC = () => {
           start: "top 80%",
           trigger: container.current,
         },
+      });
+      tl.from(".image-ripple-container", {
+        filter: "blur(10px)",
+        opacity: 0,
+        duration: 1,
+        ease: "power1.out",
       });
 
       // h2 character animation
@@ -80,7 +85,7 @@ const Footer: React.FC = () => {
           opacity: 0,
           stagger: 0.3,
           ease: "power2.inOut",
-          duration: 1,
+          duration: 1.5,
         },
         0.4
       );
@@ -132,13 +137,9 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10">
-        <Image
-          width={1080}
-          height={1080}
-          src="/footer-bg-2.avif"
-          alt="footer background compass image"
-          className="md:absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%] max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%]"
-        />
+        <div className="md:absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%] max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%] aspect-square image-ripple-container">
+          <RippleImage src={"/footer-bg-2.avif"} alt="Abstract landscape" />
+        </div>
         <div
           ref={linksGroup}
           className="flex items-center justify-between absolute inset-[auto_0%_0%]"

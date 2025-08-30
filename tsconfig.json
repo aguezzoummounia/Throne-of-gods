@@ -33,7 +33,8 @@
     "components/spheres/smoke-sphere.jsx",
     "components/spheres/lightning-sphere.jsx",
     "components/spheres/sun-sphere.jsx",
-    "components/spheres/text.jsx"
+    "components/spheres/text.jsx",
+    "components/ripple-image.tsx"
   ],
   "exclude": ["node_modules"]
 }
