@@ -13,11 +13,11 @@ export default function Home() {
     <>
       {/* <SpheresSection /> */}
       {/* <Hero /> */}
+      {/* <About /> */}
       <div className="w-full h-full"></div>
       <Map />
       <CharacterSlider />
-      {/* <Quiz /> */}
-      {/* <About /> */}
+      <Quiz />
       {/* <WebGLSlider projects={projects} /> */}
     </>
   );

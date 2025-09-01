@@ -24,19 +24,28 @@ const Indicator: React.FC<{
         }}
         title={`skip to question ${number}`}
         className={cn(
-          "cursor-pointer relative block md:w-[46px] md:h-[46px] w-9 h-9 transition-opacity opacity-50 disabled:opacity-50 disabled:cursor-not-allowed",
-          isActive && "opacity-100 drop-shadow-[0_0_4px_rgba(244,234,143,0.7)]"
+          "cursor-pointer relative lg:w-[46px] lg:h-[46px] md:w-9 md:h-9 w-6 h-6 flex items-center justify-center opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity",
+          isActive && "opacity-100"
         )}
       >
-        <span className="absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] flex items-center justify-center p-1.5 text-bronze font-cinzeldecorative md:text-sm text-xs">
-          {number}
-        </span>
+        <div className="absolute z-10 bg-bronze/50 backdrop-blur-xl transition-colors lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 flex items-center justify-center">
+          <span
+            className={cn(
+              "absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] flex items-center justify-center leading-none text-primary font-cinzeldecorative md:text-sm text-xs",
+              isActive && "text-white"
+            )}
+          >
+            {number}
+          </span>
+        </div>
+        <div className="bg-bronze/50 transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 rotate-45 flex items-center justify-center" />
         <svg
           fill="none"
           viewBox="0 0 88 89"
           xmlns="http://www.w3.org/2000/svg"
           className={cn(
-            "transition-transform ease-[cubic-bezier(.25,1,.5,1)] hover:scale-110 duration-[.6s] w-full h-full absolute inset-0 text-bronze"
+            "transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 duration-[.6s] absolute -inset-[5px] z-20 text-bronze",
+            isActive && "drop-shadow-[0_0_4px_rgba(244,234,143,0.7)]"
           )}
         >
           <g filter="url(#filter0_f_6587_3779)">
