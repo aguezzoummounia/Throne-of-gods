@@ -138,7 +138,10 @@ const Footer: React.FC = () => {
 
       <div className="2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10">
         <div className="md:absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%] max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%] aspect-square image-ripple-container">
-          <RippleImage src={"/footer-bg-2.avif"} alt="Abstract landscape" />
+          <RippleImage
+            alt="Abstract landscape"
+            src="/images/static/footer-image.png"
+          />
         </div>
         <div
           ref={linksGroup}

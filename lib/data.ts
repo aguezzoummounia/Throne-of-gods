@@ -1356,6 +1356,69 @@ const charactersData = {
   },
 };
 
+const charactersArray = [
+  {
+    id: 1,
+    name: "jarvan",
+    slug: "jarvan",
+    image: "/images/characters/character-1.jpeg",
+  },
+  {
+    id: 2,
+    name: "valeon",
+    slug: "valeon",
+    image: "/images/characters/character-2.jpeg",
+  },
+  {
+    id: 3,
+    name: "leticia",
+    slug: "leticia",
+    image: "/images/characters/character-3.jpeg",
+  },
+  {
+    id: 4,
+    name: "agon",
+    slug: "agon",
+    image: "/images/characters/character-4.jpeg",
+  },
+  {
+    id: 5,
+    name: "isolde",
+    slug: "isolde",
+    image: "/images/characters/character-5.jpeg",
+  },
+  {
+    id: 6,
+    name: "eternal-flames",
+    slug: "eternal-flames",
+    image: "/images/characters/character-6.jpeg",
+  },
+  {
+    id: 7,
+    name: "nicolas",
+    slug: "nicolas",
+    image: "/images/characters/character-7.jpeg",
+  },
+  {
+    id: 8,
+    name: "harald",
+    slug: "harald",
+    image: "/images/characters/character-8.jpeg",
+  },
+  {
+    id: 9,
+    name: "king-of-deep",
+    slug: "king-of-deep",
+    image: "/images/characters/character-9.jpeg",
+  },
+  {
+    id: 10,
+    name: "queen-of-deep",
+    slug: "queen-of-deep",
+    image: "/images/characters/character-9.jpeg",
+  },
+];
+
 const locationData = [
   {
     image: "/images/characters/character-2.jpeg",
@@ -1389,4 +1452,4 @@ const locationData = [
   },
 ];
 
-export { quizData, locationData, charactersData };
+export { quizData, locationData, charactersArray, charactersData };
