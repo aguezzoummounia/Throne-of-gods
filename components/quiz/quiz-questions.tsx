@@ -301,15 +301,13 @@ export function QuizQuestions({
 
             return (
               <AnswerButton
+                isActive={isSelected}
                 animated={true}
                 disabled={isAnimating}
                 aria-pressed={isSelected}
                 key={`response-button-${index}`}
                 onClick={() => handleAnswer(index)}
-                className={cn(
-                  " md:w-52 w-full uppercase",
-                  isSelected && "drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]"
-                )}
+                className={cn("md:w-52 w-full uppercase")}
               >
                 {answer.text}
               </AnswerButton>

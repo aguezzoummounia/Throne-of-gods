@@ -85,7 +85,6 @@ const Quiz: React.FC = () => {
             as="h4"
             ref={h4Ref}
             variant="lead"
-            // font-medievalsharp
             className="text-center uppercase md:mt-2 mt-4 font-alegreya"
           >
             Find the villain lurking in you.

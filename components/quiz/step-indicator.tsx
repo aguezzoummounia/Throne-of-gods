@@ -28,17 +28,15 @@ const Indicator: React.FC<{
           isActive && "opacity-100"
         )}
       >
-        <div className="absolute z-10 bg-bronze/50 backdrop-blur-xl transition-colors lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 flex items-center justify-center">
-          <span
+        <div className="bg-bronze/50 backdrop-blur-xl transition-colors lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 flex items-center justify-center" />
+        <div className="absolute bg-bronze/50 transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 rotate-45 flex items-center justify-center">
+          <div
             className={cn(
-              "absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] flex items-center justify-center leading-none text-primary font-cinzeldecorative md:text-sm text-xs",
-              isActive && "text-white"
+              "md:w-2 w-1.5 md:h-2 h-1.5 rounded-full bg-foreground transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 float-animation-class -rotate-45 scale-80",
+              isActive && "scale-100"
             )}
-          >
-            {number}
-          </span>
+          />
         </div>
-        <div className="bg-bronze/50 transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 rotate-45 flex items-center justify-center" />
         <svg
           fill="none"
           viewBox="0 0 88 89"
