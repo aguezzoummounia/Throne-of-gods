@@ -22,8 +22,11 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
   const soundEvents = useInteractiveSound();
   return (
     <button
-      {...soundEvents}
-      onClick={onClick}
+      onClick={() => {
+        onClick();
+        soundEvents.onClick();
+      }}
+      aria-pressed={isActive}
       className={cn(
         "relative cursor-pointer bg-[rgba(0,0,0,.05)] backdrop-blur-xl group inline-flex gap-2 whitespace-normal break-words text-sm font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 focus-visible:ring-4 focus-visible:outline-1 aria-invalid:focus-visible:ring-0 group h-auto mix-blend-difference",
         className
@@ -31,6 +34,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
       {...props}
     >
       <div
+        aria-hidden="true"
         className={cn(
           "absolute inset-0",
           isActive && "[&>div]:drop-shadow-[0_0_4px_rgba(244,234,143,1)]"
@@ -42,6 +46,7 @@ const AnswerButton: React.FC<AnswerButtonProps> = ({
         <div className="absolute w-[1px] h-[calc(100%_-_22px)] right-0 top-[50%] bg-bronze  -translate-y-[50%]" />
       </div>
       <div
+        aria-hidden="true"
         className={cn(
           "bg-bronze/30 backdrop-blur-xl absolute border border-bronze inset-[4px] group-hover:scale-101 transition-transform ease-[cubic-bezier(.16,1,.3,1)] duration-500",
           isActive && "[&>div]:drop-shadow-[0_0_4px_rgba(244,234,143,1)]"

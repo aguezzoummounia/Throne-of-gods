@@ -15,6 +15,7 @@ interface SoundContextType {
   toggleMute: () => void;
   playHoverSound: () => void;
   playClickSound: () => void;
+  playSlideSound: () => void;
 }
 
 const EFFECTS_VOLUME = 0.4; // 40% volume for effects
@@ -29,6 +30,7 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
   // Use useRef to hold the Audio objects. This prevents them from being re-created on every render.
   const hoverAudioRef = useRef<HTMLAudioElement | null>(null);
   const clickAudioRef = useRef<HTMLAudioElement | null>(null);
+  const slideAudioRef = useRef<HTMLAudioElement | null>(null);
 
   // Refs for debouncing and rate-limiting
   const lastClickTimeRef = useRef<number>(0);
@@ -39,10 +41,11 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
     if (typeof window !== "undefined") {
       hoverAudioRef.current = new Audio("/sounds/hover-sf.wav");
       clickAudioRef.current = new Audio("/sounds/click-sf.wav");
-
+      slideAudioRef.current = new Audio("/sounds/slide-over-sf.mp3");
       // Set initial volume for all sound effects
       hoverAudioRef.current.volume = EFFECTS_VOLUME;
       clickAudioRef.current.volume = EFFECTS_VOLUME;
+      slideAudioRef.current.volume = EFFECTS_VOLUME;
     }
   }, []);
 
@@ -51,6 +54,7 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
       const newMutedState = !prev;
       if (hoverAudioRef.current) hoverAudioRef.current.muted = newMutedState;
       if (clickAudioRef.current) clickAudioRef.current.muted = newMutedState;
+      if (slideAudioRef.current) slideAudioRef.current.muted = newMutedState;
       return newMutedState;
     });
   }, []);
@@ -92,11 +96,24 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [isMuted]);
 
+  const playSlideSound = useCallback(() => {
+    if (isMuted || !slideAudioRef.current) return;
+
+    const audio = slideAudioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+      audio
+        .play()
+        .catch((error) => console.log("Error playing slide sound:", error));
+    }
+  }, [isMuted]);
+
   const value = {
     isMuted,
     toggleMute,
     playHoverSound,
     playClickSound,
+    playSlideSound,
   };
 
   return (
