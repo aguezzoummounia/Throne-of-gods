@@ -12,9 +12,9 @@ import Indicator from "./step-indicator";
 import AnswerButton from "./answer-button";
 import { useRouter } from "next/navigation";
 import type { Question } from "@/lib/types";
+import BackgroundSvg from "./background-svg";
 import { useAudio } from "@/context/sound-context";
 import QuizResultPreloader from "./quiz-result-preloader";
-import BackgroundSvg from "./background-svg";
 
 gsap.registerPlugin(SplitText);
 

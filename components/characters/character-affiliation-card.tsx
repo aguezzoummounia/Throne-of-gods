@@ -9,7 +9,7 @@ const CharacterAffiliationCard: React.FC<{
   onClick: () => void;
 }> = ({ onClick, isActive, type = "allies" }) => {
   return (
-    <TiltedCardWrapper className="md:w-[300px] w-full aspect-[2/3] ">
+    <TiltedCardWrapper className="md:w-[300px] w-full aspect-[2/3]">
       <div
         onClick={onClick}
         className={cn(
@@ -23,11 +23,12 @@ const CharacterAffiliationCard: React.FC<{
       >
         <ElementsSvgOutline
           className={cn(
-            type === "allies" && isActive && "border-green-900",
-            type === "enemies" && isActive && "border-red-900",
+            "transition-colors",
+            type === "allies" && isActive && "border-green-900 text-green-900",
+            type === "enemies" && isActive && "border-red-900 text-red-900",
             type === "allies"
-              ? "group-hover:border-green-900"
-              : "group-hover:border-red-900"
+              ? "group-hover:border-green-900 group-hover:text-green-900"
+              : "group-hover:border-red-900 group-hover:text-red-900"
           )}
         />
         <div className="flex-1 flex flex-col gap-4 items-center justify-center">
