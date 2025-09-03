@@ -1,19 +1,20 @@
 "use client";
 import gsap from "gsap";
 import Text from "../ui/text";
+import { useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useQuiz } from "./useQuiz";
 import Portal from "../global/portal";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import LabelText from "../ui/label-text";
-import { useRef, useState } from "react";
 import Indicator from "./step-indicator";
 import AnswerButton from "./answer-button";
 import { useRouter } from "next/navigation";
 import type { Question } from "@/lib/types";
-import QuizResultPreloader from "./quiz-result-preloader";
-import { useQuiz } from "./useQuiz";
 import { useAudio } from "@/context/sound-context";
+import QuizResultPreloader from "./quiz-result-preloader";
+import BackgroundSvg from "./background-svg";
 
 gsap.registerPlugin(SplitText);
 
@@ -175,11 +176,14 @@ export function QuizQuestions({
   return (
     <div
       ref={containerRef}
-      className="flex items-center justify-center flex-1 relative"
+      className="h-full w-full relative flex items-center justify-center"
     >
+      <div className="md:[&>svg]:w-[50%] [&>svg]:w-full absolute inset-0 flex items-center justify-center">
+        <BackgroundSvg className="text-bronze/30 aspect-square" />
+      </div>
       <div className="flex flex-col items-center justify-center gap-10 md:w-[65%] w-full">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <LabelText className="ugly-bitch">
+        <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+          <LabelText>
             <h4
               ref={h4Ref}
               className="font-alegreya uppercase"

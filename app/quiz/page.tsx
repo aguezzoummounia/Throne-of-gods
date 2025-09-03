@@ -4,7 +4,7 @@ import { QuizQuestions } from "@/components/quiz/quiz-questions";
 
 const QuizPage: React.FC = () => {
   return (
-    <Container as="section" className="flex">
+    <Container as="section" className="h-svh min-h-auto">
       <QuizQuestions questions={quizData.questions} />
     </Container>
   );

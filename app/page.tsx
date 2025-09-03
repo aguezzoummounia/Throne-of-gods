@@ -14,13 +14,98 @@ export default function Home() {
       {/* <SpheresSection /> */}
       {/* <Hero /> */}
       {/* <About /> */}
-      <div className="w-full h-full"></div>
-      <Map />
+      <div className="w-full h-screen p-20 text-white">
+        <div></div>
+      </div>
+      {/* <Map />
       <CharacterSlider />
-      <Quiz />
+      <Quiz /> */}
       {/* <WebGLSlider projects={projects} /> */}
     </>
   );
+}
+
+{
+  /* <path
+        <svg
+          className="w-full h-full"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+            d="M50 10 L90 50 L50 90 L10 50 Z M50 25 L75 50 L50 75 L25 50 Z"
+            fill="currentColor"
+            stroke="currentColor"
+            strokeWidth="3"
+          /> */
+}
+{
+  /* <path
+            d="M 50 10 A 40 40 0 1 1 50 90 A 30 30 0 1 0 50 10 Z"
+            fill="currentColor"
+          /> */
+}
+{
+  /* <polygon
+            points="50,10 60,40 90,45 65,65 70,95 50,80 30,95 35,65 10,45 40,40"
+            fill="currentColor"
+          /> */
+}
+{
+  /* <path
+            d="M20 90 V30 C20 10, 80 10, 80 30 V90"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="5"
+          /> */
+}
+{
+  /* <path
+            d="M50 10 L55 40 L65 42 L65 50 L35 50 L35 42 L45 40 Z M45 50 H55 V60 H45 Z M48 60 H52 V85 L50 90 L48 85 Z"
+            fill="currentColor"
+          /> */
+}
+{
+  /* <path
+            d="M10 90 C 30 70, 40 30, 70 20"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="3"
+          />
+          <polygon points="25,75 30,70 35,78" fill="currentColor" />
+          <polygon points="50,40 45,35 55,38" fill="currentColor" />
+          <polygon points="65,25 70,28 60,20" fill="currentColor" /> 
+          <path
+            d="M0 0 L100 0 L0 100 Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+          <path
+            d="M0 0 L75 25 M0 0 L50 50 M0 0 L25 75"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+          <path
+            d="M75 0 A 75 75 0 0 1 0 75"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+          />
+          <path
+            d="M50 0 A 50 50 0 0 1 0 50"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+          />
+          <path
+            d="M25 0 A 25 25 0 0 1 0 25"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+          />
+        </svg>
+          */
 }
 
 // header
