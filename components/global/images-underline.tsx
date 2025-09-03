@@ -7,6 +7,7 @@ const ImagesUnderline: React.FC = () => {
         <Image
           width={1980}
           height={1024}
+          priority={true}
           src="/images/bg/bg-1.webp"
           alt="background dark blue image"
           className="block w-screen h-auto min-h-svh object-cover object-center"

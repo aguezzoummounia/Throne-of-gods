@@ -150,7 +150,10 @@ const TiltedCardWrapper = ({ children, className }: TiltedCardWarperProps) => {
       onPointerMove={handlePointerMove}
       onPointerEnter={handlePointerEnter}
       onPointerLeave={handlePointerLeave}
-      className={cn("will-change-transform transform-3d", className)}
+      className={cn(
+        "will-change-transform transform-3d backface-hidden",
+        className
+      )}
       onMouseDown={startLoop} // optional: kick the loop on first interaction if needed
     >
       <div ref={cardRef} className="w-full h-full">

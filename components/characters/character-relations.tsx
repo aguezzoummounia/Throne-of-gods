@@ -102,8 +102,8 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
         Behind the image and the years lies the truth. Every villain is measured
         by the strength of their allies and the hatred of their enemies.
       </Text>
-      <div className="grid md:gap-20 gap-16">
-        <div className="flex md:gap-20 gap-6 w-full justify-center">
+      <div className="grid md:gap-20 gap-16 ">
+        <div className="flex justify-center md:gap-20 gap-6 items-center">
           <CharacterAffiliationCard
             isActive={selected === "allies"}
             onClick={() => setSelected("allies")}
