@@ -16,24 +16,21 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-      });
-
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
       });
 
       // animate main header
-      tl.from(h2Split.chars, {
+      gsap.from(h2Split.chars, {
         autoAlpha: 0,
         stagger: {
           amount: 0.8,
           from: "random",
+        },
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
         },
       });
 
@@ -46,19 +43,19 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
           linesClass: "overflow-hidden",
         });
         lineSplits.push(split);
-      });
-      lineSplits.forEach((split) => {
-        tl.from(
-          split.lines,
-          {
-            y: 10, // Slide up from below
-            opacity: 0,
-            stagger: 0.1,
-            duration: 1.5,
-            ease: "expo.out",
+
+        // Animate each <p> independently
+        gsap.from(split.lines, {
+          yPercent: 100,
+          duration: 1,
+          stagger: 0.1,
+          autoAlpha: 0,
+          ease: "power4.out",
+          scrollTrigger: {
+            trigger: p,
+            start: "top 80%",
           },
-          "-=0.6" // Overlap with header animation
-        );
+        });
       });
 
       return () => {

@@ -9,6 +9,7 @@ import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 interface SoundButtonProps {
   href: string;
   path: string;
+  bare?: boolean;
   className?: string;
   children: React.ReactNode;
 }
@@ -16,6 +17,7 @@ interface SoundButtonProps {
 const NavLink: React.FC<SoundButtonProps> = ({
   href,
   path,
+  bare,
   children,
   className,
 }) => {
@@ -35,6 +37,16 @@ const NavLink: React.FC<SoundButtonProps> = ({
     { dependencies: [href, path] }
   );
 
+  if (bare)
+    return (
+      <a
+        href={href}
+        {...soundEvents}
+        className={cn("relative cursor-pointer uppercase text-sm", className)}
+      >
+        {children}
+      </a>
+    );
   return (
     <a
       href={href}

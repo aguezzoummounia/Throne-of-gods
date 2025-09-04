@@ -7,6 +7,7 @@ import CharacterSlider from "@/components/slider/character-slider";
 import SpheresSection from "@/components/spheres/spheres-parent";
 import { RippleImage } from "@/components/ripple-image";
 import WavyImage from "@/components/slider/wavy-image";
+import RadialInvertedTriangles from "@/components/radial-inverted-triangles";
 
 export default function Home() {
   return (
@@ -14,13 +15,11 @@ export default function Home() {
       {/* <SpheresSection /> */}
       {/* <Hero /> */}
       {/* <About /> */}
-      <div className="w-full h-screen p-20 text-white">
-        <div></div>
-      </div>
-      {/* <Map />
       <CharacterSlider />
-      <Quiz /> */}
-      {/* <WebGLSlider projects={projects} /> */}
+      <Quiz />
+      {/*
+      <Map />
+       */}
     </>
   );
 }

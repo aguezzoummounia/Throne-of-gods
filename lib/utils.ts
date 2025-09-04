@@ -77,4 +77,6 @@ function throttle<F extends (...args: any[]) => any>(
   };
 }
 
-export { cx, cn, lerp, sleep, throttle, missingClass };
+const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
+
+export { cx, cn, clamp, lerp, sleep, throttle, missingClass };

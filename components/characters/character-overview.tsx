@@ -22,44 +22,41 @@ const CharacterOverview: React.FC<{
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-      });
-
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
       });
+
+      gsap.from(h2Split.chars, {
+        autoAlpha: 0,
+        stagger: {
+          amount: 0.8,
+          from: "random",
+        },
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%", // parent enters viewport
+        },
+      });
+
+      // Paragraph animation (independent trigger at 30%)
       const pSplit = new SplitText(pRef.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
       });
 
-      // animate main header
-      tl.from(h2Split.chars, {
-        autoAlpha: 0,
-        stagger: {
-          amount: 0.8,
-          from: "random",
+      gsap.from(pSplit.lines, {
+        yPercent: 100,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: pRef.current,
+          start: "top 90%", // adjust for ~30% in viewport
         },
       });
 
-      // P lines mask animation
-      tl.from(
-        pSplit.lines,
-        {
-          y: 50,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 1.2,
-          ease: "expo.out",
-        },
-        0.3
-      );
       return () => {
         h2Split.revert();
         pSplit.revert();

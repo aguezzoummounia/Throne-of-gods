@@ -49,17 +49,20 @@ const PowerCard: React.FC<PowerCardProps> = ({
         duration: 0.8,
         ease: "power2.out",
       })
-        .from(".power-card-image", {
-          scale: 1.3,
-          duration: 1,
-          filter: "blur(5px)",
-          ease: "power2.out",
-        })
+        .from(
+          ".power-card-image",
+          {
+            scale: 1.3,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=.4"
+        )
         .from(
           titleSplit.chars,
           {
-            opacity: 0,
-            duration: 0.3,
+            autoAlpha: 0,
+            duration: 0.6,
             ease: "power2.out",
             stagger: { from: "random", each: 0.05 },
           },
@@ -68,14 +71,13 @@ const PowerCard: React.FC<PowerCardProps> = ({
         .from(
           pSplit.words,
           {
-            y: 10,
-            opacity: 0,
-            stagger: 0.1,
             duration: 1,
-            ease: "power2.out",
+            stagger: 0.1,
+            autoAlpha: 0,
+            yPercent: 100,
+            ease: "power4.out",
           },
-
-          "<0.2" // Start 0.1s after the title animation begins
+          "<"
         );
 
       return () => {
@@ -92,20 +94,12 @@ const PowerCard: React.FC<PowerCardProps> = ({
     <div
       ref={cardRef}
       className={cn(
-        "absolute md:w-[250px] w-[230px] aspect-[2/3] scale-0 invisible",
+        "absolute z-[1] md:w-[250px] w-[230px] aspect-[2/3] scale-0 invisible",
         className
       )}
     >
       <TiltedCardWrapper className={cn("w-full h-full")}>
-        {/* TODO: change this shape into the one similar to the custom 3d slider */}
-        <div
-          className="w-full h-full rounded-[83%] blur-xl mix-blend-difference rotate-scale absolute -z-1 group-hover:scale-100 transition-transform duration-500 delay-50 ease-[cubic-bezier(.16,1,.3,1)]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, rgba(244, 234, 143, 0.5) 0%, rgba(244, 234, 143, 0.1) 70%, transparent 100%)",
-          }}
-        ></div>
-        <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px] power-card-image-wrapper">
+        <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px] power-card-image-wrapper group">
           <Image
             fill
             src={image}
@@ -129,7 +123,8 @@ const PowerCard: React.FC<PowerCardProps> = ({
               {overview}
             </Text>
           </div>
-          <ElementsSvgOutline />
+
+          <ElementsSvgOutline className="group-hover:drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]" />
         </div>
       </TiltedCardWrapper>
     </div>

@@ -18,7 +18,7 @@ export default async function QuizResultPage({
   if (!villain) return notFound();
 
   return (
-    <div className="min-h-svh">
+    <>
       <CharacterHero
         name={villain.name}
         image={villain.image}
@@ -30,11 +30,11 @@ export default async function QuizResultPage({
         overview={villain.overview}
       />
       <CharacterRelation data={villain.relations} />
-      <CharacterPowers data={villain.powers} />
+      <CharacterPowers data={[...villain.powers]} />
       <CharacterBackstory data={villain.backstory} />
       {villain.trivia && villain.trivia.length > 0 && (
         <CharacterTrivia data={villain.trivia} />
       )}
-    </div>
+    </>
   );
 }

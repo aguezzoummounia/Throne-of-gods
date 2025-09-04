@@ -18,9 +18,8 @@ const Footer: React.FC = () => {
   const pRef = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const container = useRef<HTMLDivElement>(null);
-  const linksGroup = useRef<HTMLDivElement>(null);
   const buttonsGroup = useRef<HTMLDivElement>(null);
-  // animations
+
   useGSAP(
     () => {
       const pSplit = new SplitText(pRef.current, {
@@ -35,9 +34,6 @@ const Footer: React.FC = () => {
       const buttons = gsap.utils.toArray<HTMLButtonElement>(
         buttonsGroup.current?.children || []
       );
-      const links = gsap.utils.toArray<HTMLButtonElement>(
-        linksGroup.current?.children || []
-      );
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -50,58 +46,47 @@ const Footer: React.FC = () => {
         opacity: 0,
         duration: 1,
         ease: "power1.out",
-      });
-
-      // h2 character animation
-      tl.from(
+      }).from(
         h2Split.chars,
         {
           autoAlpha: 0,
           stagger: {
-            amount: 0.5,
+            amount: 0.6,
             from: "random",
           },
         },
-        0
+        "<"
       );
       // P lines mask animation
-      tl.from(
-        pSplit.lines,
-        {
-          stagger: 0.1,
-          autoAlpha: 0,
-          yPercent: 100,
-          duration: 1.5,
-          ease: "expo.out",
+      gsap.from(pSplit.lines, {
+        stagger: 0.1,
+        autoAlpha: 0,
+        yPercent: 100,
+        duration: 1.5,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: pRef.current,
+          start: "top 80%",
         },
-        0.2
-      );
+      });
 
       // BUTTONS animation
-      tl.from(
-        buttons,
-        {
-          y: 15,
-          opacity: 0,
-          stagger: 0.3,
-          ease: "power2.inOut",
-          duration: 1.5,
+      gsap.from(buttons, {
+        y: 15,
+        opacity: 0,
+        stagger: 0.3,
+        ease: "power2.inOut",
+        duration: 1.5,
+        scrollTrigger: {
+          trigger: buttonsGroup.current,
+          start: "top 80%",
         },
-        0.4
-      );
+      });
 
-      // BOTTOM LINKS animations
-      tl.from(
-        links,
-        {
-          y: 10,
-          opacity: 0,
-          stagger: 0.2,
-          ease: "power2.inOut",
-          duration: 1,
-        },
-        0.6
-      );
+      return () => {
+        h2Split.revert();
+        pSplit.revert();
+      };
     },
     { scope: container, dependencies: [pathname] }
   );
@@ -136,17 +121,14 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10">
+      <div className="footer-bottom-section 2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10">
         <div className="md:absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%] max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%] aspect-square image-ripple-container">
           <RippleImage
             alt="Abstract landscape"
             src="/images/static/footer-image.png"
           />
         </div>
-        <div
-          ref={linksGroup}
-          className="flex items-center justify-between absolute inset-[auto_0%_0%]"
-        >
+        <div className="flex items-center justify-between absolute inset-[auto_0%_0%]">
           <Text
             variant="xs"
             color="lightDark"

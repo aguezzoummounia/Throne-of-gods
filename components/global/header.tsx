@@ -10,6 +10,7 @@ import MenuToggle from "../ui/menu-toggle";
 import { useRef, useState } from "react";
 import SoundToggle from "../sound/sound-toggle";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
+import Image from "next/image";
 
 type ScreenConditions = {
   isDesktop: boolean;
@@ -39,27 +40,29 @@ const Header: React.FC = () => {
           const duration = isDesktop ? 0.7 : 0; // shorter
 
           tl.from(".header-main-link", {
-            y: -60,
+            scale: 0,
             opacity: 0,
-            duration: 0.7,
-            ease: "power1.out",
+            duration: 1,
+            ease: "power2.out",
           })
             .from(
-              ".header-main-nav",
+              ".header-main-nav .header-nav-link",
               {
-                y: -60,
-                opacity: 0,
-                duration,
+                yPercent: -100,
+                autoAlpha: 0,
                 ease: "power1.out",
+                duration: duration,
+                stagger: 0.15, // stagger links nicely
               },
-              "-=0.2"
+              "-=0.3" // slight overlap with logo
             )
+
             .from(
               ".header-main-options",
               {
-                y: -60,
-                opacity: 0,
-                duration: 0.7,
+                yPercent: -100,
+                autoAlpha: 0,
+                duration: 0.6,
                 ease: "power1.out",
               },
               "-=0.2"
@@ -75,21 +78,36 @@ const Header: React.FC = () => {
       ref={containerRef}
       className="fixed top-0 left-0 w-full px-12 max-md:px-8 h-16 flex items-center justify-between z-20 text-primary"
     >
-      <Link href="/" className="w-[100px] header-main-link">
-        Home
-      </Link>
+      <NavLink
+        bare
+        href="/"
+        path={`/`}
+        className="md:w-[200px] w-[100px] h-full inline-flex header-main-link md:mt-8"
+      >
+        <Image
+          width={300}
+          height={150}
+          alt="throne of gods logo"
+          src="/images/temp-logo.png"
+          className="md:object-scale-down object-contain"
+        />
+      </NavLink>
 
       <nav className="md:flex hidden gap-8 header-main-nav">
-        <NavLink href="/#about" path={`/${hash}`}>
+        <NavLink className="header-nav-link" href="/#about" path={`/${hash}`}>
           About
         </NavLink>
-        <NavLink href="/#ereosa" path={`/${hash}`}>
+        <NavLink className="header-nav-link" href="/#ereosa" path={`/${hash}`}>
           Ereosa
         </NavLink>
-        <NavLink path={`/${hash}`} href="/#characters">
+        <NavLink
+          className="header-nav-link"
+          path={`/${hash}`}
+          href="/#characters"
+        >
           Roles
         </NavLink>
-        <NavLink href="/#quiz" path={`/${hash}`}>
+        <NavLink className="header-nav-link" href="/#quiz" path={`/${hash}`}>
           Quiz
         </NavLink>
       </nav>

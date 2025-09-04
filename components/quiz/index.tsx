@@ -18,13 +18,14 @@ const Quiz: React.FC = () => {
 
   useGSAP(
     () => {
-      const h4Split = new SplitText(h4Ref.current, {
-        type: "chars",
-        smartWrap: true,
-      });
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
+      });
+      const h4Split = new SplitText(h4Ref.current, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
       });
 
       const tl = gsap.timeline({
@@ -34,41 +35,39 @@ const Quiz: React.FC = () => {
         },
       });
 
-      tl.from(
-        h4Split.chars,
-        {
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.8,
-            from: "random",
+      tl.from(h2Split.chars, {
+        autoAlpha: 0,
+        stagger: {
+          amount: 0.6,
+          from: "random",
+        },
+      })
+        .from(
+          h4Split.lines,
+          {
+            autoAlpha: 0,
+            yPercent: 100,
+            stagger: {
+              amount: 0.8,
+              from: "random",
+            },
           },
-        },
-        0
-      );
-
-      // Animate H2 letters starting 0.1s after H4
-      tl.from(
-        h2Split.chars,
-        {
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.8,
-            from: "random",
+          "-=0.3"
+        )
+        .from(
+          buttonsRef.current,
+          {
+            yPercent: 100,
+            autoAlpha: 0,
+            duration: 1,
+            ease: "power2.out",
           },
-        },
-        0.1
-      );
-
-      tl.from(
-        buttonsRef.current,
-        {
-          y: 20,
-          opacity: 0,
-          ease: "power2.out",
-          duration: 0.5,
-        },
-        0.3
-      );
+          "-=0.3"
+        );
+      return () => {
+        h2Split.revert();
+        h4Split.revert();
+      };
     },
     { scope: container }
   );

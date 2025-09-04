@@ -1,12 +1,13 @@
 "use client";
 import WavyImage from "./wavy-image";
 import Container from "../global/container";
+import { useRouter } from "next/navigation";
 import { charactersArray } from "@/lib/data";
 import SliderIndicator from "./slider-indicator";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
+import RadialInvertedTriangles from "../radial-inverted-triangles";
 
 const CharacterSlider: React.FC = () => {
   const OPTIONS: EmblaOptionsType = {
@@ -105,6 +106,10 @@ const CharacterSlider: React.FC = () => {
           );
         })}
       </div>
+      {/* <RadialInvertedTriangles
+        segments={5}
+        className="absolute inset-0 -z-[1]"
+      /> */}
     </Container>
   );
 };

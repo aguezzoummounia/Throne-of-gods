@@ -4,20 +4,24 @@ const trailer_url = process.env.NEXT_PUBLIC_YOUTUBE_TRAILER || "";
 const email_address = process.env.NEXT_PUBLIC_EMAIL_ADDRESS || "";
 const chanel_handler = process.env.NEXT_PUBLIC_YOUTUBE_HANDLE || "";
 
-const power_item_positions = [
-  {
-    item: "top-0 lg:left-[30%] md:left-[15%] left-0",
-  },
-  {
-    item: "md:top-[30%] top-[25.5%] xl:right-[10%] right-0",
-  },
-  {
-    item: "lg:top-[45%] top-[51.5%] xl:left-[10%] left-0",
-  },
-  {
-    item: "bottom-0 lg:right-[30%] md:right-[15%] right-0",
-  },
-];
+const power_item_positions = {
+  1: [{ item: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" }],
+  2: [
+    { item: "top-0 xl:left-[25%] lg:left-[15%] md:left-[5%] left-0" },
+    { item: "bottom-0 xl:right-[25%] lg:right-[15%] md:right-[5%] right-0" },
+  ],
+  3: [
+    { item: "top-0 lg:left-[20%] left-0" },
+    { item: "md:top-[30%] md:top-[25.5%] top-[375px] xl:right-[10%] right-0" },
+    { item: "bottom-0 lg:left-1/2 md:left-[10%] left-0 lg:-translate-x-1/2" },
+  ],
+  4: [
+    { item: "top-0 lg:left-[30%] md:left-[15%] left-0" },
+    { item: "md:top-[30%] top-[25.5%] xl:right-[10%] right-0" },
+    { item: "lg:top-[45%] top-[51.5%] xl:left-[10%] left-0" },
+    { item: "bottom-0 lg:right-[30%] md:right-[15%] right-0" },
+  ],
+} as const;
 
 const map_locations_positions = [
   {

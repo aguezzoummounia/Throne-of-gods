@@ -19,7 +19,6 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
   image,
   nickname,
 }) => {
-  // TODO: add image shader loader
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -29,17 +28,13 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
     () => {
       const tl = gsap.timeline();
 
-      tl.to(
-        imageRef.current,
-        {
-          scale: 1,
-          autoAlpha: 1,
-          duration: 1.1,
-          ease: "power2.inOut",
-          filter: "brightness(100%)",
-        },
-        0 // Position parameter: start at the beginning of the timeline
-      );
+      tl.to(imageRef.current, {
+        scale: 1,
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: "power2.inOut",
+        filter: "brightness(100%)",
+      });
 
       const pSplit = new SplitText(pRef.current, {
         type: "chars",
@@ -61,7 +56,7 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
             from: "random",
           },
         },
-        1
+        "-=.15"
       );
 
       // button animation
@@ -74,7 +69,7 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
             from: "random",
           },
         },
-        0.25
+        "-=.15"
       );
       return () => {
         pSplit.revert();
@@ -92,10 +87,10 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
       <Image
         src={image}
         width={1920}
-        ref={imageRef}
         height={1080}
+        ref={imageRef}
         alt={`Portrait of ${name}`}
-        className="w-full h-full object-cover transform-origin-center scale-150 invisible brightness-130"
+        className="w-full h-full object-cover transform-origin-center brightness-130 scale-150 invisible"
       />
       <div className="absolute bottom-0 left-0 w-full pt-20 md:pb-14 pb-10 px-12 max-md:px-5 bg-gradient-to-t from-black via-zinc-900/60 to-transparent flex items-center justify-center">
         <header className="gap-4 flex flex-col items-center justify-center lg:w-[58.33%] xs:w-[83.33%] w-full text-center">

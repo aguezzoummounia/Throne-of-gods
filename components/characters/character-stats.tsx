@@ -19,9 +19,9 @@ const CharacterStat: React.FC<{ stats: VillainStats }> = ({ stats }) => {
         },
       });
       tl.from(".stats-row-animated", {
-        autoAlpha: 0, // Start invisible and faded
-        y: 10,
         duration: 1,
+        autoAlpha: 0,
+        yPercent: 100,
         ease: "power2.out",
         stagger: 0.2, // Stagger each div by 0.2s for a wave effect
       });
@@ -86,7 +86,7 @@ const SVGLine: React.FC = () => {
         x2="3.5"
         y2="6.5"
         stroke="currentColor"
-        stroke-linecap="square"
+        strokeLinecap="square"
         strokeDasharray="1 2 3 4"
       />
       <circle cx="3.5" cy="6.5" r="3.5" fill="currentColor" />

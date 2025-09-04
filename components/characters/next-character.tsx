@@ -4,12 +4,13 @@ import Text from "../ui/text";
 import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
+import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
 import Container from "../global/container";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ElementsSvgOutline from "../elements-svg-outline";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(SplitText, ScrollTrigger);
 
 interface NextCharacterProps {
   slug: string;
@@ -31,34 +32,48 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
           trigger: containerRef.current,
         },
       });
-      tl.from(pRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 1.2,
-        ease: "power3.inOut",
+      const h2Split = new SplitText(h2Ref.current, {
+        type: "chars",
+        smartWrap: true,
       });
-
-      tl.from(
-        h2Ref.current,
-        {
-          y: 50,
-          opacity: 0,
-          duration: 1.2,
-          ease: "power3.inOut",
+      const pSplit = new SplitText(pRef.current, {
+        type: "chars",
+        smartWrap: true,
+      });
+      tl.from(pSplit.chars, {
+        autoAlpha: 0,
+        stagger: {
+          amount: 0.6,
+          from: "random",
         },
-        0.25
-      );
-
-      tl.from(
-        buttonRef.current,
-        {
-          y: 30,
-          opacity: 0,
-          duration: 1,
-          ease: "power2.inOut",
-        },
-        0.5
-      );
+        ease: "power4.out",
+      })
+        .from(
+          h2Split.chars,
+          {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.6,
+              from: "random",
+            },
+            ease: "power4.out",
+          },
+          "-=0.1"
+        )
+        .from(
+          buttonRef.current,
+          {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            ease: "power2.inOut",
+          },
+          "<"
+        );
+      return () => {
+        h2Split.revert();
+        pSplit.revert();
+      };
     },
     { scope: containerRef }
   );
@@ -66,7 +81,7 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
   return (
     <Container ref={containerRef} as="section" className="min-h-auto">
       <div className="relative bg-[rgba(0,0,0,.05)] text-white min-h-[65vh] rounded-xl overflow-hidden shadow-md">
-        <ElementsSvgOutline className="z-1 pointer-events-none" />
+        <ElementsSvgOutline size="large" className="z-1 pointer-events-none" />
         <Image
           fill
           src={image}

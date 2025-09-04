@@ -40,11 +40,10 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
 
       // animate main header
       tl.from(h4Split.lines, {
-        y: 50,
-        opacity: 0,
+        yPercent: 100,
+        duration: 1,
         stagger: 0.1,
-        duration: 1.2,
-        ease: "expo.out",
+        ease: "power4.out",
       });
       return () => {
         h4Split.revert();
@@ -56,7 +55,7 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
     () => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: pRef.current,
           start: "top 80%",
         },
       });
@@ -68,18 +67,12 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
       });
 
       // P lines mask animation
-      tl.from(
-        pSplit.lines,
-        {
-          y: 50,
-          opacity: 0,
-          stagger: 0.1,
-          duration: 1.2,
-          ease: "expo.out",
-          delay: 0.1,
-        },
-        0.3
-      );
+      tl.from(pSplit.lines, {
+        yPercent: 100,
+        duration: 1,
+        stagger: 0.1,
+        ease: "power4.out",
+      });
       return () => {
         pSplit.revert();
       };
