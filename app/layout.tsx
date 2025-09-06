@@ -1,68 +1,25 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { LenisRef, ReactLenis } from "lenis/react";
-import SmoothScroll from "@/components/global/smooth-scroll";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
-import GrainOverlay from "@/components/global/grain-overlay";
-import {
-  Cardo,
-  Cinzel,
-  Raleway,
-  Alegreya,
-  Montserrat,
-  MedievalSharp,
-  IM_Fell_English,
-  Cinzel_Decorative,
-} from "next/font/google";
 import { SoundProvider } from "@/context/sound-context";
 import SvgOutline from "@/components/global/svg-outline";
+import SmoothScroll from "@/components/global/smooth-scroll";
+import GrainOverlay from "@/components/global/grain-overlay";
+import CustomCursor from "@/components/global/custom-cursor";
+import { Alegreya, Cinzel_Decorative } from "next/font/google";
 import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
-import CustomCursor from "@/components/global/custom-cursor";
-
-const cinzel = Cinzel({
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-cinzel",
-  subsets: ["latin"],
-});
-const alegreya = Alegreya({
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-alegreya",
-  subsets: ["latin"],
-});
-const montserrat = Montserrat({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-montserrat",
-  subsets: ["latin"],
-});
-const raleway = Raleway({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-raleway",
-  subsets: ["latin"],
-});
-const imFellEnglish = IM_Fell_English({
-  variable: "--font-im-fell-english",
-  subsets: ["latin"],
-  weight: ["400"],
-});
 
 const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-decorative",
   weight: ["400", "700", "900"],
   subsets: ["latin"],
 });
-
-const cardo = Cardo({
-  variable: "--font-cardo",
-  weight: ["400", "700"],
+const alegreya = Alegreya({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-alegreya",
   subsets: ["latin"],
-});
-
-const medievalSharp = MedievalSharp({
-  variable: "--font-medieval-sharp",
-  subsets: ["latin"],
-  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -78,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${alegreya.variable} ${montserrat.variable} ${raleway.variable} ${cinzelDecorative.variable} ${cardo.variable} ${medievalSharp.variable} ${imFellEnglish.variable} antialiased`}
+        className={`${alegreya.variable} ${cinzelDecorative.variable} antialiased`}
       >
         <SmoothScroll>
           <SoundProvider>
@@ -101,3 +58,36 @@ export default function RootLayout({
     </html>
   );
 }
+
+// const cinzel = Cinzel({
+//   weight: ["400", "500", "600", "700", "800", "900"],
+//   variable: "--font-cinzel",
+//   subsets: ["latin"],
+// });
+
+// const montserrat = Montserrat({
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+//   variable: "--font-montserrat",
+//   subsets: ["latin"],
+// });
+// const raleway = Raleway({
+//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+//   variable: "--font-raleway",
+//   subsets: ["latin"],
+// });
+// const imFellEnglish = IM_Fell_English({
+//   variable: "--font-im-fell-english",
+//   subsets: ["latin"],
+//   weight: ["400"],
+// });
+// const cardo = Cardo({
+//   variable: "--font-cardo",
+//   weight: ["400", "700"],
+//   subsets: ["latin"],
+// });
+
+// const medievalSharp = MedievalSharp({
+//   variable: "--font-medieval-sharp",
+//   subsets: ["latin"],
+//   weight: ["400"],
+// });

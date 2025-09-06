@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import React from "react";
 
 interface BackgroundSvgProps {
   className?: string;
@@ -11,7 +10,10 @@ const BackgroundSvg = ({ className }: BackgroundSvgProps) => {
       fill="none"
       viewBox="0 0 256 256"
       xmlns="http://www.w3.org/2000/svg"
-      className={cn("w-full h-full", className)}
+      className={cn(
+        "w-full h-full drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]",
+        className
+      )}
     >
       <circle
         cx="128.5"

@@ -17,7 +17,7 @@ interface SoundButtonProps {
 const NavLink: React.FC<SoundButtonProps> = ({
   href,
   path,
-  bare,
+  bare = false,
   children,
   className,
 }) => {
@@ -26,7 +26,7 @@ const NavLink: React.FC<SoundButtonProps> = ({
 
   useGSAP(
     () => {
-      if (href === path) {
+      if (href === path && !bare) {
         gsap.fromTo(
           divRef.current,
           { opacity: 0, scale: 0.8 },

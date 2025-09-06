@@ -2,7 +2,7 @@
 import Map from "@/components/map";
 import Hero from "@/components/hero";
 import Quiz from "@/components/quiz";
-import About from "@/components/about";
+import About from "@/components/about/about";
 import CharacterSlider from "@/components/slider/character-slider";
 import SpheresSection from "@/components/spheres/spheres-parent";
 import { RippleImage } from "@/components/ripple-image";
@@ -14,10 +14,10 @@ export default function Home() {
     <>
       {/* <SpheresSection /> */}
       {/* <Hero /> */}
-      {/* <About /> */}
+      <About />
+      {/*
       <CharacterSlider />
       <Quiz />
-      {/*
       <Map />
        */}
     </>

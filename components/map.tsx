@@ -4,6 +4,7 @@ import Container from "./global/container";
 const Map: React.FC = () => {
   return (
     <Container
+      id="ereosa"
       as="section"
       className="min-h-screen px-0 max-md:px-0 grid md:gap-10 gap-6  bg-red-950"
     >

@@ -79,9 +79,9 @@ const Header: React.FC = () => {
       className="fixed top-0 left-0 w-full px-12 max-md:px-8 h-16 flex items-center justify-between z-20 text-primary"
     >
       <NavLink
-        bare
         href="/"
         path={`/`}
+        bare={true}
         className="md:w-[200px] w-[100px] h-full inline-flex header-main-link md:mt-8"
       >
         <Image
