@@ -6,9 +6,9 @@ import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import AboutChapter from "./about-chapter";
 import Container from "../global/container";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import BackgroundSvg from "../quiz/background-svg";
 import MaskProgress from "./scroll-progress";
+import AboutBackground from "./about-background";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollProgressRef } from "./scroll-progress";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
@@ -128,13 +128,9 @@ const About = () => {
       className="relative overflow-hidden w-full h-screen md:px-0 max-md:px-0"
     >
       {/* Background svg elements */}
-      <div className="md:[&>svg]:w-[50%] [&>svg]:w-full absolute inset-0 flex items-center justify-center">
-        <BackgroundSvg className="text-bronze/30 aspect-square" />
-        <MaskProgress
-          ref={stripRef}
-          // className="text-bronze" // color via text color utility if you prefer
-        />
-      </div>
+      <AboutBackground>
+        <MaskProgress ref={stripRef} />
+      </AboutBackground>
 
       {/* Content */}
       <div className="w-full h-screen overflow-hidden">
@@ -171,6 +167,7 @@ const About = () => {
             image="/images/characters/character-9.jpeg"
           />
           <AboutChapter
+            direction="rtl"
             title="The Veil & the Deep"
             image="/images/characters/character-6.jpeg"
             brief="Goddess Law sealed the deep and raised the Veil — but the Fallen Moon remembers, and she waits."

@@ -8,7 +8,7 @@ interface AboutChapterProps {
   image: string;
   details: string;
   className?: string;
-  layout?: "default" | "reversed";
+  direction?: "ltr" | "rtl";
 }
 
 const AboutChapter = ({
@@ -17,16 +17,23 @@ const AboutChapter = ({
   brief,
   details,
   className,
-  layout = "default",
+  direction = "ltr",
 }: AboutChapterProps) => {
   return (
     <div
       className={cn(
-        "gsap-panel md:w-screen w-[200vw] px-12 max-md:px-5 flex flex-col gap-20 justify-center",
+        "gsap-panel md:w-screen w-[150vw] px-12 max-md:px-5 flex flex-col gap-20 justify-center",
         className
       )}
     >
-      <div className="flex items-center justify-evenly gap-10">
+      <div
+        className={cn(
+          "flex items-center justify-evenly gap-10 ",
+          direction === "ltr"
+            ? "md:flex-row flex-col md:items-end items-start"
+            : "md:flex-row-reverse flex-col-reverse md:items-start items-start"
+        )}
+      >
         <div className="flex flex-col gap-4">
           <Text
             as="h2"
@@ -43,7 +50,7 @@ const AboutChapter = ({
             {brief}
           </Text>
         </div>
-        <AboutCard image={image} title={title} />
+        <AboutCard image={image} title={title} className="max-md:ml-[40%]" />
       </div>
       <Text
         as="p"
