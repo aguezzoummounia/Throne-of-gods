@@ -1,7 +1,7 @@
 "use client";
-import { vertexShader, fragmentShader } from "@/glsl/flag-shader";
 import * as THREE from "three";
 import { useRef, useEffect } from "react";
+import { vertexShader, fragmentShader } from "@/glsl/flag-shader";
 
 interface WavyImageProps {
   imageUrl: string;

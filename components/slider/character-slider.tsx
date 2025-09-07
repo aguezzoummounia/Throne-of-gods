@@ -1,14 +1,20 @@
 "use client";
+import gsap from "gsap";
 import Text from "../ui/text";
 import WavyImage from "./wavy-image";
+import { useGSAP } from "@gsap/react";
+import SplitText from "gsap/SplitText";
 import Container from "../global/container";
 import { useRouter } from "next/navigation";
 import { charactersArray } from "@/lib/data";
 import SliderIndicator from "./slider-indicator";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
-import { useState, useEffect, useCallback } from "react";
+import ScrollTrigger from "gsap/ScrollTrigger";
+import { useRef, useState, useEffect, useCallback } from "react";
 import RadialInvertedTriangles from "../radial-inverted-triangles";
+
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const CharacterSlider: React.FC = () => {
   const OPTIONS: EmblaOptionsType = {
@@ -16,6 +22,10 @@ const CharacterSlider: React.FC = () => {
     align: "center",
   };
   const router = useRouter();
+
+  const h2Ref = useRef<HTMLHeadingElement>(null);
+  const container = useRef<HTMLDivElement>(null);
+
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
 
@@ -43,18 +53,52 @@ const CharacterSlider: React.FC = () => {
     };
   }, [emblaApi, onSelect]);
 
+  useGSAP(
+    () => {
+      const h2Split = new SplitText(h2Ref.current, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 80%",
+        },
+      });
+
+      tl.from(h2Split.lines, {
+        yPercent: 100,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power2.out",
+      });
+
+      return () => {
+        h2Split.revert();
+      };
+    },
+    { scope: container }
+  );
+
   return (
     <Container
       as="section"
       id="characters"
-      className="md:px-0 px-0 flex flex-col items-center"
+      ref={container}
+      className="md:px-0 px-0 flex flex-col md:gap-20 gap-14 md:pt-24 pt-16 scroll-m-10"
     >
-      <Text as="p" variant="small" className="max-w-[600px] text-center">
-        But no story shall live without the ones who walk it.
-        <br />
-        These are the cursed, the chosen, and the condemned
+      <Text
+        as="h2"
+        ref={h2Ref}
+        variant="lead"
+        className="max-w-[768px] w-full max-md:mx-auto max-md:text-center px-12 max-md:px-5"
+      >
+        But no story shall live without the ones who walk it. These are the
+        cursed, the chosen, and the condemned
       </Text>
-      <div className="relative ">
+      <div className="flex flex-col items-center relative">
         <div className="absolute top-[50%] left-[5vw] translate-y-[-50%] z-10 pointer-events-none mix-blend-difference">
           <div className="flex overflow-hidden  gap-x-1 max-md:text-xl max-md:font-normal max-md:flex-col max-md:items-start h-16">
             <div
@@ -62,12 +106,14 @@ const CharacterSlider: React.FC = () => {
               style={{ transform: `translateY(-${selectedIndex * 64}px)` }}
             >
               {charactersArray.map((character) => (
-                <h2
+                <Text
+                  as="h2"
+                  variant="lead"
                   key={character.id}
-                  className="text-white md:text-4xl lowercase text-2xl font-medium py-2 leading-tight h-16 [text-shadow:0_2px_10px_rgba(0,0,0,0.5)]"
+                  className="[text-shadow:0_2px_10px_rgba(0,0,0,0.5)] py-2 h-16 uppercase"
                 >
                   {character.name}
-                </h2>
+                </Text>
               ))}
             </div>
           </div>
@@ -113,10 +159,10 @@ const CharacterSlider: React.FC = () => {
             );
           })}
         </div>
-        {/* <RadialInvertedTriangles
-        segments={5}
-        className="absolute inset-0 -z-[1]"
-      /> */}
+        <RadialInvertedTriangles
+          segments={5}
+          className="absolute inset-0 -z-[1]"
+        />
       </div>
     </Container>
   );

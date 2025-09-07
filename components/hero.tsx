@@ -9,7 +9,7 @@ import { trailer_url } from "@/lib/consts";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Button from "@/components/ui/button-or-link";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const Hero: React.FC = () => {
   const pRef = useRef<HTMLElement>(null);
@@ -36,13 +36,13 @@ const Hero: React.FC = () => {
         .from(
           pSplit.lines,
           {
-            opacity: 0,
+            autoAlpha: 0,
             stagger: 0.2,
             duration: 1.2,
             yPercent: 100,
             ease: "expo.out",
           },
-          1
+          "-=.6"
         )
         .from(
           buttonRef.current,
@@ -50,10 +50,14 @@ const Hero: React.FC = () => {
             y: 30,
             opacity: 0,
             duration: 0.8,
-            ease: "power1.in",
+            ease: "power2.out",
           },
-          0.5
+          "-=.8"
         );
+
+      return () => {
+        pSplit.revert();
+      };
     },
     { scope: containerRef }
   );

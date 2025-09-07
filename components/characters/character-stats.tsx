@@ -6,7 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { VillainStats } from "@/lib/types";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const CharacterStat: React.FC<{ stats: VillainStats }> = ({ stats }) => {
   const containerRef = useRef<HTMLDivElement>(null);

@@ -9,7 +9,7 @@ import { SplitText } from "gsap/SplitText";
 import AnimatedUnderline from "../ui/animated-underline";
 import ElementsSvgOutline from "@/components/elements-svg-outline";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(useGSAP, SplitText);
 
 type CardType = "new" | "default";
 

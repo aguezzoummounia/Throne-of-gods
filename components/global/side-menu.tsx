@@ -6,6 +6,8 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { site_name, chanel_handler, email_address } from "@/lib/consts";
 
+gsap.registerPlugin(useGSAP);
+
 const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
   open,
   handleClick,
@@ -40,35 +42,35 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
         .from(
           ".menu-item-main",
           {
-            y: 30,
-            opacity: 0,
+            autoAlpha: 0,
+            yPercent: 50,
             stagger: 0.25,
             duration: 1,
             ease: "power2.out",
           },
-          "-=0.1" // Overlap with the container animation for a smoother effect
+          "-=0.8" // Overlap with the container animation for a smoother effect
         )
         // Animate the secondary links
         .from(
           ".menu-item-secondary",
           {
-            y: 30,
-            opacity: 0,
-            stagger: 0.1,
             duration: 1,
+            autoAlpha: 0,
+            stagger: 0.1,
+            yPercent: 100,
             ease: "power2.out",
           },
-          "<.5" // Overlap with the container animation for a smoother effect
+          "-=.8" // Overlap with the container animation for a smoother effect
         )
         // Animate the footer
         .from(
           ".menu-item-footer",
           {
-            opacity: 0,
-            duration: 0.5,
+            autoAlpha: 0,
+            duration: 0.6,
             ease: "power2.out",
           },
-          "<.5"
+          "<"
         );
     },
     { scope: container }
@@ -101,22 +103,22 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
       <div className="flex flex-col gap-12 flex-1 justify-center">
         <ul className="flex flex-col gap-[10px] font-cinzel">
           <li className="menu-item-main">
-            <SideMenuLink href="#about" handleClick={handleClick}>
+            <SideMenuLink href="/#about" handleClick={handleClick}>
               About
             </SideMenuLink>
           </li>
           <li className="menu-item-main">
-            <SideMenuLink href="#Ereosa" handleClick={handleClick}>
+            <SideMenuLink href="/#ereosa" handleClick={handleClick}>
               Ereosa
             </SideMenuLink>
           </li>
           <li className="menu-item-main">
-            <SideMenuLink href="#characters" handleClick={handleClick}>
+            <SideMenuLink href="/#characters" handleClick={handleClick}>
               Roles
             </SideMenuLink>
           </li>
           <li className="menu-item-main">
-            <SideMenuLink href="#quiz" handleClick={handleClick}>
+            <SideMenuLink href="/#quiz" handleClick={handleClick}>
               Quiz
             </SideMenuLink>
           </li>

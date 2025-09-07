@@ -7,8 +7,9 @@ import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
 import Container from "../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import QuizBackground from "./quiz-background";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const Quiz: React.FC = () => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
@@ -73,7 +74,12 @@ const Quiz: React.FC = () => {
   );
 
   return (
-    <Container id="quiz" as="section" className="flex">
+    <Container
+      id="quiz"
+      as="section"
+      className="flex relative md:h-screen min-h-[70vh]"
+    >
+      <QuizBackground />
       <div ref={container} className="flex-1 flex items-center justify-center">
         <div className="flex flex-col items-center justify-center gap-10 lg:w-[58.33%] xs:w-[83.33%] w-full">
           <Text as="h2" ref={h2Ref} variant="title" className="text-center">

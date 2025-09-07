@@ -6,15 +6,13 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
-import { usePathname } from "next/navigation";
 import { RippleImage } from "../ripple-image";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { dev_url, site_name, email_address, trailer_url } from "@/lib/consts";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const Footer: React.FC = () => {
-  const pathname = usePathname();
   const pRef = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -72,11 +70,11 @@ const Footer: React.FC = () => {
 
       // BUTTONS animation
       gsap.from(buttons, {
-        y: 15,
+        yPercent: 15,
         opacity: 0,
         stagger: 0.3,
         ease: "power2.inOut",
-        duration: 1.5,
+        duration: 1.2,
         scrollTrigger: {
           trigger: buttonsGroup.current,
           start: "top 80%",
@@ -88,7 +86,7 @@ const Footer: React.FC = () => {
         pSplit.revert();
       };
     },
-    { scope: container, dependencies: [pathname] }
+    { scope: container }
   );
 
   return (

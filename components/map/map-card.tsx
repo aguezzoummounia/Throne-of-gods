@@ -10,7 +10,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { map_locations_positions } from "@/lib/consts";
 import { useState, useRef, useMemo, useCallback, Fragment } from "react";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type Position = {
   item: string;

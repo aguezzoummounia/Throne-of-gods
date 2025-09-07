@@ -4,7 +4,7 @@
   --background: #0a0a0a;
   --foreground: #ededed;
 }
-/* ::selection {
+::selection {
   background: #171b1e;
   color: #8f7e77;
 }
@@ -12,7 +12,7 @@
 ::-moz-selection {
   background: #171b1e;
   color: #8f7e77;
-} */
+}
 
 @theme inline {
   --breakpoint-xs: 479px;
@@ -31,13 +31,8 @@
   --text-dynamic-sm: clamp(18px, 17.2957746479px + 0.1408450704vw, 20px);
   --text-dynamic-sx: clamp(16px, 14.5915492958px + 0.2816901408vw, 20px);
   /* fonts */
-  --font-cardo: var(--font-cardo);
   --font-cinzel: var(--font-cinzel);
-  --font-raleway: var(--font-raleway);
   --font-alegreya: var(--font-alegreya);
-  --font-montserrat: var(--font-montserrat);
-  --font-medievalsharp: var(--font-medieval-sharp);
-  --font-imfellenglish: var(--font-im-fell-english);
   --font-cinzeldecorative: var(--font-cinzel-decorative);
 }
 html.lenis,

@@ -16,7 +16,7 @@ import BackgroundSvg from "./background-svg";
 import { useAudio } from "@/context/sound-context";
 import QuizResultPreloader from "./quiz-result-preloader";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(useGSAP, SplitText);
 
 type TieBreaker = "earliest" | "random";
 interface QuizClientProps {

@@ -1,8 +1,8 @@
 import "@react-three/fiber";
-import { TextureLoader, ShaderMaterial, Vector2 } from "three";
 import { useRef, useMemo, useState, useEffect } from "react";
-import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
+import { TextureLoader, ShaderMaterial, Vector2 } from "three";
 import { vertexShader, fragmentShader } from "@/glsl/ripple-shader";
+import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 
 const START_DELAY_MS = 400;
 

@@ -10,7 +10,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import TiltedCardWrapper from "@/components/tilted-card-wrapper";
 import ElementsSvgOutline from "@/components/elements-svg-outline";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 interface PowerCardProps {
   name: string;

@@ -3,8 +3,11 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
+import { usePathname } from "next/navigation";
 import AnimatedUnderline from "./animated-underline";
 import { useInteractiveSound } from "@/hooks/useInteractiveSound";
+
+gsap.registerPlugin(useGSAP);
 
 interface SoundButtonProps {
   href: string;
@@ -21,6 +24,7 @@ const NavLink: React.FC<SoundButtonProps> = ({
   children,
   className,
 }) => {
+  const pathname = usePathname();
   const soundEvents = useInteractiveSound();
   const divRef = useRef<HTMLDivElement | null>(null);
 
@@ -54,8 +58,8 @@ const NavLink: React.FC<SoundButtonProps> = ({
       className={cn("relative cursor-pointer uppercase text-sm", className)}
     >
       {children}
-      {href === path && <AnimatedUnderline />}
-      {href === path && (
+      {href === path && pathname === "/" && <AnimatedUnderline />}
+      {href === path && pathname === "/" && (
         <div className="absolute left-1/2 -top-[90%] -translate-x-1/2 pointer-events-none">
           {/* rotating element */}
           <div

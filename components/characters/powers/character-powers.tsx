@@ -9,7 +9,7 @@ import Container from "../../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import PowersContainer from "./powers-container";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const CharacterPowers: React.FC<{ data: Power[] }> = ({ data }) => {
   const containerRef = useRef<HTMLElement>(null);

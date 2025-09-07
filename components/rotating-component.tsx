@@ -1,7 +1,7 @@
 "use client";
 import gsap from "gsap";
+import { cn } from "@/lib/utils";
 import { useEffect, useRef } from "react";
-import { cn, throttle } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/useMediaQuery";
 
 interface RotatingDiv {

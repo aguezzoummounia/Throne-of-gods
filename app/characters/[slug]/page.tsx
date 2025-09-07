@@ -3,16 +3,10 @@ import { charactersData } from "@/lib/data";
 import NextCharacter from "@/components/characters/next-character";
 import CharacterHero from "@/components/characters/character-hero";
 import CharacterTrivia from "@/components/characters/character-trivia";
-import CharacterPowers from "@/components/characters/powers/character-powers";
 import CharacterOverview from "@/components/characters/character-overview";
 import CharacterRelation from "@/components/characters/character-relations";
 import CharacterBackstory from "@/components/characters/character-backstory";
-//
-import Image from "next/image";
-import Text from "@/components/ui/text";
-import Container from "@/components/global/container";
-import ElementsSvgOutline from "@/components/elements-svg-outline";
-import PowerCard from "@/components/characters/powers/power-card";
+import CharacterPowers from "@/components/characters/powers/character-powers";
 
 export default async function CharacterPage({
   params,

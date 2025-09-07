@@ -7,7 +7,7 @@ import SplitText from "gsap/SplitText";
 import Container from "../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
   const containerRef = useRef<HTMLElement>(null);

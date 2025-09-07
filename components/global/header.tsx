@@ -1,16 +1,17 @@
 "use client";
 import gsap from "gsap";
-import Link from "next/link";
 import Portal from "./portal";
+import Image from "next/image";
 import SideMenu from "./side-menu";
 import NavLink from "../ui/nav-link";
 import { useGSAP } from "@gsap/react";
+import { useRef, useState } from "react";
 import { useHash } from "@/hooks/useHash";
 import MenuToggle from "../ui/menu-toggle";
-import { useRef, useState } from "react";
 import SoundToggle from "../sound/sound-toggle";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
-import Image from "next/image";
+
+gsap.registerPlugin(useGSAP);
 
 type ScreenConditions = {
   isDesktop: boolean;
@@ -41,8 +42,8 @@ const Header: React.FC = () => {
 
           tl.from(".header-main-link", {
             scale: 0,
-            opacity: 0,
             duration: 1,
+            autoAlpha: 0,
             ease: "power2.out",
           })
             .from(

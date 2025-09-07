@@ -9,7 +9,7 @@ import Container from "../global/container";
 import CharacterStat from "./character-stats";
 import ScrollTrigger from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const CharacterOverview: React.FC<{
   quote: string;
@@ -35,11 +35,10 @@ const CharacterOverview: React.FC<{
         },
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%", // parent enters viewport
+          start: "top 50%", // parent enters viewport
         },
       });
 
-      // Paragraph animation (independent trigger at 30%)
       const pSplit = new SplitText(pRef.current, {
         type: "lines",
         mask: "lines",
@@ -53,7 +52,7 @@ const CharacterOverview: React.FC<{
         ease: "power4.out",
         scrollTrigger: {
           trigger: pRef.current,
-          start: "top 90%", // adjust for ~30% in viewport
+          start: "top 70%",
         },
       });
 

@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import { useRef, useState, useEffect } from "react";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(useGSAP, useGSAP, SplitText);
 
 const getRandomIndex = (prevIndex: number, data: readonly string[]): number => {
   if (data.length === 1) return 0;

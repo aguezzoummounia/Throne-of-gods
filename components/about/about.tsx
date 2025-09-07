@@ -11,7 +11,7 @@ import AboutBackground from "./about-background";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollProgressRef } from "./scroll-progress";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const About = () => {
   const containerRef = useRef<HTMLElement>(null);

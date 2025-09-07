@@ -47,7 +47,7 @@ const Indicator: React.FC<{
         <div className="absolute bg-bronze/50 transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 rotate-45 flex items-center justify-center">
           <div
             className={cn(
-              "md:w-2 w-1.5 md:h-2 h-1.5 rounded-full bg-foreground transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 float-animation-class -rotate-45",
+              "md:w-2 w-1.5 md:h-2 h-1.5 rounded-full bg-foreground transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 float-animation-class",
               isActive ? "scale-100" : "scale-80"
             )}
           />

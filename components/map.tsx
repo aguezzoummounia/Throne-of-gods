@@ -1,32 +1,84 @@
+import gsap from "gsap";
+import Text from "./ui/text";
+import { useRef } from "react";
 import MapCard from "./map/map-card";
+import { useGSAP } from "@gsap/react";
+import SplitText from "gsap/SplitText";
 import Container from "./global/container";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const Map: React.FC = () => {
+  const h2Ref = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const pRef = useRef<HTMLParagraphElement>(null);
+
+  useGSAP(
+    () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%", // Animate when section is 80% from the top
+        },
+      });
+
+      const h2Split = new SplitText(h2Ref.current, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
+      });
+      const pSplit = new SplitText(pRef.current, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
+      });
+      tl.from(h2Split.lines, {
+        autoAlpha: 0,
+        stagger: 0.2,
+        duration: 1.2,
+        yPercent: 100,
+        ease: "expo.out",
+      }).from(
+        pSplit.lines,
+        {
+          autoAlpha: 0,
+          stagger: 0.2,
+          duration: 1.2,
+          yPercent: 100,
+          ease: "expo.out",
+        },
+        "-=.6"
+      );
+
+      return () => {
+        h2Split.revert();
+        pSplit.revert();
+      };
+    },
+    { scope: containerRef }
+  );
   return (
     <Container
       id="ereosa"
       as="section"
-      className="min-h-screen px-0 max-md:px-0 grid md:gap-10 gap-6  bg-red-950"
+      ref={containerRef}
+      className="min-h-screen px-0 max-md:px-0 grid md:gap-20 gap-14 md:pt-24 pt-16 scroll-m-10"
     >
-      <div className="grid gap-8 mx-10 bg-green-950">
-        <h2 className="">
-          Here lies the scarred land—shaped by gods, split by emperors, and
-          haunted by the echoes of what should have stayed buried. Every name
-          carved on this map carries blood, ruin, or prophecy. And though the
-          divine are gone, their shadow lingers in every ruin and restless star
-          above.
-        </h2>
-        <h2>
-          1. Mysterious / Prophetic: They say the world cracked in three—but it
-          never healed. Look closely. The threads of fate are stitched through
-          every valley, every ruin, every empire clinging to memory. 2. Ominous
-          / Foreboding: This is no mere map. It is a ledger of sins, a memory of
-          divine wrath, and a warning etched in soil and stone. Step
-          lightly—Erosea remembers. 3. Grand / Lore-Heavy: Once ruled by gods
-          and giants of men, Erosea became a crucible for ambition and
-          annihilation. What remains is a land cursed with memory—and marked by
-          prophecy yet to be fulfilled.
-        </h2>
+      <div className="grid gap-8 max-w-[600px] w-full mx-auto text-center max-md:px-5">
+        <Text as="h2" ref={h2Ref} variant="lead">
+          Erosea, where empires broke the gods, the sea wears a Veil, and a
+          storm-forged heir walks between kingdoms.
+        </Text>
+
+        <Text as="p" ref={pRef}>
+          This is a continent that still bears the wounds of the Age of Divine
+          Unity, where mountains melted, seas reshaped, and coastlines sealed
+          behind the Veil. From Galeeria’s frozen north to Valemyra’s green
+          heart and Eternea’s fractured deserts, each region holds pieces of the
+          prophecy and clues to Kaen’s return. Click a region to reveal its
+          history.
+        </Text>
       </div>
 
       <MapCard />

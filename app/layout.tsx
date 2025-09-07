@@ -7,7 +7,7 @@ import SvgOutline from "@/components/global/svg-outline";
 import SmoothScroll from "@/components/global/smooth-scroll";
 import GrainOverlay from "@/components/global/grain-overlay";
 import CustomCursor from "@/components/global/custom-cursor";
-import { Alegreya, Cinzel_Decorative } from "next/font/google";
+import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
 import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
 
@@ -19,6 +19,11 @@ const cinzelDecorative = Cinzel_Decorative({
 const alegreya = Alegreya({
   weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-alegreya",
+  subsets: ["latin"],
+});
+const cinzel = Cinzel({
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-cinzel",
   subsets: ["latin"],
 });
 
@@ -35,7 +40,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${alegreya.variable} ${cinzelDecorative.variable} antialiased`}
+        className={`${alegreya.variable} ${cinzel.variable} ${cinzelDecorative.variable} antialiased`}
       >
         <SmoothScroll>
           <SoundProvider>
@@ -58,12 +63,6 @@ export default function RootLayout({
     </html>
   );
 }
-
-// const cinzel = Cinzel({
-//   weight: ["400", "500", "600", "700", "800", "900"],
-//   variable: "--font-cinzel",
-//   subsets: ["latin"],
-// });
 
 // const montserrat = Montserrat({
 //   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],

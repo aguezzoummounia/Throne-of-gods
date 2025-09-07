@@ -10,7 +10,7 @@ import Container from "../global/container";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ElementsSvgOutline from "../elements-svg-outline";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 interface NextCharacterProps {
   slug: string;

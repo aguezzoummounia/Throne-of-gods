@@ -6,7 +6,7 @@ import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
 import { useRef, useState, useEffect } from "react";
 
-gsap.registerPlugin(SplitText);
+gsap.registerPlugin(useGSAP, SplitText);
 
 interface QuizResultsProps {
   open: boolean;

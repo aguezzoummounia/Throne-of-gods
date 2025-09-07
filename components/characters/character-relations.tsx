@@ -8,7 +8,7 @@ import Container from "../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import CharacterAffiliationCard from "./character-affiliation-card";
 
-gsap.registerPlugin(SplitText, ScrollTrigger);
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 interface CharacterRelationProps {
   data: {

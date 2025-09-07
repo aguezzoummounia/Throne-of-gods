@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Power } from "@/lib/types";
 import PowerCard from "./power-card";
 import { power_item_positions } from "@/lib/consts";
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Point = { x: number; y: number };
 interface PowersContainerProps {

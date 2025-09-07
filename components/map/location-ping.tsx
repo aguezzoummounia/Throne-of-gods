@@ -43,15 +43,20 @@ const LocationPing = ({
         className
       )}
     >
-      <div className="bg-blurred transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground rotate-45 flex items-center justify-center">
-        <div className="md:w-2 w-1.5 md:h-2 h-1.5 rounded-full bg-foreground transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 float-animation-class -rotate-45" />
+      <div className="bg-blurred backdrop-blur-xl transition-colors lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 flex items-center justify-center" />
+      <div className="absolute bg-blurred transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 rotate-45 flex items-center justify-center">
+        <div
+          className={cn(
+            "md:w-2 w-1.5 md:h-2 h-1.5 rounded-full bg-foreground transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 float-animation-class animate-pulse"
+          )}
+        />
       </div>
       <svg
         fill="none"
         viewBox="0 0 88 89"
         xmlns="http://www.w3.org/2000/svg"
         className={cn(
-          "transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 duration-[.6s] absolute -inset-0.5 text-foreground"
+          "transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 duration-[.6s] absolute -inset-[5px] z-20 text-foreground drop-shadow-[0_0_4px_rgba(255,255,255,0.7)]"
         )}
       >
         <g filter="url(#filter0_f_6587_3779)">
