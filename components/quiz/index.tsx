@@ -19,52 +19,59 @@ const Quiz: React.FC = () => {
 
   useGSAP(
     () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 70%",
+        },
+      });
+
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          // This callback runs after SplitText has wrapped your text in lines/words.
+          // Build the split-text tween here and add it to your timeline.
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.6,
+              from: "random",
+            },
+          });
+          tl.add(splitTween);
+          return splitTween;
+        },
       });
       const h4Split = new SplitText(h4Ref.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 80%",
-        },
-      });
-
-      tl.from(h2Split.chars, {
-        autoAlpha: 0,
-        stagger: {
-          amount: 0.6,
-          from: "random",
-        },
-      })
-        .from(
-          h4Split.lines,
-          {
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
             autoAlpha: 0,
             yPercent: 100,
             stagger: {
               amount: 0.8,
               from: "random",
             },
-          },
-          "-=0.3"
-        )
-        .from(
-          buttonsRef.current,
-          {
-            yPercent: 100,
-            autoAlpha: 0,
-            duration: 1,
-            ease: "power2.out",
-          },
-          "-=0.3"
-        );
+          });
+          tl.add(splitTween, "-=0.3");
+          return splitTween;
+        },
+      });
+
+      tl.from(
+        buttonsRef.current,
+        {
+          yPercent: 100,
+          autoAlpha: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      );
       return () => {
         h2Split.revert();
         h4Split.revert();

@@ -83,35 +83,41 @@ const About = () => {
   // main text animation hook
   useGSAP(
     () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 70%", // Animate when section is 80% from the top
+        },
+      });
+
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: { amount: 0.6, from: "random" },
+          });
+          tl.add(splitTween);
+          return splitTween;
+        },
       });
       const pSplit = new SplitText(pRef.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%", // Animate when section is 80% from the top
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            autoAlpha: 0,
+            yPercent: 100,
+            stagger: { amount: 0.8 },
+          });
+          tl.add(splitTween, "-=0.3");
+          return splitTween;
         },
       });
 
-      tl.from(h2Split.chars, {
-        autoAlpha: 0,
-        stagger: { amount: 0.6, from: "random" },
-      }).from(
-        pSplit.lines,
-        {
-          autoAlpha: 0,
-          yPercent: 100,
-          stagger: { amount: 0.8 },
-        },
-        "-=0.3"
-      );
       return () => {
         h2Split.revert();
         pSplit.revert();

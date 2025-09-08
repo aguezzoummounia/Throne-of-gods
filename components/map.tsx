@@ -22,34 +22,39 @@ const Map: React.FC = () => {
           start: "top 80%", // Animate when section is 80% from the top
         },
       });
-
+      // TODO: fix the issue causing the titles to take forever to load
       const h2Split = new SplitText(h2Ref.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            autoAlpha: 0,
+            stagger: 0.2,
+            duration: 1.2,
+            yPercent: 100,
+            ease: "expo.out",
+          });
+          tl.add(splitTween);
+          return splitTween;
+        },
       });
       const pSplit = new SplitText(pRef.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-      });
-      tl.from(h2Split.lines, {
-        autoAlpha: 0,
-        stagger: 0.2,
-        duration: 1.2,
-        yPercent: 100,
-        ease: "expo.out",
-      }).from(
-        pSplit.lines,
-        {
-          autoAlpha: 0,
-          stagger: 0.2,
-          duration: 1.2,
-          yPercent: 100,
-          ease: "expo.out",
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            autoAlpha: 0,
+            stagger: 0.2,
+            duration: 1.2,
+            yPercent: 100,
+            ease: "expo.out",
+          });
+          tl.add(splitTween, "-=.6");
+          return splitTween;
         },
-        "-=.6"
-      );
+      });
 
       return () => {
         h2Split.revert();

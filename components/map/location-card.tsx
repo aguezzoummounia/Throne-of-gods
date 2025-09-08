@@ -40,67 +40,77 @@ const LocationCard = ({
   useGSAP(
     () => {
       const tl = gsap.timeline();
+
+      // === Title Split ===
       const titleSplit = new SplitText(titleRef.current, {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          const titleTween = gsap.from(self.chars, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: { from: "random", each: 0.05 },
+          });
+          // Add it to the timeline after the first two tweens
+          tl.add(titleTween, "-=0.3");
+          return titleTween;
+        },
       });
+
+      // === Label Split ===
       const labelSplit = new SplitText(labelRef.current, {
         type: "chars",
         smartWrap: true,
-      });
-      const pSplit = new SplitText(detailsRef.current, {
-        type: "words",
+        autoSplit: true,
+        onSplit: (self) => {
+          const labelTween = gsap.from(self.chars, {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            stagger: { from: "random", each: 0.05 },
+          });
+          tl.add(labelTween, "-=0.3");
+          return labelTween;
+        },
       });
 
-      tl.to(cardRef.current, {
-        scale: 1,
-        autoAlpha: 1,
-        duration: 1,
-        ease: "power2.out",
-      })
-        .from(
-          imageRef.current,
-          {
-            scale: 1.3,
-            duration: 1,
-            filter: "blur(5px)",
-            ease: "power2.out",
-          },
-          "<.3" // Start at the same time as the wrapper animation
-        )
-        .from(
-          labelSplit.chars,
-          {
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: { from: "random", each: 0.05 },
-          },
-          "-=0.3" // Overlap with previous animation for a smoother feel
-        )
-        .from(
-          titleSplit.chars,
-          {
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-            stagger: { from: "random", each: 0.05 },
-          },
-          "<" // Overlap with previous animation for a smoother feel
-        )
-        .from(
-          pSplit.words,
-          {
+      // === Paragraph Split ===
+      const pSplit = new SplitText(detailsRef.current, {
+        type: "words",
+        autoSplit: true,
+        onSplit: (self) => {
+          const pTween = gsap.from(self.words, {
             y: 10,
             opacity: 0,
             stagger: 0.05,
             duration: 1,
             ease: "power2.out",
-          },
+          });
+          tl.add(pTween, "<0.2"); // 0.2s after previous
+          return pTween;
+        },
+      });
 
-          "<0.2" // Start 0.1s after the title animation begins
-        );
+      // === Initial animations ===
+      tl.to(cardRef.current, {
+        scale: 1,
+        autoAlpha: 1,
+        duration: 1,
+        ease: "power2.out",
+      }).from(
+        imageRef.current,
+        {
+          scale: 1.3,
+          duration: 1,
+          filter: "blur(5px)",
+          ease: "power2.out",
+        },
+        "<.3"
+      );
 
+      // Cleanup
       return () => {
         if (titleSplit) titleSplit.revert();
         if (labelSplit) labelSplit.revert();
@@ -108,7 +118,7 @@ const LocationCard = ({
       };
     },
     {
-      scope: cardRef, // <-- Set the scope here!
+      scope: cardRef,
     }
   );
 

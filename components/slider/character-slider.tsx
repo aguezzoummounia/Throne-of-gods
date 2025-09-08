@@ -13,6 +13,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRef, useState, useEffect, useCallback } from "react";
 import RadialInvertedTriangles from "../radial-inverted-triangles";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -55,24 +56,27 @@ const CharacterSlider: React.FC = () => {
 
   useGSAP(
     () => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top 70%",
+        },
+      });
+
       const h2Split = new SplitText(h2Ref.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-      });
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 80%",
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            yPercent: 100,
+            autoAlpha: 0,
+            duration: 1,
+            ease: "power2.out",
+          });
+          tl.add(splitTween);
+          return splitTween;
         },
-      });
-
-      tl.from(h2Split.lines, {
-        yPercent: 100,
-        autoAlpha: 0,
-        duration: 1,
-        ease: "power2.out",
       });
 
       return () => {
@@ -130,12 +134,12 @@ const CharacterSlider: React.FC = () => {
                   flexShrink: 0,
                 }}
               >
-                <div
-                  onClick={() => router.push(`/characters/${character.slug}`)}
-                  className="relative cursor-grab active:cursor-grabbing w-full lg:aspect-[16/10] md:aspect-[3/3.5] aspect-[2/3.5]"
+                <Link
+                  href={`/characters/${character.slug}`}
+                  className="relative flex cursor-grab active:cursor-grabbing w-full lg:aspect-[16/10] md:aspect-[3/3.5] aspect-[2/3.5]"
                 >
                   <WavyImage imageUrl={character.image} />
-                </div>
+                </Link>
               </div>
             ))}
           </div>

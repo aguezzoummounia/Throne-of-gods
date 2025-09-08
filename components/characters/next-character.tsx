@@ -23,7 +23,7 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-
+  // TODO: fix this mess
   useGSAP(
     () => {
       const tl = gsap.timeline({
@@ -32,44 +32,52 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
           trigger: containerRef.current,
         },
       });
-      const h2Split = new SplitText(h2Ref.current, {
-        type: "chars",
-        smartWrap: true,
-      });
       const pSplit = new SplitText(pRef.current, {
         type: "chars",
         smartWrap: true,
-      });
-      tl.from(pSplit.chars, {
-        autoAlpha: 0,
-        stagger: {
-          amount: 0.6,
-          from: "random",
-        },
-        ease: "power4.out",
-      })
-        .from(
-          h2Split.chars,
-          {
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
             autoAlpha: 0,
             stagger: {
               amount: 0.6,
               from: "random",
             },
             ease: "power4.out",
-          },
-          "-=0.1"
-        )
-        .from(
-          buttonRef.current,
-          {
-            y: 30,
-            opacity: 0,
-            duration: 1,
-            ease: "power2.inOut",
-          },
-          "<"
-        );
+          });
+          tl.add(splitTween);
+          return splitTween;
+        },
+      });
+
+      const h2Split = new SplitText(h2Ref.current, {
+        type: "chars",
+        smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.6,
+              from: "random",
+            },
+            ease: "power4.out",
+          });
+          tl.add(splitTween, "<");
+          return splitTween;
+        },
+      });
+
+      tl.from(
+        buttonRef.current,
+        {
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.inOut",
+        }
+        // "-=.3"
+      );
       return () => {
         h2Split.revert();
         pSplit.revert();

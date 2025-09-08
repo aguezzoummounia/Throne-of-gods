@@ -15,7 +15,7 @@ const CharacterStat: React.FC<{ stats: VillainStats }> = ({ stats }) => {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
-          start: "top 80%",
+          start: "top 70%",
         },
       });
       tl.from(".stats-row-animated", {

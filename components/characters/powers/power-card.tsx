@@ -38,9 +38,32 @@ const PowerCard: React.FC<PowerCardProps> = ({
       const titleSplit = new SplitText(".power-card-title", {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: { from: "random", each: 0.05 },
+          });
+          tl.add(splitTween, "-=0.3");
+          return splitTween;
+        },
       });
       const pSplit = new SplitText(".power-card-details", {
         type: "words",
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.words, {
+            duration: 1,
+            stagger: 0.1,
+            autoAlpha: 0,
+            yPercent: 100,
+            ease: "power4.out",
+          });
+          tl.add(splitTween, "<");
+          return splitTween;
+        },
       });
 
       tl.to(cardRef.current, {
@@ -48,41 +71,19 @@ const PowerCard: React.FC<PowerCardProps> = ({
         autoAlpha: 1,
         duration: 0.8,
         ease: "power2.out",
-      })
-        .from(
-          ".power-card-image",
-          {
-            scale: 1.3,
-            duration: 1,
-            ease: "power2.out",
-          },
-          "-=.4"
-        )
-        .from(
-          titleSplit.chars,
-          {
-            autoAlpha: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: { from: "random", each: 0.05 },
-          },
-          "-=0.3" // Overlap with previous animation for a smoother feel
-        )
-        .from(
-          pSplit.words,
-          {
-            duration: 1,
-            stagger: 0.1,
-            autoAlpha: 0,
-            yPercent: 100,
-            ease: "power4.out",
-          },
-          "<"
-        );
+      }).from(
+        ".power-card-image",
+        {
+          scale: 1.3,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=.4"
+      );
 
       return () => {
-        if (titleSplit) titleSplit.revert();
         if (pSplit) pSplit.revert();
+        if (titleSplit) titleSplit.revert();
       };
     },
     {
@@ -103,6 +104,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
           <Image
             fill
             src={image}
+            sizes="500px"
             alt={`${name} image`}
             className="object-cover power-item-image power-card-image"
           />

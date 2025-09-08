@@ -25,17 +25,20 @@ const CharacterOverview: React.FC<{
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
-      });
-
-      gsap.from(h2Split.chars, {
-        autoAlpha: 0,
-        stagger: {
-          amount: 0.8,
-          from: "random",
-        },
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 50%", // parent enters viewport
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.8,
+              from: "random",
+            },
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 50%", // parent enters viewport
+            },
+          });
+          return splitTween;
         },
       });
 
@@ -43,16 +46,18 @@ const CharacterOverview: React.FC<{
         type: "lines",
         mask: "lines",
         autoSplit: true,
-      });
-
-      gsap.from(pSplit.lines, {
-        yPercent: 100,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: pRef.current,
-          start: "top 70%",
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            yPercent: 100,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: pRef.current,
+              start: "top 70%",
+            },
+          });
+          return splitTween;
         },
       });
 

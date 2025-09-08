@@ -59,6 +59,8 @@ html.lenis body {
 }
 
 body {
+  font-kerning: none;
+  text-rendering: optimizeSpeed;
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;

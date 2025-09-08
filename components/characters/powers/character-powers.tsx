@@ -20,17 +20,20 @@ const CharacterPowers: React.FC<{ data: Power[] }> = ({ data }) => {
       const split = new SplitText(titleRef.current, {
         type: "chars",
         smartWrap: true,
-      });
-
-      gsap.from(split.chars, {
-        autoAlpha: 0,
-        stagger: {
-          amount: 0.8,
-          from: "random",
-        },
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%", // parent enters viewport
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.8,
+              from: "random",
+            },
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 70%", // parent enters viewport
+            },
+          });
+          return splitTween;
         },
       });
 

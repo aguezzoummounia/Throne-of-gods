@@ -46,42 +46,43 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
       //     ease: "power2.inOut",
       //   }
       // );
-
+      gsap.set([pRef.current, h2Ref.current], { visibility: "visible" });
       const pSplit = new SplitText(pRef.current, {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.8,
+              from: "random",
+            },
+          });
+          tl.add(splitTween, "-=.15");
+          return splitTween;
+        },
       });
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.8,
+              from: "random",
+            },
+          });
+          tl.add(splitTween, "-=.15");
+          return splitTween;
+        },
       });
       // Immediately set visibility to allow proper splitting/position calc, but keep opacity 0 via from tween
-      gsap.set([pRef.current, h2Ref.current], { visibility: "visible" });
-      // P lines mask animation
-      tl.from(
-        pSplit.chars,
-        {
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.8,
-            from: "random",
-          },
-        },
-        "-=.15"
-      );
 
-      // button animation
-      tl.from(
-        h2Split.chars,
-        {
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.8,
-            from: "random",
-          },
-        },
-        "-=.15"
-      );
+      // P lines mask animation
+
       return () => {
         pSplit.revert();
         h2Split.revert();

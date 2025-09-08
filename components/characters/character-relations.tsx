@@ -25,26 +25,25 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-        },
-      });
-
       const h4Split = new SplitText(h4Ref.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            yPercent: 100,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 70%",
+            },
+          });
+          return splitTween;
+        },
       });
 
-      // animate main header
-      tl.from(h4Split.lines, {
-        yPercent: 100,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-      });
       return () => {
         h4Split.revert();
       };
@@ -53,26 +52,25 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
   );
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: pRef.current,
-          start: "top 80%",
-        },
-      });
-
       const pSplit = new SplitText(pRef.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
+            yPercent: 100,
+            duration: 1,
+            stagger: 0.1,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: pRef.current,
+              start: "top 70%",
+            },
+          });
+          return splitTween;
+        },
       });
 
-      // P lines mask animation
-      tl.from(pSplit.lines, {
-        yPercent: 100,
-        duration: 1,
-        stagger: 0.1,
-        ease: "power4.out",
-      });
       return () => {
         pSplit.revert();
       };

@@ -46,12 +46,41 @@ const map_locations_positions = [
   },
 ];
 
+const assets_to_load: string[] = [
+  // character images
+  "/images/characters/character-1.jpeg",
+  "/images/characters/character-2.jpeg",
+  "/images/characters/character-3.jpeg",
+  "/images/characters/character-4.jpeg",
+  "/images/characters/character-5.jpeg",
+  "/images/characters/character-6.jpeg",
+  "/images/characters/character-7.jpeg",
+  "/images/characters/character-8.jpeg",
+  "/images/characters/character-9.jpeg",
+  // background images
+  "/images/bg/bg-1.webp",
+  "/images/bg/bg-2.webp",
+  "/images/bg/bg-3.webp",
+  "/images/bg/bg-4.webp",
+  "/images/bg/bg-5.webp",
+  "/images/bg/bg-6.webp",
+  "/images/bg/bg-7.webp",
+  "/images/bg/bg-8.webp",
+  // map images
+  "/images/map/ereosa-map.avif",
+  "/images/map/ereosa-map-vertical.avif",
+  // static images
+  "/images/static/footer-image.png",
+  "/images/temp-logo.png",
+];
+
 export {
   dev_url,
   site_name,
   trailer_url,
   email_address,
   chanel_handler,
+  assets_to_load,
   power_item_positions,
   map_locations_positions,
 };

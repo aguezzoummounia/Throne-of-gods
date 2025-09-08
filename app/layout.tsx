@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Preloader from "@/components/preloader";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import { SoundProvider } from "@/context/sound-context";
@@ -7,9 +8,9 @@ import SvgOutline from "@/components/global/svg-outline";
 import SmoothScroll from "@/components/global/smooth-scroll";
 import GrainOverlay from "@/components/global/grain-overlay";
 import CustomCursor from "@/components/global/custom-cursor";
-import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
 import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
+import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
 
 const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-decorative",
@@ -44,16 +45,18 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <SoundProvider>
-            <Header />
-            <div className="min-h-screen overflow-clip relative">
-              <ImagesUnderline />
-              <BackgroundMusic />
-              <main className="min-h-screen">
-                {children}
-                <Footer />
-              </main>
-            </div>
-            {/* <CustomCursor /> */}
+            <Preloader>
+              <Header />
+              <div className="min-h-screen overflow-clip relative">
+                <ImagesUnderline />
+                <BackgroundMusic />
+                <main className="min-h-screen">
+                  {children}
+                  <Footer />
+                </main>
+              </div>
+              {/* <CustomCursor /> */}
+            </Preloader>
           </SoundProvider>
           <SvgOutline />
           <GrainOverlay />
@@ -63,30 +66,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// const montserrat = Montserrat({
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-//   variable: "--font-montserrat",
-//   subsets: ["latin"],
-// });
-// const raleway = Raleway({
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-//   variable: "--font-raleway",
-//   subsets: ["latin"],
-// });
-// const imFellEnglish = IM_Fell_English({
-//   variable: "--font-im-fell-english",
-//   subsets: ["latin"],
-//   weight: ["400"],
-// });
-// const cardo = Cardo({
-//   variable: "--font-cardo",
-//   weight: ["400", "700"],
-//   subsets: ["latin"],
-// });
-
-// const medievalSharp = MedievalSharp({
-//   variable: "--font-medieval-sharp",
-//   subsets: ["latin"],
-//   weight: ["400"],
-// });

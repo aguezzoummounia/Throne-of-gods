@@ -130,13 +130,20 @@ const AnimatedText: React.FC<AnimatedTextProps> = ({ message }) => {
 
   useGSAP(
     () => {
-      const split = new SplitText(textRef.current, { type: "chars" });
-      gsap.from(split.chars, {
-        duration: 2,
-        autoAlpha: 0,
-        stagger: { amount: 0.5, from: "random" },
-        ease: "power2.out",
+      const split = new SplitText(textRef.current, {
+        type: "chars",
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            duration: 2,
+            autoAlpha: 0,
+            stagger: { amount: 0.5, from: "random" },
+            ease: "power2.out",
+          });
+          return splitTween;
+        },
       });
+
       return () => {
         split.revert();
       };

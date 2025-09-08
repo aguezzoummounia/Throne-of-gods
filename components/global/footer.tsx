@@ -20,55 +20,71 @@ const Footer: React.FC = () => {
 
   useGSAP(
     () => {
-      const pSplit = new SplitText(pRef.current, {
-        type: "lines",
-        mask: "lines",
-        autoSplit: true,
-      });
-      const h2Split = new SplitText(h2Ref.current, {
-        type: "chars",
-        smartWrap: true,
-      });
-      const buttons = gsap.utils.toArray<HTMLButtonElement>(
-        buttonsGroup.current?.children || []
-      );
-
+      // Timeline for image + h2 animation
       const tl = gsap.timeline({
         scrollTrigger: {
           start: "top 80%",
           trigger: container.current,
         },
       });
+
+      // Main headline split
+      const h2Split = new SplitText(h2Ref.current, {
+        type: "chars",
+        autoSplit: true,
+        smartWrap: true,
+        onSplit: (self) => {
+          // Animate chars inside timeline (with scrollTrigger)
+          const h2Tween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            stagger: {
+              amount: 0.6,
+              from: "random",
+            },
+          });
+
+          // Add into the tl sequence after image ripple
+          tl.add(h2Tween, "<");
+          return h2Tween;
+        },
+      });
+
+      // Paragraph split
+      const pSplit = new SplitText(pRef.current, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
+        onSplit: (self) => {
+          // Animate lines with their own ScrollTrigger
+          const pTween = gsap.from(self.lines, {
+            stagger: 0.1,
+            autoAlpha: 0,
+            yPercent: 100,
+            duration: 1.5,
+            ease: "power4.out",
+            scrollTrigger: {
+              trigger: pRef.current,
+              start: "top 80%",
+            },
+          });
+
+          return pTween;
+        },
+      });
+
+      const buttons = gsap.utils.toArray<HTMLButtonElement>(
+        buttonsGroup.current?.children || []
+      );
+
+      // Image ripple comes first
       tl.from(".image-ripple-container", {
         filter: "blur(10px)",
         opacity: 0,
         duration: 1,
         ease: "power1.out",
-      }).from(
-        h2Split.chars,
-        {
-          autoAlpha: 0,
-          stagger: {
-            amount: 0.6,
-            from: "random",
-          },
-        },
-        "<"
-      );
-      // P lines mask animation
-      gsap.from(pSplit.lines, {
-        stagger: 0.1,
-        autoAlpha: 0,
-        yPercent: 100,
-        duration: 1.5,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: pRef.current,
-          start: "top 80%",
-        },
       });
 
-      // BUTTONS animation
+      // Buttons animation (own ScrollTrigger)
       gsap.from(buttons, {
         yPercent: 15,
         opacity: 0,

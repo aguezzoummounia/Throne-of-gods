@@ -21,39 +21,45 @@ const Hero: React.FC = () => {
       const tl = gsap.timeline();
 
       const words = gsap.utils.toArray(".animated-word");
-      const pSplit = new SplitText(pRef.current, {
-        type: "lines",
-        mask: "lines",
-        autoSplit: true,
-      });
 
+      // 1) schedule the .animated-word animation first
       tl.from(words, {
         y: 50,
         opacity: 0,
         stagger: 0.15,
         duration: 1.2,
-      })
-        .from(
-          pSplit.lines,
-          {
-            autoAlpha: 0,
-            stagger: 0.2,
+      });
+
+      const pSplit = new SplitText(pRef.current, {
+        type: "lines",
+        mask: "lines",
+        autoSplit: true,
+        onSplit: (self) => {
+          // This callback runs after SplitText has wrapped your text in lines/words.
+          // Build the split-text tween here and add it to your timeline.
+          let splitTween = gsap.from(self.lines, {
             duration: 1.2,
             yPercent: 100,
+            autoAlpha: 0,
+            stagger: 0.2,
             ease: "expo.out",
-          },
-          "-=.6"
-        )
-        .from(
-          buttonRef.current,
-          {
-            y: 30,
-            opacity: 0,
-            duration: 0.8,
-            ease: "power2.out",
-          },
-          "-=.8"
-        );
+          });
+          // Insert the split animation into the existing timeline at the correct offset.
+          tl.add(splitTween, "<");
+          return splitTween; // return the tween for SplitText to manage cleanup/resplitting
+        },
+      });
+
+      tl.from(
+        buttonRef.current,
+        {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        },
+        "-=.8"
+      );
 
       return () => {
         pSplit.revert();
@@ -75,7 +81,7 @@ const Hero: React.FC = () => {
           Here
         </div>
       </h2>
-      <div className="flex items-center justify-center absolute inset-0 -z-1">
+      {/* <div className="flex items-center justify-center absolute inset-0 -z-1">
         <Image
           width={1000}
           height={1000}
@@ -83,7 +89,7 @@ const Hero: React.FC = () => {
           className="object-cover"
           src="/images/spheres/green-sphere.png"
         />
-      </div>
+      </div> */}
       <div className="flex flex-col items-center justify-center gap-4 max-w-[600px] w-full mx-auto">
         <Text ref={pRef} className="uppercase text-center mb-4">
           Plunge into a realm of divine power and shadowed secrets, where

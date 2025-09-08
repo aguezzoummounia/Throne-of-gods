@@ -3,9 +3,12 @@ import gsap from "gsap";
 import Text from "../ui/text";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
+// 1. Import ScrollTrigger
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef, useState, useEffect } from "react";
 
-gsap.registerPlugin(useGSAP, useGSAP, SplitText);
+// 2. Register the ScrollTrigger plugin
+gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const getRandomIndex = (prevIndex: number, data: readonly string[]): number => {
   if (data.length === 1) return 0;
@@ -21,39 +24,70 @@ const CharacterTrivia: React.FC<{ data: readonly string[] }> = ({ data }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+  // We no longer need the isInView state or the IntersectionObserver useEffect.
+
+  // 3. Use an effect to control the interval with ScrollTrigger
   useEffect(() => {
-    if (data.length === 0) return;
+    // A ref to hold the interval ID so we can clear it from different scopes
+    let interval: NodeJS.Timeout;
 
-    const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => getRandomIndex(prevIndex, data));
-    }, 5000);
+    const startInterval = () => {
+      // Don't start if it's already running
+      if (interval) return;
+      interval = setInterval(() => {
+        setCurrentIndex((prevIndex) => getRandomIndex(prevIndex, data));
+      }, 5000);
+    };
 
-    return () => clearInterval(interval);
-  }, [data]);
+    const stopInterval = () => {
+      clearInterval(interval);
+      // @ts-ignore
+      interval = null; // Reset the interval ID
+    };
 
+    // Create the ScrollTrigger instance
+    const st = ScrollTrigger.create({
+      trigger: containerRef.current,
+      // When the top of the trigger enters the bottom of the viewport
+      onEnter: () => startInterval(),
+      // When the bottom of the trigger leaves the top of the viewport
+      onLeave: () => stopInterval(),
+      // When the top of the trigger re-enters the bottom of the viewport (scrolling up)
+      onEnterBack: () => startInterval(),
+      // When the bottom of the trigger re-enters the top of the viewport (scrolling up)
+      onLeaveBack: () => stopInterval(),
+    });
+
+    // Cleanup on component unmount
+    return () => {
+      stopInterval(); // Ensure interval is cleared
+      st.kill(); // Kill the ScrollTrigger instance to prevent memory leaks
+    };
+  }, [data]); // Dependency array includes data
+
+  // This GSAP animation hook remains the same.
+  // It's driven by `currentIndex`, which is now controlled by our ScrollTrigger.
   useGSAP(
     () => {
-      const tl = gsap.timeline();
+      if (!pRef.current) return;
 
       const pSplit = new SplitText(pRef.current, {
         type: "chars",
-        smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            opacity: 0,
+            stagger: {
+              amount: 0.5,
+              from: "random",
+            },
+          });
+          return splitTween;
+        },
       });
 
-      // P lines mask animation
-      tl.from(
-        pSplit.chars,
-        {
-          opacity: 0,
-          stagger: {
-            amount: 0.5,
-            from: "random",
-          },
-        },
-        0
-      );
       return () => {
-        pSplit.revert(); // cleanup SplitText wrappers
+        pSplit.revert();
       };
     },
     { scope: containerRef, dependencies: [currentIndex] }

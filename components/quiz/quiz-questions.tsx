@@ -58,40 +58,47 @@ export function QuizQuestions({
   useGSAP(
     () => {
       if (isAnimating) return;
+      const tl = gsap.timeline();
+
       const h4Split = new SplitText(h4Ref.current, {
         type: "chars",
         smartWrap: true,
+        autoSplit: true,
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.chars, {
+            autoAlpha: 0,
+            ease: "back.out",
+            stagger: { amount: 0.5, from: "random" },
+          });
+          tl.add(splitTween);
+          return splitTween;
+        },
       });
+
       const h2Split = new SplitText(h2Ref.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-      });
-      const buttons = gsap.utils.toArray<HTMLButtonElement>(
-        buttonsRef.current?.children || []
-      );
-      const tl = gsap.timeline();
-
-      tl.from(h4Split.chars, {
-        autoAlpha: 0,
-        ease: "back.out",
-        stagger: { amount: 0.5, from: "random" },
-      })
-        .from(
-          h2Split.lines,
-          {
+        onSplit: (self) => {
+          let splitTween = gsap.from(self.lines, {
             opacity: 0,
             stagger: 0.2,
             duration: 0.8,
             yPercent: 100,
-          },
-          "<"
-        )
-        .from(
-          buttons,
-          { y: 20, opacity: 0, duration: 0.8, stagger: 0.16 },
-          "-=.6"
-        );
+          });
+          tl.add(splitTween, "<");
+          return splitTween;
+        },
+      });
+      const buttons = gsap.utils.toArray<HTMLButtonElement>(
+        buttonsRef.current?.children || []
+      );
+
+      tl.from(
+        buttons,
+        { y: 20, opacity: 0, duration: 0.8, stagger: 0.16 },
+        "-=.6"
+      );
 
       return () => {
         h4Split.revert();

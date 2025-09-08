@@ -12,7 +12,7 @@ const DigitReel: React.FC<DigitReelProps> = ({ digit }) => {
 
   return (
     <div
-      className="overflow-hidden font-medium"
+      className="overflow-hidden font-normal"
       style={{ height: `${digitHeight}px` }}
     >
       <div
@@ -49,7 +49,7 @@ const VerticalCounter: React.FC<VerticalCounterProps> = ({ progress }) => {
   const digits = formattedProgress.split("").map(Number);
 
   return (
-    <div className="flex">
+    <div className="flex max-md:mb-14">
       <DigitReel digit={digits[0]} />
       <DigitReel digit={digits[1]} />
       <DigitReel digit={digits[2]} />
