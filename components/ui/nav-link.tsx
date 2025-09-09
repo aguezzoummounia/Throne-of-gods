@@ -3,34 +3,36 @@ import gsap from "gsap";
 import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
-import { usePathname } from "next/navigation";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 import AnimatedUnderline from "./animated-underline";
 import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollToPlugin);
 
 interface SoundButtonProps {
   href: string;
-  path: string;
   bare?: boolean;
+  isActive?: boolean;
   className?: string;
   children: React.ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const NavLink: React.FC<SoundButtonProps> = ({
   href,
-  path,
-  bare = false,
+  onClick,
+  isActive,
   children,
   className,
+  bare = false,
 }) => {
-  const pathname = usePathname();
   const soundEvents = useInteractiveSound();
   const divRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
     () => {
-      if (href === path && !bare) {
+      if (href === "/" && !bare) {
         gsap.fromTo(
           divRef.current,
           { opacity: 0, scale: 0.8 },
@@ -38,8 +40,17 @@ const NavLink: React.FC<SoundButtonProps> = ({
         );
       }
     },
-    { dependencies: [href, path] }
+    { dependencies: [href] }
   );
+
+  // Create a new, correctly typed handler that combines both actions
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    soundEvents.onClick(); // Call the sound hook's onClick
+    if (onClick) onClick(e); // Call the onClick passed down from the Nav parent
+  };
+
+  // The rest of the sound events (onMouseEnter, onMouseLeave, etc.) can be spread
+  const { onClick: soundOnClick, ...otherSoundEvents } = soundEvents;
 
   if (bare)
     return (
@@ -54,12 +65,16 @@ const NavLink: React.FC<SoundButtonProps> = ({
   return (
     <a
       href={href}
-      {...soundEvents}
-      className={cn("relative cursor-pointer uppercase text-sm", className)}
+      {...otherSoundEvents}
+      onClick={handleClick}
+      className={cn(
+        "relative cursor-pointer uppercase text-sm font-cinzel font-semibold",
+        className
+      )}
     >
       {children}
-      {href === path && pathname === "/" && <AnimatedUnderline />}
-      {href === path && pathname === "/" && (
+      {isActive && <AnimatedUnderline />}
+      {isActive && (
         <div className="absolute left-1/2 -top-[90%] -translate-x-1/2 pointer-events-none">
           {/* rotating element */}
           <div

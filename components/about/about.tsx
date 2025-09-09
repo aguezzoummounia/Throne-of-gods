@@ -10,6 +10,7 @@ import MaskProgress from "./scroll-progress";
 import AboutBackground from "./about-background";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollProgressRef } from "./scroll-progress";
+import { useScrollTriggerContext } from "@/context/scroll-trigger-context";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -19,6 +20,8 @@ const About = () => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
   const stripRef = useRef<ScrollProgressRef | null>(null);
+
+  const { setHorizontalST } = useScrollTriggerContext();
 
   const updateProgress = (n: number) => {
     const clamped = Math.max(0, Math.min(1, n));
@@ -51,7 +54,9 @@ const About = () => {
           },
         },
       });
-
+      if (horizontalTween.scrollTrigger) {
+        setHorizontalST(horizontalTween.scrollTrigger);
+      }
       // ensure progress initialized (if there's no scroll distance this will still show 0)
       const st = horizontalTween.scrollTrigger as ScrollTrigger;
       if (st) updateProgress(st.progress ?? 0);
@@ -76,8 +81,11 @@ const About = () => {
           });
         }
       });
+      return () => {
+        setHorizontalST(null);
+      };
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [setHorizontalST] }
   );
 
   // main text animation hook

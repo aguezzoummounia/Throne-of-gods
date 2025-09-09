@@ -11,6 +11,7 @@ import CustomCursor from "@/components/global/custom-cursor";
 import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
 import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
+import { ScrollTriggerProvider } from "@/context/scroll-trigger-context";
 
 const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-decorative",
@@ -46,16 +47,18 @@ export default function RootLayout({
         <SmoothScroll>
           <SoundProvider>
             <Preloader>
-              <Header />
-              <div className="min-h-screen overflow-clip relative">
-                <ImagesUnderline />
-                <BackgroundMusic />
-                <main className="min-h-screen">
-                  {children}
-                  <Footer />
-                </main>
-              </div>
-              {/* <CustomCursor /> */}
+              <ScrollTriggerProvider>
+                <Header />
+                <div className="min-h-screen overflow-clip relative">
+                  <ImagesUnderline />
+                  <BackgroundMusic />
+                  <main className="min-h-screen">
+                    {children}
+                    <Footer />
+                  </main>
+                </div>
+                {/* <CustomCursor /> */}
+              </ScrollTriggerProvider>
             </Preloader>
           </SoundProvider>
           <SvgOutline />

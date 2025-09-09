@@ -74,8 +74,16 @@ const assets_to_load: string[] = [
   "/images/temp-logo.png",
 ];
 
+const nav_links = [
+  { label: "About", href: "/", hash: "#about" },
+  { label: "Ereosa", href: "/", hash: "#ereosa" },
+  { label: "Roles", href: "/", hash: "#characters" },
+  { label: "Quiz", href: "/", hash: "#quiz" },
+];
+
 export {
   dev_url,
+  nav_links,
   site_name,
   trailer_url,
   email_address,

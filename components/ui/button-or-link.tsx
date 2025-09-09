@@ -62,12 +62,12 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>(
     const borders = (
       <>
         <img
-          src="/cropped-border.png"
+          src="/images/static/cropped-border.png"
           alt=""
           className="absolute left-0 bottom-full h-auto pointer-events-none z-0 rotate-180 translate-y-[2px]"
         />
         <img
-          src="/cropped-border.png"
+          src="/images/static/cropped-border.png"
           alt=""
           className="absolute left-0 top-full w-full h-auto pointer-events-none z-0 -translate-y-[2px]"
         />

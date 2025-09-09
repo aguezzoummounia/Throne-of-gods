@@ -6,15 +6,16 @@ import SideMenu from "./side-menu";
 import NavLink from "../ui/nav-link";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
-import { useHash } from "@/hooks/useHash";
+import { nav_links } from "@/lib/consts";
 import MenuToggle from "../ui/menu-toggle";
+import { usePathname } from "next/navigation";
 import SoundToggle from "../sound/sound-toggle";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
+import { useScrollTriggerContext } from "@/context/scroll-trigger-context";
 
 gsap.registerPlugin(useGSAP);
 
 const Header: React.FC = () => {
-  const hash = useHash();
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
   useBodyLockScroll(isOpen);
@@ -74,6 +75,43 @@ const Header: React.FC = () => {
     { scope: containerRef }
   );
 
+  const pathname = usePathname();
+  const { horizontalST, activeSection, setActiveSection, isScrollingRef } =
+    useScrollTriggerContext();
+
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    hash?: string
+  ) => {
+    if (pathname === "/" && hash) {
+      e.preventDefault();
+      let scrollTarget: string | number = hash;
+
+      if (hash === "#about" && horizontalST) {
+        scrollTarget = horizontalST.start;
+      }
+
+      // Synchronously update the ref's current value.
+      // This change is immediately visible to the observers.
+      isScrollingRef.current = true;
+      setActiveSection(hash.substring(1));
+
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: scrollTarget,
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Set it back to false when done
+          isScrollingRef.current = false;
+        },
+        onInterrupt: () => {
+          // Also set it back if interrupted
+          isScrollingRef.current = false;
+        },
+      });
+    }
+  };
+
   return (
     <header
       ref={containerRef}
@@ -81,7 +119,6 @@ const Header: React.FC = () => {
     >
       <NavLink
         href="/"
-        path={`/`}
         bare={true}
         className="md:w-[200px] w-[100px] h-full inline-flex header-main-link md:mt-8"
       >
@@ -95,22 +132,29 @@ const Header: React.FC = () => {
       </NavLink>
 
       <nav className="md:flex hidden gap-8 header-main-nav">
-        <NavLink className="header-nav-link" href="/#about" path={`/${hash}`}>
-          About
-        </NavLink>
-        <NavLink className="header-nav-link" href="/#ereosa" path={`/${hash}`}>
-          Ereosa
-        </NavLink>
-        <NavLink
-          className="header-nav-link"
-          path={`/${hash}`}
-          href="/#characters"
-        >
-          Roles
-        </NavLink>
-        <NavLink className="header-nav-link" href="/#quiz" path={`/${hash}`}>
-          Quiz
-        </NavLink>
+        {nav_links.map((link, index) => {
+          let isActive = false;
+          if (pathname === "/") {
+            // If on the homepage, the active link is determined by the scrolled section
+            // We strip the '#' from link.hash to compare it to the section's id
+            isActive = activeSection === link.hash?.substring(1);
+          } else {
+            // If on another page, the active link is determined by the page's path
+            isActive = pathname === link.href;
+          }
+
+          return (
+            <NavLink
+              isActive={isActive}
+              href={`/${link.hash}`}
+              key={`nav-link-${index}`}
+              className="header-nav-link"
+              onClick={(e) => handleNavClick(e, link.hash)}
+            >
+              {link.label}
+            </NavLink>
+          );
+        })}
       </nav>
       <div className="md:w-[100px] w-fit flex items-center md:justify-end justify-center gap-1 header-main-options">
         <SoundToggle />
@@ -118,7 +162,15 @@ const Header: React.FC = () => {
       </div>
       <Portal>
         {isOpen && (
-          <SideMenu open={isOpen} handleClick={() => setIsOpen(false)} />
+          <SideMenu
+            open={isOpen}
+            pathname={pathname}
+            handleClick={() => setIsOpen(false)}
+            horizontalST={horizontalST}
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+            isScrollingRef={isScrollingRef}
+          />
         )}
       </Portal>
     </header>

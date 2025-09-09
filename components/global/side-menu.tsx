@@ -1,17 +1,36 @@
 "use client";
+import {
+  site_name,
+  nav_links,
+  email_address,
+  chanel_handler,
+} from "@/lib/consts";
 import { gsap } from "gsap";
 import Link from "next/link";
 import Text from "../ui/text";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
-import { site_name, chanel_handler, email_address } from "@/lib/consts";
 
 gsap.registerPlugin(useGSAP);
 
-const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
+interface SideMenuProps {
+  open: boolean;
+  pathname: string;
+  handleClick: () => void;
+  activeSection: string | null;
+  horizontalST: ScrollTrigger | null;
+  isScrollingRef: { current: boolean };
+  setActiveSection: (id: string | null) => void;
+}
+
+const SideMenu = ({
   open,
+  pathname,
   handleClick,
-}) => {
+  horizontalST,
+  setActiveSection,
+  isScrollingRef,
+}: SideMenuProps) => {
   // refs
   const tl = useRef<gsap.core.Timeline>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -88,6 +107,39 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
     { scope: container, dependencies: [open] }
   );
 
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    hash?: string
+  ) => {
+    if (pathname === "/" && hash) {
+      e.preventDefault();
+      let scrollTarget: string | number = hash;
+
+      if (hash === "#about" && horizontalST) {
+        scrollTarget = horizontalST.start;
+      }
+
+      // Synchronously update the ref's current value.
+      // This change is immediately visible to the observers.
+      isScrollingRef.current = true;
+      setActiveSection(hash.substring(1));
+
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: scrollTarget,
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Set it back to false when done
+          isScrollingRef.current = false;
+        },
+        onInterrupt: () => {
+          // Also set it back if interrupted
+          isScrollingRef.current = false;
+        },
+      });
+    }
+  };
+
   return (
     <div
       ref={container}
@@ -102,26 +154,21 @@ const SideMenu: React.FC<{ open: boolean; handleClick: () => void }> = ({
       </h2>
       <div className="flex flex-col gap-12 flex-1 justify-center">
         <ul className="flex flex-col gap-[10px] font-cinzel">
-          <li className="menu-item-main">
-            <SideMenuLink href="/#about" handleClick={handleClick}>
-              About
-            </SideMenuLink>
-          </li>
-          <li className="menu-item-main">
-            <SideMenuLink href="/#ereosa" handleClick={handleClick}>
-              Ereosa
-            </SideMenuLink>
-          </li>
-          <li className="menu-item-main">
-            <SideMenuLink href="/#characters" handleClick={handleClick}>
-              Roles
-            </SideMenuLink>
-          </li>
-          <li className="menu-item-main">
-            <SideMenuLink href="/#quiz" handleClick={handleClick}>
-              Quiz
-            </SideMenuLink>
-          </li>
+          {nav_links.map((link, index) => {
+            return (
+              <li className="menu-item-main" key={`mobile-nav-link-${index}`}>
+                <SideMenuLink
+                  href={`/${link.hash}`}
+                  handleClick={(e) => {
+                    handleClick();
+                    handleNavClick(e, link.hash);
+                  }}
+                >
+                  {link.label}
+                </SideMenuLink>
+              </li>
+            );
+          })}
         </ul>
         <ul className="flex flex-col gap-1.5">
           <li className="menu-item-secondary">
@@ -160,8 +207,8 @@ export default SideMenu;
 const SideMenuLink: React.FC<{
   href: string;
   target?: string;
-  handleClick: () => void;
   children: React.ReactNode;
+  handleClick: (e: React.MouseEvent<HTMLAnchorElement>) => void;
 }> = ({ href, target, handleClick, children, ...props }) => {
   return (
     <Link
