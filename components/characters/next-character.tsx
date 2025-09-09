@@ -23,12 +23,12 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
-  // TODO: fix this mess
+
   useGSAP(
     () => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          start: "top 80%",
+          start: "top 70%",
           trigger: containerRef.current,
         },
       });
@@ -41,45 +41,37 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
             autoAlpha: 0,
             stagger: {
               amount: 0.6,
-              from: "random",
+              from: "start",
             },
             ease: "power4.out",
           });
-          tl.add(splitTween);
+          tl.add(splitTween, "first");
           return splitTween;
         },
       });
 
-      const h2Split = new SplitText(h2Ref.current, {
-        type: "chars",
-        smartWrap: true,
-        autoSplit: true,
-        onSplit: (self) => {
-          let splitTween = gsap.from(self.chars, {
-            autoAlpha: 0,
-            stagger: {
-              amount: 0.6,
-              from: "random",
-            },
-            ease: "power4.out",
-          });
-          tl.add(splitTween, "<");
-          return splitTween;
+      tl.addLabel("first", 0);
+      tl.from(
+        h2Ref.current,
+        {
+          yPercent: 100,
+          autoAlpha: 0,
+          duration: 1,
+          ease: "power2.inOut",
         },
-      });
-
+        "-=.3"
+      );
       tl.from(
         buttonRef.current,
         {
-          y: 30,
-          opacity: 0,
+          yPercent: 100,
+          autoAlpha: 0,
           duration: 1,
-          ease: "power2.inOut",
-        }
-        // "-=.3"
+          ease: "power2.out",
+        },
+        "-=.3"
       );
       return () => {
-        h2Split.revert();
         pSplit.revert();
       };
     },

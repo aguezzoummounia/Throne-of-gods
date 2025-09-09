@@ -29,8 +29,7 @@ export default async function CharacterPage({
 
   return (
     <div className="min-h-svh">
-      {/* TODO fix animation timeline positioning on mainly the header and next character */}
-      {/* <CharacterHero
+      <CharacterHero
         name={character.name}
         image={character.image}
         nickname={character.nickname}
@@ -43,9 +42,10 @@ export default async function CharacterPage({
       <CharacterRelation data={character.relations} />
       <CharacterPowers data={character.powers} />
       <CharacterBackstory data={character.backstory} />
+
       {character.trivia && character.trivia.length > 0 && (
         <CharacterTrivia data={character.trivia} />
-      )} */}
+      )}
       <NextCharacter
         slug={randomSlug}
         name={randomCharacter.name}

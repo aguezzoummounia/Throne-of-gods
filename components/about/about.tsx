@@ -83,13 +83,6 @@ const About = () => {
   // main text animation hook
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 70%", // Animate when section is 80% from the top
-        },
-      });
-
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
@@ -98,8 +91,11 @@ const About = () => {
           let splitTween = gsap.from(self.chars, {
             autoAlpha: 0,
             stagger: { amount: 0.6, from: "random" },
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 40%",
+            },
           });
-          tl.add(splitTween);
           return splitTween;
         },
       });
@@ -112,8 +108,11 @@ const About = () => {
             autoAlpha: 0,
             yPercent: 100,
             stagger: { amount: 0.8 },
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 30%",
+            },
           });
-          tl.add(splitTween, "-=0.3");
           return splitTween;
         },
       });

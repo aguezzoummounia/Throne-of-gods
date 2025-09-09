@@ -38,13 +38,13 @@ const Indicator: React.FC<{
         aria-pressed={isActive}
         aria-label={`Go to question ${number}`}
         className={cn(
-          "cursor-pointer relative lg:w-[46px] lg:h-[46px] md:w-9 md:h-9 w-6 h-6 flex items-center justify-center opacity-10 disabled:cursor-not-allowed transition-opacity",
+          "bg-[rgba(0,0,0,.05)] cursor-pointer relative lg:w-[46px] lg:h-[46px] md:w-9 md:h-9 w-6 h-6 flex items-center justify-center opacity-10 disabled:cursor-not-allowed transition-opacity mix-blend-difference",
           isAccessible && "opacity-50",
           isActive && "opacity-100"
         )}
       >
-        <div className="bg-bronze/50 backdrop-blur-xl transition-colors lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 flex items-center justify-center" />
-        <div className="absolute bg-bronze/50 transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-foreground/50 rotate-45 flex items-center justify-center">
+        <div className="bg-bronze/30 backdrop-blur-xl transition-colors lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-bronze flex items-center justify-center " />
+        <div className="absolute bg-bronze/30 transition-colors backdrop-blur-xl lg:w-[38px] lg:h-[38px] md:w-[30px] md:h-[30px] w-6 h-6 border border-bronze rotate-45 flex items-center justify-center">
           <div
             className={cn(
               "md:w-2 w-1.5 md:h-2 h-1.5 rounded-full bg-foreground transition-transform ease-[cubic-bezier(.25,1,.5,1)] group-hover:scale-110 float-animation-class",

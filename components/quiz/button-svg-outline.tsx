@@ -55,13 +55,13 @@ const HorizontalLineSVG = ({ className }: SvgLineProps) => {
   return (
     <svg
       className={cn("h-[1px] w-full", className)}
-      viewBox="0 0 250 1"
+      viewBox="0 0 350 1"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <line
         y1="0.5"
-        x2="250"
+        x2="100%"
         y2="0.5"
         stroke="currentColor"
         strokeDasharray="2 4 6 8"

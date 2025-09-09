@@ -16,13 +16,6 @@ const Map: React.FC = () => {
 
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%", // Animate when section is 80% from the top
-        },
-      });
-      // TODO: fix the issue causing the titles to take forever to load
       const h2Split = new SplitText(h2Ref.current, {
         type: "lines",
         mask: "lines",
@@ -34,8 +27,11 @@ const Map: React.FC = () => {
             duration: 1.2,
             yPercent: 100,
             ease: "expo.out",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 80%",
+            },
           });
-          tl.add(splitTween);
           return splitTween;
         },
       });
@@ -50,8 +46,11 @@ const Map: React.FC = () => {
             duration: 1.2,
             yPercent: 100,
             ease: "expo.out",
+            scrollTrigger: {
+              trigger: containerRef.current,
+              start: "top 60%",
+            },
           });
-          tl.add(splitTween, "-=.6");
           return splitTween;
         },
       });

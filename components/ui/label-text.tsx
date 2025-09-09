@@ -39,7 +39,7 @@ const renderSVG = (direction: "left" | "right") => {
           fill="none"
           viewBox="0 0 116 16"
           xmlns="http://www.w3.org/2000/svg"
-          className="text-bronze/50 drop-shadow-[0_0_4px_rgba(244,234,143,0.7)] w-[100px] h-[16px]"
+          className="text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.7)] w-[100px] h-[16px]"
         >
           <line
             x1="10.5"
@@ -73,7 +73,7 @@ const renderSVG = (direction: "left" | "right") => {
           fill="none"
           viewBox="0 0 116 16"
           xmlns="http://www.w3.org/2000/svg"
-          className="text-bronze/50 drop-shadow-[0_0_4px_rgba(244,234,143,0.7)] w-[100px] h-[16px]"
+          className="text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.7)] w-[100px] h-[16px]"
         >
           <line
             x1="105.5"
@@ -96,7 +96,7 @@ const renderSVG = (direction: "left" | "right") => {
           fill="none"
           viewBox="0 0 116 16"
           xmlns="http://www.w3.org/2000/svg"
-          className="text-bronze/50 drop-shadow-[0_0_4px_rgba(244,234,143,0.7)] w-[100px] h-[16px]"
+          className="text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.7)] w-[100px] h-[16px]"
         >
           <line
             x1="10.5"

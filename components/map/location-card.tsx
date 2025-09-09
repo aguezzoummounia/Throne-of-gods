@@ -41,7 +41,25 @@ const LocationCard = ({
     () => {
       const tl = gsap.timeline();
 
-      // === Title Split ===
+      tl.to(cardRef.current, {
+        scale: 1,
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: "power2.out",
+      })
+        .from(
+          imageRef.current,
+          {
+            scale: 1.3,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=.4"
+        )
+        .addLabel("label", "-=.6")
+        .addLabel("title", "-=.3")
+        .addLabel("details", "-=.3");
+
       const titleSplit = new SplitText(titleRef.current, {
         type: "chars",
         smartWrap: true,
@@ -49,17 +67,16 @@ const LocationCard = ({
         onSplit: (self) => {
           const titleTween = gsap.from(self.chars, {
             opacity: 0,
-            duration: 0.8,
+            duration: 0.6,
             ease: "power2.out",
             stagger: { from: "random", each: 0.05 },
           });
           // Add it to the timeline after the first two tweens
-          tl.add(titleTween, "-=0.3");
+          tl.add(titleTween, "label");
           return titleTween;
         },
       });
 
-      // === Label Split ===
       const labelSplit = new SplitText(labelRef.current, {
         type: "chars",
         smartWrap: true,
@@ -67,48 +84,30 @@ const LocationCard = ({
         onSplit: (self) => {
           const labelTween = gsap.from(self.chars, {
             opacity: 0,
-            duration: 0.8,
+            duration: 1,
             ease: "power2.out",
             stagger: { from: "random", each: 0.05 },
           });
-          tl.add(labelTween, "-=0.3");
+          tl.add(labelTween, "title");
           return labelTween;
         },
       });
 
-      // === Paragraph Split ===
       const pSplit = new SplitText(detailsRef.current, {
         type: "words",
         autoSplit: true,
         onSplit: (self) => {
           const pTween = gsap.from(self.words, {
-            y: 10,
-            opacity: 0,
-            stagger: 0.05,
             duration: 1,
-            ease: "power2.out",
+            stagger: 0.1,
+            autoAlpha: 0,
+            yPercent: 100,
+            ease: "power4.out",
           });
-          tl.add(pTween, "<0.2"); // 0.2s after previous
+          tl.add(pTween, "details");
           return pTween;
         },
       });
-
-      // === Initial animations ===
-      tl.to(cardRef.current, {
-        scale: 1,
-        autoAlpha: 1,
-        duration: 1,
-        ease: "power2.out",
-      }).from(
-        imageRef.current,
-        {
-          scale: 1.3,
-          duration: 1,
-          filter: "blur(5px)",
-          ease: "power2.out",
-        },
-        "<.3"
-      );
 
       // Cleanup
       return () => {
@@ -128,7 +127,7 @@ const LocationCard = ({
       aria-label={title}
       ref={cardRef}
       className={cn(
-        "aspect-[2/3] w-[220px] h-auto bg-blurred backdrop-blur-xl absolute z-20 rounded-lg overflow-clip",
+        "aspect-[2/3] w-[220px] h-auto bg-blurred backdrop-blur-xl absolute z-20 rounded-lg overflow-clip group",
         "transform-origin-center scale-0 invisible",
         className
       )}
@@ -172,7 +171,7 @@ const LocationCard = ({
               {details}
             </Text>
           </div>
-          <ElementsSvgOutline />
+          <ElementsSvgOutline className="group-hover:drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]" />
         </div>
       ) : (
         <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px]">

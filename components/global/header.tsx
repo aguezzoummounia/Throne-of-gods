@@ -13,11 +13,6 @@ import useBodyLockScroll from "@/hooks/useBodyLockScroll";
 
 gsap.registerPlugin(useGSAP);
 
-type ScreenConditions = {
-  isDesktop: boolean;
-  isMobile: boolean;
-};
-
 const Header: React.FC = () => {
   const hash = useHash();
   const [isOpen, setIsOpen] = useState(false);
@@ -27,48 +22,53 @@ const Header: React.FC = () => {
   useGSAP(
     () => {
       const tl = gsap.timeline();
-      const mm = gsap.matchMedia();
-      mm.add(
-        {
-          isDesktop: `(min-width: 768px)`,
-          isMobile: "(max-width: 767px)",
-        },
-        (context) => {
-          // mobile version (shorter)
-          const { isDesktop, isMobile } =
-            context.conditions as ScreenConditions;
+      const root = (containerRef.current ?? document) as Element | Document;
+      tl.from(".header-main-link", {
+        scale: 0,
+        duration: 1,
+        autoAlpha: 0,
+        ease: "power2.out",
+      });
 
-          const duration = isDesktop ? 0.7 : 0; // shorter
+      // querySelectorAll generic ensures we get HTMLElement nodes
+      const nodeList = root.querySelectorAll<HTMLElement>(
+        ".header-main-nav .header-nav-link"
+      );
+      // turn NodeList -> Array<HTMLElement> and use a type predicate for the filter
+      const navLinks = Array.from(nodeList).filter((el): el is HTMLElement => {
+        // el is already HTMLElement, but this explicit predicate helps TS with later usage
+        const cs = window.getComputedStyle(el);
+        return (
+          cs.display !== "none" &&
+          cs.visibility !== "hidden" &&
+          el.offsetParent !== null
+        );
+      });
 
-          tl.from(".header-main-link", {
-            scale: 0,
-            duration: 1,
+      if (navLinks.length) {
+        tl.from(
+          navLinks,
+          {
+            yPercent: -100,
             autoAlpha: 0,
-            ease: "power2.out",
-          })
-            .from(
-              ".header-main-nav .header-nav-link",
-              {
-                yPercent: -100,
-                autoAlpha: 0,
-                ease: "power1.out",
-                duration: duration,
-                stagger: 0.15, // stagger links nicely
-              },
-              "-=0.3" // slight overlap with logo
-            )
+            ease: "power1.out",
+            duration: 0.6,
+            stagger: 0.15,
+          },
+          "-=0.3"
+        );
+      }
 
-            .from(
-              ".header-main-options",
-              {
-                yPercent: -100,
-                autoAlpha: 0,
-                duration: 0.6,
-                ease: "power1.out",
-              },
-              "-=0.2"
-            );
-        }
+      tl.from(
+        ".header-main-options > *",
+        {
+          yPercent: -100,
+          autoAlpha: 0,
+          duration: 0.6,
+          ease: "power1.out",
+          stagger: 0.15,
+        },
+        "-=0.3"
       );
     },
     { scope: containerRef }

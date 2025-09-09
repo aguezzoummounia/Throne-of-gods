@@ -51,7 +51,7 @@ const MapCard: React.FC = () => {
         ease: "power2.out",
         stagger: {
           each: 0.1,
-          from: "start",
+          from: "random",
         },
       });
 

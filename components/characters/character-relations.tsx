@@ -64,7 +64,7 @@ const CharacterRelation: React.FC<CharacterRelationProps> = ({ data }) => {
             ease: "power4.out",
             scrollTrigger: {
               trigger: pRef.current,
-              start: "top 70%",
+              start: "top 95%",
             },
           });
           return splitTween;

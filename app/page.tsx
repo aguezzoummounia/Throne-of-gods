@@ -10,11 +10,11 @@ export default function Home() {
     <>
       {/* <SpheresSection /> */}
 
-      {/* <Hero /> */}
-      {/* <About /> */}
+      <Hero />
+      <About />
       <Map />
-      {/* <CharacterSlider /> */}
-      {/* <Quiz /> */}
+      <CharacterSlider />
+      <Quiz />
     </>
   );
 }

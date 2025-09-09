@@ -31,8 +31,6 @@ const Quiz: React.FC = () => {
         smartWrap: true,
         autoSplit: true,
         onSplit: (self) => {
-          // This callback runs after SplitText has wrapped your text in lines/words.
-          // Build the split-text tween here and add it to your timeline.
           let splitTween = gsap.from(self.chars, {
             autoAlpha: 0,
             stagger: {
@@ -40,7 +38,7 @@ const Quiz: React.FC = () => {
               from: "random",
             },
           });
-          tl.add(splitTween);
+          tl.add(splitTween, "h2Title");
           return splitTween;
         },
       });
@@ -57,12 +55,12 @@ const Quiz: React.FC = () => {
               from: "random",
             },
           });
-          tl.add(splitTween, "-=0.3");
+          tl.add(splitTween, "pTitle");
           return splitTween;
         },
       });
 
-      tl.from(
+      tl.addLabel("h2Title", 0).addLabel("pTitle", "-=.3").from(
         buttonsRef.current,
         {
           yPercent: 100,
@@ -72,6 +70,7 @@ const Quiz: React.FC = () => {
         },
         "-=0.3"
       );
+
       return () => {
         h2Split.revert();
         h4Split.revert();

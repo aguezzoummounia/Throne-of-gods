@@ -35,6 +35,24 @@ const PowerCard: React.FC<PowerCardProps> = ({
           start: "top 80%",
         },
       });
+      tl.to(cardRef.current, {
+        scale: 1,
+        autoAlpha: 1,
+        duration: 0.8,
+        ease: "power2.out",
+      })
+        .from(
+          ".power-card-image",
+          {
+            scale: 1.3,
+            duration: 1,
+            ease: "power2.out",
+          },
+          "-=.4"
+        )
+        .addLabel("label", "-=.6")
+        .addLabel("title", "-=.3");
+
       const titleSplit = new SplitText(".power-card-title", {
         type: "chars",
         smartWrap: true,
@@ -46,7 +64,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
             ease: "power2.out",
             stagger: { from: "random", each: 0.05 },
           });
-          tl.add(splitTween, "-=0.3");
+          tl.add(splitTween, "label");
           return splitTween;
         },
       });
@@ -61,29 +79,14 @@ const PowerCard: React.FC<PowerCardProps> = ({
             yPercent: 100,
             ease: "power4.out",
           });
-          tl.add(splitTween, "<");
+          tl.add(splitTween, "title");
           return splitTween;
         },
       });
 
-      tl.to(cardRef.current, {
-        scale: 1,
-        autoAlpha: 1,
-        duration: 0.8,
-        ease: "power2.out",
-      }).from(
-        ".power-card-image",
-        {
-          scale: 1.3,
-          duration: 1,
-          ease: "power2.out",
-        },
-        "-=.4"
-      );
-
       return () => {
-        if (pSplit) pSplit.revert();
-        if (titleSplit) titleSplit.revert();
+        pSplit.revert();
+        titleSplit.revert();
       };
     },
     {

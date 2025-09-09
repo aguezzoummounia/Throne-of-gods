@@ -14,62 +14,8 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
-  // useGSAP(
-  //   () => {
-  //     const h2Split = new SplitText(h2Ref.current, {
-  //       type: "chars",
-  //       smartWrap: true,
-
-  //     });
-
-  //     // animate main header
-  //     gsap.from(h2Split.chars, {
-  //       autoAlpha: 0,
-  //       stagger: {
-  //         amount: 0.8,
-  //         from: "random",
-  //       },
-  //       scrollTrigger: {
-  //         trigger: containerRef.current,
-  //         start: "top 80%",
-  //       },
-  //     });
-
-  //     const contentDivs = contentRef.current?.querySelectorAll("p") || [];
-  //     const lineSplits: SplitText[] = [];
-
-  //     contentDivs.forEach((p) => {
-  //       const split = new SplitText(p, {
-  //         type: "lines",
-  //         linesClass: "overflow-hidden",
-  //       });
-  //       lineSplits.push(split);
-
-  //       // Animate each <p> independently
-  //       gsap.from(split.lines, {
-  //         yPercent: 100,
-  //         duration: 1,
-  //         stagger: 0.1,
-  //         autoAlpha: 0,
-  //         ease: "power4.out",
-  //         scrollTrigger: {
-  //           trigger: p,
-  //           start: "top 80%",
-  //         },
-  //       });
-  //     });
-
-  //     return () => {
-  //       h2Split.revert();
-  //       lineSplits.forEach((split) => split.revert());
-  //     };
-  //   },
-  //   { scope: containerRef }
-  // );
-
   useGSAP(
     () => {
-      // === H2 split ===
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
@@ -86,11 +32,10 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
               start: "top 70%",
             },
           });
-          return h2Tween; // required for resplitting
+          return h2Tween;
         },
       });
 
-      // === Paragraphs split ===
       const contentDivs = contentRef.current?.querySelectorAll("p") || [];
       const lineSplits: SplitText[] = [];
 

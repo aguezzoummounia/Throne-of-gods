@@ -22,7 +22,6 @@ const Hero: React.FC = () => {
 
       const words = gsap.utils.toArray(".animated-word");
 
-      // 1) schedule the .animated-word animation first
       tl.from(words, {
         y: 50,
         opacity: 0,
@@ -35,8 +34,6 @@ const Hero: React.FC = () => {
         mask: "lines",
         autoSplit: true,
         onSplit: (self) => {
-          // This callback runs after SplitText has wrapped your text in lines/words.
-          // Build the split-text tween here and add it to your timeline.
           let splitTween = gsap.from(self.lines, {
             duration: 1.2,
             yPercent: 100,
@@ -44,9 +41,8 @@ const Hero: React.FC = () => {
             stagger: 0.2,
             ease: "expo.out",
           });
-          // Insert the split animation into the existing timeline at the correct offset.
           tl.add(splitTween, "<");
-          return splitTween; // return the tween for SplitText to manage cleanup/resplitting
+          return splitTween;
         },
       });
 
@@ -81,15 +77,16 @@ const Hero: React.FC = () => {
           Here
         </div>
       </h2>
-      {/* <div className="flex items-center justify-center absolute inset-0 -z-1">
+      <div className="flex items-center justify-center absolute inset-0 -z-1">
         <Image
+          priority
           width={1000}
           height={1000}
           alt="hero image"
-          className="object-cover"
+          className="object-cover w-auto h-auto"
           src="/images/spheres/green-sphere.png"
         />
-      </div> */}
+      </div>
       <div className="flex flex-col items-center justify-center gap-4 max-w-[600px] w-full mx-auto">
         <Text ref={pRef} className="uppercase text-center mb-4">
           Plunge into a realm of divine power and shadowed secrets, where
