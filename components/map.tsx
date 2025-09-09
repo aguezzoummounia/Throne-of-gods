@@ -1,3 +1,4 @@
+"use client";
 import gsap from "gsap";
 import Text from "./ui/text";
 import { useRef } from "react";
