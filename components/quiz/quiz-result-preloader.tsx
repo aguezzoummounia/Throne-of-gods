@@ -35,7 +35,7 @@ const QuizResultPreloader: React.FC<QuizResultsProps> = ({
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % messages.length);
       // (% messages.length) loops back to 0 after last index
-    }, 2000);
+    }, 3500);
 
     return () => clearInterval(interval);
   }, []);
@@ -45,7 +45,7 @@ const QuizResultPreloader: React.FC<QuizResultsProps> = ({
       if (!open) return;
 
       const circleCenter = "50% -50%";
-      const finalClipPath = `circle(150vmax at ${circleCenter})`;
+      const finalClipPath = `circle(200vmax at ${circleCenter})`;
 
       // Set initial states
       gsap.set(containerRef.current, {

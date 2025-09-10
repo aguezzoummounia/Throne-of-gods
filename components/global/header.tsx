@@ -12,13 +12,57 @@ import { usePathname } from "next/navigation";
 import SoundToggle from "../sound/sound-toggle";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
 import { useScrollTriggerContext } from "@/context/scroll-trigger-context";
+import { useTransitionRouter } from "next-view-transitions";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP);
+
+export function slideInOut() {
+  document.documentElement.animate(
+    [
+      {
+        opacity: 1,
+        scale: 1,
+        filter: "blur(0px)",
+        transform: "translateY(0%)",
+      },
+      {
+        opacity: 0.2,
+        scale: 0.98,
+        filter: "blur(5px)",
+        transform: "translateY(-35%)",
+      },
+    ],
+    {
+      duration: 2500,
+      easing: "cubic-bezier(.87,0,0.13,1)",
+      fill: "forwards",
+      pseudoElement: "::view-transition-old(root)",
+    }
+  );
+  document.documentElement.animate(
+    [
+      {
+        clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      },
+      {
+        clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
+      },
+    ],
+    {
+      duration: 2500,
+      easing: "cubic-bezier(.87,0,0.13,1)",
+      fill: "forwards",
+      pseudoElement: "::view-transition-new(root)",
+    }
+  );
+}
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
   useBodyLockScroll(isOpen);
+  const router = useTransitionRouter();
 
   useGSAP(
     () => {
@@ -117,10 +161,18 @@ const Header: React.FC = () => {
       ref={containerRef}
       className="fixed top-0 left-0 w-full px-12 max-md:px-8 h-16 flex items-center justify-between z-20 text-primary"
     >
-      <NavLink
+      <Link
         href="/"
-        bare={true}
-        className="md:w-[200px] w-[100px] h-full inline-flex header-main-link md:mt-8"
+        onClick={(e) => {
+          if (pathname === "/") {
+            e.preventDefault();
+            return;
+          }
+          router.push("/", {
+            onTransitionReady: slideInOut,
+          });
+        }}
+        className="relative cursor-pointer uppercase text-sm md:w-[200px] w-[100px] h-full inline-flex header-main-link md:mt-8"
       >
         <Image
           width={300}
@@ -129,7 +181,7 @@ const Header: React.FC = () => {
           src="/images/temp-logo.png"
           className="md:object-scale-down object-contain"
         />
-      </NavLink>
+      </Link>
 
       <nav className="md:flex hidden gap-8 header-main-nav">
         {nav_links.map((link, index) => {
@@ -137,6 +189,7 @@ const Header: React.FC = () => {
           if (pathname === "/") {
             // If on the homepage, the active link is determined by the scrolled section
             // We strip the '#' from link.hash to compare it to the section's id
+
             isActive = activeSection === link.hash?.substring(1);
           } else {
             // If on another page, the active link is determined by the page's path

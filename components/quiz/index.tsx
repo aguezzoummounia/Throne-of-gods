@@ -6,8 +6,10 @@ import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
 import Container from "../global/container";
+import { slideInOut } from "../global/header";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import QuizBackground from "./quiz-background";
+import { useTransitionRouter } from "next-view-transitions";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -17,15 +19,10 @@ const Quiz: React.FC = () => {
   const container = useRef<HTMLDivElement>(null);
   const buttonsRef = useRef<HTMLButtonElement>(null);
 
+  const router = useTransitionRouter();
+
   useGSAP(
     () => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top 70%",
-        },
-      });
-
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
@@ -37,8 +34,11 @@ const Quiz: React.FC = () => {
               amount: 0.6,
               from: "random",
             },
+            scrollTrigger: {
+              trigger: container.current,
+              start: "top 70%",
+            },
           });
-          tl.add(splitTween, "h2Title");
           return splitTween;
         },
       });
@@ -54,22 +54,25 @@ const Quiz: React.FC = () => {
               amount: 0.8,
               from: "random",
             },
+            scrollTrigger: {
+              trigger: h4Ref.current,
+              start: "top 80%",
+            },
           });
-          tl.add(splitTween, "pTitle");
           return splitTween;
         },
       });
 
-      tl.addLabel("h2Title", 0).addLabel("pTitle", "-=.3").from(
-        buttonsRef.current,
-        {
-          yPercent: 100,
-          autoAlpha: 0,
-          duration: 1,
-          ease: "power2.out",
+      gsap.from(buttonsRef.current, {
+        yPercent: 100,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: buttonsRef.current,
+          start: "top 80%",
         },
-        "-=0.3"
-      );
+      });
 
       return () => {
         h2Split.revert();
@@ -101,7 +104,16 @@ const Quiz: React.FC = () => {
             Find the villain lurking in you.
           </Text>
 
-          <Button href="/quiz" ref={buttonsRef} animated>
+          <Button
+            href="/quiz"
+            onClick={() => {
+              router.push(`/quiz`, {
+                onTransitionReady: slideInOut,
+              });
+            }}
+            ref={buttonsRef}
+            animated
+          >
             Choose your path
           </Button>
         </div>

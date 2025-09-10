@@ -34,7 +34,8 @@
     "components/spheres/lightning-sphere.jsx",
     "components/spheres/sun-sphere.jsx",
     "components/spheres/text.jsx",
-    "components/ripple-image.tsx"
+    "components/ripple-image.tsx",
+    "next.config.js"
   ],
   "exclude": ["node_modules"]
 }

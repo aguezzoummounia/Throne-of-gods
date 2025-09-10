@@ -17,7 +17,6 @@ interface HomeScrollContainerProps {
 const HomeScrollContainer = ({ children }: HomeScrollContainerProps) => {
   const { horizontalST, setHorizontalST, setActiveSection, isScrollingRef } =
     useScrollTriggerContext();
-
   // either scroll to the top of the horizontal scroll section, in  this case "about section", or just to any other section
   useHashScroll(horizontalST, isScrollingRef);
 

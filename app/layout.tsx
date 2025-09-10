@@ -12,6 +12,7 @@ import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
 import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
 import { ScrollTriggerProvider } from "@/context/scroll-trigger-context";
+import { ViewTransitions } from "next-view-transitions";
 
 const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-decorative",
@@ -40,32 +41,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${alegreya.variable} ${cinzel.variable} ${cinzelDecorative.variable} antialiased`}
-      >
-        <SmoothScroll>
-          <SoundProvider>
-            <Preloader>
-              <ScrollTriggerProvider>
-                <Header />
-                <div className="min-h-screen overflow-clip relative">
-                  <ImagesUnderline />
-                  <BackgroundMusic />
-                  <main className="min-h-screen">
-                    {children}
-                    <Footer />
-                  </main>
-                </div>
-                {/* <CustomCursor /> */}
-              </ScrollTriggerProvider>
-            </Preloader>
-          </SoundProvider>
-          <SvgOutline />
-          <GrainOverlay />
-          <div id="popup-portal"></div>
-        </SmoothScroll>
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body
+          className={`${alegreya.variable} ${cinzel.variable} ${cinzelDecorative.variable} antialiased`}
+        >
+          <SmoothScroll>
+            <SoundProvider>
+              <Preloader>
+                <ScrollTriggerProvider>
+                  <Header />
+                  <div className="min-h-screen overflow-clip relative">
+                    <ImagesUnderline />
+                    <BackgroundMusic />
+                    <main className="min-h-screen">
+                      {children}
+                      <Footer />
+                    </main>
+                  </div>
+                  {/* <CustomCursor /> */}
+                </ScrollTriggerProvider>
+              </Preloader>
+            </SoundProvider>
+            <SvgOutline />
+            <GrainOverlay />
+            <div id="popup-portal"></div>
+          </SmoothScroll>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

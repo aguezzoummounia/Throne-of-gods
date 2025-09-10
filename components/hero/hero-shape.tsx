@@ -1,4 +1,3 @@
-"use client";
 import * as THREE from "three";
 import { useRef, useEffect } from "react";
 import { shaderMaterial } from "@react-three/drei";

@@ -13,8 +13,10 @@ import AnswerButton from "./answer-button";
 import { useRouter } from "next/navigation";
 import type { Question } from "@/lib/types";
 import BackgroundSvg from "./background-svg";
+import { slideInOut } from "../global/header";
 import { useAudio } from "@/context/sound-context";
 import QuizResultPreloader from "./quiz-result-preloader";
+import { useTransitionRouter } from "next-view-transitions";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -28,7 +30,7 @@ export function QuizQuestions({
   questions,
   tieBreaker = "earliest",
 }: QuizClientProps) {
-  const router = useRouter();
+  // const router = useRouter();
   const seqRef = useRef<number>(0);
   const { playSlideSound } = useAudio();
   const h4Ref = useRef<HTMLHeadingElement>(null);
@@ -55,6 +57,7 @@ export function QuizQuestions({
     setCurrentQuestionIndex,
   } = useQuiz(questions, tieBreaker);
 
+  const router = useTransitionRouter();
   useGSAP(
     () => {
       if (isAnimating) return;
@@ -268,7 +271,11 @@ export function QuizQuestions({
         <Portal>
           <QuizResultPreloader
             open={result.open}
-            onFinish={() => router.push(result.href)}
+            onFinish={() => {
+              router.push(result.href, {
+                onTransitionReady: slideInOut,
+              });
+            }}
             goBack={() => goBack()}
           />
         </Portal>

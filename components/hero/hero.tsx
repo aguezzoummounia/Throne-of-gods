@@ -8,6 +8,7 @@ import { trailer_url } from "@/lib/consts";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Button from "@/components/ui/button-or-link";
 import HeroBackground from "./hero-background";
+import Link from "next/link";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 

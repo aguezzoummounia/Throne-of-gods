@@ -1,5 +1,27 @@
 @import "tailwindcss";
 
+::view-transition-new(root),
+::view-transition-old(root) {
+  animation: none !important;
+}
+::view-transition-group(root) {
+  z-index: auto !important;
+}
+::view-transition-image-pair(root) {
+  isolation: isolate;
+  will-change: transform opacity clip-path;
+  z-index: 1;
+}
+
+::view-transition-new(root) {
+  z-index: 1000000;
+  animation: none !important;
+}
+::view-transition-old(root) {
+  z-index: 1;
+  animation: none !important;
+}
+
 :root {
   --background: #0a0a0a;
   --foreground: #ededed;

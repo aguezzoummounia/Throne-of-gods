@@ -5,7 +5,6 @@ import WavyImage from "./wavy-image";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Container from "../global/container";
-import { useRouter } from "next/navigation";
 import { charactersArray } from "@/lib/data";
 import SliderIndicator from "./slider-indicator";
 import { EmblaOptionsType } from "embla-carousel";
@@ -14,6 +13,8 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import { useRef, useState, useEffect, useCallback } from "react";
 import RadialInvertedTriangles from "../radial-inverted-triangles";
 import Link from "next/link";
+import { slideInOut } from "../global/header";
+import { useTransitionRouter } from "next-view-transitions";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -22,7 +23,7 @@ const CharacterSlider: React.FC = () => {
     loop: true,
     align: "center",
   };
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const container = useRef<HTMLDivElement>(null);
@@ -136,6 +137,11 @@ const CharacterSlider: React.FC = () => {
               >
                 <Link
                   href={`/characters/${character.slug}`}
+                  onClick={() => {
+                    router.push(`/characters/${character.slug}`, {
+                      onTransitionReady: slideInOut,
+                    });
+                  }}
                   className="relative flex cursor-grab active:cursor-grabbing w-full lg:aspect-[16/10] md:aspect-[3/3.5] aspect-[2/3.5]"
                 >
                   <WavyImage imageUrl={character.image} />
