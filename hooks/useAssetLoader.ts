@@ -1,114 +1,136 @@
 "use client";
-import { assets_to_load } from "@/lib/consts";
-import { useState, useEffect, useRef } from "react";
+import { assets_to_load as defaultAssets } from "@/lib/consts";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 interface UsePreloaderResult {
   errors: string[];
   progress: number;
   isLoaded: boolean;
-  notifyShaderReady: () => void;
+  notifyItemLoaded: (itemName: string) => void;
 }
 
-export function useAssetLoader(): UsePreloaderResult {
+export function useAssetLoader(
+  assets_to_load: string[] = defaultAssets
+): UsePreloaderResult {
   const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
 
-  const totalAssets = assets_to_load.length; // +1 for shader
-  const loadedCountRef = useRef(0);
+  // Use a ref to track loaded items to avoid re-renders on every load
+  const loadedItemsRef = useRef<Set<string>>(new Set());
+  const totalItems = useRef(assets_to_load.length);
 
-  function handleAssetLoaded() {
-    loadedCountRef.current += 1;
-    const newProgress = Math.floor(
-      (loadedCountRef.current / totalAssets) * 100
-    );
+  const handleItemLoaded = useCallback((itemName: string) => {
+    const normalized = String(itemName);
+    if (loadedItemsRef.current.has(normalized)) return;
+    loadedItemsRef.current.add(normalized);
+    const loadedCount = loadedItemsRef.current.size;
+    const newProgress =
+      totalItems.current > 0
+        ? Math.floor((loadedCount / totalItems.current) * 100)
+        : 100;
     setProgress(newProgress);
-
-    if (loadedCountRef.current >= totalAssets) {
-      setTimeout(() => setIsLoaded(true), 500);
+    if (loadedCount >= totalItems.current) {
+      setTimeout(() => setIsLoaded(true), 200);
     }
-  }
+  }, []);
 
-  function handleAssetError(src: string) {
-    setErrors((prev) => [...prev, src]);
-    handleAssetLoaded();
-  }
+  const handleItemError = useCallback(
+    (itemName: string) => {
+      setErrors((p) => [...p, String(itemName)]);
+      handleItemLoaded(itemName);
+    },
+    [handleItemLoaded]
+  );
 
-  function notifyShaderReady() {
-    handleAssetLoaded();
-  }
+  const notifyItemLoaded = useCallback(
+    (itemName: string) => {
+      console.log(`[AssetLoader] RECEIVED notification for: ${itemName}`);
+      handleItemLoaded(itemName);
+    },
+    [handleItemLoaded]
+  );
 
   useEffect(() => {
     let cancelled = false;
 
-    function preloadImage(src: string): Promise<void> {
-      return new Promise<void>((resolve) => {
-        const img = new Image();
-        img.onload = () => {
-          if (!cancelled) handleAssetLoaded();
-          resolve();
-        };
-        img.onerror = () => {
-          if (!cancelled) handleAssetError(src);
-          resolve();
-        };
-        img.src = src;
-      });
-    }
+    async function preloadDomAssets() {
+      const promises: Promise<void>[] = [];
 
-    function preloadAudio(src: string): Promise<void> {
-      return new Promise<void>((resolve) => {
-        const audio = new Audio();
-        audio.src = src;
-        audio.preload = "auto";
+      const isTextureOrShader = (a: string) =>
+        a.startsWith("texture:") || a.startsWith("shader:");
 
-        audio.oncanplaythrough = () => {
-          if (!cancelled) handleAssetLoaded();
-          resolve();
-        };
-        audio.onerror = () => {
-          if (!cancelled) handleAssetError(src);
-          resolve();
-        };
-
-        audio.load();
-      });
-    }
-    function preloadFonts(): Promise<void> {
-      return document.fonts.ready
-        .then(() => {
-          if (!cancelled) handleAssetLoaded();
-        })
-        .catch(() => {
-          if (!cancelled) handleAssetError("fonts");
-        });
-    }
-
-    async function loadAll() {
-      const promises = assets_to_load.map((path) => {
-        const url = path.startsWith("/") ? path : `/${path}`;
+      assets_to_load.forEach((asset) => {
+        if (isTextureOrShader(asset)) {
+          // these will be fulfilled by external notify calls via assetBus
+          return;
+        }
+        const url = asset.startsWith("/") ? asset : `/${asset}`;
         if (/\.(png|jpe?g|gif|webp|avif)$/i.test(url)) {
-          return preloadImage(url);
+          promises.push(
+            new Promise((resolve) => {
+              const img = new Image();
+              img.onload = () => {
+                if (!cancelled) handleItemLoaded(asset);
+                resolve();
+              };
+              img.onerror = () => {
+                if (!cancelled) handleItemError(asset);
+                resolve();
+              };
+              img.src = url;
+            })
+          );
+          return;
         }
         if (/\.(mp3|ogg|wav)$/i.test(url)) {
-          return preloadAudio(url);
+          promises.push(
+            new Promise((resolve) => {
+              const audio = new Audio();
+              audio.src = url;
+              audio.preload = "auto";
+              audio.oncanplaythrough = () => {
+                if (!cancelled) handleItemLoaded(asset);
+                resolve();
+              };
+              audio.onerror = () => {
+                if (!cancelled) handleItemError(asset);
+                resolve();
+              };
+              audio.load();
+            })
+          );
+          return;
         }
-        // Unsupported: just mark it as error
-        return Promise.resolve().then(() => {
-          if (!cancelled) handleAssetError(url);
-        });
+
+        if (asset === "fonts") {
+          promises.push(
+            document.fonts.ready
+              .then(() => {
+                if (!cancelled) handleItemLoaded(asset);
+              })
+              .catch(() => {
+                if (!cancelled) handleItemError(asset);
+              })
+          );
+          return;
+        }
+
+        // Fallback: mark as error (so loader won't hang)
+        console.warn("AssetLoader: Unhandled asset type", asset);
+        handleItemError(asset);
       });
-      promises.push(preloadFonts());
 
       await Promise.all(promises);
+      console.log("loaded assets are: ", loadedItemsRef);
     }
 
-    loadAll();
+    preloadDomAssets();
 
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [handleItemError, handleItemLoaded, assets_to_load]);
 
-  return { progress, isLoaded, errors, notifyShaderReady };
+  return { progress, isLoaded, errors, notifyItemLoaded };
 }

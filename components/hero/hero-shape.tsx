@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { useRef, useEffect } from "react";
 import { shaderMaterial } from "@react-three/drei";
 import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
+import { useAssetLoaderContext } from "@/context/asset-loader-provider";
 
 // Add iScale to the material's props type for the animation
 type AbstractRingMaterialProps =
@@ -89,15 +90,23 @@ const ShaderPlane = () => {
     }
   >(null);
   const { viewport, size } = useThree();
+  const firstFrameRendered = useRef(false);
+  const { notifyItemLoaded } = useAssetLoaderContext();
   const animationState = useRef({ startTime: -1, triggered: false });
-
   // Use useEffect to trigger the animation after a delay on mount.
   useEffect(() => {
+    if (!firstFrameRendered.current) {
+      // === INTEGRATION POINT ===
+      const shaderKey = "shader:hero"; // MUST match the key in assets_to_load
+      console.log(`[HeroShape] Notifying for: ${shaderKey}`);
+      notifyItemLoaded(shaderKey);
+      firstFrameRendered.current = true;
+    }
     const timer = setTimeout(() => {
       animationState.current.triggered = true;
     }, 600); // 0.6 second delay
     return () => clearTimeout(timer);
-  }, []);
+  }, [notifyItemLoaded]);
 
   useFrame((state) => {
     const material = materialRef.current;
@@ -142,6 +151,7 @@ const ShaderPlane = () => {
 };
 
 const HeroShape = () => {
+  console.log("3. HeroShape component IS rendering.");
   return (
     <div className="absolute top-0 left-0 w-full h-full">
       <Canvas gl={{ alpha: true }}>

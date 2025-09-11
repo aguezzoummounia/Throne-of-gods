@@ -113,9 +113,10 @@ const About = () => {
         autoSplit: true,
         onSplit: (self) => {
           let splitTween = gsap.from(self.lines, {
-            autoAlpha: 0,
             yPercent: 100,
-            stagger: { amount: 0.8 },
+            duration: 1,
+            stagger: 0.1,
+            ease: "power4.out",
             scrollTrigger: {
               trigger: containerRef.current,
               start: "top 30%",

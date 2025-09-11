@@ -27,7 +27,6 @@ const CharacterSlider: React.FC = () => {
 
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const container = useRef<HTMLDivElement>(null);
-
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS);
 

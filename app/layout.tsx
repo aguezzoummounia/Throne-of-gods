@@ -4,15 +4,16 @@ import Preloader from "@/components/preloader";
 import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import { SoundProvider } from "@/context/sound-context";
+import { ViewTransitions } from "next-view-transitions";
 import SvgOutline from "@/components/global/svg-outline";
 import SmoothScroll from "@/components/global/smooth-scroll";
 import GrainOverlay from "@/components/global/grain-overlay";
 import CustomCursor from "@/components/global/custom-cursor";
 import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
+import { AssetLoaderProvider } from "@/context/asset-loader-provider";
 import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
 import { ScrollTriggerProvider } from "@/context/scroll-trigger-context";
-import { ViewTransitions } from "next-view-transitions";
 
 const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-decorative",
@@ -46,27 +47,29 @@ export default function RootLayout({
         <body
           className={`${alegreya.variable} ${cinzel.variable} ${cinzelDecorative.variable} antialiased`}
         >
-          <SmoothScroll>
-            <SoundProvider>
-              <Preloader>
-                <ScrollTriggerProvider>
-                  <Header />
-                  <div className="min-h-screen overflow-clip relative">
-                    <ImagesUnderline />
-                    <BackgroundMusic />
-                    <main className="min-h-screen">
-                      {children}
-                      <Footer />
-                    </main>
-                  </div>
-                  {/* <CustomCursor /> */}
-                </ScrollTriggerProvider>
-              </Preloader>
-            </SoundProvider>
-            <SvgOutline />
-            <GrainOverlay />
-            <div id="popup-portal"></div>
-          </SmoothScroll>
+          <AssetLoaderProvider>
+            <SmoothScroll>
+              <SoundProvider>
+                <Preloader>
+                  <ScrollTriggerProvider>
+                    <Header />
+                    <div className="min-h-screen overflow-clip relative">
+                      <ImagesUnderline />
+                      <BackgroundMusic />
+                      <main className="min-h-screen">
+                        {children}
+                        <Footer />
+                      </main>
+                    </div>
+                    {/* <CustomCursor /> */}
+                  </ScrollTriggerProvider>
+                </Preloader>
+              </SoundProvider>
+              <SvgOutline />
+              <GrainOverlay />
+              <div id="popup-portal"></div>
+            </SmoothScroll>
+          </AssetLoaderProvider>
         </body>
       </html>
     </ViewTransitions>

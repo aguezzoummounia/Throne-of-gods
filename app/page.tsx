@@ -1,3 +1,4 @@
+"use client";
 import Map from "@/components/map";
 import Quiz from "@/components/quiz";
 import Hero from "@/components/hero/hero";
@@ -11,11 +12,11 @@ export default function Home() {
     <HomeScrollContainer>
       {/* <SpheresSection /> */}
 
-      <Hero />
-      <About />
-      <Map />
+      {/* <Hero /> */}
+      {/* <About /> */}
+      {/* <Map /> */}
       <CharacterSlider />
-      <Quiz />
+      {/* <Quiz /> */}
     </HomeScrollContainer>
   );
 }

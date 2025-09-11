@@ -198,7 +198,7 @@ const WavyImage: React.FC<WavyImageProps> = ({ imageUrl }) => {
       flagTexture.dispose();
       renderer.dispose();
     };
-  }, []);
+  }, [imageUrl]);
 
   return <div ref={mountRef} className="w-full h-full" />;
 };
