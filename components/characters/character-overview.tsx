@@ -73,9 +73,11 @@ const CharacterOverview: React.FC<{
     <Container
       as="section"
       ref={containerRef}
-      className="flex flex-col justify-center md:gap-32 gap-20 mt-20"
+      className="flex flex-col justify-center md:gap-32 gap-20  relative"
     >
-      <div className="lg:w-[83.33%] w-full mx-auto max-md:flex-1 flex flex-col justify-center md:gap-32 gap-10">
+      <div className="absolute top-0 left-0 w-full md:h-[600px] h-[300px] bg-gradient-to-b from-black via-zinc-900/60 to-transparent -z-1" />
+
+      <div className="lg:w-[83.33%] w-full mx-auto max-md:flex-1 flex flex-col justify-center md:gap-32 gap-10 mt-20">
         <Text as="h2" ref={h2Ref} variant="title" className="text-center">
           {quote}
         </Text>

@@ -5,6 +5,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
+import LabelText from "../ui/label-text";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -105,9 +106,9 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
       />
       <div className="absolute bottom-0 left-0 w-full pt-20 md:pb-14 pb-10 px-12 max-md:px-5 bg-gradient-to-t from-black via-zinc-900/60 to-transparent flex items-center justify-center">
         <header className="gap-4 flex flex-col items-center justify-center lg:w-[58.33%] xs:w-[83.33%] w-full text-center">
-          <Text ref={pRef} as="p" className="font-alegreya">
-            {nickname}
-          </Text>
+          <LabelText className="font-alegreya">
+            <p ref={pRef}>{nickname}</p>
+          </LabelText>
           <Text as="h2" ref={h2Ref} variant="title">
             {name}
           </Text>

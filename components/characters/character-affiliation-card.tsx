@@ -9,7 +9,7 @@ const CharacterAffiliationCard: React.FC<{
   onClick: () => void;
 }> = ({ onClick, isActive, type = "allies" }) => {
   return (
-    <TiltedCardWrapper className="md:w-[300px] w-full aspect-[2/3]">
+    <TiltedCardWrapper className="md:w-[280px] w-full aspect-[2/3]">
       <div
         onClick={onClick}
         className={cn(

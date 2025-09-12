@@ -14,14 +14,11 @@ import { useAssetLoaderContext } from "@/context/asset-loader-provider";
 gsap.registerPlugin(useGSAP, SplitText);
 
 // todo:
-// add logic load and cach audio, images for then reuse them on the accual components no need to reload them again
-// add new svgs including the global outline lines
-// add custom svgs to each section
+// add logic load and each audio, images for then reuse them on the actual components no need to reload them again
 // fix the canvas error/warning on characters slider
+// add custom svgs to each section
 // improve the hero shape changes the colorSpaceToWorking, add interactivity mouse follow....
-// fix footer animation breaking on other pages, has to do with scrolltrigger
 // finish the powers cards container svg animations and optimize its login into a custom hooks
-// change the bg images into dark images and account for home screen long height
 
 interface PreloaderProps {
   children: React.ReactNode;
