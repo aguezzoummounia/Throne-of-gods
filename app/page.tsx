@@ -5,18 +5,22 @@ import Hero from "@/components/hero/hero";
 import About from "@/components/about/about";
 import CharacterSlider from "@/components/slider/character-slider";
 import HomeScrollContainer from "@/components/home-scroll-container";
+import Footer from "@/components/global/footer";
 // import ShaderCanvas from "@/components/test-shape";
 
 export default function Home() {
   return (
-    <HomeScrollContainer>
-      {/* <SpheresSection /> */}
+    <>
+      <HomeScrollContainer>
+        {/* <SpheresSection /> */}
 
-      {/* <Hero /> */}
-      {/* <About /> */}
-      {/* <Map /> */}
-      <CharacterSlider />
-      {/* <Quiz /> */}
-    </HomeScrollContainer>
+        <Hero />
+        <About />
+        <Map />
+        <CharacterSlider />
+        <Quiz />
+      </HomeScrollContainer>
+      <Footer />
+    </>
   );
 }

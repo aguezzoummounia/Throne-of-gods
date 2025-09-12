@@ -22,10 +22,6 @@ const Footer: React.FC = () => {
 
   useGSAP(
     () => {
-      // TODO fix this footer elements not showing on some pages
-      // ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      // ScrollTrigger.refresh();
-
       // Timeline for image + h2 animation
       const tl = gsap.timeline({
         scrollTrigger: {

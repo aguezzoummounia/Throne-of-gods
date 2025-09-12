@@ -9,6 +9,7 @@ interface WavyImageProps {
 
 const WavyImage: React.FC<WavyImageProps> = ({ imageUrl }) => {
   const mountRef = useRef<HTMLDivElement>(null);
+
   const mousePosition = useRef(new THREE.Vector2(-1, -1));
   const prevMousePosition = useRef(new THREE.Vector2(-1, -1));
   const mouseVelocity = useRef(new THREE.Vector2(0, 0));

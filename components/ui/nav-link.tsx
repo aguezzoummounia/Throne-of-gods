@@ -68,7 +68,7 @@ const NavLink: React.FC<SoundButtonProps> = ({
       {...otherSoundEvents}
       onClick={handleClick}
       className={cn(
-        "relative cursor-pointer uppercase text-sm font-cinzel font-semibold",
+        "relative cursor-pointer uppercase text-sm font-cinzel",
         className
       )}
     >

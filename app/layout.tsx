@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Preloader from "@/components/preloader";
-import Footer from "@/components/global/footer";
 import Header from "@/components/global/header";
 import { SoundProvider } from "@/context/sound-context";
 import { ViewTransitions } from "next-view-transitions";
@@ -26,7 +25,6 @@ const alegreya = Alegreya({
   subsets: ["latin"],
 });
 const cinzel = Cinzel({
-  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-cinzel",
   subsets: ["latin"],
 });
@@ -56,10 +54,7 @@ export default function RootLayout({
                     <div className="min-h-screen overflow-clip relative">
                       <ImagesUnderline />
                       <BackgroundMusic />
-                      <main className="min-h-screen">
-                        {children}
-                        <Footer />
-                      </main>
+                      <main className="min-h-screen">{children}</main>
                     </div>
                     {/* <CustomCursor /> */}
                   </ScrollTriggerProvider>

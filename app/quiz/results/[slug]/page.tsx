@@ -6,6 +6,7 @@ import CharacterPowers from "@/components/characters/powers/character-powers";
 import CharacterOverview from "@/components/characters/character-overview";
 import CharacterRelation from "@/components/characters/character-relations";
 import CharacterBackstory from "@/components/characters/character-backstory";
+import Footer from "@/components/global/footer";
 
 export default async function QuizResultPage({
   params,
@@ -35,6 +36,7 @@ export default async function QuizResultPage({
       {villain.trivia && villain.trivia.length > 0 && (
         <CharacterTrivia data={villain.trivia} />
       )}
+      <Footer />
     </>
   );
 }

@@ -7,6 +7,7 @@ import CharacterOverview from "@/components/characters/character-overview";
 import CharacterRelation from "@/components/characters/character-relations";
 import CharacterBackstory from "@/components/characters/character-backstory";
 import CharacterPowers from "@/components/characters/powers/character-powers";
+import Footer from "@/components/global/footer";
 
 export default async function CharacterPage({
   params,
@@ -28,7 +29,7 @@ export default async function CharacterPage({
   const randomCharacter = charactersData[randomSlug];
 
   return (
-    <div className="min-h-svh">
+    <>
       <CharacterHero
         name={character.name}
         image={character.image}
@@ -51,6 +52,7 @@ export default async function CharacterPage({
         name={randomCharacter.name}
         image={randomCharacter.image}
       />
-    </div>
+      <Footer />
+    </>
   );
 }
