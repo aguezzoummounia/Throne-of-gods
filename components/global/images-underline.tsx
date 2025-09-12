@@ -7,51 +7,84 @@ const ImagesUnderline: React.FC = () => {
         <Image
           width={1980}
           height={1024}
-          priority={true}
-          src="/images/bg/bg-1.webp"
-          alt="background dark blue image"
-          className="block w-screen h-auto min-h-svh object-cover object-center"
-        />
-        <Image
-          width={1980}
-          height={1024}
-          src="/images/bg/bg-8.webp"
-          alt="background dark blue image"
-          className="block w-screen h-auto md:min-h-svh  object-cover object-center rotate-180"
-        />
-        <Image
-          width={1980}
-          height={1024}
-          src="/images/bg/bg-2.webp"
-          alt="background dark blue image"
-          className="block w-screen h-auto min-h-svh  object-cover object-center rotate-180"
-        />
-        <Image
-          width={1980}
-          height={1024}
-          src="/images/bg/bg-3.webp"
-          alt="background dark blue image"
-          className="block w-screen h-auto min-h-svh object-cover object-center "
-        />
-        <Image
-          width={1980}
-          height={1024}
-          src="/images/bg/bg-3.webp"
+          src="/images/bg/new-bg-6.webp"
           alt="background dark blue image"
           className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
         />
-
         <Image
           width={1980}
           height={1024}
-          src="/images/bg/bg-3.webp"
+          src="/images/bg/new-bg-1.webp"
           alt="background dark blue image"
-          className="block w-screen h-auto  object-cover object-center"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
         />
         <Image
           width={1980}
           height={1024}
-          src="/images/bg/bg-3.webp"
+          src="/images/bg/new-bg-2.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-4.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-5.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-3.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-6.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-1.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-2.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-4.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-5.webp"
+          alt="background dark blue image"
+          className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
+        />
+        <Image
+          width={1980}
+          height={1024}
+          src="/images/bg/new-bg-3.webp"
           alt="background dark blue image"
           className="block w-screen h-auto min-h-svh object-cover object-center rotate-180"
         />

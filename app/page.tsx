@@ -11,9 +11,9 @@ import Footer from "@/components/global/footer";
 export default function Home() {
   return (
     <>
+      {/* <div className="w-full h-[10000px]"></div> */}
+      {/* <SpheresSection /> */}
       <HomeScrollContainer>
-        {/* <SpheresSection /> */}
-
         <Hero />
         <About />
         <Map />
