@@ -18,7 +18,6 @@ gsap.registerPlugin(useGSAP, SplitText);
 // fix the canvas error/warning on characters slider
 // add custom svgs to each section
 // improve the hero shape changes the colorSpaceToWorking, add interactivity mouse follow....
-// finish the powers cards container svg animations and optimize its login into a custom hooks
 
 interface PreloaderProps {
   children: React.ReactNode;

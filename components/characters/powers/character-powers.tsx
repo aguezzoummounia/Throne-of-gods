@@ -7,7 +7,7 @@ import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 import Container from "../../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import PowersContainer from "./powers-container";
+import ConnectedCardsCustomAnchors from "./powers-container";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -53,7 +53,7 @@ const CharacterPowers: React.FC<{ data: Power[] }> = ({ data }) => {
       <Text ref={titleRef} as="h2" variant="title" className="mx-auto">
         Relics of Power
       </Text>
-      <PowersContainer powers={data} />
+      <ConnectedCardsCustomAnchors powers={data} />
     </Container>
   );
 };
