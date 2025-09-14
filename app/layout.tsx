@@ -56,7 +56,7 @@ export default function RootLayout({
                     <BackgroundMusic />
                     <main className="min-h-screen">{children}</main>
                   </div>
-                  {/* <CustomCursor /> */}
+                  <CustomCursor />
                 </ScrollTriggerProvider>
                 {/* </Preloader> */}
               </SoundProvider>
