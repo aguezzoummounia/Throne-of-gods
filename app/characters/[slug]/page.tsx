@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { charactersData } from "@/lib/data";
+import Footer from "@/components/global/footer";
 import NextCharacter from "@/components/characters/next-character";
 import CharacterHero from "@/components/characters/character-hero";
 import CharacterTrivia from "@/components/characters/character-trivia";
@@ -7,7 +8,6 @@ import CharacterOverview from "@/components/characters/character-overview";
 import CharacterRelation from "@/components/characters/character-relations";
 import CharacterBackstory from "@/components/characters/character-backstory";
 import CharacterPowers from "@/components/characters/powers/character-powers";
-import Footer from "@/components/global/footer";
 
 export default async function CharacterPage({
   params,

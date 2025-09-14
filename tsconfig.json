@@ -35,7 +35,8 @@
     "components/spheres/sun-sphere.jsx",
     "components/spheres/text.jsx",
     "components/ripple-image.tsx",
-    "next.config.js"
+    "next.config.js",
+    "components/hero/hero-shape.jsx"
   ],
   "exclude": ["node_modules"]
 }

@@ -17,7 +17,6 @@ gsap.registerPlugin(useGSAP, SplitText);
 // add logic load and each audio, images for then reuse them on the actual components no need to reload them again
 // fix the canvas error/warning on characters slider
 // add custom svgs to each section
-// improve the hero shape changes the colorSpaceToWorking, add interactivity mouse follow....
 
 interface PreloaderProps {
   children: React.ReactNode;
