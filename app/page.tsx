@@ -16,7 +16,7 @@ export default function Home() {
         <Hero />
         <About />
         <Map />
-        <CharacterSlider />
+        {/* <CharacterSlider /> */}
         <Quiz />
       </HomeScrollContainer>
       <Footer />
