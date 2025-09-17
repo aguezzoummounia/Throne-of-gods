@@ -219,7 +219,7 @@ const WEBGLSlider = ({
   };
 
   return (
-    <div className="2xl:h-[90vh] xl:h-[80vh] lg:h-[70vh] md:h-[100vw] h-[550px]">
+    <div className="2xl:h-[100vh] xl:h-[80vh] lg:h-[70vh] md:h-[100vw] h-[550px]">
       <div
         onMouseMove={handleMouseMoveForParallax}
         onMouseLeave={handleMouseLeaveForParallax}
