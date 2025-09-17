@@ -36,7 +36,10 @@
     "components/spheres/text.jsx",
     "components/ripple-image.tsx",
     "next.config.js",
-    "components/hero/hero-shape.jsx"
+    "components/hero/hero-shape.jsx",
+    "components/characters-section/particles.jsx",
+    "components/characters-section/placeholder-plane.jsx",
+    "components/characters-section/webgl-slider.jsx"
   ],
   "exclude": ["node_modules"]
 }

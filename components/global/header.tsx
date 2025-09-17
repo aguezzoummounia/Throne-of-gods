@@ -21,16 +21,10 @@ export function slideInOut() {
   document.documentElement.animate(
     [
       {
-        opacity: 1,
-        scale: 1,
         filter: "blur(0px)",
-        transform: "translateY(0%) translateZ(0) rotateX(0deg)",
       },
       {
-        opacity: 0.2,
-        scale: 0.5,
-        filter: "blur(35px)",
-        transform: "translateY(-50%) translateZ(250px) rotateX(-80deg)",
+        filter: "blur(20px)",
       },
     ],
     {
