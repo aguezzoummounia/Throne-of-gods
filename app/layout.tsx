@@ -48,18 +48,18 @@ export default function RootLayout({
           <AssetLoaderProvider>
             <SmoothScroll>
               <SoundProvider>
-                {/* <Preloader> */}
-                <ScrollTriggerProvider>
-                  <Header />
-                  <div className="min-h-screen overflow-clip relative">
-                    <ImagesUnderline />
-                    <BackgroundMusic />
-                    <main className="min-h-screen">{children}</main>
-                  </div>
-                  <CustomCursor />
-                </ScrollTriggerProvider>
-                {/* </Preloader> */}
+                <Preloader>
+                  <ScrollTriggerProvider>
+                    <Header />
+                    <div className="min-h-screen overflow-clip relative">
+                      <ImagesUnderline />
+                      <BackgroundMusic />
+                      <main className="min-h-screen">{children}</main>
+                    </div>
+                  </ScrollTriggerProvider>
+                </Preloader>
               </SoundProvider>
+              <CustomCursor />
               <SvgOutline />
               <GrainOverlay />
               <div id="popup-portal"></div>

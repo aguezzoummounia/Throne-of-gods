@@ -1,14 +1,15 @@
 "use client";
 
-import React, {
-  createContext,
+import {
   useRef,
   useState,
-  useContext,
   useEffect,
-  useCallback,
   ReactNode,
+  useContext,
+  useCallback,
+  createContext,
 } from "react";
+import { usePreloader } from "./asset-loader-provider";
 
 interface SoundContextType {
   isMuted: boolean;
@@ -25,6 +26,7 @@ const CLICK_COOLDOWN_DELAY = 200; // in milliseconds
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
 export const SoundProvider = ({ children }: { children: ReactNode }) => {
+  const { assets } = usePreloader();
   const [isMuted, setIsMuted] = useState(false);
 
   // Use useRef to hold the Audio objects. This prevents them from being re-created on every render.
@@ -38,16 +40,16 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
 
   // Initialize Audio objects on the client side
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      hoverAudioRef.current = new Audio("/sounds/hover-sf.wav");
-      clickAudioRef.current = new Audio("/sounds/click-sf.wav");
-      slideAudioRef.current = new Audio("/sounds/slide-over-sf.mp3");
+    if (assets.sounds.hover && assets.sounds.click && assets.sounds.slide) {
+      hoverAudioRef.current = assets.sounds.hover;
+      clickAudioRef.current = assets.sounds.click;
+      slideAudioRef.current = assets.sounds.slide;
       // Set initial volume for all sound effects
       hoverAudioRef.current.volume = EFFECTS_VOLUME;
       clickAudioRef.current.volume = EFFECTS_VOLUME;
       slideAudioRef.current.volume = EFFECTS_VOLUME;
     }
-  }, []);
+  }, [assets.sounds]);
 
   const toggleMute = useCallback(() => {
     setIsMuted((prev) => {

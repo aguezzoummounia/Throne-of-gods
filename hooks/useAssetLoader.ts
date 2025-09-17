@@ -2,10 +2,15 @@
 import { assets_to_load as defaultAssets } from "@/lib/consts";
 import { useEffect, useRef, useState, useCallback } from "react";
 
+interface PreloadedAssets {
+  sounds: Record<string, HTMLAudioElement>;
+}
+
 interface UsePreloaderResult {
   errors: string[];
   progress: number;
   isLoaded: boolean;
+  assets: PreloadedAssets;
   notifyItemLoaded: (itemName: string) => void;
 }
 
@@ -15,6 +20,7 @@ export function useAssetLoader(
   const [progress, setProgress] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [errors, setErrors] = useState<string[]>([]);
+  const [assets, setAssets] = useState<PreloadedAssets>({ sounds: {} });
 
   // Use a ref to track loaded items to avoid re-renders on every load
   const loadedItemsRef = useRef<Set<string>>(new Set());
@@ -55,6 +61,7 @@ export function useAssetLoader(
     let cancelled = false;
 
     async function preloadDomAssets() {
+      const soundMap: Record<string, HTMLAudioElement> = {};
       const promises: Promise<void>[] = [];
 
       const isTextureOrShader = (a: string) =>
@@ -83,6 +90,7 @@ export function useAssetLoader(
           );
           return;
         }
+
         if (/\.(mp3|ogg|wav)$/i.test(url)) {
           promises.push(
             new Promise((resolve) => {
@@ -90,7 +98,11 @@ export function useAssetLoader(
               audio.src = url;
               audio.preload = "auto";
               audio.oncanplaythrough = () => {
-                if (!cancelled) handleItemLoaded(asset);
+                if (!cancelled) {
+                  // Store the loaded audio object in our temporary map
+                  soundMap[asset] = audio;
+                  handleItemLoaded(asset);
+                }
                 resolve();
               };
               audio.onerror = () => {
@@ -122,7 +134,11 @@ export function useAssetLoader(
       });
 
       await Promise.all(promises);
-      console.log("loaded assets are: ", loadedItemsRef);
+
+      if (!cancelled) {
+        setAssets({ sounds: soundMap });
+        // console.log("Assets processed. Sound map is ready.");
+      }
     }
 
     preloadDomAssets();
@@ -132,5 +148,5 @@ export function useAssetLoader(
     };
   }, [handleItemError, handleItemLoaded, assets_to_load]);
 
-  return { progress, isLoaded, errors, notifyItemLoaded };
+  return { progress, assets, isLoaded, errors, notifyItemLoaded };
 }

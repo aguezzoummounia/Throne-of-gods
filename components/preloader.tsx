@@ -9,22 +9,20 @@ import AnimatedCounter from "./counter";
 import LabelText from "./ui/label-text";
 import Button from "./ui/button-or-link";
 import { useRef, useState } from "react";
-import { useAssetLoaderContext } from "@/context/asset-loader-provider";
+import { usePreloader } from "@/context/asset-loader-provider";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
 // todo:
-// add logic load and each audio, images for then reuse them on the actual components no need to reload them again
-// fix the canvas error/warning on characters slider
 // add custom svgs to each section
+// too many rerenders, optimize the whole logic
 
 interface PreloaderProps {
   children: React.ReactNode;
 }
 
 const Preloader = ({ children }: PreloaderProps) => {
-  // const { errors, progress, isLoaded } = useAssetLoader();
-  const { progress, isLoaded } = useAssetLoaderContext();
+  const { progress, isLoaded } = usePreloader();
 
   const h4Ref = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
@@ -154,7 +152,7 @@ const Preloader = ({ children }: PreloaderProps) => {
           <Text as="h2" ref={h2Ref} variant="title">
             Uncover a saga of gods, mortals, and endless strife…
           </Text>
-          <div className="flex w-full items-center justify-center relative">
+          <div className="flex w-full gap-4 max-md:flex-col items-center justify-center relative px-5">
             <Button
               animated
               ref={buttonRef}
@@ -168,7 +166,7 @@ const Preloader = ({ children }: PreloaderProps) => {
                 as="p"
                 variant="small"
                 ref={loadedTextRef}
-                className="absolute right-[5%] top-0 md:text-[16px] text-[16px]"
+                className="md:absolute right-[5%] top-0 md:text-[16px] text-[16px] max-md:ml-auto"
               >
                 Experience loaded
               </Text>

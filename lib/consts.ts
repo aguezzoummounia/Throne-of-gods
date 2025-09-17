@@ -47,20 +47,11 @@ const map_locations_positions = [
 ];
 
 const assets_to_load: string[] = [
-  // character slider shaders images
-  // "texture:/images/characters/character-1.jpeg",
-  // "texture:/images/characters/character-2.jpeg",
-  // "texture:/images/characters/character-3.jpeg",
-  // "texture:/images/characters/character-4.jpeg",
-  // "texture:/images/characters/character-5.jpeg",
-  // "texture:/images/characters/character-6.jpeg",
-  // "texture:/images/characters/character-7.jpeg",
-  // "texture:/images/characters/character-8.jpeg",
-  // "texture:/images/characters/character-9.jpeg",
-  // about images
-  "/images/powers/power-1.jpeg",
-  "/images/powers/power-2.jpeg",
-  "/images/powers/power-3.jpeg",
+  // sound effects
+  "/sounds/click-sf.wav",
+  "/sounds/hover-sf.wav",
+  "/sounds/slide-over-sf.mp3",
+  "/sounds/background-sf.mp3",
   // background images
   "/images/bg/new-bg-1.webp",
   "/images/bg/new-bg-2.webp",
@@ -68,8 +59,10 @@ const assets_to_load: string[] = [
   "/images/bg/new-bg-4.webp",
   "/images/bg/new-bg-5.webp",
   "/images/bg/new-bg-6.webp",
-  "/images/bg/new-bg-7.webp",
-  "/images/bg/new-bg-8.webp",
+  // about images
+  "/images/powers/power-1.jpeg",
+  "/images/powers/power-2.jpeg",
+  "/images/powers/power-3.jpeg",
   // map images
   "/images/map/ereosa-map.avif",
   "/images/map/ereosa-map-vertical.avif",
@@ -77,14 +70,18 @@ const assets_to_load: string[] = [
   "/images/static/footer-image.png",
   "/images/temp-logo.png",
   "/images/static/grain.png",
-  // shaders
-  // "shader:hero",
-  // sound effects
-  "/sounds/click-sf.wav",
-  "/sounds/hover-sf.wav",
-  "/sounds/slide-over-sf.mp3",
-  "/sounds/background-sf.mp3",
   "fonts",
+];
+export interface SoundAsset {
+  id: string;
+  src: string;
+}
+
+const SOUNDS_TO_PRELOAD: SoundAsset[] = [
+  { id: "hover", src: "/sounds/hover-sf.wav" },
+  { id: "click", src: "/sounds/click-sf.wav" },
+  { id: "slide", src: "/sounds/slide-over-sf.mp3" },
+  { id: "background", src: "/sounds/background-sf.mp3" },
 ];
 
 const nav_links = [
@@ -102,6 +99,7 @@ export {
   email_address,
   chanel_handler,
   assets_to_load,
+  SOUNDS_TO_PRELOAD,
   power_item_positions,
   map_locations_positions,
 };
