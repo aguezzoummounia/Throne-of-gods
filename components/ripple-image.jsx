@@ -1,23 +1,13 @@
 import "@react-three/fiber";
 import { useRef, useMemo, useState, useEffect } from "react";
-import { TextureLoader, ShaderMaterial, Vector2 } from "three";
+import { TextureLoader, Vector2 } from "three";
 import { vertexShader, fragmentShader } from "@/glsl/ripple-shader";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 
 const START_DELAY_MS = 400;
 
-interface RippleSceneProps {
-  src: string;
-  planeArgs: [number, number];
-  animationDuration?: number; // seconds
-}
-
-const RippleScene: React.FC<RippleSceneProps> = ({
-  src,
-  planeArgs,
-  animationDuration = 2.5,
-}) => {
-  const material = useRef<ShaderMaterial>(null);
+const RippleScene = ({ src, planeArgs, animationDuration = 2.5 }) => {
+  const material = useRef(null);
   const texture = useLoader(TextureLoader, src);
 
   const { invalidate } = useThree();
@@ -77,7 +67,7 @@ const RippleScene: React.FC<RippleSceneProps> = ({
   }, []);
 
   // pointer handler on the mesh: uses event.uv (plane has UVs)
-  const onPointerDown = (e: any) => {
+  const onPointerDown = (e) => {
     e.stopPropagation();
     const uv = e.uv; // r3f pointer event provides uv for geometry with UVs
     if (!uv || !material.current?.uniforms) return;
@@ -107,13 +97,9 @@ const RippleScene: React.FC<RippleSceneProps> = ({
   );
 };
 
-export const RippleImage: React.FC<{
-  src: string;
-  alt: string;
-  animationDuration?: number;
-}> = ({ src, alt, animationDuration = 2.5 }) => {
+export const RippleImage = ({ src, alt, animationDuration = 2.5 }) => {
   // Use a square plane (10x10) for a 1:1 aspect ratio.
-  const planeArgs: [number, number] = useMemo(() => [10, 10], []);
+  const planeArgs = useMemo(() => [10, 10], []);
 
   return (
     <div

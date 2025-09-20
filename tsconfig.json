@@ -28,7 +28,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "components/ui/animated-text.jsx",
-    "components/ripple-image.tsx",
+    "components/ripple-image.jsx",
     "next.config.js",
     "components/hero/hero-shape.jsx",
     "components/characters-section/particles.jsx",
