@@ -143,7 +143,7 @@ const CharacterSlider: React.FC = () => {
                   }}
                   className="relative flex cursor-grab active:cursor-grabbing w-full lg:aspect-[16/10] md:aspect-[3/3.5] aspect-[2/3.5]"
                 >
-                  <WavyImage imageUrl={character.image} />
+                  <WavyImage imageUrl={character.src} />
                 </Link>
               </div>
             ))}

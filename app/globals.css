@@ -359,3 +359,20 @@ body {
 .button-pulse-animation {
   animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+
+/* grain overlay animation keyframe */
+@keyframes grain {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200px 200px;
+  }
+}
+.grain-overlay-container {
+  inset: 0;
+  background-size: auto;
+  background-repeat: repeat;
+  animation: grain 8s linear infinite;
+  background-image: url("/images/static/grain.png");
+}
