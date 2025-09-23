@@ -9,13 +9,11 @@ import HomeScrollContainer from "@/components/home-scroll-container";
 export default function Home() {
   return (
     <>
-      <HomeScrollContainer>
-        <Hero />
-        <About />
-        <Map />
-        <CharactersSection />
-        <Quiz />
-      </HomeScrollContainer>
+      <Hero />
+      <About />
+      {/* <CharactersSection /> */}
+      {/* <Map /> */}
+      {/* <Quiz /> */}
       <Footer />
     </>
   );

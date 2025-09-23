@@ -12,8 +12,7 @@ const AboutCard = ({ title, image, className }: AboutCardProps) => {
   return (
     <div
       className={cn(
-        //  max-h-[250px]
-        "relative bg-[rgba(0,0,0,.05)] md:w-[400px] w-[75vw] aspect-[16/10] rounded-[10px] overflow-hidden shadow-md group",
+        "relative bg-[rgba(0,0,0,.05)] md:max-w-[768px] w-full md:aspect-[16/9] aspect-[4/3] rounded-[10px] overflow-hidden shadow-md group",
         className
       )}
     >

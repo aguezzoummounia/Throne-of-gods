@@ -8,23 +8,35 @@ export type ScrollProgressRef = {
 };
 
 type MaskProgressProps = {
+  index?: number;
   className?: string;
   ariaLabel?: string;
-  /**
-   * "ltr" => reveal underlying SVG left-to-right (overlay collapses toward the right)
-   * "rtl" => reveal underlying SVG right-to-left (overlay collapses toward the left)
-   */
+  totalSteps?: number;
   direction?: "ltr" | "rtl";
 };
 
 const MaskProgress = forwardRef<ScrollProgressRef, MaskProgressProps>(
-  ({ className, direction = "ltr", ariaLabel = "Scroll progress" }, ref) => {
+  (
+    {
+      className,
+      index = 1,
+      totalSteps = 3,
+      direction = "ltr",
+      ariaLabel = "Scroll progress",
+    },
+    ref
+  ) => {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
     const fillRef = useRef<HTMLDivElement | null>(null);
 
     // compute transform origin based on requested direction
     const transformOrigin =
       direction === "ltr" ? "right center" : "left center";
+
+    // Clamp index and compute progress (index/totalSteps)
+    const clampedIndex = Math.max(1, Math.min(totalSteps, Math.round(index)));
+    const progress = clampedIndex / totalSteps;
+    const progressPercent = Math.round(progress * 100);
 
     // initialize the overlay to full (scaleX: 1) and set transformOrigin once
     useEffect(() => {
@@ -36,40 +48,56 @@ const MaskProgress = forwardRef<ScrollProgressRef, MaskProgressProps>(
       });
     }, [transformOrigin]);
 
+    // internal function to apply progress (0..1)
+    const applyProgress = (p: number) => {
+      const clamped = Math.max(0, Math.min(1, p));
+      if (!fillRef.current) return;
+
+      // overlay should start full (scaleX=1) and shrink to 0 when p === 1
+      const targetScale = 1 - clamped;
+
+      // optionally fade out completely when fully hidden
+      const targetOpacity = targetScale > 0 ? 1 : 0;
+
+      gsap.to(fillRef.current as any, {
+        scaleX: targetScale,
+        opacity: targetOpacity,
+        duration: 0.6,
+        ease: "power1.out",
+        overwrite: true,
+      });
+
+      if (wrapperRef.current) {
+        wrapperRef.current.setAttribute(
+          "aria-valuenow",
+          String(Math.round(clamped * 100))
+        );
+      }
+    };
+
+    // expose imperative handle (keeps backward-compatibility with callers using ref)
     useImperativeHandle(ref, () => ({
-      setProgress: (p: number) => {
-        const clamped = Math.max(0, Math.min(1, p));
-        if (!fillRef.current) return;
-
-        // overlay should start full (scaleX=1) and shrink to 0 when p === 1
-        const targetScale = 1 - clamped;
-
-        // optionally fade out completely when fully hidden
-        const targetOpacity = targetScale > 0 ? 1 : 0;
-
-        gsap.to(fillRef.current as any, {
-          scaleX: targetScale,
-          opacity: targetOpacity,
-          duration: 0.14,
-          ease: "power1.out",
-          overwrite: true,
-        });
-
-        if (wrapperRef.current) {
-          wrapperRef.current.setAttribute(
-            "aria-valuenow",
-            String(Math.round(clamped * 100))
-          );
-        }
-      },
+      setProgress: (p: number) => applyProgress(p),
     }));
+
+    // whenever index/totalSteps/direction changes, update UI
+    useEffect(() => {
+      applyProgress(progress);
+      // Update aria-valuenow attribute directly (keeps it in sync for screen readers)
+      if (wrapperRef.current) {
+        wrapperRef.current.setAttribute(
+          "aria-valuenow",
+          String(progressPercent)
+        );
+      }
+    }, [progress, progressPercent, direction]); // progress already depends on index & totalSteps
 
     return (
       <div
         ref={wrapperRef}
         role="progressbar"
         aria-valuemin={0}
-        aria-valuenow={0}
+        aria-valuenow={progressPercent}
         aria-valuemax={100}
         aria-label={ariaLabel}
         className={cn(
@@ -89,7 +117,6 @@ const MaskProgress = forwardRef<ScrollProgressRef, MaskProgressProps>(
           }}
         />
         <AnimatedUnderline className="bottom-1/2 translate-y-1/2" />
-        {/* optional: accessible text for screen readers */}
         <span className="sr-only">Scroll progress</span>
       </div>
     );
