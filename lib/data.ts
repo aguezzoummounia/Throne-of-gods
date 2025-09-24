@@ -1452,4 +1452,31 @@ const locationData = [
   },
 ];
 
-export { quizData, locationData, charactersArray, charactersData };
+const aboutData = [
+  {
+    title: "The Age of Divine Unity",
+    brief:
+      "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
+    details:
+      "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
+    image: "/images/characters/character-9.jpeg",
+  },
+  {
+    title: "The Veil & the Deep",
+    brief:
+      "Goddess Law sealed the deep and raised the Veil — but the Fallen Moon remembers, and she waits.",
+    details:
+      "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
+    image: "/images/characters/character-6.jpeg",
+  },
+  {
+    title: "The Prophecy & the Heir",
+    brief:
+      "When blood stains the earth, the Harbinger will wake the dawn. Kaen's return may be the key — or the ruin.",
+    details:
+      "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that  tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
+    image: "/images/characters/character-8.jpeg",
+  },
+];
+
+export { quizData, locationData, charactersArray, charactersData, aboutData };

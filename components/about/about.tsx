@@ -1,16 +1,18 @@
 "use client";
 import { gsap } from "gsap";
 import Text from "../ui/text";
-import { useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import { useGSAP } from "@gsap/react";
+import { aboutData } from "@/lib/data";
 import SplitText from "gsap/SplitText";
+import { useRef, useState } from "react";
 import AboutChapter from "./about-chapter";
 import Container from "../global/container";
 import MaskProgress from "./scroll-progress";
 import AboutBackground from "./about-background";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AboutSelectorCard from "./about-selector-card";
-import { cn } from "@/lib/utils";
+import { AboutSVG1, AboutSVG2, AboutSVG3 } from "../svgs/about-svgs";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -18,7 +20,7 @@ const About = () => {
   const containerRef = useRef<HTMLElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const pRef = useRef<HTMLParagraphElement>(null);
-  const [chapterIndex, setChapterIndex] = useState(1);
+  const [chapterIndex, setChapterIndex] = useState(0);
   // main text animation hook
   useGSAP(
     () => {
@@ -69,11 +71,12 @@ const About = () => {
     <Container
       id="about"
       as="section"
-      className="relative grid grid-rows-[1fr_auto] gap-8"
+      ref={containerRef}
+      className="relative grid grid-rows-[1fr_auto] gap-8 scroll-m-10"
     >
       {/* Background svg elements */}
       <AboutBackground>
-        <MaskProgress index={chapterIndex} />
+        <MaskProgress index={chapterIndex + 1} />
       </AboutBackground>
 
       <div className="md:py-8 py-4 flex flex-col items-center justify-center gap-10 text-center">
@@ -99,56 +102,41 @@ const About = () => {
       </div>
 
       <AboutChapter
-        title="The Age of Divine Unity"
-        brief="Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep."
-        details="Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep."
-        image="/images/characters/character-9.jpeg"
+        activeIndex={chapterIndex}
+        title={aboutData[chapterIndex].title}
+        brief={aboutData[chapterIndex].brief}
+        details={aboutData[chapterIndex].details}
+        image={aboutData[chapterIndex].image}
       />
       <div className="flex items-center justify-center gap-6 pb-14 pt-8">
         <AboutSelectorCard
           className={cn(
-            "bg-green-950/50 hover:-rotate-2",
-            chapterIndex === 1 && "-rotate-2 -translate-y-6"
+            "hover:-rotate-2",
+            chapterIndex === 0 && "-rotate-2 -translate-y-6"
           )}
           title="The Age of Divine Unity"
+          onClick={() => setChapterIndex(0)}
+        >
+          <AboutSVG1 />
+        </AboutSelectorCard>
+        <AboutSelectorCard
+          className={cn(chapterIndex === 1 && "-translate-y-6")}
+          title="Age of The Veil & the Deep"
           onClick={() => setChapterIndex(1)}
         >
-          1
+          <AboutSVG2 />
         </AboutSelectorCard>
         <AboutSelectorCard
           className={cn(
-            "bg-gray-600/50",
-            chapterIndex === 2 && "-translate-y-6"
-          )}
-          title="Age of The Veil & the Deep"
-          onClick={() => setChapterIndex(2)}
-        >
-          2
-        </AboutSelectorCard>
-        <AboutSelectorCard
-          className={cn(
-            "bg-yellow-900/50 hover:rotate-2",
-            chapterIndex === 3 && "rotate-2 -translate-y-6"
+            "hover:rotate-2",
+            chapterIndex === 2 && "rotate-2 -translate-y-6"
           )}
           title="Age of The Prophecy & the Heir"
-          onClick={() => setChapterIndex(3)}
+          onClick={() => setChapterIndex(2)}
         >
-          3
+          <AboutSVG3 />
         </AboutSelectorCard>
       </div>
-      {/* <AboutChapter
-        direction="rtl"
-        title="The Veil & the Deep"
-        image="/images/characters/character-6.jpeg"
-        brief="Goddess Law sealed the deep and raised the Veil — but the Fallen Moon remembers, and she waits."
-        details="Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep."
-      />
-      <AboutChapter
-        title="The Prophecy & the Heir"
-        brief="When blood stains the earth, the Harbinger will wake the dawn. Kaen's return may be the key — or the ruin."
-        details="Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that  tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep."
-        image="/images/characters/character-8.jpeg"
-      /> */}
     </Container>
   );
 };

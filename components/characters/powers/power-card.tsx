@@ -129,7 +129,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
             </Text>
           </div>
 
-          <ElementsSvgOutline className="group-hover:drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]" />
+          <ElementsSvgOutline className="drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]" />
         </div>
       </TiltedCardWrapper>
     </div>

@@ -1,5 +1,6 @@
 "use client";
 import gsap from "gsap";
+import Link from "next/link";
 import Portal from "./portal";
 import Image from "next/image";
 import SideMenu from "./side-menu";
@@ -7,13 +8,12 @@ import NavLink from "../ui/nav-link";
 import { useGSAP } from "@gsap/react";
 import { useRef, useState } from "react";
 import { nav_links } from "@/lib/consts";
+import { useHash } from "@/hooks/useHash";
 import MenuToggle from "../ui/menu-toggle";
 import { usePathname } from "next/navigation";
 import SoundToggle from "../sound/sound-toggle";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
-import { useScrollTriggerContext } from "@/context/scroll-trigger-context";
 import { useTransitionRouter } from "next-view-transitions";
-import Link from "next/link";
 
 gsap.registerPlugin(useGSAP);
 
@@ -56,6 +56,8 @@ const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
   useBodyLockScroll(isOpen);
+  const hash = useHash();
+  const pathname = usePathname();
   const router = useTransitionRouter();
 
   useGSAP(
@@ -113,43 +115,6 @@ const Header: React.FC = () => {
     { scope: containerRef }
   );
 
-  const pathname = usePathname();
-  const { horizontalST, activeSection, setActiveSection, isScrollingRef } =
-    useScrollTriggerContext();
-
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    hash?: string
-  ) => {
-    if (pathname === "/" && hash) {
-      e.preventDefault();
-      let scrollTarget: string | number = hash;
-
-      if (hash === "#about" && horizontalST) {
-        scrollTarget = horizontalST.start;
-      }
-
-      // Synchronously update the ref's current value.
-      // This change is immediately visible to the observers.
-      isScrollingRef.current = true;
-      setActiveSection(hash.substring(1));
-
-      gsap.to(window, {
-        duration: 1.5,
-        scrollTo: scrollTarget,
-        ease: "power2.inOut",
-        onComplete: () => {
-          // Set it back to false when done
-          isScrollingRef.current = false;
-        },
-        onInterrupt: () => {
-          // Also set it back if interrupted
-          isScrollingRef.current = false;
-        },
-      });
-    }
-  };
-
   return (
     <header
       ref={containerRef}
@@ -179,24 +144,12 @@ const Header: React.FC = () => {
 
       <nav className="md:flex hidden gap-8 header-main-nav">
         {nav_links.map((link, index) => {
-          let isActive = false;
-          if (pathname === "/") {
-            // If on the homepage, the active link is determined by the scrolled section
-            // We strip the '#' from link.hash to compare it to the section's id
-
-            isActive = activeSection === link.hash?.substring(1);
-          } else {
-            // If on another page, the active link is determined by the page's path
-            isActive = pathname === link.href;
-          }
-
           return (
             <NavLink
-              isActive={isActive}
               href={`/${link.hash}`}
               key={`nav-link-${index}`}
               className="header-nav-link"
-              onClick={(e) => handleNavClick(e, link.hash)}
+              isActive={pathname === "/" && hash === link.hash}
             >
               {link.label}
             </NavLink>
@@ -209,15 +162,7 @@ const Header: React.FC = () => {
       </div>
       <Portal>
         {isOpen && (
-          <SideMenu
-            open={isOpen}
-            pathname={pathname}
-            handleClick={() => setIsOpen(false)}
-            horizontalST={horizontalST}
-            activeSection={activeSection}
-            setActiveSection={setActiveSection}
-            isScrollingRef={isScrollingRef}
-          />
+          <SideMenu open={isOpen} handleClick={() => setIsOpen(false)} />
         )}
       </Portal>
     </header>
