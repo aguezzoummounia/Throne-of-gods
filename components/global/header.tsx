@@ -2,11 +2,11 @@
 import gsap from "gsap";
 import Link from "next/link";
 import Portal from "./portal";
-import Image from "next/image";
+import SmartImage from "../ui/smart-image";
 import SideMenu from "./side-menu";
 import NavLink from "../ui/nav-link";
 import { useGSAP } from "@gsap/react";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback, useMemo } from "react";
 import { nav_links } from "@/lib/consts";
 import { useHash } from "@/hooks/useHash";
 import MenuToggle from "../ui/menu-toggle";
@@ -17,153 +17,205 @@ import { useTransitionRouter } from "next-view-transitions";
 
 gsap.registerPlugin(useGSAP);
 
-export function slideInOut() {
-  document.documentElement.animate(
-    [
-      {
-        filter: "blur(0px)",
-      },
-      {
-        filter: "blur(20px)",
-      },
-    ],
+// Optimized transition function with better performance
+export const slideInOut = () => {
+  const animations = [
     {
-      duration: 3000,
-      easing: "cubic-bezier(.87,0,0.13,1)",
-      fill: "forwards",
-      pseudoElement: "::view-transition-old(root)",
-    }
-  );
-  document.documentElement.animate(
-    [
-      {
-        clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)",
+      keyframes: [{ filter: "blur(0px)" }, { filter: "blur(20px)" }],
+      options: {
+        duration: 3000,
+        easing: "cubic-bezier(.87,0,0.13,1)",
+        fill: "forwards" as FillMode,
+        pseudoElement: "::view-transition-old(root)",
       },
-      {
-        clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
-      },
-    ],
+    },
     {
-      duration: 3000,
-      easing: "cubic-bezier(.87,0,0.13,1)",
-      fill: "forwards",
-      pseudoElement: "::view-transition-new(root)",
-    }
-  );
-}
+      keyframes: [
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%)" },
+        { clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)" },
+      ],
+      options: {
+        duration: 3000,
+        easing: "cubic-bezier(.87,0,0.13,1)",
+        fill: "forwards" as FillMode,
+        pseudoElement: "::view-transition-new(root)",
+      },
+    },
+  ];
+
+  // Batch animations for better performance
+  animations.forEach(({ keyframes, options }) => {
+    document.documentElement.animate(keyframes, options);
+  });
+};
 
 const Header: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const optionsRef = useRef<HTMLDivElement>(null);
+
   useBodyLockScroll(isOpen);
   const hash = useHash();
   const pathname = usePathname();
   const router = useTransitionRouter();
 
+  // Optimized GSAP animation with direct refs
   useGSAP(
     () => {
+      if (!containerRef.current) return;
+
       const tl = gsap.timeline();
-      const root = (containerRef.current ?? document) as Element | Document;
-      tl.from(".header-main-link", {
-        scale: 0,
-        duration: 1,
-        autoAlpha: 0,
-        ease: "power2.out",
-      });
 
-      // querySelectorAll generic ensures we get HTMLElement nodes
-      const nodeList = root.querySelectorAll<HTMLElement>(
-        ".header-main-nav .header-nav-link"
-      );
-      // turn NodeList -> Array<HTMLElement> and use a type predicate for the filter
-      const navLinks = Array.from(nodeList).filter((el): el is HTMLElement => {
-        // el is already HTMLElement, but this explicit predicate helps TS with later usage
-        const cs = window.getComputedStyle(el);
-        return (
-          cs.display !== "none" &&
-          cs.visibility !== "hidden" &&
-          el.offsetParent !== null
-        );
-      });
-
-      if (navLinks.length) {
-        tl.from(
-          navLinks,
-          {
-            yPercent: -100,
-            autoAlpha: 0,
-            ease: "power1.out",
-            duration: 0.6,
-            stagger: 0.15,
-          },
-          "-=0.3"
-        );
+      // Animate logo with direct ref
+      if (logoRef.current) {
+        tl.from(logoRef.current, {
+          scale: 0,
+          duration: 0.8,
+          autoAlpha: 0,
+          ease: "power2.out",
+        });
       }
 
-      tl.from(
-        ".header-main-options > *",
-        {
-          yPercent: -100,
-          autoAlpha: 0,
-          duration: 0.6,
-          ease: "power1.out",
-          stagger: 0.15,
-        },
-        "-=0.3"
-      );
+      // Animate nav links with direct ref and optimized selector
+      if (navRef.current) {
+        const navLinks = navRef.current.querySelectorAll(".header-nav-link");
+        if (navLinks.length) {
+          tl.from(
+            navLinks,
+            {
+              yPercent: -100,
+              autoAlpha: 0,
+              ease: "power1.out",
+              duration: 0.5,
+              stagger: 0.1,
+            },
+            "-=0.4"
+          );
+        }
+      }
+
+      // Animate options with direct ref
+      if (optionsRef.current) {
+        const options = optionsRef.current.children;
+        if (options.length) {
+          tl.from(
+            options,
+            {
+              yPercent: -100,
+              autoAlpha: 0,
+              duration: 0.5,
+              ease: "power1.out",
+              stagger: 0.1,
+            },
+            "-=0.4"
+          );
+        }
+      }
+
+      return () => {
+        tl.kill();
+      };
     },
     { scope: containerRef }
+  );
+
+  // Optimized handlers with useCallback
+  const handleLogoClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (pathname === "/") {
+        e.preventDefault();
+        return;
+      }
+      router.push("/", {
+        onTransitionReady: slideInOut,
+      });
+    },
+    [pathname, router]
+  );
+
+  const handleMenuToggle = useCallback(() => {
+    setIsOpen((prev) => !prev);
+  }, []);
+
+  const handleMenuClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  // Memoized navigation links to prevent unnecessary re-renders
+  const navigationLinks = useMemo(
+    () =>
+      nav_links.map((link, index) => (
+        <NavLink
+          href={link.hash}
+          key={link.hash}
+          className="header-nav-link"
+          isActive={pathname === "/" && hash === link.hash}
+          aria-current={
+            pathname === "/" && hash === link.hash ? "page" : undefined
+          }
+        >
+          {link.label}
+        </NavLink>
+      )),
+    [hash, pathname]
   );
 
   return (
     <header
       ref={containerRef}
+      role="banner"
       className="fixed top-0 left-0 w-full px-12 max-md:px-8 h-16 flex items-center justify-between z-20 text-primary"
+      aria-label="Main navigation"
     >
       <Link
+        ref={logoRef}
         href="/"
-        onClick={(e) => {
-          if (pathname === "/") {
-            e.preventDefault();
-            return;
-          }
-          router.push("/", {
-            onTransitionReady: slideInOut,
-          });
-        }}
-        className="relative cursor-pointer uppercase text-sm md:w-[200px] w-[100px] h-full inline-flex header-main-link md:mt-8"
+        onClick={handleLogoClick}
+        className="relative cursor-pointer uppercase text-sm md:w-[200px] w-[100px] h-full inline-flex items-center md:mt-8"
+        aria-label="Throne of Gods - Home"
       >
-        <Image
+        <SmartImage
           width={300}
           height={150}
-          alt="throne of gods logo"
+          alt="Throne of Gods logo"
           src="/images/temp-logo.png"
           className="md:object-scale-down object-contain"
+          priority
         />
       </Link>
 
-      <nav className="md:flex hidden gap-8 header-main-nav">
-        {nav_links.map((link, index) => {
-          return (
-            <NavLink
-              href={`/${link.hash}`}
-              key={`nav-link-${index}`}
-              className="header-nav-link"
-              isActive={pathname === "/" && hash === link.hash}
-            >
-              {link.label}
-            </NavLink>
-          );
-        })}
+      <nav
+        ref={navRef}
+        className="md:flex hidden gap-8"
+        role="navigation"
+        aria-label="Main menu"
+      >
+        {navigationLinks}
       </nav>
-      <div className="md:w-[100px] w-fit flex items-center md:justify-end justify-center gap-1 header-main-options">
+
+      <div
+        ref={optionsRef}
+        className="md:w-[100px] w-fit flex items-center md:justify-end justify-center gap-1"
+        role="group"
+        aria-label="Header options"
+      >
         <SoundToggle />
-        <MenuToggle open={isOpen} handleClick={() => setIsOpen(!isOpen)} />
+        <MenuToggle
+          open={isOpen}
+          handleClick={handleMenuToggle}
+          aria-expanded={isOpen}
+          aria-controls="mobile-menu"
+        />
       </div>
+
       <Portal>
-        {isOpen && (
-          <SideMenu open={isOpen} handleClick={() => setIsOpen(false)} />
-        )}
+        <SideMenu
+          open={isOpen}
+          handleClick={handleMenuClose}
+          id="mobile-menu"
+        />
       </Portal>
     </header>
   );

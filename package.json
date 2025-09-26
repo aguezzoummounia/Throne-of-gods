@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:registry": "node scripts/run-registry-tests.js",
+    "test:integration": "node scripts/run-integration-test-suite.js"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

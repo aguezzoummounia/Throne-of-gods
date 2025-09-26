@@ -1,12 +1,15 @@
 "use client";
 import { SOUNDS_TO_PRELOAD } from "@/lib/consts";
 import { useAssetLoader } from "@/hooks/useAssetLoader";
+import PreloadedImageRegistry from "@/lib/preloaded-image-registry";
 import {
   useState,
   useEffect,
   ReactNode,
   useContext,
   createContext,
+  useMemo,
+  useCallback,
 } from "react";
 interface PreloadContextType {
   isLoaded: boolean;
@@ -16,6 +19,7 @@ interface PreloadContextType {
   };
   errors: string[];
   hasInteracted: boolean;
+  isImagePreloaded: (src: string) => boolean;
 }
 
 interface HookAssets {
@@ -65,15 +69,19 @@ export const AssetLoaderProvider = ({ children }: { children: ReactNode }) => {
   const [hasInteracted, setHasInteracted] = useState(false);
   const { progress, errors, isLoaded, assets } = useAssetLoader();
 
-  useEffect(() => {
-    // If we've already interacted, no need to add listeners again.
-    if (hasInteracted) return;
+  // Get the singleton instance of the image registry
+  const imageRegistry = useMemo(() => PreloadedImageRegistry.getInstance(), []);
 
-    const handleInteraction = () => {
-      setHasInteracted(true);
-      // Listeners are removed automatically by the { once: true } option.
+  // Memoize the interaction handler to prevent recreation
+  const handleInteraction = useCallback(() => {
+    setHasInteracted(true);
+    if (process.env.NODE_ENV === "development") {
       console.log("[PreloadProvider] User has interacted for the first time.");
-    };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (hasInteracted) return;
 
     const events: (keyof DocumentEventMap)[] = [
       "click",
@@ -81,31 +89,52 @@ export const AssetLoaderProvider = ({ children }: { children: ReactNode }) => {
       "touchstart",
     ];
 
-    // Add listeners that will only fire once.
+    // Add listeners that will only fire once
     events.forEach((event) => {
       document.addEventListener(event, handleInteraction, { once: true });
     });
 
-    // Cleanup function to remove listeners if the component unmounts before interaction.
+    // Cleanup function to remove listeners if component unmounts before interaction
     return () => {
       events.forEach((event) => {
         document.removeEventListener(event, handleInteraction);
       });
     };
-  }, [hasInteracted]);
+  }, [hasInteracted, handleInteraction]);
 
-  const remappedAssets = remapSoundAssets(assets);
+  // Memoize remapped assets to prevent unnecessary recalculations
+  const remappedAssets = useMemo(() => remapSoundAssets(assets), [assets]);
 
-  const value = {
-    errors,
-    isLoaded,
-    progress,
-    hasInteracted,
-    assets: remappedAssets, // Provide the remapped assets to the context
-  };
+  // Memoize the isImagePreloaded function
+  const isImagePreloaded = useCallback(
+    (src: string): boolean => {
+      return imageRegistry.isPreloaded(src);
+    },
+    [imageRegistry]
+  );
+
+  // Memoize the context value to prevent unnecessary re-renders
+  const contextValue = useMemo(
+    () => ({
+      errors,
+      isLoaded,
+      progress,
+      hasInteracted,
+      assets: remappedAssets,
+      isImagePreloaded,
+    }),
+    [
+      errors,
+      isLoaded,
+      progress,
+      hasInteracted,
+      remappedAssets,
+      isImagePreloaded,
+    ]
+  );
 
   return (
-    <AssetLoaderContext.Provider value={value}>
+    <AssetLoaderContext.Provider value={contextValue}>
       {children}
     </AssetLoaderContext.Provider>
   );

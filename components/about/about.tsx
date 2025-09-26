@@ -108,29 +108,25 @@ const About = () => {
         details={aboutData[chapterIndex].details}
         image={aboutData[chapterIndex].image}
       />
-      <div className="flex items-center justify-center gap-6 pb-14 pt-8">
+      <div className="flex items-center justify-center md:gap-6 gap-4 pb-14 md:pt-8 pt-4">
         <AboutSelectorCard
-          className={cn(
-            "hover:-rotate-2",
-            chapterIndex === 0 && "-rotate-2 -translate-y-6"
-          )}
+          className={cn("hover:-rotate-2")}
+          isActive={chapterIndex === 0}
           title="The Age of Divine Unity"
           onClick={() => setChapterIndex(0)}
         >
           <AboutSVG1 />
         </AboutSelectorCard>
         <AboutSelectorCard
-          className={cn(chapterIndex === 1 && "-translate-y-6")}
+          isActive={chapterIndex === 1}
           title="Age of The Veil & the Deep"
           onClick={() => setChapterIndex(1)}
         >
           <AboutSVG2 />
         </AboutSelectorCard>
         <AboutSelectorCard
-          className={cn(
-            "hover:rotate-2",
-            chapterIndex === 2 && "rotate-2 -translate-y-6"
-          )}
+          className={cn("hover:rotate-2")}
+          isActive={chapterIndex === 2}
           title="Age of The Prophecy & the Heir"
           onClick={() => setChapterIndex(2)}
         >

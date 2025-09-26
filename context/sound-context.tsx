@@ -8,6 +8,7 @@ import {
   useContext,
   useCallback,
   createContext,
+  useMemo,
 } from "react";
 import { usePreloader } from "./asset-loader-provider";
 
@@ -19,9 +20,11 @@ interface SoundContextType {
   playSlideSound: () => void;
 }
 
-const EFFECTS_VOLUME = 0.4; // 40% volume for effects
-const HOVER_DEBOUNCE_DELAY = 100; // in milliseconds
-const CLICK_COOLDOWN_DELAY = 200; // in milliseconds
+// Optimized constants
+const EFFECTS_VOLUME = 0.4;
+const HOVER_THROTTLE_DELAY = 80; // Reduced for better responsiveness
+const CLICK_THROTTLE_DELAY = 150; // Reduced for better responsiveness
+const SLIDE_THROTTLE_DELAY = 200;
 
 const SoundContext = createContext<SoundContextType | undefined>(undefined);
 
@@ -29,97 +32,137 @@ export const SoundProvider = ({ children }: { children: ReactNode }) => {
   const { assets } = usePreloader();
   const [isMuted, setIsMuted] = useState(false);
 
-  // Use useRef to hold the Audio objects. This prevents them from being re-created on every render.
-  const hoverAudioRef = useRef<HTMLAudioElement | null>(null);
-  const clickAudioRef = useRef<HTMLAudioElement | null>(null);
-  const slideAudioRef = useRef<HTMLAudioElement | null>(null);
+  // Audio refs - using Map for better performance with multiple sounds
+  const audioRefs = useRef<Map<string, HTMLAudioElement>>(new Map());
 
-  // Refs for debouncing and rate-limiting
-  const lastClickTimeRef = useRef<number>(0);
-  const hoverDebounceTimerRef = useRef<NodeJS.Timeout | null>(null);
+  // Throttling refs - using Map for scalability
+  const throttleTimers = useRef<Map<string, NodeJS.Timeout>>(new Map());
+  const lastPlayTimes = useRef<Map<string, number>>(new Map());
 
-  // Initialize Audio objects on the client side
+  // Initialize audio objects with optimized setup
   useEffect(() => {
-    if (assets.sounds.hover && assets.sounds.click && assets.sounds.slide) {
-      hoverAudioRef.current = assets.sounds.hover;
-      clickAudioRef.current = assets.sounds.click;
-      slideAudioRef.current = assets.sounds.slide;
-      // Set initial volume for all sound effects
-      hoverAudioRef.current.volume = EFFECTS_VOLUME;
-      clickAudioRef.current.volume = EFFECTS_VOLUME;
-      slideAudioRef.current.volume = EFFECTS_VOLUME;
-    }
-  }, [assets.sounds]);
+    const soundKeys = ["hover", "click", "slide"] as const;
 
+    soundKeys.forEach((key) => {
+      const audio = assets.sounds[key];
+      if (audio) {
+        // Configure audio for optimal performance
+        audio.volume = EFFECTS_VOLUME;
+        audio.preload = "auto";
+        audio.muted = isMuted;
+
+        // Store in map for efficient access
+        audioRefs.current.set(key, audio);
+
+        // Initialize timing tracking
+        lastPlayTimes.current.set(key, 0);
+      }
+    });
+
+    // Cleanup function
+    return () => {
+      throttleTimers.current.forEach((timer) => clearTimeout(timer));
+      throttleTimers.current.clear();
+    };
+  }, [assets.sounds, isMuted]);
+
+  // Optimized mute toggle with batch updates
   const toggleMute = useCallback(() => {
     setIsMuted((prev) => {
       const newMutedState = !prev;
-      if (hoverAudioRef.current) hoverAudioRef.current.muted = newMutedState;
-      if (clickAudioRef.current) clickAudioRef.current.muted = newMutedState;
-      if (slideAudioRef.current) slideAudioRef.current.muted = newMutedState;
+
+      // Batch update all audio elements
+      audioRefs.current.forEach((audio) => {
+        audio.muted = newMutedState;
+      });
+
       return newMutedState;
     });
   }, []);
 
-  const playHoverSound = useCallback(() => {
-    if (isMuted || !hoverAudioRef.current) return;
+  // Generic optimized sound player with throttling
+  const createSoundPlayer = useCallback(
+    (soundKey: string, throttleDelay: number) => {
+      return () => {
+        if (isMuted) return;
 
-    // Clear any existing timer
-    if (hoverDebounceTimerRef.current) {
-      clearTimeout(hoverDebounceTimerRef.current);
-    }
+        const audio = audioRefs.current.get(soundKey);
+        if (!audio) return;
 
-    // Set a new timer
-    hoverDebounceTimerRef.current = setTimeout(() => {
-      const audio = hoverAudioRef.current;
-      if (audio) {
-        audio.currentTime = 0;
-        audio
-          .play()
-          .catch((error) => console.log("Error playing hover sound:", error));
-      }
-    }, HOVER_DEBOUNCE_DELAY);
-  }, [isMuted]);
+        const now = performance.now(); // More precise than Date.now()
+        const lastPlayTime = lastPlayTimes.current.get(soundKey) || 0;
 
-  const playClickSound = useCallback(() => {
-    if (isMuted || !clickAudioRef.current) return;
+        // Throttle check
+        if (now - lastPlayTime < throttleDelay) return;
 
-    const now = Date.now();
-    // Check if enough time has passed since the last click
-    if (now - lastClickTimeRef.current > CLICK_COOLDOWN_DELAY) {
-      lastClickTimeRef.current = now; // Update the last click time
-      const audio = clickAudioRef.current;
-      if (audio) {
-        audio.currentTime = 0;
-        audio
-          .play()
-          .catch((error) => console.log("Error playing click sound:", error));
-      }
-    }
-  }, [isMuted]);
+        // Clear existing timer for this sound
+        const existingTimer = throttleTimers.current.get(soundKey);
+        if (existingTimer) {
+          clearTimeout(existingTimer);
+        }
 
-  const playSlideSound = useCallback(() => {
-    if (isMuted || !slideAudioRef.current) return;
+        // Set new timer
+        const timer = setTimeout(() => {
+          if (audio && !isMuted) {
+            // Reset to start for immediate playback
+            audio.currentTime = 0;
 
-    const audio = slideAudioRef.current;
-    if (audio) {
-      audio.currentTime = 0;
-      audio
-        .play()
-        .catch((error) => console.log("Error playing slide sound:", error));
-    }
-  }, [isMuted]);
+            // Play with error handling
+            const playPromise = audio.play();
+            if (playPromise) {
+              playPromise.catch((error) => {
+                if (process.env.NODE_ENV === "development") {
+                  console.warn(`Error playing ${soundKey} sound:`, error);
+                }
+              });
+            }
 
-  const value = {
-    isMuted,
-    toggleMute,
-    playHoverSound,
-    playClickSound,
-    playSlideSound,
-  };
+            // Update last play time
+            lastPlayTimes.current.set(soundKey, performance.now());
+          }
+
+          // Clean up timer reference
+          throttleTimers.current.delete(soundKey);
+        }, 16); // ~60fps for smooth audio
+
+        throttleTimers.current.set(soundKey, timer);
+      };
+    },
+    [isMuted]
+  );
+
+  // Memoized sound players for optimal performance
+  const playHoverSound = useMemo(
+    () => createSoundPlayer("hover", HOVER_THROTTLE_DELAY),
+    [createSoundPlayer]
+  );
+
+  const playClickSound = useMemo(
+    () => createSoundPlayer("click", CLICK_THROTTLE_DELAY),
+    [createSoundPlayer]
+  );
+
+  const playSlideSound = useMemo(
+    () => createSoundPlayer("slide", SLIDE_THROTTLE_DELAY),
+    [createSoundPlayer]
+  );
+
+  // Memoized context value to prevent unnecessary re-renders
+  const contextValue = useMemo(
+    () => ({
+      isMuted,
+      toggleMute,
+      playHoverSound,
+      playClickSound,
+      playSlideSound,
+    }),
+    [isMuted, toggleMute, playHoverSound, playClickSound, playSlideSound]
+  );
 
   return (
-    <SoundContext.Provider value={value}>{children}</SoundContext.Provider>
+    <SoundContext.Provider value={contextValue}>
+      {children}
+    </SoundContext.Provider>
   );
 };
 

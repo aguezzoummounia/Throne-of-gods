@@ -219,7 +219,7 @@ const DecorativeSVG1 = ({ className }: SVGProps) => {
       fill="none"
       viewBox="0 0 120 120"
       className={cn(
-        "md:w-[70px] w-[40px] text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]",
+        "md:w-[70px] w-[50px] text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]",
         className
       )}
       xmlns="http://www.w3.org/2000/svg"
@@ -328,7 +328,7 @@ const DecorativeSVG2 = ({ className }: SVGProps) => {
   return (
     <svg
       className={cn(
-        "md:w-[70px] w-[40px] text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]",
+        "md:w-[70px] w-[50px] text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]",
         className
       )}
       viewBox="0 0 166 164"

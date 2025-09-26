@@ -1,5 +1,6 @@
 "use client";
 import { assets_to_load as defaultAssets } from "@/lib/consts";
+import PreloadedImageRegistry from "@/lib/preloaded-image-registry";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 interface PreloadedAssets {
@@ -22,28 +23,50 @@ export function useAssetLoader(
   const [errors, setErrors] = useState<string[]>([]);
   const [assets, setAssets] = useState<PreloadedAssets>({ sounds: {} });
 
-  // Use a ref to track loaded items to avoid re-renders on every load
+  // Use refs to track state without causing re-renders
   const loadedItemsRef = useRef<Set<string>>(new Set());
   const totalItems = useRef(assets_to_load.length);
+  const progressUpdateTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const handleItemLoaded = useCallback((itemName: string) => {
-    const normalized = String(itemName);
-    if (loadedItemsRef.current.has(normalized)) return;
-    loadedItemsRef.current.add(normalized);
-    const loadedCount = loadedItemsRef.current.size;
-    const newProgress =
-      totalItems.current > 0
-        ? Math.floor((loadedCount / totalItems.current) * 100)
-        : 100;
-    setProgress(newProgress);
-    if (loadedCount >= totalItems.current) {
-      setTimeout(() => setIsLoaded(true), 200);
+  // Throttled progress updates to reduce re-renders
+  const updateProgress = useCallback((newProgress: number) => {
+    if (progressUpdateTimeoutRef.current) {
+      clearTimeout(progressUpdateTimeoutRef.current);
     }
+
+    progressUpdateTimeoutRef.current = setTimeout(() => {
+      setProgress(newProgress);
+    }, 16); // ~60fps throttling
   }, []);
+
+  const handleItemLoaded = useCallback(
+    (itemName: string) => {
+      const normalized = String(itemName);
+      if (loadedItemsRef.current.has(normalized)) return;
+
+      loadedItemsRef.current.add(normalized);
+      const loadedCount = loadedItemsRef.current.size;
+      const newProgress =
+        totalItems.current > 0
+          ? Math.floor((loadedCount / totalItems.current) * 100)
+          : 100;
+
+      updateProgress(newProgress);
+
+      if (loadedCount >= totalItems.current) {
+        // Small delay to ensure smooth completion animation
+        setTimeout(() => setIsLoaded(true), 200);
+      }
+    },
+    [updateProgress]
+  );
 
   const handleItemError = useCallback(
     (itemName: string) => {
-      setErrors((p) => [...p, String(itemName)]);
+      setErrors((prev) => {
+        const normalized = String(itemName);
+        return prev.includes(normalized) ? prev : [...prev, normalized];
+      });
       handleItemLoaded(itemName);
     },
     [handleItemLoaded]
@@ -51,7 +74,9 @@ export function useAssetLoader(
 
   const notifyItemLoaded = useCallback(
     (itemName: string) => {
-      console.log(`[AssetLoader] RECEIVED notification for: ${itemName}`);
+      if (process.env.NODE_ENV === "development") {
+        console.log(`[AssetLoader] RECEIVED notification for: ${itemName}`);
+      }
       handleItemLoaded(itemName);
     },
     [handleItemLoaded]
@@ -78,11 +103,28 @@ export function useAssetLoader(
             new Promise((resolve) => {
               const img = new Image();
               img.onload = () => {
-                if (!cancelled) handleItemLoaded(asset);
+                if (!cancelled) {
+                  try {
+                    // Register the successfully loaded image in the registry
+                    const registry = PreloadedImageRegistry.getInstance();
+                    registry.registerPreloadedImage(url);
+                    handleItemLoaded(asset);
+                  } catch (error) {
+                    // If registry registration fails, still mark as loaded to prevent hanging
+                    console.warn(
+                      `Failed to register preloaded image ${url}:`,
+                      error
+                    );
+                    handleItemLoaded(asset);
+                  }
+                }
                 resolve();
               };
               img.onerror = () => {
-                if (!cancelled) handleItemError(asset);
+                if (!cancelled) {
+                  // Don't register failed images to prevent registry corruption
+                  handleItemError(asset);
+                }
                 resolve();
               };
               img.src = url;
@@ -145,6 +187,9 @@ export function useAssetLoader(
 
     return () => {
       cancelled = true;
+      if (progressUpdateTimeoutRef.current) {
+        clearTimeout(progressUpdateTimeoutRef.current);
+      }
     };
   }, [handleItemError, handleItemLoaded, assets_to_load]);
 

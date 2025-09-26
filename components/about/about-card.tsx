@@ -1,4 +1,4 @@
-import Image from "next/image";
+import SmartImage from "@/components/ui/smart-image";
 import { cn } from "@/lib/utils";
 import ElementsSvgOutline from "../elements-svg-outline";
 
@@ -17,7 +17,7 @@ const AboutCard = ({ title, image, className }: AboutCardProps) => {
       )}
     >
       <div className="absolute top-0 w-full h-full">
-        <Image
+        <SmartImage
           fill
           src={image}
           sizes="90vw"

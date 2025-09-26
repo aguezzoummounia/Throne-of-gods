@@ -1421,31 +1421,31 @@ const charactersArray = [
 
 const locationData = [
   {
-    image: "/images/characters/character-2.jpeg",
+    image: "/images/locations/location-1.jpeg",
     title: "Eternea",
     label: "Marraki’sh",
     details: "golden desert city inspired by Moroccan architecture.",
   },
   {
-    image: "/images/characters/character-1.jpeg",
+    image: "/images/locations/location-2.jpeg",
     title: "Galeeria",
     label: "Kalgrath",
     details: "a gothic fortress capital in the icy north.",
   },
   {
-    image: "/images/characters/character-4.jpeg",
+    image: "/images/locations/location-3.jpeg",
     title: "Valemyra",
     label: "Valemont",
     details: "lush southern capital, center of noble bloodlines.",
   },
   {
-    image: "/images/characters/character-5.jpeg",
+    image: "/images/locations/location-4.jpeg",
     title: "Isles of Eryndyr",
     label: "Venmyr",
     details: "cliff-side bastion of the Watchers of the Deep.",
   },
   {
-    image: "/images/characters/character-3.jpeg",
+    image: "/images/locations/location-5.jpeg",
     title: "Christalia",
     label: "Vasselguard",
     details: "arid republic capital with the Tree of Life at its heart.",
@@ -1459,7 +1459,7 @@ const aboutData = [
       "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
     details:
       "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
-    image: "/images/characters/character-9.jpeg",
+    image: "/images/about/about-1.jpeg",
   },
   {
     title: "The Veil & the Deep",
@@ -1467,7 +1467,7 @@ const aboutData = [
       "Goddess Law sealed the deep and raised the Veil — but the Fallen Moon remembers, and she waits.",
     details:
       "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
-    image: "/images/characters/character-6.jpeg",
+    image: "/images/about/about-2.jpeg",
   },
   {
     title: "The Prophecy & the Heir",
@@ -1475,7 +1475,7 @@ const aboutData = [
       "When blood stains the earth, the Harbinger will wake the dawn. Kaen's return may be the key — or the ruin.",
     details:
       "Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that  tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep. Three emperors, one faith broken. Their corruption birthed wars that tore Erosea and summoned beings from the deep.",
-    image: "/images/characters/character-8.jpeg",
+    image: "/images/about/about-3.jpeg",
   },
 ];
 

@@ -8,7 +8,6 @@ import SvgOutline from "@/components/global/svg-outline";
 import SmoothScroll from "@/components/global/smooth-scroll";
 import GrainOverlay from "@/components/global/grain-overlay";
 import CustomCursor from "@/components/global/custom-cursor";
-import ImagesUnderline from "@/components/global/images-underline";
 import { BackgroundMusic } from "@/components/sound/background-music";
 import { AssetLoaderProvider } from "@/context/asset-loader-provider";
 import { Alegreya, Cinzel, Cinzel_Decorative } from "next/font/google";
@@ -47,14 +46,13 @@ export default function RootLayout({
           <AssetLoaderProvider>
             <SmoothScroll>
               <SoundProvider>
-                <Preloader>
-                  <Header />
-                  <div className="min-h-screen overflow-clip relative">
-                    <ImagesUnderline />
+                <div className="min-h-screen overflow-clip relative">
+                  <Preloader>
+                    <Header />
                     <BackgroundMusic />
                     <main className="min-h-screen">{children}</main>
-                  </div>
-                </Preloader>
+                  </Preloader>
+                </div>
               </SoundProvider>
               <CustomCursor />
               <SvgOutline />

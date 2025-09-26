@@ -2,7 +2,7 @@ const dev_url = process.env.NEXT_PUBLIC_SITE_NAME || "";
 const site_name = process.env.NEXT_PUBLIC_SITE_NAME || "";
 const trailer_url = process.env.NEXT_PUBLIC_YOUTUBE_TRAILER || "";
 const email_address = process.env.NEXT_PUBLIC_EMAIL_ADDRESS || "";
-const chanel_handler = process.env.NEXT_PUBLIC_YOUTUBE_HANDLE || "";
+const channel_handler = process.env.NEXT_PUBLIC_YOUTUBE_HANDLE || "";
 
 const power_item_positions = {
   1: [{ item: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" }],
@@ -60,15 +60,32 @@ const assets_to_load: string[] = [
   "/images/bg/new-bg-5.webp",
   "/images/bg/new-bg-6.webp",
   // about images
-  "/images/powers/power-1.jpeg",
-  "/images/powers/power-2.jpeg",
-  "/images/powers/power-3.jpeg",
+  "/images/about/about-1.jpeg",
+  "/images/about/about-2.jpeg",
+  "/images/about/about-3.jpeg",
   // map images
   "/images/map/ereosa-map.avif",
   "/images/map/ereosa-map-vertical.avif",
+  // locations images
+  "/images/locations/location-1.jpeg",
+  "/images/locations/location-2.jpeg",
+  "/images/locations/location-3.jpeg",
+  "/images/locations/location-4.jpeg",
+  "/images/locations/location-5.jpeg",
+  // character images
+  "/images/characters/character-1.jpeg",
+  "/images/characters/character-2.jpeg",
+  "/images/characters/character-3.jpeg",
+  "/images/characters/character-4.jpeg",
+  "/images/characters/character-5.jpeg",
+  "/images/characters/character-6.jpeg",
+  "/images/characters/character-7.jpeg",
+  "/images/characters/character-8.jpeg",
+  "/images/characters/character-9.jpeg",
   // static images
-  "/images/static/footer-image.png",
   "/images/temp-logo.png",
+  "/images/static/cropped-border.png",
+  "/images/static/footer-image.png",
   "/images/static/grain.png",
   "fonts",
 ];
@@ -97,7 +114,7 @@ export {
   site_name,
   trailer_url,
   email_address,
-  chanel_handler,
+  channel_handler,
   assets_to_load,
   SOUNDS_TO_PRELOAD,
   power_item_positions,
