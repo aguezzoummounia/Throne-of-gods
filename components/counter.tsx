@@ -1,4 +1,5 @@
 import { memo, useMemo } from "react";
+import { useMobile } from "../hooks/use-mobile";
 
 interface DigitReelProps {
   digit: number;
@@ -6,13 +7,13 @@ interface DigitReelProps {
 
 // Memoized digit reel to prevent unnecessary re-renders
 const DigitReel = memo<DigitReelProps>(({ digit }) => {
-  const DIGIT_HEIGHT = useMemo(() => (window.innerWidth > 768 ? 80 : 50), []);
-
+  const isMobile = useMobile();
+  const DIGIT_HEIGHT = useMemo(() => (isMobile ? 50 : 80), [isMobile]);
   const transformStyle = useMemo(
     () => ({
       transform: `translateY(-${digit * DIGIT_HEIGHT}px)`,
     }),
-    [digit]
+    [digit, DIGIT_HEIGHT]
   );
 
   // Pre-generate digit elements to avoid recreation on each render
@@ -28,7 +29,7 @@ const DigitReel = memo<DigitReelProps>(({ digit }) => {
           {i}
         </div>
       )),
-    []
+    [DIGIT_HEIGHT, digit]
   );
 
   return (
@@ -78,7 +79,7 @@ const VerticalCounter: React.FC<VerticalCounterProps> = ({ progress }) => {
       <DigitReel digit={digits[1]} />
       <DigitReel digit={digits[2]} />
       <div
-        className="flex md:text-3xl text-lg items-end justify-center font-alegreya md:h-[80px] h-[50px] pl-1.5 md:pb-3.5 pb-1.5"
+        className="flex md:text-3xl text-lg items-end justify-center font-alegreya md:h-[80px] h-[50px] pl-1.5 md:pb-3.5 pb-1.5 mt-auto"
         aria-hidden="true"
       >
         %
