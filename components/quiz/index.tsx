@@ -1,15 +1,25 @@
 "use client";
-import gsap from "gsap";
-import Text from "../ui/text";
+
+// React imports
 import { useRef } from "react";
+
+// GSAP imports
+import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
+// Next.js imports
+import { useTransitionRouter } from "next-view-transitions";
+
+// Local component imports
+import Text from "../ui/text";
 import Button from "../ui/button-or-link";
 import Container from "../global/container";
-import { slideInOut } from "../global/header";
-import ScrollTrigger from "gsap/ScrollTrigger";
 import QuizBackground from "./quiz-background";
-import { useTransitionRouter } from "next-view-transitions";
+
+// Utility imports
+import { slideInOut } from "../global/header";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 

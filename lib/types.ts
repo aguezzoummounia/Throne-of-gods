@@ -45,11 +45,11 @@ export interface VillainProfile {
 
 /**
  * Describes a single answer option.
- * The `villain` property is now strongly typed to be one of the `VillainKey`s.
+ * The `villains` property is now strongly typed to be one of the `VillainKey`s.
  */
 export interface Answer {
   text: string;
-  villains?: readonly VillainKey[];
+  villains: readonly VillainKey[];
 }
 
 /**

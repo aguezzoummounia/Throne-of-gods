@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import BackgroundSvg from "../quiz/background-svg";
+import BackgroundSvg from "../quiz/quiz-question-background-svg";
 import { DecorativeSVG1, DecorativeSVG2 } from "../svgs/about-svgs";
 
 interface AboutBackgroundProp {

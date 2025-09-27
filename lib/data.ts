@@ -58,23 +58,23 @@ const quizData = {
       answers: [
         {
           text: "Feign ignorance, then twist the knife",
-          villain: ["isolde", "leticia"],
+          villains: ["isolde", "leticia"],
         },
         {
           text: "Declare holy vengeance in flames",
-          villain: ["eternal-flames", "agon"],
+          villains: ["eternal-flames", "agon"],
         },
         {
           text: "Vanish and leave nightmares of return",
-          villain: ["queen-of-deep"],
+          villains: ["queen-of-deep"],
         },
         {
           text: "Strike first so none dare betray again",
-          villain: ["jarvan"],
+          villains: ["jarvan"],
         },
         {
           text: "Make them beg and erase their name",
-          villain: ["nicolas", "valeon"],
+          villains: ["nicolas", "valeon"],
         },
       ],
     },
@@ -84,23 +84,23 @@ const quizData = {
       answers: [
         {
           text: "Kingdom of shadows, puppets, and lies",
-          villain: ["leticia", "isolde"],
+          villains: ["leticia", "isolde"],
         },
         {
           text: "War cry echoing through burning altars",
-          villain: ["agon", "eternal-flames"],
+          villains: ["agon", "eternal-flames"],
         },
         {
           text: "Name erased by gods, returned vengeance",
-          villain: ["valeon", "harald"],
+          villains: ["valeon", "harald"],
         },
         {
           text: "First to silence heaven, last kneeling",
-          villain: ["jarvan"],
+          villains: ["jarvan"],
         },
         {
           text: "None speak kindly, yet remember me",
-          villain: ["leticia", "nicolas", "valeon"],
+          villains: ["leticia", "nicolas", "valeon"],
         },
       ],
     },
@@ -110,17 +110,17 @@ const quizData = {
       answers: [
         {
           text: "The weak pray. The strong rule",
-          villain: ["jarvan"],
+          villains: ["jarvan"],
         },
-        { text: "Gold burns brighter than glory.", villain: ["valeon"] },
-        { text: "Power is beauty. Beauty is control.", villain: ["leticia"] },
+        { text: "Gold burns brighter than glory.", villains: ["valeon"] },
+        { text: "Power is beauty. Beauty is control.", villains: ["leticia"] },
         {
           text: "Let theme believe my pain, to keep my throne.",
-          villain: ["isolde"],
+          villains: ["isolde"],
         },
         {
           text: "We rose from darkness to reclaim the sun.",
-          villain: ["king-of-deep"],
+          villains: ["king-of-deep"],
         },
       ],
     },
@@ -130,18 +130,21 @@ const quizData = {
       answers: [
         {
           text: "Immortality through legacy and wealth.",
-          villain: ["valeon"],
+          villains: ["valeon"],
         },
-        { text: "Control everything from the shadows.", villain: ["leticia"] },
+        { text: "Control everything from the shadows.", villains: ["leticia"] },
         {
           text: "To stay in charge, at all cost",
-          villain: ["isolde"],
+          villains: ["isolde"],
         },
         {
           text: "Become more powerful than the gods",
-          villain: ["jarvan"],
+          villains: ["jarvan"],
         },
-        { text: "To feel strong by keeping others weak", villain: ["nicolas"] },
+        {
+          text: "To feel strong by keeping others weak",
+          villains: ["nicolas"],
+        },
       ],
     },
   ],

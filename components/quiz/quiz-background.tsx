@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import BackgroundSvg from "./background-svg";
+import BackgroundSvg from "./quiz-question-background-svg";
 
 interface QuizBackgroundProps {
   className?: string;

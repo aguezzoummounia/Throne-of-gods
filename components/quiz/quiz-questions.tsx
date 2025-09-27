@@ -1,22 +1,33 @@
 "use client";
+
+// React imports
+import { useRef, useMemo, useCallback } from "react";
+
+// GSAP imports
 import gsap from "gsap";
-import Text from "../ui/text";
-import { useRef } from "react";
-import { cn } from "@/lib/utils";
-import { useQuiz } from "./useQuiz";
-import Portal from "../global/portal";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
+
+// Next.js imports
+import { useTransitionRouter } from "next-view-transitions";
+
+// Local component imports
+import Text from "../ui/text";
 import LabelText from "../ui/label-text";
+import Portal from "../global/portal";
 import Indicator from "./step-indicator";
 import AnswerButton from "./answer-button";
-import { useRouter } from "next/navigation";
-import type { Question } from "@/lib/types";
-import BackgroundSvg from "./background-svg";
-import { slideInOut } from "../global/header";
-import { useAudio } from "@/context/sound-context";
+import BackgroundSvg from "./quiz-question-background-svg";
 import QuizResultPreloader from "./quiz-result-preloader";
-import { useTransitionRouter } from "next-view-transitions";
+import { useQuiz } from "./useQuiz";
+
+// Context and utility imports
+import { useAudio } from "@/context/sound-context";
+import { slideInOut } from "../global/header";
+import { cn } from "@/lib/utils";
+
+// Type imports
+import type { Question } from "@/lib/types";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -30,9 +41,8 @@ export function QuizQuestions({
   questions,
   tieBreaker = "earliest",
 }: QuizClientProps) {
-  // const router = useRouter();
-  const seqRef = useRef<number>(0);
   const { playSlideSound } = useAudio();
+
   const h4Ref = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const buttonsRef = useRef<HTMLDivElement>(null);
@@ -48,150 +58,237 @@ export function QuizQuestions({
     lastAnsweredIndex,
     currentQuestionIndex,
     goBack,
-    setResult,
     goToQuestion,
-    computeScores,
     setIsAnimating,
-    calculateResult,
-    setSelectedAnswers,
-    setCurrentQuestionIndex,
+    handleAnswer: hookHandleAnswer,
   } = useQuiz(questions, tieBreaker);
 
   const router = useTransitionRouter();
+
+  // Question animation
   useGSAP(
     () => {
       if (isAnimating) return;
-      const tl = gsap.timeline();
 
-      const h4Split = new SplitText(h4Ref.current, {
+      const h4 = h4Ref.current;
+      const h2 = h2Ref.current;
+      const buttons = buttonsRef.current;
+
+      if (!h4 || !h2 || !buttons) return;
+
+      // Create SplitText instances
+      const h4Split = new SplitText(h4, {
         type: "chars",
+        autoSplit: true,
         smartWrap: true,
+      });
+      const h2Split = new SplitText(h2, {
+        type: "chars",
         autoSplit: true,
-        onSplit: (self) => {
-          let splitTween = gsap.from(self.chars, {
-            autoAlpha: 0,
-            ease: "back.out",
-            stagger: { amount: 0.5, from: "random" },
-          });
-          tl.add(splitTween);
-          return splitTween;
-        },
+        smartWrap: true,
       });
 
-      const h2Split = new SplitText(h2Ref.current, {
-        type: "lines",
-        mask: "lines",
-        autoSplit: true,
-        onSplit: (self) => {
-          let splitTween = gsap.from(self.lines, {
-            opacity: 0,
-            stagger: 0.2,
-            duration: 0.8,
-            yPercent: 100,
-          });
-          tl.add(splitTween, "<");
-          return splitTween;
-        },
-      });
-      const buttons = gsap.utils.toArray<HTMLButtonElement>(
-        buttonsRef.current?.children || []
-      );
+      // Create timeline
+      const tl = gsap.timeline({ paused: true });
 
+      // Animate question number
+      tl.from(h4Split.chars, {
+        opacity: 0,
+        y: 20,
+        duration: 0.6,
+        stagger: 0.02,
+        ease: "power2.out",
+      });
+
+      // Animate question text
       tl.from(
-        buttons,
-        { y: 20, opacity: 0, duration: 0.8, stagger: 0.16 },
-        "-=.6"
+        h2Split.chars,
+        {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          stagger: 0.01,
+          ease: "power2.out",
+        },
+        "-=0.3"
       );
 
+      // Animate buttons
+      tl.from(
+        gsap.utils.toArray(buttons.children),
+        {
+          opacity: 0,
+          y: 40,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      );
+
+      // Play animation
+      tl.play();
+
+      // Cleanup function
       return () => {
         h4Split.revert();
         h2Split.revert();
+        tl.kill();
       };
     },
-    { scope: containerRef, dependencies: [isAnimating, currentQuestionIndex] }
+    {
+      scope: containerRef,
+      dependencies: [currentQuestionIndex],
+      revertOnUpdate: true,
+    }
   );
 
-  // animating indicators
+  // Indicator animation - only runs once on mount
   useGSAP(
     () => {
-      const tl = gsap.timeline();
+      if (!indicatorsRef.current) return;
 
-      tl.from(indicatorsRef.current, {
-        y: 20,
+      const indicators = gsap.utils.toArray(indicatorsRef.current.children);
+
+      gsap.from(indicators, {
         opacity: 0,
-        duration: 1.2,
-        ease: "power2.out",
+        scale: 0.8,
+        duration: 0.4,
+        stagger: 0.05,
+        ease: "back.out(1.7)",
       });
     },
-    { scope: containerRef }
+    {
+      scope: containerRef,
+      dependencies: [], // Empty dependencies - only run once on mount
+      revertOnUpdate: false,
+    }
   );
 
   /**
    * handleAnswer: user selects an answer (answerIndex)
-   * - increments seqRef to mark selection order
-   * - stores answerIndex and seq for current question
-   * - advances or finishes quiz
+   * - Uses the hook's handleAnswer for state management
+   * - Handles animations for non-final questions
+   * - Automatically progresses to next question
    */
-  const handleAnswer = (answerIndex: number) => {
-    if (isAnimating) return;
-    // set true immediately to avoid double clicks while we handle logic
-    setIsAnimating(true);
-    playSlideSound();
-    const seq = seqRef.current++;
-    const lastQuestion = currentQuestionIndex === questions.length - 1;
-    if (lastQuestion) {
-      // Skip exit animations entirely for the final answer.
-      // Use functional update so we compute result from the fresh object.
-      setSelectedAnswers((prev) => {
-        const newSelected = {
-          ...prev,
-          [currentQuestionIndex]: { answerIndex, seq },
-        };
-        return newSelected;
-      });
-      const newSelectedAnswers = {
-        ...selectedAnswers,
-        [currentQuestionIndex]: { answerIndex, seq },
-      };
-      const { scores, earliestSeqForVillain } =
-        computeScores(newSelectedAnswers);
-      const path = calculateResult(scores, earliestSeqForVillain);
-      setResult({ open: true, href: path as string });
-      // give path to the popup
-      // still set false to keep state consistent in case push is replaced.
-      setIsAnimating(false);
-      return;
-    }
+  const handleAnswer = useCallback(
+    (answerIndex: number) => {
+      if (isAnimating) return;
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setSelectedAnswers((prev) => {
-          const newSelected = {
-            ...prev,
-            [currentQuestionIndex]: { answerIndex, seq },
-          };
-
-          return newSelected;
-        });
-        // advance to next question
-        setCurrentQuestionIndex((idx) => idx + 1);
+      if (isLastQuestion) {
+        // Skip exit animations entirely for the final answer
+        setIsAnimating(true);
+        playSlideSound();
+        hookHandleAnswer(answerIndex);
         setIsAnimating(false);
-      },
-    });
+        return;
+      }
 
-    tl.to(h2Ref.current, { opacity: 0, y: -20, duration: 0.5 }, "-=.1");
-    tl.to(buttonsRef.current, { opacity: 0, y: -20, duration: 0.5 }, "-=.3");
-  };
+      // For non-final questions, animate out and then proceed to next question
+      setIsAnimating(true);
+      playSlideSound();
+
+      const h2 = h2Ref.current;
+      const buttons = buttonsRef.current;
+
+      if (!h2 || !buttons) {
+        hookHandleAnswer(answerIndex);
+        // Automatically go to next question
+        setTimeout(() => {
+          goToQuestion(currentQuestionIndex + 1);
+          setIsAnimating(false);
+        }, 100);
+        return;
+      }
+
+      // Create exit animation
+      const tl = gsap.timeline();
+
+      tl.to([h2, ...gsap.utils.toArray(buttons.children)], {
+        opacity: 0,
+        y: -20,
+        duration: 0.3,
+        stagger: 0.05,
+        ease: "power2.in",
+      });
+
+      tl.call(() => {
+        hookHandleAnswer(answerIndex);
+        // Automatically go to next question after animation
+        goToQuestion(currentQuestionIndex + 1);
+        setIsAnimating(false);
+      });
+
+      tl.play();
+    },
+    [
+      isAnimating,
+      isLastQuestion,
+      setIsAnimating,
+      playSlideSound,
+      hookHandleAnswer,
+      goToQuestion,
+      currentQuestionIndex,
+    ]
+  );
+
+  // Memoize indicator calculations to prevent re-computation
+  const indicatorCalculations = useMemo(() => {
+    return questions.map((_, index) => {
+      const isAnswered = index in selectedAnswers;
+      const isAccessible =
+        index <= lastAnsweredIndex || index === currentQuestionIndex;
+      const isActive = currentQuestionIndex >= index;
+      const inLineActive = currentQuestionIndex > index;
+      const isLast = index + 1 === questions.length;
+      const disabled = !isAccessible || isAnimating;
+
+      return {
+        index,
+        isAnswered,
+        isAccessible,
+        isActive,
+        inLineActive,
+        isLast,
+        disabled,
+      };
+    });
+  }, [
+    questions,
+    selectedAnswers,
+    lastAnsweredIndex,
+    currentQuestionIndex,
+    isAnimating,
+  ]);
+
+  // Memoize indicator click handlers to prevent re-creation
+  const indicatorHandlers = useMemo(() => {
+    return questions.map((_, index) => () => goToQuestion(index));
+  }, [questions, goToQuestion]);
+
+  // Memoize indicator elements with optimized calculations
+  const indicatorElements = useMemo(() => {
+    return indicatorCalculations.map((calc, index) => (
+      <Indicator
+        number={calc.index + 1}
+        isAccessible={calc.isAnswered}
+        key={`indicator-${calc.index}`}
+        isLast={calc.isLast}
+        isActive={calc.isActive}
+        inLineActive={calc.inLineActive}
+        handleClick={indicatorHandlers[index]}
+        disabled={calc.disabled}
+      />
+    ));
+  }, [indicatorCalculations, indicatorHandlers]);
 
   return (
     <div
       ref={containerRef}
       className="h-full w-full relative flex items-center justify-center"
     >
-      <div className="md:[&>svg]:w-[50%] [&>svg]:w-full absolute inset-0 flex items-center justify-center">
-        <BackgroundSvg className="text-bronze/30 aspect-square" />
-      </div>
-      <div className="flex flex-col items-center justify-center gap-10 md:w-[65%] w-full">
+      <BackgroundSvg />
+      <div className="flex flex-col items-center justify-center md:gap-10 gap-10 md:w-[65%] w-full max-md:pb-8">
         <div className="w-full h-full flex flex-col items-center justify-center gap-4">
           <LabelText>
             <h4
@@ -247,24 +344,7 @@ export function QuizQuestions({
           ref={indicatorsRef}
           className="grid grid-rows-1 grid-cols-[repeat(5,1fr)_auto] w-full"
         >
-          {questions.map((_, index) => {
-            const isAnswered = index in selectedAnswers;
-            const isAccessible =
-              index <= lastAnsweredIndex || index === currentQuestionIndex;
-
-            return (
-              <Indicator
-                number={index + 1}
-                isAccessible={isAnswered}
-                key={`indicator-${index}`}
-                isLast={index + 1 === questions.length}
-                isActive={currentQuestionIndex >= index}
-                inLineActive={currentQuestionIndex > index}
-                handleClick={() => goToQuestion(index)}
-                disabled={!isAccessible || isAnimating}
-              />
-            );
-          })}
+          {indicatorElements}
         </div>
       </div>
       {result.open && (
