@@ -18,8 +18,8 @@ const SvgOutline: React.FC = () => {
         style={{ filter: "drop-shadow(0 0 4px rgba(244,234,143,0.3))" }}
         className="absolute right-0 w-[1px] h-[95%] top-[50%] -translate-y-[50%]"
       >
-        <div className="absolute top-0 left-0  w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical" />
-        <div className="absolute bottom-0 -right-1.5 translate-x-[50%] w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical-reversed" />
+        <div className="md:absolute max-md:hidden top-0 left-0  w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical" />
+        <div className="md:absolute max-md:hidden bottom-0 -right-1.5 translate-x-[50%] w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical-reversed" />
         <VerticalLine className="h-[95%] absolute top-[50%] -right-1.5 -translate-y-[50%] rotate-180" />
         <VerticalLine />
       </div>
@@ -28,8 +28,8 @@ const SvgOutline: React.FC = () => {
         style={{ filter: "drop-shadow(0 0 4px rgba(244,234,143,0.3))" }}
         className="absolute left-0 w-[1px] h-[95%] top-[50%] -translate-y-[50%]"
       >
-        <div className="absolute bottom-0 left-0 -translate-x-[50%] w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical" />
-        <div className="absolute bottom-0 -left-1.5 -translate-x-[50%] w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical-reversed" />
+        <div className="md:absolute max-md:hidden bottom-0 left-0 -translate-x-[50%] w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical" />
+        <div className="md:absolute max-md:hidden bottom-0 -left-1.5 -translate-x-[50%] w-[2px] rounded-full h-[8px] animate-sweep sweep-vertical-reversed" />
         <VerticalLine />
         <VerticalLine className="h-[95%] absolute top-[50%] -left-1.5 -translate-y-[50%] rotate-180" />
       </div>
@@ -39,8 +39,8 @@ const SvgOutline: React.FC = () => {
         style={{ filter: "drop-shadow(0 0 4px rgba(244,234,143,0.3))" }}
         className="absolute bottom-0 md:w-[95%] w-[85%] h-[2px] left-[50%] -translate-x-[50%]"
       >
-        <div className="absolute top-0 right-0 w-[8px] rounded-full h-[2px] animate-sweep sweep-right" />
-        <div className="absolute -bottom-[5px] left-0 w-[8px] rounded-full h-[2px] animate-sweep sweep-left" />
+        <div className="md:absolute max-md:hidden top-0 right-0 w-[8px] rounded-full h-[2px] animate-sweep sweep-right" />
+        <div className="md:absolute max-md:hidden -bottom-[5px] left-0 w-[8px] rounded-full h-[2px] animate-sweep sweep-left" />
         <HorizontalLine />
         <HorizontalLine className="w-[95%] absolute left-[50%] -bottom-[5px] -translate-x-[50%] rotate-180" />
       </div>

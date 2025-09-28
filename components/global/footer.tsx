@@ -6,30 +6,26 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
-import { usePathname } from "next/navigation";
 import { RippleImage } from "../ripple-image";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { FooterSVG } from "../svgs/footer-svg";
+import { useMobile } from "@/hooks/use-mobile";
 import { dev_url, site_name, email_address, trailer_url } from "@/lib/consts";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const Footer: React.FC = () => {
-  const pathname = usePathname();
+  const isMobile = useMobile();
   const pRef = useRef<HTMLHeadingElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const container = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
   const buttonsGroup = useRef<HTMLDivElement>(null);
+  const rippleContainerRef = useRef<HTMLDivElement>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
 
   useGSAP(
     () => {
-      // Timeline for image + h2 animation
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          start: "top 80%",
-          trigger: container.current,
-        },
-      });
-
       // Main headline split
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
@@ -43,10 +39,14 @@ const Footer: React.FC = () => {
               amount: 0.6,
               from: "random",
             },
+            scrollTrigger: {
+              trigger: h2Ref.current,
+              start: "top 70%",
+            },
           });
 
           // Add into the tl sequence after image ripple
-          tl.add(h2Tween, "<");
+          // tl.add("h2Title", 0);
           return h2Tween;
         },
       });
@@ -66,10 +66,10 @@ const Footer: React.FC = () => {
             ease: "power4.out",
             scrollTrigger: {
               trigger: pRef.current,
-              start: "top 80%",
+              start: "top 70%",
             },
           });
-
+          // tl.add("PTitle", "-=.3");
           return pTween;
         },
       });
@@ -77,23 +77,28 @@ const Footer: React.FC = () => {
       const buttons = gsap.utils.toArray<HTMLButtonElement>(
         buttonsGroup.current?.children || []
       );
-
-      // Image ripple comes first
-      tl.from(".image-ripple-container", {
-        opacity: 0,
-        duration: 1,
-        ease: "power1.out",
-      });
-
       // Buttons animation (own ScrollTrigger)
       gsap.from(buttons, {
         yPercent: 15,
-        opacity: 0,
+        autoAlpha: 0,
         stagger: 0.3,
         ease: "power2.inOut",
         duration: 1.2,
         scrollTrigger: {
-          trigger: buttonsGroup.current,
+          trigger: buttons,
+          start: "top 80%",
+        },
+      });
+
+      gsap.from(svgRef.current, {
+        scale: 0.5,
+        delay: 0.6,
+        rotation: 90,
+        autoAlpha: 0,
+        duration: 1.2,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: svgRef.current,
           start: "top 80%",
         },
       });
@@ -103,7 +108,26 @@ const Footer: React.FC = () => {
         pSplit.revert();
       };
     },
-    { scope: container, dependencies: [pathname] }
+    { scope: container }
+  );
+
+  useGSAP(
+    () => {
+      // Image animation - different for mobile and desktop
+      if (imageRef.current) {
+        gsap.from(imageRef.current, {
+          y: 50,
+          autoAlpha: 0,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: imageRef.current,
+            start: "top 80%",
+          },
+        });
+      }
+    },
+    { scope: container, dependencies: [isMobile] }
   );
 
   return (
@@ -137,11 +161,21 @@ const Footer: React.FC = () => {
       </div>
 
       <div className="footer-bottom-section 2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10">
-        <div className="md:absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%] max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%] aspect-square image-ripple-container">
-          <RippleImage
-            alt="Abstract landscape"
-            src="/images/static/footer-image.png"
-          />
+        <div
+          ref={rippleContainerRef}
+          className="absolute md:bottom-[0%] md:translate-y-[50%] md:left-[50%] md:-translate-x-[50%] max-md:h-[70%] max-md:aspect-square max-md:w-auto xl:w-[45%] lg:w-[60%] md:w-[60%] aspect-square image-ripple-container"
+        >
+          <FooterSVG ref={svgRef} />
+          {isMobile ? (
+            <img
+              ref={imageRef}
+              src="/images/static/footer-image.png"
+              className="w-full h-full object-cover"
+              alt="Glassy vertical-slit 'eye' and a small central flame"
+            />
+          ) : (
+            <RippleImage />
+          )}
         </div>
         <div className="flex items-center justify-between absolute inset-[auto_0%_0%]">
           <Text
