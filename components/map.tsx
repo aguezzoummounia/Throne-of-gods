@@ -1,12 +1,13 @@
 "use client";
 import gsap from "gsap";
 import Text from "./ui/text";
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import MapCard from "./map/map-card";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Container from "./global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import MapErrorBoundary from "./map/map-error-boundary";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -17,46 +18,48 @@ const Map: React.FC = () => {
 
   useGSAP(
     () => {
+      if (!h2Ref.current || !pRef.current || !containerRef.current) return;
+
       const h2Split = new SplitText(h2Ref.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-        onSplit: (self) => {
-          let splitTween = gsap.from(self.lines, {
-            autoAlpha: 0,
-            stagger: 0.2,
-            duration: 1.2,
-            yPercent: 100,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 80%",
-            },
-          });
-          return splitTween;
-        },
       });
+
       const pSplit = new SplitText(pRef.current, {
         type: "lines",
         mask: "lines",
         autoSplit: true,
-        onSplit: (self) => {
-          let splitTween = gsap.from(self.lines, {
-            autoAlpha: 0,
-            stagger: 0.2,
-            duration: 1.2,
-            yPercent: 100,
-            ease: "expo.out",
-            scrollTrigger: {
-              trigger: containerRef.current,
-              start: "top 60%",
-            },
-          });
-          return splitTween;
+      });
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+          // once: true, // Performance: only animate once
         },
       });
 
+      tl.from(h2Split.lines, {
+        autoAlpha: 0,
+        stagger: 0.2,
+        duration: 1.2,
+        yPercent: 100,
+        ease: "expo.out",
+      }).from(
+        pSplit.lines,
+        {
+          autoAlpha: 0,
+          stagger: 0.2,
+          duration: 1.2,
+          yPercent: 100,
+          ease: "expo.out",
+        },
+        "-=0.8" // Start paragraph animation before h2 finishes
+      );
+
       return () => {
+        // tl.kill();
         h2Split.revert();
         pSplit.revert();
       };
@@ -68,7 +71,7 @@ const Map: React.FC = () => {
       id="ereosa"
       as="section"
       ref={containerRef}
-      className="min-h-screen px-0 max-md:px-0 grid md:gap-20 gap-14 md:pt-24 pt-16 scroll-m-10"
+      className="min-h-fit px-0 max-md:px-0 grid md:gap-20 gap-14 md:pt-24 pt-16 scroll-m-10"
     >
       <div className="grid gap-8 max-w-[600px] w-full mx-auto text-center max-md:px-5">
         <Text as="h2" ref={h2Ref} variant="lead">
@@ -86,9 +89,13 @@ const Map: React.FC = () => {
         </Text>
       </div>
 
-      <MapCard />
+      <div className="w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]">
+        <MapErrorBoundary>
+          <MapCard />
+        </MapErrorBoundary>
+      </div>
     </Container>
   );
 };
 
-export default Map;
+export default memo(Map);

@@ -9,8 +9,8 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <About />
-      <CharactersSection />
+      {/* <About /> */}
+      {/* <CharactersSection /> */}
       <Map />
       <Quiz />
       <Footer />

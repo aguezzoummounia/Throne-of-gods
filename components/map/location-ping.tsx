@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { memo } from "react";
 import { useInteractiveSound } from "@/hooks/useInteractiveSound";
 
 interface LocationPingProps {
@@ -19,9 +20,14 @@ const LocationPing = ({
   ariaControls,
 }: LocationPingProps) => {
   const soundEvents = useInteractiveSound();
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
     if (e.key === "Escape") {
       handleBlur();
+    } else if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      handleClick();
+      soundEvents.onClick();
     }
   };
   return (
@@ -38,6 +44,7 @@ const LocationPing = ({
         handleClick();
         soundEvents.onClick();
       }}
+      onFocus={soundEvents.onFocus}
       className={cn(
         "cursor-pointer absolute lg:w-[46px] lg:h-[46px] md:w-9 md:h-9 w-6 h-6 flex items-center justify-center group location-ping",
         className
@@ -108,4 +115,4 @@ const LocationPing = ({
   );
 };
 
-export default LocationPing;
+export default memo(LocationPing);

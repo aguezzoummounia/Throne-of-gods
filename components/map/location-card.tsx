@@ -1,11 +1,11 @@
 "use client";
 import gsap from "gsap";
-import { useRef } from "react";
-import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useRef, memo } from "react";
 import { useGSAP } from "@gsap/react";
 import Text from "@/components/ui/text";
 import { SplitText } from "gsap/SplitText";
+import SmartImage from "../ui/smart-image";
 import AnimatedUnderline from "../ui/animated-underline";
 import ElementsSvgOutline from "@/components/elements-svg-outline";
 
@@ -39,107 +39,122 @@ const LocationCard = ({
 
   useGSAP(
     () => {
+      if (
+        !cardRef.current ||
+        !titleRef.current ||
+        !labelRef.current ||
+        !detailsRef.current
+      )
+        return;
+
       const tl = gsap.timeline();
 
+      // Main card animation
       tl.to(cardRef.current, {
         scale: 1,
         autoAlpha: 1,
         duration: 0.8,
         ease: "power2.out",
-      })
-        .from(
+      });
+
+      // Image animation (if exists)
+      if (imageRef.current) {
+        tl.from(
           imageRef.current,
           {
             scale: 1.3,
             duration: 1,
             ease: "power2.out",
           },
-          "-=.4"
-        )
-        .addLabel("label", "-=.6")
-        .addLabel("title", "-=.3")
-        .addLabel("details", "-=.3");
+          "-=0.4"
+        );
+      }
 
+      // Text animations with proper null checks
       const titleSplit = new SplitText(titleRef.current, {
         type: "chars",
         smartWrap: true,
         autoSplit: true,
-        onSplit: (self) => {
-          const titleTween = gsap.from(self.chars, {
-            opacity: 0,
-            duration: 0.6,
-            ease: "power2.out",
-            stagger: { from: "random", each: 0.05 },
-          });
-          // Add it to the timeline after the first two tweens
-          tl.add(titleTween, "label");
-          return titleTween;
-        },
       });
 
       const labelSplit = new SplitText(labelRef.current, {
         type: "chars",
         smartWrap: true,
         autoSplit: true,
-        onSplit: (self) => {
-          const labelTween = gsap.from(self.chars, {
-            opacity: 0,
-            duration: 1,
-            ease: "power2.out",
-            stagger: { from: "random", each: 0.05 },
-          });
-          tl.add(labelTween, "title");
-          return labelTween;
-        },
       });
 
       const pSplit = new SplitText(detailsRef.current, {
         type: "words",
         autoSplit: true,
-        onSplit: (self) => {
-          const pTween = gsap.from(self.words, {
-            duration: 1,
-            stagger: 0.1,
-            autoAlpha: 0,
-            yPercent: 100,
-            ease: "power4.out",
-          });
-          tl.add(pTween, "details");
-          return pTween;
-        },
       });
+
+      // Add text animations to timeline
+      tl.from(
+        labelSplit.chars,
+        {
+          opacity: 0,
+          duration: 0.6,
+          ease: "power2.out",
+          stagger: { from: "random", each: 0.03 },
+        },
+        "-=0.6"
+      )
+        .from(
+          titleSplit.chars,
+          {
+            opacity: 0,
+            duration: 0.6,
+            ease: "power2.out",
+            stagger: { from: "random", each: 0.03 },
+          },
+          "-=0.3"
+        )
+        .from(
+          pSplit.words,
+          {
+            duration: 0.8,
+            stagger: 0.05,
+            autoAlpha: 0,
+            yPercent: 50,
+            ease: "power2.out",
+          },
+          "-=0.3"
+        );
 
       // Cleanup
       return () => {
-        if (titleSplit) titleSplit.revert();
-        if (labelSplit) labelSplit.revert();
-        if (pSplit) pSplit.revert();
+        tl.kill();
+        titleSplit.revert();
+        labelSplit.revert();
+        pSplit.revert();
       };
     },
     {
       scope: cardRef,
+      dependencies: [title, label, details], // Re-run if content changes
     }
   );
 
   return (
     <div
       role="dialog"
-      aria-label={title}
+      aria-label={`${label}: ${title}`}
+      aria-live="polite"
       ref={cardRef}
       className={cn(
         "aspect-[2/3] w-[220px] h-auto bg-blurred backdrop-blur-xl absolute z-20 rounded-lg overflow-clip group",
-        "transform-origin-center scale-0 invisible",
+        "transform-origin-center scale-0 invisible focus-within:ring-2 focus-within:ring-foreground/50",
         className
       )}
     >
       {type === "new" ? (
         <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px]">
-          <Image
+          <SmartImage
             fill
             src={image}
             ref={imageRef}
-            sizes="500px"
-            alt={`${title} power image`}
+            sizes="50vw"
+            alt={`${title} location in ${label}`}
             className="object-cover power-card-image"
           />
 
@@ -175,23 +190,24 @@ const LocationCard = ({
         </div>
       ) : (
         <div className="absolute inset-0 z-1 overflow-clip bg-blurred backdrop-blur-xl rounded-[10px]">
-          <Image
+          <SmartImage
             fill
             src={"/images/bg/new-bg-6.webp"}
-            alt={`${title} power image`}
+            alt=""
+            role="presentation"
             sizes="220px"
             className="object-cover power-card-image blur-xs"
           />
           <div className="relative flex w-full h-full flex-col gap-2 px-3.5 py-4">
             {/* bg-gradient-to-t from-black via-zinc-900/60 */}
 
-            <Image
+            <SmartImage
               width={220}
               src={image}
               height={100}
               ref={imageRef}
               sizes="220px"
-              alt={`${title} power image`}
+              alt={`${title} location in ${label}`}
               className="object-cover aspect-[5/4] rounded-[5px] power-card-image"
             />
 
@@ -232,4 +248,4 @@ const LocationCard = ({
   );
 };
 
-export default LocationCard;
+export default memo(LocationCard);
