@@ -1,8 +1,8 @@
 "use client";
 import gsap from "gsap";
-import { useRef } from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useRef, memo } from "react";
 import { useGSAP } from "@gsap/react";
 import Text from "@/components/ui/text";
 import { SplitText } from "gsap/SplitText";
@@ -19,12 +19,12 @@ interface PowerCardProps {
   className?: string;
 }
 
-const PowerCard: React.FC<PowerCardProps> = ({
+const PowerCard = memo<PowerCardProps>(function PowerCard({
   name,
   image,
   overview,
   className,
-}) => {
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
 
   useGSAP(
@@ -33,13 +33,20 @@ const PowerCard: React.FC<PowerCardProps> = ({
         scrollTrigger: {
           trigger: cardRef.current,
           start: "top 80%",
+          once: true, // Only animate once for better performance
         },
       });
+
+      // Set initial will-change for better performance
+      gsap.set(cardRef.current, { willChange: "transform, opacity" });
+      gsap.set(".power-card-image", { willChange: "transform" });
+
       tl.to(cardRef.current, {
         scale: 1,
         autoAlpha: 1,
         duration: 0.8,
         ease: "power2.out",
+        force3D: true, // Force hardware acceleration
       })
         .from(
           ".power-card-image",
@@ -47,6 +54,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
             scale: 1.3,
             duration: 1,
             ease: "power2.out",
+            force3D: true,
           },
           "-=.4"
         )
@@ -85,6 +93,9 @@ const PowerCard: React.FC<PowerCardProps> = ({
       });
 
       return () => {
+        // Clean up will-change properties
+        gsap.set(cardRef.current, { willChange: "auto" });
+        gsap.set(".power-card-image", { willChange: "auto" });
         pSplit.revert();
         titleSplit.revert();
       };
@@ -98,7 +109,7 @@ const PowerCard: React.FC<PowerCardProps> = ({
     <div
       ref={cardRef}
       className={cn(
-        "absolute z-[1] md:w-[250px] w-[230px] aspect-[2/3] scale-0 invisible",
+        "absolute z-[1] md:w-[250px] w-[230px] aspect-[2/3] scale-0 invisible transform-gpu",
         className
       )}
     >
@@ -107,9 +118,11 @@ const PowerCard: React.FC<PowerCardProps> = ({
           <Image
             fill
             src={image}
-            sizes="500px"
+            sizes="50vw"
             alt={`${name} image`}
-            className="object-cover power-item-image power-card-image"
+            className="object-cover power-item-image power-card-image transform-gpu"
+            priority={false}
+            loading="lazy"
           />
 
           <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-zinc-900/60 to-transparent flex flex-col px-4 py-4.5 pt-30 gap-2">
@@ -134,6 +147,6 @@ const PowerCard: React.FC<PowerCardProps> = ({
       </TiltedCardWrapper>
     </div>
   );
-};
+});
 
 export default PowerCard;
