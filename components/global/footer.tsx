@@ -44,9 +44,6 @@ const Footer: React.FC = () => {
               start: "top 70%",
             },
           });
-
-          // Add into the tl sequence after image ripple
-          // tl.add("h2Title", 0);
           return h2Tween;
         },
       });
@@ -69,7 +66,6 @@ const Footer: React.FC = () => {
               start: "top 70%",
             },
           });
-          // tl.add("PTitle", "-=.3");
           return pTween;
         },
       });

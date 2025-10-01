@@ -1,10 +1,12 @@
 "use client";
 
 import Image, { ImageProps } from "next/image";
+import { forwardRef } from "react";
 import { usePreloader } from "@/context/asset-loader-provider";
 
-interface SmartImageProps extends ImageProps {
+interface SmartImageProps extends Omit<ImageProps, "src"> {
   src: string;
+  alt: string;
   fallbackToOptimized?: boolean;
 }
 
@@ -15,19 +17,29 @@ interface SmartImageProps extends ImageProps {
  * This component maintains all Next.js Image features while leveraging
  * the preloader cache to avoid duplicate network requests.
  */
-export default function SmartImage({
-  src,
-  fallbackToOptimized = true,
-  ...props
-}: SmartImageProps) {
-  const { isImagePreloaded } = usePreloader();
+const SmartImage = forwardRef<HTMLImageElement, SmartImageProps>(
+  ({ src, alt, fallbackToOptimized = true, ...props }, ref) => {
+    const { isImagePreloaded } = usePreloader();
 
-  // Check if the image was preloaded
-  const isPreloaded = isImagePreloaded(src);
+    // Check if the image was preloaded
+    const isPreloaded = isImagePreloaded(src);
 
-  // If image is preloaded, use unoptimized version to avoid additional requests
-  // If not preloaded and fallback is enabled, use Next.js optimization
-  const shouldUseUnoptimized = isPreloaded || !fallbackToOptimized;
+    // If image is preloaded, use unoptimized version to avoid additional requests
+    // If not preloaded and fallback is enabled, use Next.js optimization
+    const shouldUseUnoptimized = isPreloaded || !fallbackToOptimized;
 
-  return <Image src={src} unoptimized={shouldUseUnoptimized} {...props} />;
-}
+    return (
+      <Image
+        ref={ref}
+        src={src}
+        alt={alt}
+        unoptimized={shouldUseUnoptimized}
+        {...props}
+      />
+    );
+  }
+);
+
+SmartImage.displayName = "SmartImage";
+
+export default SmartImage;

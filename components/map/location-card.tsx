@@ -31,11 +31,10 @@ const LocationCard = ({
   className,
 }: PowerCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-
+  const imageRef = useRef<HTMLImageElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const labelRef = useRef<HTMLParagraphElement | null>(null);
   const detailsRef = useRef<HTMLParagraphElement | null>(null);
-  const imageRef = useRef<HTMLImageElement | null>(null);
 
   useGSAP(
     () => {
@@ -55,20 +54,15 @@ const LocationCard = ({
         autoAlpha: 1,
         duration: 0.8,
         ease: "power2.out",
-      });
-
-      // Image animation (if exists)
-      if (imageRef.current) {
-        tl.from(
-          imageRef.current,
-          {
-            scale: 1.3,
-            duration: 1,
-            ease: "power2.out",
-          },
-          "-=0.4"
-        );
-      }
+      }).from(
+        imageRef.current,
+        {
+          scale: 1.3,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      );
 
       // Text animations with proper null checks
       const titleSplit = new SplitText(titleRef.current, {
@@ -93,7 +87,7 @@ const LocationCard = ({
         labelSplit.chars,
         {
           opacity: 0,
-          duration: 0.6,
+          duration: 0.8,
           ease: "power2.out",
           stagger: { from: "random", each: 0.03 },
         },
@@ -103,16 +97,16 @@ const LocationCard = ({
           titleSplit.chars,
           {
             opacity: 0,
-            duration: 0.6,
+            duration: 0.8,
             ease: "power2.out",
             stagger: { from: "random", each: 0.03 },
           },
-          "-=0.3"
+          "-=0.6"
         )
         .from(
           pSplit.words,
           {
-            duration: 0.8,
+            duration: 1.2,
             stagger: 0.05,
             autoAlpha: 0,
             yPercent: 50,

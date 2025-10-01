@@ -1,8 +1,8 @@
-const dev_url = process.env.NEXT_PUBLIC_SITE_NAME || "";
 const site_name = process.env.NEXT_PUBLIC_SITE_NAME || "";
 const trailer_url = process.env.NEXT_PUBLIC_YOUTUBE_TRAILER || "";
 const email_address = process.env.NEXT_PUBLIC_EMAIL_ADDRESS || "";
 const channel_handler = process.env.NEXT_PUBLIC_YOUTUBE_HANDLE || "";
+const dev_url = "https://www.fiverr.com/younesbnlmoudn";
 
 const power_item_positions = {
   1: [{ item: "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" }],
@@ -87,6 +87,7 @@ const assets_to_load: string[] = [
   "/images/static/cropped-border.png",
   "/images/static/footer-image.png",
   "/images/static/grain.png",
+  "/images/static/alternate-hero-image.png",
   "fonts",
 ];
 export interface SoundAsset {
