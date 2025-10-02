@@ -1,11 +1,11 @@
 "use client";
 import gsap from "gsap";
 import Text from "../ui/text";
-import Image from "next/image";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Button from "../ui/button-or-link";
+import SmartImage from "../ui/smart-image";
 import Container from "../global/container";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ElementsSvgOutline from "../elements-svg-outline";
@@ -82,7 +82,7 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
     <Container ref={containerRef} as="section" className="min-h-auto">
       <div className="relative bg-[rgba(0,0,0,.05)] text-white min-h-[65vh] rounded-xl overflow-hidden shadow-md">
         <ElementsSvgOutline size="large" className="z-1 pointer-events-none" />
-        <Image
+        <SmartImage
           fill
           src={image}
           sizes="90vw"

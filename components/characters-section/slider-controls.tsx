@@ -1,50 +1,86 @@
+"use client";
+import { memo } from "react";
 import { cn } from "@/lib/utils";
 
 interface SliderControlsProps {
-  handlePrev: (prev: any) => void;
-  handleNext: (prev: any) => void;
-  handleNavigate: (prev: any) => void;
+  handlePrev: () => void;
+  handleNext: () => void;
+  handleNavigate: () => void;
 }
 
-const SliderControls = ({
-  handlePrev,
-  handleNext,
-  handleNavigate,
-}: SliderControlsProps) => {
-  return (
-    <div className="absolute md:bottom-10 bottom-0 z-10 md:-translate-x-1/2 md:left-1/2 left-[5vw] max-md:right-[5vw] flex items-center gap-4">
-      <div className="md:w-[150px] w-[calc(100%_-_60px)] flex justify-between items-center gap-[4px] bg-blurred backdrop-blur-lg rounded-full p-[3px] border-bronze/20 border">
-        <button
-          onClick={handlePrev}
-          className={`p-1 rounded-full flex focus:outline-none focus:ring-2 focus:ring-white/50 border-bronze/20 border cursor-pointer`}
-          aria-label="Next slide"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 text-white"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+const SliderControls = memo<SliderControlsProps>(
+  ({ handlePrev, handleNext, handleNavigate }) => {
+    return (
+      <div className="absolute md:bottom-10 bottom-3 z-10 md:-translate-x-1/2 md:left-1/2 max-md:inset-x-[5vw] flex items-center justify-between gap-4">
+        <div className="md:w-[150px] w-[calc(100%_-_60px)] flex justify-between items-center gap-1 bg-blurred backdrop-blur-lg rounded-full p-1 border-bronze/20 border">
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="p-2 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white/50 border-bronze/20 border cursor-pointer hover:bg-white/10 active:scale-95 transition-all duration-150"
+            aria-label="Previous slide"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M15 19l-7-7 7-7"
-            />
-          </svg>
-        </button>
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 19l-7-7 7-7"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            className="p-2 rounded-full flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-white/50 border-bronze/20 border cursor-pointer hover:bg-white/10 active:scale-95 transition-all duration-150"
+            aria-label="Next slide"
+          >
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </button>
+        </div>
+
         <button
-          onClick={handleNext}
-          className={`p-1 rounded-full flex focus:outline-none focus:ring-2 focus:ring-white/50 border-bronze/20 border cursor-pointer`}
-          aria-label="Previous slide"
+          type="button"
+          onClick={handleNavigate}
+          className={cn(
+            "group relative flex items-center justify-center w-[38px] h-[38px] rounded-full",
+            "bg-blurred backdrop-blur-lg border border-bronze/20",
+            "focus:outline-none focus:ring-2 focus:ring-white/50",
+            "hover:bg-white/10 hover:border-bronze/40 hover:shadow-[0_0_20px_rgba(244,234,143,0.3)]",
+            "active:scale-95 transition-all duration-200",
+            "cursor-pointer overflow-visible"
+          )}
+          aria-label="View character details"
         >
+          {/* Perfect dual-ring pulse */}
+          <div className="absolute -inset-[5px] border border-white/30 rounded-full button-pulse-ring-1" />
+          <div className="absolute -inset-[3px] border border-white/20 rounded-full button-pulse-ring-2" />
+
+          {/* Icon with enhanced hover effect */}
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-5 h-5 text-white"
+            className="w-5 h-5 text-white -rotate-45 group-hover:scale-110 group-hover:text-bronze transition-all duration-200 relative z-10"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -55,33 +91,10 @@ const SliderControls = ({
           </svg>
         </button>
       </div>
+    );
+  }
+);
 
-      <button
-        onClick={handleNavigate}
-        className={cn(
-          "focus:ring-2 focus:ring-white/50p-1 rounded-full flex items-center justify-center focus:outline-none border-bronze/20 border cursor-pointer bg-blurred backdrop-blur-lg w-[38px] h-[38px]"
-        )}
-        aria-label="See character"
-      >
-        <div className="border-white/30 border w-[46px] rounded-full aspect-square absolute -inset-[5px] button-pulse-animation" />
-        <div className="border-white/30 border w-[42px] rounded-full aspect-square absolute -inset-[3px] delay-2000 button-pulse-animation" />
-        <svg
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          className="text-white w-5 h-5 -rotate-45"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </button>
-    </div>
-  );
-};
+SliderControls.displayName = "SliderControls";
 
 export default SliderControls;

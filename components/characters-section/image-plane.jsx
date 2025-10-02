@@ -10,9 +10,11 @@ const ImagePlane = ({
   waveAmplitude,
   index,
   scrollVelocity,
+  planeSegments,
+  shaderPerformance,
 }) => {
-  const shaderRef = useRef(null);
   const texture = useLoader(THREE.TextureLoader, image.src);
+  const shaderRef = useRef(null);
 
   const mouseData = useRef({
     pos: new THREE.Vector2(),
@@ -45,26 +47,38 @@ const ImagePlane = ({
       uMouse: { value: mouseData.current.pos },
       uMouseVelocity: { value: mouseData.current.velocity },
       uMouseInfluence: { value: 0 },
+      uPerformanceLevel: { value: shaderPerformance },
     };
-  }, [texture, width, height, waveAmplitude, index]);
+  }, [texture, width, height, waveAmplitude, index, shaderPerformance]);
 
   useFrame(({ clock }, delta) => {
-    mouseData.current.pos.lerp(mouseData.current.targetPos, 0.1);
-    const velocity = mouseData.current.pos
-      .clone()
-      .sub(mouseData.current.lastPos);
-    mouseData.current.velocity.lerp(velocity, 0.15);
-    mouseData.current.lastPos.copy(mouseData.current.pos);
+    // Only update mouse uniforms if performance level is not 'low'
+    if (shaderPerformance > 0) {
+      mouseData.current.pos.lerp(mouseData.current.targetPos, 0.1);
+      const velocity = mouseData.current.pos
+        .clone()
+        .sub(mouseData.current.lastPos);
+      mouseData.current.velocity.lerp(velocity, 0.15);
+      mouseData.current.lastPos.copy(mouseData.current.pos);
 
-    const speed = mouseData.current.velocity.length();
-    mouseData.current.targetInfluence =
-      speed > 0.001 ? Math.min(speed * 5.0, 1.0) : 0.0;
-    mouseData.current.influence = THREE.MathUtils.damp(
-      mouseData.current.influence,
-      mouseData.current.targetInfluence,
-      4,
-      delta
-    );
+      const speed = mouseData.current.velocity.length();
+      mouseData.current.targetInfluence =
+        speed > 0.001 ? Math.min(speed * 5.0, 1.0) : 0.0;
+      mouseData.current.influence = THREE.MathUtils.damp(
+        mouseData.current.influence,
+        mouseData.current.targetInfluence,
+        4,
+        delta
+      );
+      if (shaderRef.current) {
+        shaderRef.current.uniforms.uMouse.value.copy(mouseData.current.pos);
+        shaderRef.current.uniforms.uMouseVelocity.value.copy(
+          mouseData.current.velocity
+        );
+        shaderRef.current.uniforms.uMouseInfluence.value =
+          mouseData.current.influence;
+      }
+    }
 
     if (shaderRef.current) {
       shaderRef.current.uniforms.uTime.value = clock.getElapsedTime();
@@ -74,27 +88,23 @@ const ImagePlane = ({
         4,
         delta
       );
-      shaderRef.current.uniforms.uMouse.value.copy(mouseData.current.pos);
-      shaderRef.current.uniforms.uMouseVelocity.value.copy(
-        mouseData.current.velocity
-      );
-      shaderRef.current.uniforms.uMouseInfluence.value =
-        mouseData.current.influence;
     }
   });
 
   return (
     <mesh
       onPointerMove={(e) => {
-        if (e.uv) {
+        if (e.uv && shaderPerformance > 0) {
           mouseData.current.targetPos.copy(e.uv);
         }
       }}
       onPointerLeave={() => {
-        mouseData.current.targetInfluence = 0;
+        if (shaderPerformance > 0) {
+          mouseData.current.targetInfluence = 0;
+        }
       }}
     >
-      <planeGeometry args={[width, height, 32, 32]} />
+      <planeGeometry args={[width, height, planeSegments, planeSegments]} />
       <shaderMaterial
         ref={shaderRef}
         vertexShader={vertexShader}
@@ -106,5 +116,4 @@ const ImagePlane = ({
     </mesh>
   );
 };
-
 export default ImagePlane;

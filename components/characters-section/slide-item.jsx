@@ -13,7 +13,9 @@ const SlideItem = ({
   slideWidth,
   slideHeight,
   waveAmplitude,
-  introProgress,
+  isVisible,
+  planeSegments,
+  shaderPerformance,
 }) => {
   const { viewport } = useThree();
   const groupRef = useRef(null);
@@ -58,31 +60,30 @@ const SlideItem = ({
       6,
       delta
     );
-
-    const centerIndex = Math.round(scrollPosition.current / totalSlideWidth);
-    const distanceFromCenterIndex = index - centerIndex;
-    const parallaxIntensity = 1.5;
-    const zOffset =
-      Math.pow(Math.abs(distanceFromCenterIndex), 1.2) *
-      parallaxIntensity *
-      (1 - introProgress.current);
-    groupRef.current.position.z = -zOffset;
   });
 
   return (
     <group ref={groupRef}>
-      <Suspense
-        fallback={<PlaceholderPlane width={slideWidth} height={slideHeight} />}
-      >
-        <ImagePlane
-          image={image}
-          width={slideWidth}
-          height={slideHeight}
-          waveAmplitude={waveAmplitude}
-          index={index}
-          scrollVelocity={scrollVelocity}
-        />
-      </Suspense>
+      {isVisible ? (
+        <Suspense
+          fallback={
+            <PlaceholderPlane width={slideWidth} height={slideHeight} />
+          }
+        >
+          <ImagePlane
+            image={image}
+            width={slideWidth}
+            height={slideHeight}
+            waveAmplitude={waveAmplitude}
+            index={index}
+            scrollVelocity={scrollVelocity}
+            planeSegments={planeSegments}
+            shaderPerformance={shaderPerformance}
+          />
+        </Suspense>
+      ) : (
+        <PlaceholderPlane width={slideWidth} height={slideHeight} />
+      )}
     </group>
   );
 };

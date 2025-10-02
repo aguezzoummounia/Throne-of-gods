@@ -2,10 +2,10 @@
 import gsap from "gsap";
 import Text from "../ui/text";
 import { useRef } from "react";
-import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import LabelText from "../ui/label-text";
+import SmartImage from "../ui/smart-image";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -95,7 +95,7 @@ const CharacterHero: React.FC<CharacterHeroProps> = ({
       ref={containerRef}
       className="w-full h-svh relative overflow-clip backdrop-blur-3xl bg-blurred"
     >
-      <Image
+      <SmartImage
         priority
         src={image}
         width={1920}

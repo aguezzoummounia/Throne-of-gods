@@ -7,10 +7,13 @@ import SplitText from "gsap/SplitText";
 import WEBGLSlider from "./webgl-slider";
 import Container from "../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import EmblaCharacterSlider from "../embla-characters-slider/character-slider";
+import { useMobile } from "@/hooks/use-mobile";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
 const CharactersSection = () => {
+  const isMobile = useMobile();
   const container = useRef<HTMLDivElement>(null);
   const h2Ref = useRef<HTMLHeadingElement>(null);
 
@@ -51,7 +54,7 @@ const CharactersSection = () => {
       as="section"
       id="characters"
       ref={container}
-      className="md:px-0 px-0 flex 2xl:gap-10 max-md:gap-4 flex-col min-h-fit md:pt-24 pt-16 scroll-m-10"
+      className="md:px-0 px-0 flex gap-10 max-md:gap-4 flex-col min-h-fit md:pt-24 pt-16 scroll-m-10"
     >
       <Text
         as="h2"
@@ -62,7 +65,7 @@ const CharactersSection = () => {
         But no story shall live without the ones who walk it. These are the
         cursed, the chosen, and the condemned
       </Text>
-      <WEBGLSlider />
+      {isMobile ? <EmblaCharacterSlider /> : <WEBGLSlider />}
     </Container>
   );
 };

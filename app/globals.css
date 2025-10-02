@@ -347,8 +347,8 @@ body {
     opacity: 0.8;
   }
   50% {
-    transform: scale(1.05);
-    opacity: 0.3;
+    transform: scale(1.1);
+    opacity: 0.2;
   }
   100% {
     transform: scale(1);
@@ -356,8 +356,38 @@ body {
   }
 }
 
-.button-pulse-animation {
-  animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+@keyframes pulse-dual {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+.button-pulse-ring-1 {
+  animation: pulse-dual 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0s;
+}
+
+.button-pulse-ring-2 {
+  animation: pulse-dual 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 1s;
+}
+
+.button-pulse-ring-1:hover,
+.button-pulse-ring-2:hover {
+  animation-duration: 1.4s;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
 }
 
 /* grain overlay animation keyframe */

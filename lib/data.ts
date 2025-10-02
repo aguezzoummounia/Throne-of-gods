@@ -1365,60 +1365,80 @@ const charactersArray = [
     name: "jarvan",
     slug: "jarvan",
     src: "/images/characters/character-1.jpeg",
+    overview:
+      "Jarvan the First, Emperor of Galeeria, outlawed prayer and burned temples across the north. Declaring 'The strong rule, the weak pray,' he embodied tyranny. Alongside Valeon, his actions fractured the world and left a legacy of ruin.",
   },
   {
     id: 2,
     name: "valeon",
     slug: "valeon",
     src: "/images/characters/character-2.jpeg",
+    overview:
+      "Valeon, ruler of Valemyra, turned his sacred flame into currency and fueled endless wars for profit. His greed devastated Erosea and led to his downfall. A blood curse now plagues his descendants, sealing his legacy as a gold-obsessed emperor.",
   },
   {
     id: 3,
     name: "leticia",
     slug: "leticia",
     src: "/images/characters/character-3.jpeg",
+    overview:
+      "Empress Leticia of House Valaar rose as Imperial Consort to Jarvan XI. She orchestrated his murder, framed Kaen, and later tried to kill him at the funeral. Through her Order of Eternal Flames, she declared her son Agon the divine heir.",
   },
   {
     id: 4,
     name: "agon",
     slug: "agon",
     src: "/images/characters/character-4.jpeg",
+    overview:
+      "Prince Agon, eldest son of Jarvan XI and Leticia, was proclaimed the gods’ chosen heir. He accused Kaen of patricide and struck him down at Jarvan XI’s funeral. Yet Kaen later humiliated him in the Crown Prince Tournament by awakening divine lightning.",
   },
   {
     id: 5,
     name: "isolde",
     slug: "isolde",
     src: "/images/characters/character-5.jpeg",
+    overview:
+      "Queen Isolde Thalakar of Valemyra rose from obscurity by marrying into power. She burned her own son to fake the Valeon blood curse, securing fear and obedience. Ruthless and manipulative, she even orchestrated Sir Anthony’s abduction to protect her rule.",
   },
   {
     id: 6,
     name: "eternal-flames",
     slug: "eternal-flames",
     src: "/images/characters/character-6.jpeg",
+    overview:
+      "The Order of Eternal Flames, led by House Valaar, emerged from Eternea’s civil war preaching purity and fire. They crowned Agon as the 'true heir' while conspiring against Kaen. To him, they represent a corrupt faith he vows to destroy.",
   },
   {
     id: 7,
     name: "nicolas",
     slug: "nicolas",
     src: "/images/characters/character-7.jpeg",
+    overview:
+      "Nicolas, a brutal overseer at Castleberry Farm, was infamous for flogging the enslaved. When Kaen’s powers reawakened, he tried to punish him but was overpowered. Kaen snapped his neck, marking his first violent act in a new body.",
   },
   {
     id: 8,
     name: "harald",
     slug: "harald",
     src: "/images/characters/character-8.jpeg",
+    overview:
+      "Harald, fellow overseer at Castleberry Farm, tried to seize Kaen after Nicolas’s death. Witnessing Kaen’s lightning, he panicked and ordered everyone to flee. He later revealed the farm’s true nature as a disguised rebellion serving the Duke.",
   },
   {
     id: 9,
     name: "king of deep",
     slug: "king-of-deep",
     src: "/images/characters/character-9.jpeg",
+    overview:
+      "The King of the Deep sought to reclaim ancient lands with his Queen, commanding abyssal creatures in the War of Depths. Their unity contrasted humanity’s divisions. He was frozen by Goddess Law before vanishing into ash with the Queen.",
   },
   {
     id: 10,
     name: "queen of deep",
     slug: "queen-of-deep",
     src: "/images/characters/character-9.jpeg",
+    overview:
+      "The Queen of the Deep, alongside her King, waged war with sea-spawn that devoured light. Their bond forged devastation across land and sea. Even before Goddess Law, she chose defiance and vanished in unyielding unity with him.",
   },
 ];
 
