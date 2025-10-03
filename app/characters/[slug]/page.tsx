@@ -1,5 +1,8 @@
 import { notFound } from "next/navigation";
+import { Metadata, Viewport } from "next";
 import { charactersData } from "@/lib/data";
+import { CharacterSEO } from "@/lib/seo/character";
+import CharacterStructuredData from "@/components/seo/character-structured-data";
 import Footer from "@/components/global/footer";
 import NextCharacter from "@/components/characters/next-character";
 import CharacterHero from "@/components/characters/character-hero";
@@ -8,6 +11,44 @@ import CharacterOverview from "@/components/characters/character-overview";
 import CharacterRelation from "@/components/characters/character-relations";
 import CharacterBackstory from "@/components/characters/character-backstory";
 import CharacterPowers from "@/components/characters/powers/character-powers";
+
+// Generate metadata for character pages
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const slug = (await params).slug;
+  const character = charactersData[slug as keyof typeof charactersData];
+
+  if (!character) {
+    return CharacterSEO.generateFallbackMetadata(slug);
+  }
+
+  return CharacterSEO.generateCharacterMetadata(character);
+}
+
+// Generate viewport for character pages
+export async function generateViewport({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Viewport> {
+  const slug = (await params).slug;
+  const character = charactersData[slug as keyof typeof charactersData];
+
+  if (!character) {
+    // Return default viewport for fallback
+    return {
+      width: "device-width",
+      initialScale: 1,
+      maximumScale: 1,
+      userScalable: false,
+    };
+  }
+
+  return CharacterSEO.generateCharacterViewport(character);
+}
 
 export default async function CharacterPage({
   params,
@@ -30,6 +71,7 @@ export default async function CharacterPage({
 
   return (
     <>
+      <CharacterStructuredData character={character} />
       <CharacterHero
         name={character.name}
         image={character.image}

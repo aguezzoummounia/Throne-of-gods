@@ -166,20 +166,18 @@ global.HTMLCanvasElement = class MockHTMLCanvasElement {
 
 // Mock Element
 global.Element = class MockElement {
-  static prototype = {
-    getBoundingClientRect: vi.fn(() => ({
-      left: 0,
-      top: 0,
-      right: 100,
-      bottom: 100,
-      width: 100,
-      height: 100,
-      x: 0,
-      y: 0,
-    })),
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-  };
+  getBoundingClientRect = vi.fn(() => ({
+    left: 0,
+    top: 0,
+    right: 100,
+    bottom: 100,
+    width: 100,
+    height: 100,
+    x: 0,
+    y: 0,
+  }));
+  addEventListener = vi.fn();
+  removeEventListener = vi.fn();
 } as any;
 
 // Suppress console warnings in tests unless explicitly testing them

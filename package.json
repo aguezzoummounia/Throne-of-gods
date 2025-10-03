@@ -9,8 +9,7 @@
     "lint": "next lint",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:registry": "node scripts/run-registry-tests.js",
-    "test:integration": "node scripts/run-integration-test-suite.js"
+    "test:seo": "vitest run lib/seo/__tests__"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
