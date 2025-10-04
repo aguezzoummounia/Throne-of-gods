@@ -17,8 +17,8 @@ const AboutBackground = ({ children, className }: AboutBackgroundProp) => {
     >
       <BackgroundSvg className="text-bronze aspect-square max-lg:-mt-[60%]" />
       <div className="absolute md:left-10 left-5 md:bottom-5 bottom-7 flex md:gap-8 gap-4">
-        <DecorativeSVG1 />
-        <DecorativeSVG2 />
+        <DecorativeSVG1 className="w-[40px]" />
+        <DecorativeSVG2 className="w-[40px]" />
       </div>
       {children}
     </div>

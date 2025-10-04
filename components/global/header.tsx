@@ -14,6 +14,7 @@ import { usePathname } from "next/navigation";
 import SoundToggle from "../sound/sound-toggle";
 import useBodyLockScroll from "@/hooks/useBodyLockScroll";
 import { useTransitionRouter } from "next-view-transitions";
+import { usePreloader } from "@/context/asset-loader-provider";
 
 gsap.registerPlugin(useGSAP);
 
@@ -50,10 +51,14 @@ export const slideInOut = () => {
 };
 
 const Header: React.FC = () => {
+  const { deviceCapability } = usePreloader();
+  const canAnimate = deviceCapability.deviceTier === "high";
+
   const [isOpen, setIsOpen] = useState(false);
+
+  const navRef = useRef<HTMLElement>(null);
   const containerRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
-  const navRef = useRef<HTMLElement>(null);
   const optionsRef = useRef<HTMLDivElement>(null);
 
   useBodyLockScroll(isOpen);
@@ -64,7 +69,7 @@ const Header: React.FC = () => {
   // Optimized GSAP animation with direct refs
   useGSAP(
     () => {
-      if (!containerRef.current) return;
+      if (!containerRef.current || !canAnimate) return;
 
       const tl = gsap.timeline();
 
@@ -118,7 +123,7 @@ const Header: React.FC = () => {
         tl.kill();
       };
     },
-    { scope: containerRef }
+    { scope: containerRef, dependencies: [canAnimate] }
   );
 
   // Optimized handlers with useCallback

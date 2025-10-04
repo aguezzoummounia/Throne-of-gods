@@ -15,6 +15,9 @@ export default {
       transitionTimingFunction: {
         "custom-ease": "cubic-bezier(0.4, 0, 0.2, 1)",
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(circle, var(--tw-gradient-stops))",
+      },
       //   screens: {
       //     xs: "400px",
       //     xxs: "350px",

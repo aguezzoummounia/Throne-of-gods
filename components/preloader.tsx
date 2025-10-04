@@ -25,11 +25,18 @@ const PreloaderContent = ({
   isLoaded,
   onEnterClick,
   isExiting,
+  deviceCapability,
 }: {
   progress: number;
   isLoaded: boolean;
   onEnterClick: () => void;
   isExiting: boolean;
+  deviceCapability: {
+    deviceTier: "high" | "medium" | "low" | null;
+    shouldUseShaders: boolean;
+    isProfiled: boolean;
+    capabilities: any;
+  };
 }) => {
   const containerRef = useRef<HTMLElement>(null);
   const h4Ref = useRef<HTMLHeadingElement>(null);
@@ -56,7 +63,7 @@ const PreloaderContent = ({
         onSplit: (self) => {
           let splitTween = gsap.from(self.chars, {
             autoAlpha: 0,
-            stagger: { amount: 1.2, from: "start" },
+            stagger: { amount: 1.2, from: "center" },
           });
           tl.add(splitTween, "startH2");
           return splitTween;
@@ -128,14 +135,22 @@ const PreloaderContent = ({
             animated
             ref={buttonRef}
             onClick={onEnterClick}
-            disabled={!isLoaded || isExiting}
+            disabled={!isLoaded || !deviceCapability.isProfiled || isExiting}
             aria-label={
-              !isLoaded ? "Loading in progress" : "Start the experience"
+              !isLoaded
+                ? "Loading in progress"
+                : !deviceCapability.isProfiled
+                ? "Optimizing for your device..."
+                : "Start the experience"
             }
           >
-            {!isLoaded ? "Loading the experience..." : "Start exploring"}
+            {!isLoaded
+              ? "Loading the experience..."
+              : !deviceCapability.isProfiled
+              ? "Optimizing for your device..."
+              : "Start exploring"}
           </Button>
-          {isLoaded && (
+          {isLoaded && deviceCapability.isProfiled && (
             <Text
               as="p"
               variant="small"
@@ -143,7 +158,7 @@ const PreloaderContent = ({
               className="md:absolute right-[5%] top-0 md:text-[16px] text-[14px] max-md:ml-auto max-md:mt-4"
               aria-live="polite"
             >
-              Experience loaded
+              {deviceCapability.deviceTier && <>Experience Loaded.</>}
             </Text>
           )}
         </div>
@@ -164,7 +179,7 @@ const PreloaderContent = ({
 };
 
 const Preloader = ({ children }: PreloaderProps) => {
-  const { progress, isLoaded } = usePreloader();
+  const { progress, isLoaded, deviceCapability } = usePreloader();
   const containerRef = useRef<HTMLDivElement>(null);
   const [isExiting, setIsExiting] = useState(false);
   const [hasEntered, setHasEntered] = useState(false);
@@ -190,6 +205,14 @@ const Preloader = ({ children }: PreloaderProps) => {
   const handleEnterClick = useCallback(() => {
     if (isExiting || !containerRef.current) return;
 
+    // Ensure device profiling is complete before allowing exit
+    if (!deviceCapability.isProfiled) {
+      if (process.env.NODE_ENV === "development") {
+        console.log("[Preloader] Device profiling not complete, waiting...");
+      }
+      return;
+    }
+
     setIsExiting(true);
 
     // Animate preloader out
@@ -207,7 +230,7 @@ const Preloader = ({ children }: PreloaderProps) => {
         handleHashScroll();
       },
     });
-  }, [isExiting, handleHashScroll]);
+  }, [isExiting, handleHashScroll, deviceCapability.isProfiled]);
 
   // Memoize content props to prevent unnecessary re-renders
   const contentProps = useMemo(
@@ -216,8 +239,9 @@ const Preloader = ({ children }: PreloaderProps) => {
       isLoaded,
       onEnterClick: handleEnterClick,
       isExiting,
+      deviceCapability,
     }),
-    [progress, isLoaded, handleEnterClick, isExiting]
+    [progress, isLoaded, handleEnterClick, isExiting, deviceCapability]
   );
 
   return (

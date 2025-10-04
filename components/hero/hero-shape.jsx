@@ -370,17 +370,16 @@ const MobileShaderPlane = () => {
   );
 };
 
-const ShaderCanvas = () => {
-  const isMobile = useMobile();
+const ShaderCanvas = ({ quality }) => {
   return (
     <div className="absolute top-0 left-0 w-full h-full">
       <Canvas
         gl={{
           alpha: true,
-          powerPreference: isMobile ? "low-power" : "default",
+          powerPreference: quality === "medium" ? "low-power" : "default",
         }}
       >
-        {isMobile ? <MobileShaderPlane /> : <ShaderPlane />}
+        {quality === "medium" ? <MobileShaderPlane /> : <ShaderPlane />}
       </Canvas>
     </div>
   );
