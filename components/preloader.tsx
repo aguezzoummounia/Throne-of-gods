@@ -12,6 +12,11 @@ import Container from "./global/container";
 import ImagesUnderline from "./global/images-underline";
 import { usePreloader } from "@/context/asset-loader-provider";
 import { useRef, useState, useCallback, useMemo } from "react";
+import PreloaderSVGs from "./svgs/preloader-svgs";
+import {
+  DesktopUnderlinesSVG,
+  MobileUnderlinesSVG,
+} from "./global/svg-outline";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
@@ -155,7 +160,7 @@ const PreloaderContent = ({
               as="p"
               variant="small"
               ref={loadedTextRef}
-              className="md:absolute right-[5%] top-0 md:text-[16px] text-[14px] max-md:ml-auto max-md:mt-4"
+              className="md:absolute right-[5%] top-0 md:text-[16px] text-[14px] max-md:ml-auto max-md:mt-4 text-foreground/80 drop-shadow-[0_0_4px_rgba(244,234,143,0.5)] "
               aria-live="polite"
             >
               {deviceCapability.deviceTier && <>Experience Loaded.</>}
@@ -274,6 +279,9 @@ const Preloader = ({ children }: PreloaderProps) => {
               src="/images/bg/new-bg-2.webp"
             />
           </div>
+          <PreloaderSVGs />
+          <DesktopUnderlinesSVG className="z-[999]" />
+          <MobileUnderlinesSVG className="z-[999]" />
           <PreloaderContent {...contentProps} />
         </div>
       )}

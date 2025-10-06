@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
 import Container from "../global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { CerclesSVGs } from "../svgs/preloader-svgs";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -75,7 +76,7 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
     <Container
       as="section"
       ref={containerRef}
-      className="lg:w-[58.33%] xs:w-[83.33%] w-full mx-auto flex md:gap-12 gap-8 flex-col items-center justify-center min-h-fit"
+      className="lg:w-[58.33%] xs:w-[83.33%] w-full mx-auto flex md:gap-12 gap-8 flex-col items-center justify-center min-h-fit relative"
     >
       <Text as="h2" ref={h2Ref} variant="title">
         Chronicle of Sin
@@ -86,6 +87,7 @@ const CharacterBackstory: React.FC<{ data: string }> = ({ data }) => {
         dangerouslySetInnerHTML={{ __html: data }}
         className="grid gap-10 font-alegreya lg:text-dynamic-lg md:text-dynamic-base max-md:text-[4vw] font-semibold leading-[1.1] text-center"
       />
+      <CerclesSVGs className="md:-left-[16%] -left-[5%] bottom-[25%]" />
     </Container>
   );
 };

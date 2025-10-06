@@ -222,6 +222,7 @@ const EmblaCharacterSlider: React.FC<EmblaCharacterSliderProps> = ({
                   handleNavigate();
                 }}
               >
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-zinc-900/60 to-transparent z-9 md:hidden block rounded-2xl overflow-clip pointer-events-none" />
                 <SmartImage
                   fill
                   src={character.src}

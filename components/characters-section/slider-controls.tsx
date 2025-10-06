@@ -20,18 +20,15 @@ const SliderControls = memo<SliderControlsProps>(
             aria-label="Previous slide"
           >
             <svg
-              className="w-4 h-4 text-white"
+              xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+              className="w-4 h-4 text-bronze rotate-90"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M15 19l-7-7 7-7"
-              />
+                fill="currentColor"
+                d="m3 7 3.857 2.857 3.857 3.572c.31.326.86.937 1.286.92.42-.017.99-.587 1.286-.92 0 0 2.356-2.542 3.857-3.572C18.093 9.204 21 7 21 7.032 21 7.063 12.532 17 12 17c-.643 0-9-9.968-9-9.968z"
+              ></path>
             </svg>
           </button>
           <button
@@ -41,18 +38,15 @@ const SliderControls = memo<SliderControlsProps>(
             aria-label="Next slide"
           >
             <svg
-              className="w-4 h-4 text-white"
+              xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
+              className="w-4 h-4 text-bronze -rotate-90"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
+                fill="currentColor"
+                d="m3 7 3.857 2.857 3.857 3.572c.31.326.86.937 1.286.92.42-.017.99-.587 1.286-.92 0 0 2.356-2.542 3.857-3.572C18.093 9.204 21 7 21 7.032 21 7.063 12.532 17 12 17c-.643 0-9-9.968-9-9.968z"
+              ></path>
             </svg>
           </button>
         </div>
@@ -61,7 +55,7 @@ const SliderControls = memo<SliderControlsProps>(
           type="button"
           onClick={handleNavigate}
           className={cn(
-            "group relative flex items-center justify-center w-[38px] h-[38px] rounded-full",
+            "group relative flex items-center justify-center w-[38px] h-[38px] rounded-full -rotate-90",
             "bg-blurred backdrop-blur-lg border border-bronze/20",
             "focus:outline-none focus:ring-2 focus:ring-white/50",
             "hover:bg-white/10 hover:border-bronze/40 hover:shadow-[0_0_20px_rgba(244,234,143,0.3)]",
@@ -76,18 +70,15 @@ const SliderControls = memo<SliderControlsProps>(
 
           {/* Icon with enhanced hover effect */}
           <svg
-            className="w-5 h-5 text-white -rotate-45 group-hover:scale-110 group-hover:text-bronze transition-all duration-200 relative z-10"
+            xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
+            className="w-5 h-5 text-bronze -rotate-45 group-hover:scale-110 group-hover:text-bronze/50 transition-all duration-200 relative z-10"
           >
             <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 5l7 7-7 7"
-            />
+              fill="currentColor"
+              d="m3 7 3.857 2.857 3.857 3.572c.31.326.86.937 1.286.92.42-.017.99-.587 1.286-.92 0 0 2.356-2.542 3.857-3.572C18.093 9.204 21 7 21 7.032 21 7.063 12.532 17 12 17c-.643 0-9-9.968-9-9.968z"
+            ></path>
           </svg>
         </button>
       </div>

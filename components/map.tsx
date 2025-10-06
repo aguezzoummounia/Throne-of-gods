@@ -8,6 +8,7 @@ import SplitText from "gsap/SplitText";
 import Container from "./global/container";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import MapErrorBoundary from "./map/map-error-boundary";
+import MapBackground from "./map/map-background";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -36,7 +37,6 @@ const Map: React.FC = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top 80%",
-          // once: true, // Performance: only animate once
         },
       });
 
@@ -59,7 +59,6 @@ const Map: React.FC = () => {
       );
 
       return () => {
-        // tl.kill();
         h2Split.revert();
         pSplit.revert();
       };
@@ -71,8 +70,9 @@ const Map: React.FC = () => {
       id="ereosa"
       as="section"
       ref={containerRef}
-      className="min-h-fit px-0 max-md:px-0 grid md:gap-20 gap-14 md:pt-24 pt-16 scroll-m-10"
+      className="min-h-fit px-0 max-md:px-0 grid md:gap-20 gap-14 md:pt-24 pt-16 scroll-m-10 relative"
     >
+      <MapBackground />
       <div className="grid gap-8 max-w-[600px] w-full mx-auto text-center max-md:px-5">
         <Text as="h2" ref={h2Ref} variant="lead">
           Erosea, where empires broke the gods, the sea wears a Veil, and a

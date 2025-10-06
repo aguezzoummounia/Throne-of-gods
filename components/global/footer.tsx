@@ -93,7 +93,7 @@ const Footer: React.FC = () => {
       ref={container}
       className="px-12 max-md:px-5 md:py-10 py-8 md:pt-30 pt-16 overflow-hidden"
     >
-      <div className="w-full flex flex-col gap-10 items-center xl:justify-center xl:max-w-[55%] lg:max-w-[70%] mx-auto">
+      <div className="w-full flex flex-col gap-10 items-center xl:justify-center xl:max-w-[55%] lg:max-w-[70%] mx-auto z-[3]">
         <Text as="h2" ref={h2Ref} variant="title" className="text-center">
           Memory Burns Brighter Than Flame
         </Text>
@@ -118,7 +118,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className="footer-bottom-section 2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10">
+      <div className="footer-bottom-section 2xl:h-96 md:h-[350px] h-80 relative flex items-center justify-center 2xl:mt-10 z-[1]">
         <AdaptiveRippleImage />
         <div className="flex items-center justify-between absolute inset-[auto_0%_0%]">
           <Text

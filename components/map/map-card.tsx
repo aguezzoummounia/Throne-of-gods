@@ -32,37 +32,37 @@ const MapCard: React.FC = () => {
   }, []);
 
   const locations = useMemo(() => locationData as Location[], []);
+  // commented for now for optimisation testing
+  // useGSAP(
+  //   () => {
+  //     if (!pinsContainerRef.current) return;
 
-  useGSAP(
-    () => {
-      if (!pinsContainerRef.current) return;
+  //     const tl = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: pinsContainerRef.current,
+  //         start: "top 80%",
+  //         once: true, // Performance: animate only once
+  //       },
+  //     });
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: pinsContainerRef.current,
-          start: "top 80%",
-          once: true, // Performance: animate only once
-        },
-      });
+  //     const pins = gsap.utils.toArray(".location-ping");
 
-      const pins = gsap.utils.toArray(".location-ping");
-
-      tl.from(pins, {
-        y: 10,
-        autoAlpha: 0,
-        duration: 1.2,
-        ease: "power2.out",
-        stagger: {
-          each: 0.1,
-          from: "random",
-        },
-      });
-    },
-    {
-      scope: pinsContainerRef,
-      dependencies: [locations.length], // Re-run if locations change
-    }
-  );
+  //     tl.from(pins, {
+  //       y: 10,
+  //       autoAlpha: 0,
+  //       duration: 1.2,
+  //       ease: "power2.out",
+  //       stagger: {
+  //         each: 0.1,
+  //         from: "random",
+  //       },
+  //     });
+  //   },
+  //   {
+  //     scope: pinsContainerRef,
+  //     dependencies: [locations.length], // Re-run if locations change
+  //   }
+  // );
 
   return (
     <div className="w-full relative">
@@ -115,7 +115,6 @@ const MapCard: React.FC = () => {
         </div>
       </div>
     </div>
-    // </div>
   );
 };
 

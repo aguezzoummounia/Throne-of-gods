@@ -54,7 +54,6 @@ export default function Home() {
     <>
       {/* JSON-LD structured data for homepage */}
       <JSONLDScript schemas={schemas} />
-
       <Hero />
       <About />
       <CharactersSection />

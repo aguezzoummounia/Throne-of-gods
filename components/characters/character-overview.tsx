@@ -8,6 +8,7 @@ import { VillainStats } from "@/lib/types";
 import Container from "../global/container";
 import CharacterStat from "./character-stats";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { ArrowsSVGs } from "../svgs/preloader-svgs";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -73,7 +74,7 @@ const CharacterOverview: React.FC<{
     <Container
       as="section"
       ref={containerRef}
-      className="flex flex-col justify-center md:gap-32 gap-20  relative"
+      className="flex flex-col justify-center md:gap-32 gap-20 relative"
     >
       <div className="absolute top-0 left-0 w-full md:h-[600px] h-[300px] bg-gradient-to-b from-black via-zinc-900/60 to-transparent -z-1" />
 
@@ -91,6 +92,7 @@ const CharacterOverview: React.FC<{
         </Text>
       </div>
       <CharacterStat stats={stats} />
+      <ArrowsSVGs className="bottom-22 rotate-90 right-5" />
     </Container>
   );
 };

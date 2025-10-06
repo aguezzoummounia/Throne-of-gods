@@ -1,7 +1,7 @@
 const ImagesUnderline = () => {
   return (
     <div className="absolute pointer-events-none w-full h-full">
-      <div className="w-full h-full absolute -z-1">
+      <div className="w-full h-full absolute z-[-1]">
         <img
           loading="eager"
           src="/images/bg/new-bg-6.webp"

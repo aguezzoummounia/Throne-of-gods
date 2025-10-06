@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import BackgroundSvg from "./quiz-question-background-svg";
+import QuizSectionSVGs from "../svgs/quiz-section-svgs";
 
 interface QuizBackgroundProps {
   className?: string;
@@ -9,11 +9,11 @@ const QuizBackground = ({ className }: QuizBackgroundProps) => {
   return (
     <div
       className={cn(
-        "md:[&>svg]:w-[50%] [&>svg]:w-full absolute inset-0 flex items-center justify-center",
+        "xl:[&>svg]:w-[50%] md:[&>svg]:w-[60%] [&>svg]:w-[100%] absolute inset-0 flex items-center justify-center",
         className
       )}
     >
-      <BackgroundSvg className="text-bronze aspect-square" />
+      <QuizSectionSVGs className="text-bronze aspect-square" />
     </div>
   );
 };
