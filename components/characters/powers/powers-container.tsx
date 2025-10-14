@@ -1,9 +1,10 @@
-import { useRef, memo, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Power } from "@/lib/types";
 import PowerCard from "./power-card";
+import { useRef, memo, useMemo } from "react";
 import { power_item_positions } from "@/lib/consts";
 import { useConnectedAnchors } from "@/hooks/useConnectedAnchors";
+import RadialAnimatedStrips from "@/components/radial-animated-strips";
 
 interface PowersContainerProps {
   powers: Power[];
@@ -119,6 +120,7 @@ const ConnectedCardsCustomAnchors = memo(function ConnectedCardsCustomAnchors({
               image={power.image}
               overview={power.overview}
             />
+            <RadialAnimatedStrips className="absolute top-0 left-0 md:w-[700px] w-[700px] -translate-x-[230px] -translate-y-[20%]" />
           </div>
         );
       })}

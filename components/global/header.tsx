@@ -193,7 +193,7 @@ const Header: React.FC = () => {
 
       <nav
         ref={navRef}
-        className="md:flex hidden gap-8"
+        className="md:flex hidden gap-8 absolute left-1/2 -translate-x-1/2"
         role="navigation"
         aria-label="Main menu"
       >

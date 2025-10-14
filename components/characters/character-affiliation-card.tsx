@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import TiltedCardWrapper from "../tilted-card-wrapper";
 import ElementsSvgOutline from "../elements-svg-outline";
+import RadialAnimatedStrips from "../radial-animated-strips";
 
 const CharacterAffiliationCard: React.FC<{
   type?: string;

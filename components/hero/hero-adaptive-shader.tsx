@@ -4,9 +4,8 @@ import { cn } from "@/lib/utils";
 import HeroShape from "./hero-shape";
 import HeroShapeCSS from "./hero-shape-css";
 import type { DeviceCapabilities } from "@/lib/device-profiler.js";
-import HeroSVGs from "../svgs/hero-svgs";
 
-interface DeviceCapabilityContextType {
+export interface DeviceCapabilityContextType {
   isProfiled: boolean;
   shouldUseShaders: boolean;
   capabilities: DeviceCapabilities | null;

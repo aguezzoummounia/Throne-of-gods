@@ -11,6 +11,7 @@ import About from "@/components/about/about";
 import Footer from "@/components/global/footer";
 import CharactersSection from "@/components/characters-section";
 import JSONLDScript from "@/components/seo/json-ld-script";
+import RadialAnimatedStrips from "@/components/radial-animated-strips";
 
 // Helper function to safely convert mobile meta to Next.js compatible format
 function sanitizeMobileMeta(
@@ -54,6 +55,7 @@ export default function Home() {
     <>
       {/* JSON-LD structured data for homepage */}
       <JSONLDScript schemas={schemas} />
+
       <Hero />
       {/* <About />
       <CharactersSection />
