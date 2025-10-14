@@ -7,9 +7,10 @@ import SplitText from "gsap/SplitText";
 import { trailer_url } from "@/lib/consts";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import Button from "@/components/ui/button-or-link";
-import AdaptiveHeroShader from "./hero-adaptive-shader";
+// import AdaptiveHeroShader from "./hero-adaptive-shader";
 import { usePreloader } from "@/context/asset-loader-provider";
 import HeroBackground from "./hero-background";
+import { DeviceDebugDisplay } from "./device-debug-display";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 
@@ -113,7 +114,12 @@ const Hero: React.FC = () => {
       className="min-h-screen md:gap-20 grid grid-rows-[1fr_auto] md:py-16 py-8 max-md:pb-12 max-md:px-5 relative"
     >
       <HeroBackground />
-      <AdaptiveHeroShader deviceCapability={deviceCapability} />
+      {/* Temporarily commented out for debugging */}
+      {/* <AdaptiveHeroShader deviceCapability={deviceCapability} /> */}
+
+      {/* Debug display - shows device profiling results */}
+      <DeviceDebugDisplay deviceCapability={deviceCapability} />
+
       <h2 className="hero-title lg:text-9xl md:text-8xl text-[15vw] leading-none font-cinzel font-bold max-w-[768px] w-full lg:self-end self-center justify-self-center md:mt-0 mt-20 text-[#fffff7]/80">
         <div className={`animated-word first-word md:text-7xl text-4xl ml-10`}>
           Your
