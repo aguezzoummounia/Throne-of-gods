@@ -96,7 +96,7 @@ const Quiz: React.FC = () => {
     <Container
       id="quiz"
       as="section"
-      className="flex relative min-h-fit w-full md:aspect-video aspect-square"
+      className="flex relative min-h-fit w-full md:aspect-video aspect-square md:mt-24 mt-16 md:pt-0 pt-0"
     >
       <QuizBackground />
       <div ref={container} className="flex-1 flex items-center justify-center">

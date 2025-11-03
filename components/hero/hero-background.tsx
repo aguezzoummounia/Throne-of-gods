@@ -21,17 +21,17 @@ const HeroBackground = memo<HeroBackgroundProps>(
         )}
       >
         <RadialAnimatedStrips
-          numberOfLines={isMobile ? 80 : 100}
-          innerRadius={150}
-          outerRadiusMin={280}
-          outerRadiusMax={isMobile ? 800 : 500}
+          numberOfLines={isMobile ? 90 : 100}
+          innerRadius={isMobile ? 200 : 150}
+          outerRadiusMin={isMobile ? 300 : 280}
+          outerRadiusMax={isMobile ? 900 : 500}
           strokeWidth={1.2}
           segmentLengthMin={3}
           segmentLengthMax={10}
           gapLengthMin={10}
           gapLengthMax={25}
           animationDuration={4}
-          className="absolute h-full w-full text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]"
+          className="absolute h-full md:w-full w-[130vw] text-bronze drop-shadow-[0_0_4px_rgba(244,234,143,0.5)]"
         />
         <HeroSVGs className="w-[90%] md:w-[65vh]" />
       </div>

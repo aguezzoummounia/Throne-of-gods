@@ -31,6 +31,7 @@ export const AdaptiveHeroShader = ({
   const renderingConfig = useMemo(() => {
     const tier = deviceCapability.deviceTier;
     const shouldUseShaders = deviceCapability.shouldUseShaders;
+    const isMobile = deviceCapability.capabilities?.isMobile ?? false;
 
     if (!deviceCapability.isProfiled) {
       // While profiling, show loading state
@@ -41,13 +42,18 @@ export const AdaptiveHeroShader = ({
       };
     }
 
+    // Desktop: Always use high quality shader
+    if (!isMobile) {
+      return {
+        type: "shader",
+        quality: "high" as const,
+        useShader: shouldUseShaders,
+      };
+    }
+
+    // Mobile: Use medium shader for high/medium tier, CSS fallback for low tier
     switch (tier) {
       case "high":
-        return {
-          type: "shader",
-          quality: "high" as const,
-          useShader: shouldUseShaders,
-        };
       case "medium":
         return {
           type: "shader",

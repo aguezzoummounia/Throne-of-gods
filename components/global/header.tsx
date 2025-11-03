@@ -178,7 +178,7 @@ const Header: React.FC = () => {
         ref={logoRef}
         href="/"
         onClick={handleLogoClick}
-        className="relative cursor-pointer uppercase text-sm md:w-[200px] w-[100px] h-full inline-flex items-center md:mt-8"
+        className="relative cursor-pointer uppercase text-sm md:w-[200px] w-[100px] h-full inline-flex items-center md:mt-8 opacity-0"
         aria-label="Throne of Gods - Home"
       >
         <SmartImage

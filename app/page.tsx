@@ -57,11 +57,11 @@ export default function Home() {
       <JSONLDScript schemas={schemas} />
 
       <Hero />
-      {/* <About />
+      <About />
       <CharactersSection />
       <Map />
       <Quiz />
-      <Footer /> */}
+      <Footer />
     </>
   );
 }
