@@ -11,7 +11,7 @@ import Particles from "./particles";
 import SlideItem from "./slide-item";
 import SliderTitles from "./slider-titles";
 import { Canvas } from "@react-three/fiber";
-import { slideInOut } from "../global/header";
+import { slideInOut } from "../../../global/header";
 import SliderControls from "./slider-controls";
 import SliderIndicators from "./slider-indicators";
 import { charactersArray as images } from "@/lib/data";

@@ -1,14 +1,14 @@
 "use client";
 import gsap from "gsap";
-import Text from "../ui/text";
 import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import SplitText from "gsap/SplitText";
-import WEBGLSlider from "./webgl-slider";
-import Container from "../global/container";
+import Text from "@/components/ui/text";
+import WEBGLSlider from "./webgl-slider/webgl-slider";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import Container from "@/components/global/container";
 import { usePreloader } from "@/context/asset-loader-provider";
-import EmblaCharacterSlider from "../embla-characters-slider/character-slider";
+import EmblaCharacterSlider from "./embla-js-slider/character-slider";
 
 gsap.registerPlugin(useGSAP, SplitText, ScrollTrigger);
 

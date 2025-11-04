@@ -1,15 +1,15 @@
 "use client";
 import Link from "next/link";
-import SmartImage from "../ui/smart-image";
-import { slideInOut } from "../global/header";
+import SmartImage from "../../../ui/smart-image";
+import { slideInOut } from "../../../global/header";
 import { EmblaOptionsType } from "embla-carousel";
 import useEmblaCarousel from "embla-carousel-react";
 import { charactersArray as images } from "@/lib/data";
 import { useState, useEffect, useCallback } from "react";
 import { useTransitionRouter } from "next-view-transitions";
-import SliderTitles from "../characters-section/slider-titles";
-import SliderControls from "../characters-section/slider-controls";
-import SliderIndicators from "../characters-section/slider-indicators";
+import SliderTitles from "../webgl-slider/slider-titles";
+import SliderControls from "../webgl-slider/slider-controls";
+import SliderIndicators from "../webgl-slider/slider-indicators";
 import { cn } from "@/lib/utils";
 
 // Type definitions for better TypeScript support

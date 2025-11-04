@@ -2,7 +2,7 @@
 import { useRef, memo } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import Text from "../ui/text";
+import Text from "../../../ui/text";
 
 interface Character {
   id: number;

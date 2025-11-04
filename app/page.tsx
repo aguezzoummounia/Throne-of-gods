@@ -9,8 +9,8 @@ import Quiz from "@/components/quiz";
 import Hero from "@/components/hero/hero";
 import About from "@/components/about/about";
 import Footer from "@/components/global/footer";
-import CharactersSection from "@/components/characters-section";
 import JSONLDScript from "@/components/seo/json-ld-script";
+import CharactersSection from "@/components/characters/sliders";
 
 // Helper function to safely convert mobile meta to Next.js compatible format
 function sanitizeMobileMeta(
