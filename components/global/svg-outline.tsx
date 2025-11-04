@@ -93,6 +93,7 @@ const VerticalLine = ({ className }: SVGlineProps) => {
       className={cn("h-full text-bronze", className)}
       viewBox="0 0 2 1024"
       fill="none"
+      preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -110,6 +111,7 @@ const HorizontalLine = ({ className }: SVGlineProps) => {
       height="2"
       viewBox="0 0 1440 2"
       fill="none"
+      preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

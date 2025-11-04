@@ -71,7 +71,7 @@ const PreloaderSVGs = ({ className }: PreloaderSVGsProps) => {
             strokeWidth=".75"
             stroke="currentColor"
             className={cn(
-              "drop-shadow-[0_0_4px_rgba(244,234,143,0.6)]",
+              "drop-shadow-[0_0_4px_rgba(244,234,143,0.6)]  -rotate-25",
               circle.className
             )}
             style={{

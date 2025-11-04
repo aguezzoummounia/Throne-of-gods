@@ -81,7 +81,7 @@ const NextCharacter: React.FC<NextCharacterProps> = ({ slug, name, image }) => {
   return (
     <Container ref={containerRef} as="section" className="min-h-auto">
       <div className="relative bg-[rgba(0,0,0,.05)] text-white min-h-[65vh] rounded-xl overflow-hidden shadow-md">
-        <ElementsSvgOutline size="large" className="z-1 pointer-events-none" />
+        <ElementsSvgOutline className="z-1 pointer-events-none" />
         <SmartImage
           fill
           src={image}

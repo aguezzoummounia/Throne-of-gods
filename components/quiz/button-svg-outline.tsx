@@ -79,6 +79,7 @@ const HorizontalLineSVG = ({ className }: SvgLineProps) => {
       className={cn("h-[2px] w-full", className)}
       viewBox="0 0 500 2"
       fill="none"
+      preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -95,6 +96,7 @@ const VerticalLineSVG = ({ className }: SvgLineProps) => {
       className={cn("w-[2px] h-full", className)}
       viewBox="0 0 2 100"
       fill="none"
+      preserveAspectRatio="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

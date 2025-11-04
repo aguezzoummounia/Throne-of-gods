@@ -113,14 +113,14 @@ const ConnectedCardsCustomAnchors = memo(function ConnectedCardsCustomAnchors({
             ref={(el) => {
               cardRefs.current[index] = el;
             }}
-            className={`${position} absolute md:w-[250px] w-[230px] aspect-[2/3]`}
+            className={`${position} absolute md:w-[250px] w-[230px] aspect-[2/3] group`}
           >
             <PowerCard
               name={power.name}
               image={power.image}
               overview={power.overview}
             />
-            <RadialAnimatedStrips className="absolute top-0 left-0 md:w-[700px] w-[700px] -translate-x-[230px] -translate-y-[20%]" />
+            <RadialAnimatedStrips className="absolute top-0 left-0 md:w-[700px] w-[700px] -translate-x-[230px] -translate-y-[20%] group-hover:drop-shadow-[0_0_4px_rgba(244,234,143,0.8)]" />
           </div>
         );
       })}

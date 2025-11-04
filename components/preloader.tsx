@@ -316,7 +316,7 @@ const Preloader = ({ children }: PreloaderProps) => {
       {/* Preloader overlay - only show when not entered */}
       {!hasEntered && (
         <>
-          <div className="bg-black fixed inset-0 z-[99999] animate-fade-in"></div>
+          <div className="bg-black fixed inset-0 z-[99999] animate-fade-in pointer-events-none"></div>
           <div
             ref={containerRef}
             className={cn(
