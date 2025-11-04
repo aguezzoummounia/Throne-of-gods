@@ -406,3 +406,24 @@ body {
   animation: grain 8s linear infinite;
   background-image: url("/images/static/grain.png");
 }
+
+/* SVG Circle Drawing Animation */
+@keyframes drawCircle {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Preloader Fade In Animation */
+@keyframes fade-in {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1.2s ease-out forwards;
+}

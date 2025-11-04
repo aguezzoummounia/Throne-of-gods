@@ -48,44 +48,85 @@ const PreloaderContent = ({
   const h2Ref = useRef<HTMLHeadingElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const loadedTextRef = useRef<HTMLParagraphElement>(null);
+  const leftSvgRef = useRef<SVGSVGElement>(null);
+  const rightSvgRef = useRef<SVGSVGElement>(null);
+  const leftMaskRef = useRef<SVGRectElement>(null);
+  const rightMaskRef = useRef<SVGRectElement>(null);
 
   useGSAP(
     () => {
       if (!containerRef.current) return;
 
-      const tl = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
 
-      tl.from(h4Ref.current, {
-        autoAlpha: 0,
-        yPercent: 100,
-        duration: 1.2,
+      // Animate left arrow mask first (right to left reveal)
+      tl.to(leftMaskRef.current, {
+        attr: { x: 0, width: 116 },
+        duration: 0.8,
         ease: "power2.out",
-      }).add("startH2", "-=.3");
+      });
+
+      // Animate right arrow mask (left to right reveal)
+      tl.to(
+        rightMaskRef.current,
+        { attr: { width: 116 }, duration: 0.8, ease: "power2.out" },
+        "-=0.8"
+      );
+
+      // Animate h4 text overlapping with masks
+      tl.fromTo(
+        h4Ref.current,
+        {
+          autoAlpha: 0,
+          yPercent: 100,
+        },
+        {
+          autoAlpha: 1,
+          yPercent: 0,
+          duration: 1.2,
+          ease: "power2.out",
+        },
+        "-=0.6"
+      );
+
+      tl.add("startH2", "-=.3");
+
+      // Make h2 parent visible and set opacity to 1 so chars are visible
+      gsap.set(h2Ref.current, { autoAlpha: 1 });
+
       const h2Split = new SplitText(h2Ref.current, {
         type: "chars",
         smartWrap: true,
         autoSplit: true,
         onSplit: (self) => {
-          let splitTween = gsap.from(self.chars, {
-            autoAlpha: 0,
-            stagger: { amount: 1.2, from: "center" },
-          });
+          let splitTween = gsap.fromTo(
+            self.chars,
+            {
+              autoAlpha: 0,
+            },
+            {
+              autoAlpha: 1,
+              stagger: { amount: 1.2, from: "center" },
+            }
+          );
           tl.add(splitTween, "startH2");
           return splitTween;
         },
       });
-      tl.from(
+      tl.fromTo(
         buttonRef.current,
         {
           yPercent: 100,
           autoAlpha: 0,
+        },
+        {
+          yPercent: 0,
+          autoAlpha: 1,
           duration: 1.2,
           ease: "power2.out",
         },
         "-=.3"
       );
-      // Play entrance animation
-      tl.play();
 
       return () => {
         tl.kill();
@@ -94,16 +135,24 @@ const PreloaderContent = ({
     },
     { scope: containerRef }
   );
+
   useGSAP(
     () => {
-      if (isLoaded) {
-        gsap.from(loadedTextRef.current, {
-          autoAlpha: 0,
-          yPercent: 100,
-          duration: 1.2,
-          ease: "power3.out",
-          delay: 0.3,
-        });
+      if (isLoaded && loadedTextRef.current) {
+        gsap.fromTo(
+          loadedTextRef.current,
+          {
+            autoAlpha: 0,
+            yPercent: 100,
+          },
+          {
+            autoAlpha: 1,
+            yPercent: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            delay: 0.3,
+          }
+        );
       }
     },
     {
@@ -118,10 +167,15 @@ const PreloaderContent = ({
       className="absolute flex inset-0"
     >
       <div className="flex md:gap-10 gap-8 flex-col items-center justify-center text-center lg:w-[58.33%] xs:w-[83.33%] w-full mx-auto">
-        <LabelText>
+        <LabelText
+          leftSvgRef={leftSvgRef}
+          rightSvgRef={rightSvgRef}
+          leftMaskRef={leftMaskRef}
+          rightMaskRef={rightMaskRef}
+        >
           <h4
             ref={h4Ref}
-            className="font-alegreya uppercase"
+            className="font-alegreya uppercase opacity-0 invisible"
             aria-label="Welcome message"
           >
             Welcome Stranger
@@ -131,6 +185,7 @@ const PreloaderContent = ({
           as="h2"
           ref={h2Ref}
           variant="title"
+          className="opacity-0 invisible"
           aria-label="Main preloader message"
         >
           Uncover a saga of gods, mortals, and endless strife…
@@ -141,6 +196,7 @@ const PreloaderContent = ({
             ref={buttonRef}
             onClick={onEnterClick}
             disabled={!isLoaded || !deviceCapability.isProfiled || isExiting}
+            className="opacity-0 invisible"
             aria-label={
               !isLoaded
                 ? "Loading in progress"
@@ -160,7 +216,7 @@ const PreloaderContent = ({
               as="p"
               variant="small"
               ref={loadedTextRef}
-              className="md:absolute right-[5%] top-0 md:text-[16px] text-[14px] max-md:ml-auto max-md:mt-4 text-foreground/80 drop-shadow-[0_0_4px_rgba(244,234,143,0.5)] "
+              className="md:absolute right-[5%] top-0 md:text-[16px] text-[14px] max-md:ml-auto max-md:mt-4 text-foreground/80 drop-shadow-[0_0_4px_rgba(244,234,143,0.5)] opacity-0 invisible"
               aria-live="polite"
             >
               {deviceCapability.deviceTier && <>Experience Loaded.</>}
@@ -259,31 +315,34 @@ const Preloader = ({ children }: PreloaderProps) => {
 
       {/* Preloader overlay - only show when not entered */}
       {!hasEntered && (
-        <div
-          ref={containerRef}
-          className={cn(
-            "fixed inset-0 z-50 flex flex-col items-center justify-center transition-opacity duration-500"
-          )}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="preloader-title"
-          aria-describedby="preloader-description"
-        >
-          <div className="relative w-full h-full overflow-hidden">
-            <Image
-              fill
-              priority
-              sizes="100vw"
-              alt="Preloader background showing mythological scene"
-              className="object-cover"
-              src="/images/bg/new-bg-2.webp"
-            />
+        <>
+          <div className="bg-black fixed inset-0 z-[99999] animate-fade-in"></div>
+          <div
+            ref={containerRef}
+            className={cn(
+              "fixed inset-0 z-50 flex flex-col items-center justify-center"
+            )}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="preloader-title"
+            aria-describedby="preloader-description"
+          >
+            <div className="relative w-full h-full overflow-hidden">
+              <Image
+                fill
+                priority
+                sizes="100vw"
+                alt="Preloader background showing mythological scene"
+                className="object-cover"
+                src="/images/bg/new-bg-2.webp"
+              />
+            </div>
+            <PreloaderSVGs />
+            <DesktopUnderlinesSVG className="z-[999]" />
+            <MobileUnderlinesSVG className="z-[999]" />
+            <PreloaderContent {...contentProps} />
           </div>
-          <PreloaderSVGs />
-          <DesktopUnderlinesSVG className="z-[999]" />
-          <MobileUnderlinesSVG className="z-[999]" />
-          <PreloaderContent {...contentProps} />
-        </div>
+        </>
       )}
     </>
   );
