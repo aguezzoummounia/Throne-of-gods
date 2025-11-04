@@ -148,7 +148,10 @@ export const AdaptiveRippleImage: React.FC<AdaptiveRippleImageProps> = ({
         className
       )}
     >
-      <FooterSVG ref={svgRef} className="svg-footer-element" />
+      <FooterSVG
+        ref={svgRef}
+        className="svg-footer-element pointer-events-none"
+      />
       {selectedComponent}
     </div>
   );
