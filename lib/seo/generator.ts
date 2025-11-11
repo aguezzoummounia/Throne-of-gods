@@ -99,12 +99,17 @@ export class SEOGenerator {
       // App icons for mobile
       icons: {
         icon: [
-          { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-          { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+          { url: "/favicon/favicon.ico", sizes: "any" },
+          { url: "/favicon/favicon.svg", type: "image/svg+xml" },
+          {
+            url: "/favicon/favicon-96x96.png",
+            sizes: "96x96",
+            type: "image/png",
+          },
         ],
         apple: [
           {
-            url: SEO_CONFIG.mobile.touchIcon,
+            url: "/favicon/apple-touch-icon.png",
             sizes: "180x180",
             type: "image/png",
           },
@@ -112,8 +117,12 @@ export class SEOGenerator {
         other: [
           {
             rel: "mask-icon",
-            url: SEO_CONFIG.mobile.maskIcon,
+            url: "/favicon/favicon.svg",
             color: SEO_CONFIG.mobile.maskIconColor,
+          },
+          {
+            rel: "manifest",
+            url: "/favicon/site.webmanifest",
           },
         ],
       },
@@ -139,12 +148,8 @@ export class SEOGenerator {
       // Additional mobile optimization meta tags
       other: {
         "mobile-web-app-capable": "yes",
-        "apple-mobile-web-app-capable": "yes",
-        "apple-mobile-web-app-status-bar-style":
-          SEO_CONFIG.mobile.statusBarStyle,
-        "format-detection": "telephone=no",
+        "format-detection": "telephone=no, date=no, email=no, address=no",
         "msapplication-TileColor": SEO_CONFIG.mobile.backgroundColor,
-        "msapplication-config": "/browserconfig.xml",
       },
     };
   }
@@ -265,44 +270,31 @@ export class SEOGenerator {
    * Generate responsive social media images for different platforms with validation
    */
   private static generateResponsiveSocialImages(config: SEOConfig) {
-    // Validate and get fallback images if needed
-    const defaultImageValidation = SEOValidator.validateImageURL(
-      config.image?.url || ""
-    );
-    const defaultImage = defaultImageValidation.fallbackUsed
-      ? { ...SEO_CONFIG.defaultImage, url: defaultImageValidation.url }
-      : config.image || SEO_CONFIG.defaultImage;
-
-    const mobileImageValidation = SEOValidator.validateImageURL(
-      config.mobileImage?.url || ""
-    );
-    const mobileImage = mobileImageValidation.fallbackUsed
-      ? { ...SEO_CONFIG.mobileImage, url: mobileImageValidation.url }
-      : config.mobileImage || SEO_CONFIG.mobileImage;
-
+    // Use provided image or fall back to SEO_CONFIG defaults
+    const defaultImage = config.image || SEO_CONFIG.defaultImage;
+    const mobileImage = config.mobileImage || SEO_CONFIG.mobileImage;
     const socialImages = config.socialImages || SEO_CONFIG.socialImages;
 
-    // Log image validation issues
-    if (defaultImageValidation.fallbackUsed) {
-      SEOErrorLogger.logWarning(
-        "Default image validation failed, using fallback",
-        {
-          originalUrl: config.image?.url,
-          fallbackUrl: defaultImageValidation.url,
-          error: defaultImageValidation.error,
-        }
-      );
+    // Validate images and log warnings if needed
+    const defaultImageValidation = SEOValidator.validateImageURL(
+      defaultImage.url
+    );
+    const mobileImageValidation = SEOValidator.validateImageURL(
+      mobileImage.url
+    );
+
+    if (!defaultImageValidation.isValid) {
+      SEOErrorLogger.logWarning("Default image validation failed", {
+        url: defaultImage.url,
+        error: defaultImageValidation.error,
+      });
     }
 
-    if (mobileImageValidation.fallbackUsed) {
-      SEOErrorLogger.logWarning(
-        "Mobile image validation failed, using fallback",
-        {
-          originalUrl: config.mobileImage?.url,
-          fallbackUrl: mobileImageValidation.url,
-          error: mobileImageValidation.error,
-        }
-      );
+    if (!mobileImageValidation.isValid) {
+      SEOErrorLogger.logWarning("Mobile image validation failed", {
+        url: mobileImage.url,
+        error: mobileImageValidation.error,
+      });
     }
 
     return {

@@ -53,44 +53,6 @@ export class CharacterSEO {
         height: 630,
         alt: `${character.name} - ${character.nickname}`,
       },
-      mobileImage: {
-        url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-          /\.(jpg|jpeg|png|webp)$/i,
-          "-mobile.$1"
-        ),
-        width: 800,
-        height: 600,
-        alt: `${character.name} - ${character.nickname} - Mobile`,
-      },
-      socialImages: {
-        facebook: {
-          url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-            /\.(jpg|jpeg|png|webp)$/i,
-            "-facebook.$1"
-          ),
-          width: 1200,
-          height: 630,
-          alt: `${character.name} - ${character.nickname} - Facebook`,
-        },
-        twitter: {
-          url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-            /\.(jpg|jpeg|png|webp)$/i,
-            "-twitter.$1"
-          ),
-          width: 1200,
-          height: 675,
-          alt: `${character.name} - ${character.nickname} - Twitter`,
-        },
-        instagram: {
-          url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-            /\.(jpg|jpeg|png|webp)$/i,
-            "-instagram.$1"
-          ),
-          width: 1080,
-          height: 1080,
-          alt: `${character.name} - ${character.nickname} - Instagram`,
-        },
-      },
       url: `/characters/${character.slug}`,
       type: "profile",
       author: SEO_CONFIG.author,
@@ -316,43 +278,11 @@ export class CharacterSEO {
     const mobileConfig: SEOConfig = {
       title: `${character.name} - ${character.nickname}`,
       description: this.generateCharacterDescription(character),
-      mobileImage: {
-        url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-          /\.(jpg|jpeg|png|webp)$/i,
-          "-mobile.$1"
-        ),
-        width: 800,
-        height: 600,
-        alt: `${character.name} - Mobile`,
-      },
-      socialImages: {
-        facebook: {
-          url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-            /\.(jpg|jpeg|png|webp)$/i,
-            "-facebook.$1"
-          ),
-          width: 1200,
-          height: 630,
-          alt: `${character.name} - Facebook`,
-        },
-        twitter: {
-          url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-            /\.(jpg|jpeg|png|webp)$/i,
-            "-twitter.$1"
-          ),
-          width: 1200,
-          height: 675,
-          alt: `${character.name} - Twitter`,
-        },
-        instagram: {
-          url: (character.image || DEFAULT_FALLBACKS.characterImage).replace(
-            /\.(jpg|jpeg|png|webp)$/i,
-            "-instagram.$1"
-          ),
-          width: 1080,
-          height: 1080,
-          alt: `${character.name} - Instagram`,
-        },
+      image: {
+        url: character.image || DEFAULT_FALLBACKS.characterImage,
+        width: 1200,
+        height: 630,
+        alt: `${character.name}`,
       },
       url: `/characters/${character.slug}`,
       isMobileOptimized: true,

@@ -64,8 +64,8 @@ const assets_to_load: string[] = [
   "/images/about/about-2.jpeg",
   "/images/about/about-3.jpeg",
   // map images
-  "/images/map/ereosa-map.avif",
-  "/images/map/ereosa-map-vertical.avif",
+  "/images/map/ereosa-map.png",
+  "/images/map/ereosa-map-vertical.png",
   // locations images
   "/images/locations/location-1.jpeg",
   "/images/locations/location-2.jpeg",
@@ -83,11 +83,11 @@ const assets_to_load: string[] = [
   "/images/characters/character-8.jpeg",
   "/images/characters/character-9.jpeg",
   // static images
-  "/images/temp-logo.png",
+  "/images/logo.png",
   "/images/static/cropped-border.png",
   "/images/static/footer-image.png",
   "/images/static/grain.png",
-  "/images/static/alternate-hero-image.png",
+  "/images/static/hero-bg.png",
   "fonts",
 ];
 export interface SoundAsset {

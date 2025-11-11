@@ -142,7 +142,6 @@ const MobileShaderPlane = () => {
 };
 
 const ShaderCanvas = ({ quality }) => {
-  console.log("inside ShaderCanvas:", quality);
   return (
     <div className="absolute top-0 left-0 w-full h-full">
       <Canvas

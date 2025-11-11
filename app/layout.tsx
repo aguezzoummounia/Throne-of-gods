@@ -46,9 +46,15 @@ const seoConfig = {
     "dark fantasy",
   ],
   image: {
-    url: "/images/og-homepage.jpg",
+    url: "/images/og-homepage.png",
     width: 1200,
     height: 630,
+    alt: "Throne of Gods - Fantasy Character Quiz",
+  },
+  mobileImage: {
+    url: "/images/og-homepage-mobile.png",
+    width: 800,
+    height: 600,
     alt: "Throne of Gods - Fantasy Character Quiz",
   },
   url: "/",

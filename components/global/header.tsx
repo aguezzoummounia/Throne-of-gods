@@ -171,22 +171,22 @@ const Header: React.FC = () => {
     <header
       ref={containerRef}
       role="banner"
-      className="fixed top-0 left-0 w-full px-12 max-md:px-8 h-16 flex items-center justify-between z-20 text-primary"
+      className="fixed top-0 left-0 w-full px-12 max-md:px-8.5 h-16 flex items-center justify-between z-20 text-primary"
       aria-label="Main navigation"
     >
       <Link
         ref={logoRef}
         href="/"
         onClick={handleLogoClick}
-        className="relative cursor-pointer uppercase text-sm md:w-[200px] w-[100px] h-full inline-flex items-center md:mt-8 opacity-0"
+        className="relative cursor-pointer uppercase text-sm md:w-[150px] w-[100px] h-full inline-flex items-center"
         aria-label="Throne of Gods - Home"
       >
         <SmartImage
           width={300}
           height={150}
           alt="Throne of Gods logo"
-          src="/images/temp-logo.png"
-          className="md:object-scale-down object-contain"
+          src="/images/logo.png"
+          className="md:object-scale-down object-contain brightness-200"
           priority
         />
       </Link>

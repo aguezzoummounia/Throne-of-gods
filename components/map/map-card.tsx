@@ -71,7 +71,7 @@ const MapCard: React.FC = () => {
         height={1080}
         sizes="100vw"
         alt="ereosa map"
-        src="/images/map/ereosa-map.avif"
+        src="/images/map/ereosa-map.png"
         className="md:block hidden w-full h-auto"
       />
       <SmartImage
@@ -80,7 +80,7 @@ const MapCard: React.FC = () => {
         sizes="100vw"
         alt="ereosa map"
         className="md:hidden block w-full h-auto"
-        src="/images/map/ereosa-map-vertical.avif"
+        src="/images/map/ereosa-map-vertical.png"
       />
       <div className="absolute inset-0 z-10">
         <div ref={pinsContainerRef} className="relative w-full h-full">

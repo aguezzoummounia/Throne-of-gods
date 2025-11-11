@@ -179,7 +179,6 @@ export function useAssetLoader(
 
       if (!cancelled) {
         setAssets({ sounds: soundMap });
-        // console.log("Assets processed. Sound map is ready.");
       }
     }
 

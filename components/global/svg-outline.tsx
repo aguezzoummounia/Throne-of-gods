@@ -7,7 +7,7 @@ interface SVGlineProps {
 const SvgOutline = () => {
   return (
     <>
-      <div className="fixed z-[999] md:inset-[30px_20px_20px_20px] inset-[28px_12px_16px_12px] m-auto pointer-events-none">
+      <div className="fixed z-[999] md:inset-[35px_20px_20px_20px] inset-[32px_12px_16px_12px] m-auto pointer-events-none">
         {/* corners */}
         <div
           className="z-1 absolute inset-0"

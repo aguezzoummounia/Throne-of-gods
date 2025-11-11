@@ -17,14 +17,14 @@ export const SEO_CONFIG = {
     "dark fantasy",
   ],
   defaultImage: {
-    url: "/images/og-homepage.jpg",
+    url: "/images/og-homepage.png",
     width: 1200,
     height: 630,
     alt: "Throne of Gods - Fantasy Character Quiz",
   },
   // Mobile-optimized image variants
   mobileImage: {
-    url: "/images/og-homepage-mobile.jpg",
+    url: "/images/og-homepage-mobile.png",
     width: 800,
     height: 600,
     alt: "Throne of Gods - Fantasy Character Quiz",
@@ -32,19 +32,19 @@ export const SEO_CONFIG = {
   // Social media platform specific images
   socialImages: {
     facebook: {
-      url: "/images/og-facebook.jpg",
+      url: "/images/og-facebook.png",
       width: 1200,
       height: 630,
       alt: "Throne of Gods - Fantasy Character Quiz",
     },
     twitter: {
-      url: "/images/og-twitter.jpg",
+      url: "/images/og-twitter.png",
       width: 1200,
       height: 675,
       alt: "Throne of Gods - Fantasy Character Quiz",
     },
     instagram: {
-      url: "/images/og-instagram.jpg",
+      url: "/images/og-instagram.png",
       width: 1080,
       height: 1080,
       alt: "Throne of Gods - Fantasy Character Quiz",

@@ -7,8 +7,8 @@ const HeroShapeCSS = () => {
         width={500}
         height={500}
         alt="hero shape image"
-        src="/images/static/alternate-hero-image.png"
-        className="w-[80%] aspect-square object-cover"
+        src="/images/static/hero-bg.png"
+        className="w-[95%] aspect-square object-cover"
       />
     </div>
   );
