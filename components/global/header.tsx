@@ -178,15 +178,15 @@ const Header: React.FC = () => {
         ref={logoRef}
         href="/"
         onClick={handleLogoClick}
-        className="relative cursor-pointer uppercase text-sm md:w-[150px] w-[100px] h-full inline-flex items-center"
+        className="relative cursor-pointer uppercase text-sm md:w-[250px] w-[150px] h-full inline-flex items-center"
         aria-label="Throne of Gods - Home"
       >
         <SmartImage
           width={300}
           height={150}
           alt="Throne of Gods logo"
-          src="/images/logo.png"
-          className="md:object-scale-down object-contain brightness-200"
+          src="/images/logo-3.png"
+          className="md:object-scale-down object-contain"
           priority
         />
       </Link>
